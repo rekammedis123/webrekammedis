@@ -321,7 +321,6 @@
       }
     }
 
-    /* ANIMASI */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -361,39 +360,12 @@
 
       <div id="jadwal" class="tab-content active">
         <div class="sub-tab">
-          <button class="sub-tab-btn active" data-subtab="tahun2025">JADWAL 2025</button>
-          <button class="sub-tab-btn" data-subtab="tahun2026">JADWAL 2026</button>
-          <button class="sub-tab-btn" data-subtab="tahun2027">JADWAL 2027</button>
-        </div>
-        
-        <div id="tahun2025" class="sub-tab-content active">
-          <table class="calendar">
-            <thead>
-              <tr>
-                <th>Minggu</th>
-                <th>Senin</th>
-                <th>Selasa</th>
-                <th>Rabu</th>
-                <th>Kamis</th>
-                <th>Jumat</th>
-                <th>Sabtu</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Contoh baris kalender -->
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-              </tr>
-              <!-- Tambahkan baris lainnya -->
-            </tbody>
-          </table>
-          <p style="margin-top: 20px;">Informasi lebih lanjut melalui WhatsApp: 08xxxxxxxxxx</p>
+          <a href="https://drive.google.com/drive/folders/1XwPFZviN2lWLNLvQJW0QSN1Ouyanj1jI?usp=sharing" 
+             target="_blank" 
+             class="sub-tab-btn active" 
+             style="text-decoration: none; display: inline-block;">
+            JADWAL KERJA
+          </a>
         </div>
         
         <div id="tahun2026" class="sub-tab-content">
@@ -493,8 +465,8 @@
       });
     });
 
-    // Sub-tab functionality
-    const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+    // Sub-tab functionality (skip untuk link jadwal kerja)
+    const subTabBtns = document.querySelectorAll('.sub-tab-btn:not([href])');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
     
     subTabBtns.forEach(btn => {
