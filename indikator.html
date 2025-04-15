@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Regulasi</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      background-color: #f5f7f6;
+      color: #111;
+      background-image: url('backgroundrsnmc.jpeg');
+      backdrop-filter: blur(3px);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    header {
+      background-color: #f1f3f22d;
+      padding: 15px 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    .judul h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .judul p {
+      font-size: 25px;
+      margin-top: 1px;
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .user-info {
+      text-align: right;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding: 5px;
+      background-color: #ffffff00;
+      border-radius: 55px;
+      font-size: 12px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+      border-radius: 50px;
+      padding: 3px 5px;
+      transition: background-color 0.3s ease;
+    }
+    nav ul li a:hover {
+      background-color: #009765;
+      border-radius: 55px;
+      padding: 3px 5px;
+    }
+    main {
+      flex: 1;
+      padding: 30px 20px;
+      text-align: left;
+    }
+
+    footer {
+      display: flex;
+      background-color: #f1f3f22d;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 30px 20px;
+      font-size: 14px;
+      gap: 20px;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+      flex: 1 1 100%;
+    }
+
+    .footer-left img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+
+    @media (min-width: 600px) {
+      .logo {
+        flex-wrap: nowrap;
+      }
+
+      .footer-left,
+      .footer-center,
+      .footer-right {
+        flex: 1;
+      }
+
+      .footer-left {
+        display: flex;
+        align-items: flex-start;
+      }
+    }
+
+    .tab-menu {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    .tab-menu button:hover {
+      transform: scale(1.02);
+      background-color: #009765;
+      padding: 3px 19px;
+    }
+    .tab-menu button {
+      padding: 3px 19px;
+      background-color: #ffffff7a;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 12px;
+      transition: 0.3s;
+      width: fit-content;
+      transition: all 0.2s ease;
+    }
+
+    .tab-menu button.active {
+      background-color: #429673;
+      color: #fff;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+      padding: 10px 0;
+      color: #000;
+      background-color: transparent;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .file-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .file-list li {
+      margin-bottom: 10px;
+    }
+
+    .upload-box {
+      margin-top: 20px;
+      background-color: #e8e8e8;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    const user = localStorage.getItem("loggedInUser");
+    if (!user) {
+      alert("Silakan login terlebih dahulu untuk mengakses halaman ini.");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
+      <div class="judul">
+        <h1>MEDICAL RECORD</h1>
+        <p>RSU AN'NIMAH</p>
+      </div>
+    </div>
+    <div class="user-info" id="user-info"></div>
+    <nav>
+      <ul>
+        <li><a href="profil.html">PROFIL</a></li>
+        <li><a href="regulasi.html">REGULASI</a></li>
+        <li><a href="informasi.html">INFORMASI</a></li>
+        <li><a href="indikator.html">INDIKATOR</a></li>
+        <li><a href="laporan.html">LAPORAN</a></li>
+        <li><a href="kegiatan.html">KEGIATAN</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>INDIKATOR</h2>
+    <div class="tab-menu">
+      <button class="tab-btn" data-tab="visi">NASIONAL</button>
+      <button class="tab-btn" data-tab="misi">UNIT</button>
+    </div>
+
+    <div id="visi" class="tab-content">
+      Menjadi unit rekam medik yang unggul dalam pengelolaan data dan informasi kesehatan, mendukung pelayanan rumah sakit yang berkualitas, aman, dan terpercaya.
+    </div>
+    <div id="misi" class="tab-content">
+      <p1>
+        <li>Menyediakan data dan informasi yang akurat dan tepat waktu.</li>
+        <li>Meningkatkan pelayanan administrasi rekam medik berbasis teknologi.</li>
+        <li>Menjaga kerahasiaan dan keamanan data pasien.</li>
+      </p1>
+    </div>
+
+    <div class="upload-box" id="upload-box">
+      <h3>Upload File Regulasi</h3>
+      <input type="text" placeholder="Nama Tampilkan" id="display-name" /><br/><br/>
+      <input type="file" id="file-upload" /><br/><br/>
+      <button>Upload</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
+      <div>
+        <strong>MEDICAL RECORD</strong><br />
+        UNIT REKAM MEDIK RSU AN'NIMAH<br />
+        Jalan Ajan Klapagadi Wangonesea<br />
+        08888822334
+      </div>
+    </div>
+    <div class="footer-center">
+      <strong>INFORMASI</strong><br />
+      GALERI<br />
+      KONTAK KAMI
+    </div>
+    <div class="footer-right">
+      <strong>SOCIAL MEDIA</strong><br />
+      FACEBOOK<br />
+      INSTAGRAM<br />
+      WHATSAPP
+    </div>
+  </footer>
+
+  <script>
+    const userInfoDiv = document.getElementById("user-info");
+    const uploadBox = document.getElementById("upload-box");
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    if (loggedInUser) {
+      userInfoDiv.innerHTML = `
+        <span>User : ${loggedInUser}</span>
+        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;">Logout</a>
+      `;
+      if (loggedInUser === 'admin') {
+        uploadBox.style.display = "block";
+      }
+      document.getElementById("logout-btn").addEventListener("click", function(e) {
+        e.preventDefault();
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "login.html";
+      });
+    } else {
+      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn">Login Skuy</a>`;
+      uploadBox.style.display = "none";
+    }
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
