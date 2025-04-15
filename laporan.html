@@ -3,231 +3,293 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Regulasi</title>
+  <title>Laporan | Medical Record</title>
+  <!-- FONT AWESOME UNTUK ICON -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
     }
-
     html, body {
       height: 100%;
+      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      color: #333;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
-
-    body {
-      background-color: #f5f7f6;
-      color: #111;
-      background-image: url('backgroundrsnmc.jpeg');
-      backdrop-filter: blur(3px);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-    }
-
     header {
-      background-color: #f1f3f22d;
+      background-color: #005b96;
       padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-
     .logo {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
     }
-
     .logo img {
       width: 60px;
       height: 60px;
       margin-right: 15px;
     }
-
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
       color: #ffffff;
     }
-
     .judul p {
       font-size: 25px;
       margin-top: 1px;
-      font-weight: bold;
-      color: #000000;
+      color: #ffffff;
     }
-
+    .judul p::before {
+      content: "🏥 ";
+    }
     .user-info {
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
+      color: #ffffff;
     }
-
     nav ul {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 50px;
-      padding: 5px;
-      background-color: #ffffff00;
-      border-radius: 55px;
+      gap: 30px;
+      padding: 10px;
+      background-color: #0077cc;
+      border-radius: 50px;
       font-size: 12px;
       justify-content: center;
       margin-top: 15px;
     }
-
     nav ul li a {
       text-decoration: none;
-      color: #000000;
+      color: #ffffff;
       font-weight: bold;
       border-radius: 50px;
-      padding: 3px 5px;
-      transition: background-color 0.3s ease;
+      padding: 5px 15px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-
     nav ul li a:hover {
-      background-color: #009765;
-      border-radius: 55px;
-      padding: 3px 5px;
+      background-color: #0099ff;
+      transform: translateY(-3px);
     }
-
     main {
       flex: 1;
       padding: 30px 20px;
       text-align: left;
     }
-
-    footer {
+    
+    /* STYLE KHUSUS LAPORAN */
+    .report-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
+    }
+    
+    .report-container h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #005b96;
       display: flex;
-      background-color: #f1f3f22d;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .report-container h2::before {
+      content: "📊";
+    }
+    
+    .tab-menu {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      padding: 8px 20px;
+      background-color: #e6f2ff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      color: #005b96;
+    }
+    
+    .tab-btn:hover {
+      background-color: #009765;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .tab-btn.active {
+      background-color: #005b96;
+      color: white;
+    }
+    
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+      padding: 20px 0;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .sub-tab {
+      margin: 15px 0;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .sub-tab-btn {
+      padding: 6px 18px;
+      background-color: #e6f2ff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      color: #005b96;
+    }
+    
+    .sub-tab-btn:hover {
+      background-color: #009765;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .sub-tab-btn.active {
+      background-color: #005b96;
+      color: white;
+    }
+    
+    .sub-tab-content {
+      display: none;
+      padding: 15px;
+      background-color: #f8faff;
+      border-radius: 10px;
+      margin-top: 10px;
+      border-left: 4px solid #005b96;
+    }
+    
+    .sub-tab-content.active {
+      display: block;
+    }
+    
+    .upload-box {
+      margin-top: 30px;
+      background-color: #f8faff;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px dashed #cce0ff;
+      display: none;
+    }
+    
+    .upload-box h3 {
+      color: #005b96;
+      margin-bottom: 15px;
+    }
+    
+    .upload-box input[type="text"],
+    .upload-box input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #cce0ff;
+      border-radius: 5px;
+    }
+    
+    .upload-box button {
+      background-color: #009765;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .upload-box button:hover {
+      background-color: #00bb77;
+      transform: translateY(-2px);
+    }
+    
+    /* FOOTER */
+    footer {
+      background-color: #005b96;
+      display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 30px 20px;
       font-size: 14px;
       gap: 20px;
+      color: white;
     }
-
     .footer-left,
     .footer-center,
     .footer-right {
       flex: 1 1 100%;
     }
-
     .footer-left img {
       width: 50px;
       height: 50px;
       margin-right: 15px;
     }
 
+    .footer-left {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .footer-left strong::before,
+    .footer-center strong::before,
+    .footer-right strong::before {
+      margin-right: 5px;
+    }
+
+    .footer-left strong::before {
+      content: "🏛️";
+    }
+    .footer-center strong::before {
+      content: "ℹ️";
+    }
+    .footer-right strong::before {
+      content: "🌐";
+    }
+
     @media (min-width: 600px) {
       .logo {
         flex-wrap: nowrap;
       }
-
       .footer-left,
       .footer-center,
       .footer-right {
         flex: 1;
       }
-
-      .footer-left {
-        display: flex;
-        align-items: flex-start;
-      }
     }
 
-    .tab-menu {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-
-    .tab-menu button:hover {
-      transform: scale(1.02);
-      background-color: #009765;
-      padding: 3px 19px;
-    }
-
-    .tab-menu button {
-      padding: 3px 19px;
-      background-color: #ffffff7a;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-      transition: 0.3s;
-      width: fit-content;
-      transition: all 0.2s ease;
-    }
-
-    .tab-menu button.active {
-      background-color: #429673;
-      color: #fff;
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.5s ease-in-out;
-      padding: 10px 0;
-      color: #000;
-      background-color: transparent;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .sub-tab {
-      margin-top: 10px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .sub-tab-btn {
-      padding: 3px 19px;
-      background-color: #e3e3e3;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .sub-tab-btn:hover {
-      background-color: #009765;
-      color: white;
-    }
-
-    .sub-tab-btn.active {
-      background-color: #429673;
-      color: white;
-    }
-
-    .sub-tab-content {
-      display: none;
-      padding: 10px 0;
-    }
-
-    .sub-tab-content.active {
-      display: block;
-    }
-
-    .upload-box {
-      margin-top: 20px;
-      background-color: #e8e8e8;
-      padding: 15px;
-      border-radius: 8px;
-      display: none;
-    }
-
+    /* ANIMASI */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -244,75 +306,76 @@
     <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
-        <li><a href="profil.html">PROFIL</a></li>
-        <li><a href="regulasi.html">REGULASI</a></li>
-        <li><a href="informasi.html">INFORMASI</a></li>
-        <li><a href="indikator.html">INDIKATOR</a></li>
-        <li><a href="laporan.html">LAPORAN</a></li>
-        <li><a href="kegiatan.html">KEGIATAN</a></li>
+        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+        <li><a href="regulasi.html"><i class="fas fa-file-alt"></i> REGULASI</a></li>
+        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+        <li><a href="laporan.html"><i class="fas fa-file-medical"></i> LAPORAN</a></li>
+        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h2>LAPORAN</h2>
-    <div class="tab-menu">
-      <button class="tab-btn" data-tab="sumber">LAPORAN INTERNAL</button>
-      <button class="tab-btn" data-tab="sumbar">LAPORAN EKSTERNAL</button>
-    </div>
+    <div class="report-container">
+      <h2>LAPORAN</h2>
+      <div class="tab-menu">
+        <button class="tab-btn active" data-tab="internal">LAPORAN INTERNAL</button>
+        <button class="tab-btn" data-tab="eksternal">LAPORAN EKSTERNAL</button>
+      </div>
 
-    <div id="sumber" class="tab-content">
-      <div class="tab-menu sub-tab">
-        <button class="sub-tab-btn" data-subtab="harian">HARIAN</button>
-        <button class="sub-tab-btn" data-subtab="mingguan">MINGGUAN</button>
-        <button class="sub-tab-btn" data-subtab="bulanan">BULANAN</button>
-        <button class="sub-tab-btn" data-subtab="triwulan">3 BULAN</button>
-        <button class="sub-tab-btn" data-subtab="sixwulan">6 BULAN</button>
-        <button class="sub-tab-btn" data-subtab="tahunan">TAHUNAN</button>
+      <div id="internal" class="tab-content active">
+        <div class="sub-tab">
+          <button class="sub-tab-btn active" data-subtab="harian">HARIAN</button>
+          <button class="sub-tab-btn" data-subtab="mingguan">MINGGUAN</button>
+          <button class="sub-tab-btn" data-subtab="bulanan">BULANAN</button>
+          <button class="sub-tab-btn" data-subtab="triwulan">3 BULAN</button>
+          <button class="sub-tab-btn" data-subtab="sixwulan">6 BULAN</button>
+          <button class="sub-tab-btn" data-subtab="tahunan">TAHUNAN</button>
+        </div>
+        <div id="harian" class="sub-tab-content active">
+          <p>Informasi melalui WhatsApp dapat diakses melalui nomor 08xxxxxxxxxx</p>
+        </div>
+        <div id="mingguan" class="sub-tab-content">
+          <p>Follow kami di Instagram: @rsu_annimah</p>
+        </div>
+        <div id="bulanan" class="sub-tab-content">
+          <p>Follow kami di Instagram: @rsu_annimah</p>
+        </div>
+        <div id="triwulan" class="sub-tab-content">
+          <p>Follow kami di Instagram: @rsu_annimah</p>
+        </div>
+        <div id="sixwulan" class="sub-tab-content">
+          <p>Follow kami di Instagram: @rsu_annimah</p>
+        </div>
+        <div id="tahunan" class="sub-tab-content">
+          <p>Follow kami di Instagram: @rsu_annimah</p>
+        </div>
       </div>
-      <div id="harian" class="sub-tab-content">
-        <p>Informasi melalui WhatsApp dapat diakses melalui nomor 08xxxxxxxxxx</p>
-      </div>
-      <div id="mingguan" class="sub-tab-content">
-        <p>Follow kami di Instagram: @rsu_annimah</p>
-      </div>
-      <div id="bulanan" class="sub-tab-content">
-        <p>Follow kami di Instagram: @rsu_annimah</p>
-      </div>
-      <div id="triwulan" class="sub-tab-content">
-        <p>Follow kami di Instagram: @rsu_annimah</p>
-      </div>
-      <div id="sixwulan" class="sub-tab-content">
-        <p>Follow kami di Instagram: @rsu_annimah</p>
-      </div>
-      <div id="tahunan" class="sub-tab-content">
-        <p>Follow kami di Instagram: @rsu_annimah</p>
-      </div>
-    </div>
 
-    <div id="sumbar" class="tab-content">
-      <div class="tab-menu sub-tab">
-        <button class="sub-tab-btn" data-subtab="skdr">SKDR</button>
-        <button class="sub-tab-btn" data-subtab="sars">SARS</button>
-        <button class="sub-tab-btn" data-subtab="rl">RL</button>
-        
+      <div id="eksternal" class="tab-content">
+        <div class="sub-tab">
+          <button class="sub-tab-btn active" data-subtab="skdr">SKDR</button>
+          <button class="sub-tab-btn" data-subtab="sars">SARS</button>
+          <button class="sub-tab-btn" data-subtab="rl">RL</button>
+        </div>
+        <div id="skdr" class="sub-tab-content active">
+          <p>Informasi dari sumber internal rumah sakit.</p>
+        </div>
+        <div id="sars" class="sub-tab-content">
+          <p>Informasi dari sumber eksternal (dinas, kementerian, dll).</p>
+        </div>
+        <div id="rl" class="sub-tab-content">
+          <p>Informasi dari sumber eksternal (dinas, kementerian, dll).</p>
+        </div>
       </div>
-      <div id="skdr" class="sub-tab-content">
-        <p>Informasi dari sumber internal rumah sakit.</p>
-      </div>
-      <div id="sars" class="sub-tab-content">
-        <p>Informasi dari sumber eksternal (dinas, kementerian, dll).</p>
-      </div>
-      <div id="rl" class="sub-tab-content">
-        <p>Informasi dari sumber eksternal (dinas, kementerian, dll).</p>
-      </div>
-    </div>
 
-    <div class="upload-box" id="upload-box">
-      <h3>Upload File Regulasi</h3>
-      <input type="text" placeholder="Nama Tampilkan" id="display-name" /><br/><br/>
-      <input type="file" id="file-upload" /><br/><br/>
-      <button>Upload</button>
+      <div class="upload-box" id="upload-box">
+        <h3><i class="fas fa-upload"></i> Upload File Laporan</h3>
+        <input type="text" placeholder="Nama Tampilkan" id="display-name" />
+        <input type="file" id="file-upload" />
+        <button><i class="fas fa-cloud-upload-alt"></i> Upload</button>
+      </div>
     </div>
   </main>
 
@@ -321,21 +384,21 @@
       <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
       <div>
         <strong>MEDICAL RECORD</strong><br />
-        UNIT REKAM MEDIK RSU AN'NIMAH<br />
-        Jalan Ajan Klapagadi Wangonesea<br />
-        08888822334
+        <i class="fas fa-map-marker-alt"></i> UNIT REKAM MEDIK RSU AN'NIMAH<br />
+        <i class="fas fa-road"></i> Jalan Ajan Klapagadi Wangonesea<br />
+        <i class="fas fa-phone"></i> 08888822334
       </div>
     </div>
     <div class="footer-center">
       <strong>INFORMASI</strong><br />
-      GALERI<br />
-      KONTAK KAMI
+      <i class="fas fa-images"></i> GALERI<br />
+      <i class="fas fa-envelope"></i> KONTAK KAMI
     </div>
     <div class="footer-right">
       <strong>SOCIAL MEDIA</strong><br />
-      FACEBOOK<br />
-      INSTAGRAM<br />
-      WHATSAPP
+      <i class="fab fa-facebook"></i> FACEBOOK<br />
+      <i class="fab fa-instagram"></i> INSTAGRAM<br />
+      <i class="fab fa-whatsapp"></i> WHATSAPP
     </div>
   </footer>
 
@@ -346,8 +409,8 @@
 
     if (loggedInUser) {
       userInfoDiv.innerHTML = `
-        <span>User : ${loggedInUser}</span>
-        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;">Logout</a>
+        <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
+        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
       `;
       if (loggedInUser === 'admin') {
         uploadBox.style.display = "block";
@@ -358,12 +421,14 @@
         window.location.href = "login.html";
       });
     } else {
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn">Login Skuy</a>`;
+      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
       uploadBox.style.display = "none";
     }
 
+    // Tab functionality
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
+    
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         tabBtns.forEach(b => b.classList.remove('active'));
@@ -373,8 +438,10 @@
       });
     });
 
+    // Sub-tab functionality
     const subTabBtns = document.querySelectorAll('.sub-tab-btn');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
+    
     subTabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const parent = btn.closest('.tab-content');
