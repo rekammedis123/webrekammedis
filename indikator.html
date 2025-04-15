@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Regulasi</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indikator - RSU AN'NIMAH</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --biru-rs: #005b96;
+      --hijau-medis: #009765;
+    }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     html, body {
       height: 100%;
+      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      color: #333;
       display: flex;
       flex-direction: column;
-    }
-
-    body {
-      background-color: #f5f7f6;
-      color: #111;
-      background-image: url('backgroundrsnmc.jpeg');
-      backdrop-filter: blur(3px);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
+      min-height: 100vh;
     }
 
     header {
-      background-color: #f1f3f22d;
+      background-color: #005b96;
       padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .logo {
@@ -55,24 +54,28 @@
     .judul p {
       font-size: 25px;
       margin-top: 1px;
-      font-weight: bold;
-      color: #000000;
+      color: #ffffff;
+    }
+
+    .judul p::before {
+      content: "🏥 ";
     }
 
     .user-info {
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
+      color: #ffffff;
     }
 
     nav ul {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 50px;
-      padding: 5px;
-      background-color: #ffffff00;
-      border-radius: 55px;
+      gap: 30px;
+      padding: 10px;
+      background-color: #0077cc;
+      border-radius: 50px;
       font-size: 12px;
       justify-content: center;
       margin-top: 15px;
@@ -80,138 +83,157 @@
 
     nav ul li a {
       text-decoration: none;
-      color: #000000;
+      color: #ffffff;
       font-weight: bold;
       border-radius: 50px;
-      padding: 3px 5px;
-      transition: background-color 0.3s ease;
+      padding: 5px 15px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
+
     nav ul li a:hover {
-      background-color: #009765;
-      border-radius: 55px;
-      padding: 3px 5px;
+      background-color: #0099ff;
+      transform: translateY(-3px);
     }
+
     main {
       flex: 1;
       padding: 30px 20px;
       text-align: left;
     }
 
-    footer {
+    .content-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #005b96;
+      margin-bottom: 20px;
       display: flex;
-      background-color: #f1f3f22d;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 30px 20px;
-      font-size: 14px;
-      gap: 20px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-
-    @media (min-width: 600px) {
-      .logo {
-        flex-wrap: nowrap;
-      }
-
-      .footer-left,
-      .footer-center,
-      .footer-right {
-        flex: 1;
-      }
-
-      .footer-left {
-        display: flex;
-        align-items: flex-start;
-      }
+    h2::before {
+      content: "📊";
     }
 
     .tab-menu {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-    .tab-menu button:hover {
-      transform: scale(1.02);
-      background-color: #009765;
-      padding: 3px 19px;
-    }
-    .tab-menu button {
-      padding: 3px 19px;
-      background-color: #ffffff7a;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-      transition: 0.3s;
-      width: fit-content;
-      transition: all 0.2s ease;
+      margin-bottom: 25px;
     }
 
-    .tab-menu button.active {
-      background-color: #429673;
-      color: #fff;
+    .tab-btn {
+      padding: 10px 20px;
+      background-color: #e6f2ff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      background-color: #0099ff;
+      color: white;
+    }
+
+    .tab-btn.active {
+      background-color: #009765;
+      color: white;
     }
 
     .tab-content {
       display: none;
-      animation: fadeIn 0.5s ease-in-out;
-      padding: 10px 0;
-      color: #000;
-      background-color: transparent;
+      animation: fadeIn 0.5s ease;
     }
 
     .tab-content.active {
       display: block;
     }
 
-    .file-list {
-      list-style: none;
-      padding: 0;
+    .indicator-card {
+      background-color: #f5f9ff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
     }
 
-    .file-list li {
+    .indicator-title {
+      font-weight: bold;
+      color: #005b96;
       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .upload-box {
-      margin-top: 20px;
-      background-color: #e8e8e8;
-      padding: 15px;
-      border-radius: 8px;
-      display: none;
+    .indicator-value {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .indicator-progress {
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--biru-rs), var(--hijau-medis));
+      width: 0;
+      transition: width 1s ease;
+    }
+
+    footer {
+      background-color: #005b96;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 30px 20px;
+      font-size: 14px;
+      gap: 20px;
+      color: white;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes progressAnimation {
+      from { width: 0; }
+      to { width: var(--progress-value); }
     }
   </style>
 </head>
 <body>
-
   <script>
+    // Proteksi halaman - redirect jika belum login
     const user = localStorage.getItem("loggedInUser");
     if (!user) {
       alert("Silakan login terlebih dahulu untuk mengakses halaman ini.");
       window.location.href = "login.html";
     }
   </script>
-
-</body>
-<body>
 
   <header>
     <div class="logo">
@@ -224,39 +246,76 @@
     <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
-        <li><a href="profil.html">PROFIL</a></li>
-        <li><a href="regulasi.html">REGULASI</a></li>
-        <li><a href="informasi.html">INFORMASI</a></li>
-        <li><a href="indikator.html">INDIKATOR</a></li>
-        <li><a href="laporan.html">LAPORAN</a></li>
-        <li><a href="kegiatan.html">KEGIATAN</a></li>
+        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+        <li><a href="regulasi.html"><i class="fas fa-file-alt"></i> REGULASI</a></li>
+        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+        <li><a href="laporan.html"><i class="fas fa-file-medical"></i> LAPORAN</a></li>
+        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h2>INDIKATOR</h2>
-    <div class="tab-menu">
-      <button class="tab-btn" data-tab="visi">NASIONAL</button>
-      <button class="tab-btn" data-tab="misi">UNIT</button>
-    </div>
+    <div class="content-container">
+      <h2>INDIKATOR KINERJA</h2>
+      
+      <div class="tab-menu">
+        <button class="tab-btn active" data-tab="nasional">
+          <i class="fas fa-flag"></i> NASIONAL
+        </button>
+        <button class="tab-btn" data-tab="unit">
+          <i class="fas fa-hospital"></i> UNIT
+        </button>
+      </div>
 
-    <div id="visi" class="tab-content">
-      Menjadi unit rekam medik yang unggul dalam pengelolaan data dan informasi kesehatan, mendukung pelayanan rumah sakit yang berkualitas, aman, dan terpercaya.
-    </div>
-    <div id="misi" class="tab-content">
-      <p1>
-        <li>Menyediakan data dan informasi yang akurat dan tepat waktu.</li>
-        <li>Meningkatkan pelayanan administrasi rekam medik berbasis teknologi.</li>
-        <li>Menjaga kerahasiaan dan keamanan data pasien.</li>
-      </p1>
-    </div>
+      <div id="nasional" class="tab-content active">
+        <div class="indicator-card">
+          <div class="indicator-title">
+            <i class="fas fa-check-circle"></i> Kelengkapan Rekam Medis
+          </div>
+          <div class="indicator-value">87%</div>
+          <div class="indicator-progress">
+            <div class="progress-bar" style="--progress-value: 87%; width: 87%;"></div>
+          </div>
+          <p>Standar Nasional: ≥90%</p>
+        </div>
 
-    <div class="upload-box" id="upload-box">
-      <h3>Upload File Regulasi</h3>
-      <input type="text" placeholder="Nama Tampilkan" id="display-name" /><br/><br/>
-      <input type="file" id="file-upload" /><br/><br/>
-      <button>Upload</button>
+        <div class="indicator-card">
+          <div class="indicator-title">
+            <i class="fas fa-clock"></i> Waktu Respons Permintaan Data
+          </div>
+          <div class="indicator-value">2.3 Hari</div>
+          <div class="indicator-progress">
+            <div class="progress-bar" style="--progress-value: 70%; width: 70%;"></div>
+          </div>
+          <p>Standar Nasional: ≤2 Hari</p>
+        </div>
+      </div>
+
+      <div id="unit" class="tab-content">
+        <div class="indicator-card">
+          <div class="indicator-title">
+            <i class="fas fa-file-upload"></i> Dokumen Terscan
+          </div>
+          <div class="indicator-value">94%</div>
+          <div class="indicator-progress">
+            <div class="progress-bar" style="--progress-value: 94%; width: 94%;"></div>
+          </div>
+          <p>Target Unit: ≥95%</p>
+        </div>
+
+        <div class="indicator-card">
+          <div class="indicator-title">
+            <i class="fas fa-user-clock"></i> Rata-rata Waktu Pelayanan
+          </div>
+          <div class="indicator-value">15 Menit</div>
+          <div class="indicator-progress">
+            <div class="progress-bar" style="--progress-value: 85%; width: 85%;"></div>
+          </div>
+          <p>Target Unit: ≤10 Menit</p>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -264,57 +323,66 @@
     <div class="footer-left">
       <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
       <div>
-        <strong>MEDICAL RECORD</strong><br />
-        UNIT REKAM MEDIK RSU AN'NIMAH<br />
-        Jalan Ajan Klapagadi Wangonesea<br />
-        08888822334
+        <strong><i class="fas fa-hospital"></i> MEDICAL RECORD</strong><br />
+        <i class="fas fa-map-marker-alt"></i> UNIT REKAM MEDIK RSU AN'NIMAH<br />
+        <i class="fas fa-road"></i> Jalan Ajan Klapagadi Wangonesea<br />
+        <i class="fas fa-phone"></i> 08888822334
       </div>
     </div>
     <div class="footer-center">
-      <strong>INFORMASI</strong><br />
-      GALERI<br />
-      KONTAK KAMI
+      <strong><i class="fas fa-info-circle"></i> INFORMASI</strong><br />
+      <i class="fas fa-images"></i> GALERI<br />
+      <i class="fas fa-envelope"></i> KONTAK KAMI
     </div>
     <div class="footer-right">
-      <strong>SOCIAL MEDIA</strong><br />
-      FACEBOOK<br />
-      INSTAGRAM<br />
-      WHATSAPP
+      <strong><i class="fas fa-share-alt"></i> SOCIAL MEDIA</strong><br />
+      <i class="fab fa-facebook"></i> FACEBOOK<br />
+      <i class="fab fa-instagram"></i> INSTAGRAM<br />
+      <i class="fab fa-whatsapp"></i> WHATSAPP
     </div>
   </footer>
 
   <script>
+    // Fungsi User Login
     const userInfoDiv = document.getElementById("user-info");
-    const uploadBox = document.getElementById("upload-box");
     const loggedInUser = localStorage.getItem("loggedInUser");
 
     if (loggedInUser) {
       userInfoDiv.innerHTML = `
-        <span>User : ${loggedInUser}</span>
-        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;">Logout</a>
+        <span><i class="fas fa-user"></i> ${loggedInUser}</span>
+        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px; padding: 3px 15px; font-size: 12px;">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       `;
-      if (loggedInUser === 'admin') {
-        uploadBox.style.display = "block";
-      }
+      
       document.getElementById("logout-btn").addEventListener("click", function(e) {
         e.preventDefault();
         localStorage.removeItem("loggedInUser");
         window.location.href = "login.html";
       });
-    } else {
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn">Login Skuy</a>`;
-      uploadBox.style.display = "none";
     }
 
+    // Fungsi Tab
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
+    
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         tabBtns.forEach(b => b.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
+        
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
       });
+    });
+
+    // Animasi progress bar
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      const width = bar.style.getPropertyValue('--progress-value');
+      bar.style.width = '0';
+      setTimeout(() => {
+        bar.style.width = width;
+      }, 100);
     });
   </script>
 </body>
