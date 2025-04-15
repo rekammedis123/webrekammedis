@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Informasi - RSU AN'NIMAH</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
       --biru-rs: #005b96;
       --hijau-medis: #009765;
     }
-    
+
     * {
       margin: 0;
       padding: 0;
@@ -28,7 +28,7 @@
     }
 
     header {
-      background-color: #005b96;
+      background-color: var(--biru-rs);
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -59,13 +59,6 @@
 
     .judul p::before {
       content: "🏥 ";
-    }
-
-    .user-info {
-      text-align: right;
-      font-size: 13px;
-      margin-top: 10px;
-      color: #ffffff;
     }
 
     nav ul {
@@ -104,52 +97,7 @@
       text-align: center;
     }
 
-    .login-required {
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
-    }
-
-    .login-required i {
-      font-size: 50px;
-      color: #005b96;
-      margin-bottom: 20px;
-    }
-
-    .login-required h2 {
-      color: #005b96;
-      margin-bottom: 15px;
-    }
-
-    .login-required p {
-      margin-bottom: 25px;
-      color: #666;
-    }
-
-    .login-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #ffffff;
-      padding: 12px 30px;
-      background-color: #009765;
-      border-radius: 50px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-    }
-
-    .login-btn:hover {
-      background-color: #00bb77;
-      transform: scale(1.05);
-    }
-
-    /* Style untuk konten informasi (akan muncul setelah login) */
     .info-container {
-      display: none;
       max-width: 1000px;
       margin: 0 auto;
       background-color: white;
@@ -252,7 +200,7 @@
     }
 
     footer {
-      background-color: #005b96;
+      background-color: var(--biru-rs);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -278,7 +226,6 @@
         <p>RSU AN'NIMAH</p>
       </div>
     </div>
-    <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
@@ -292,56 +239,47 @@
   </header>
 
   <main>
-    <!-- Tampilan jika belum login -->
-    <div class="login-required" id="login-required">
-      <i class="fas fa-lock"></i>
-      <h2>Akses Dibatasi</h2>
-      <p>Anda harus login terlebih dahulu untuk mengakses halaman informasi ini.</p>
-      <a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Sekarang</a>
-    </div>
-
-    <!-- Tampilan konten informasi (muncul setelah login) -->
-    <div class="info-container" id="info-container">
+    <div class="info-container">
       <h2>INFORMASI</h2>
       
       <div class="tab-menu">
-        <button class="tab-btn active" data-tab="sumber">
-          <i class="fas fa-database"></i> SUMBER
-        </button>
-        <button class="tab-btn" data-tab="sumbar">
-          <i class="fas fa-map-marked-alt"></i> SUMBAR
-        </button>
+        <button class="tab-btn active" data-tab="sumber"><i class="fas fa-database"></i> SUMBER</button>
+        <button class="tab-btn" data-tab="sumbar"><i class="fas fa-map-marked-alt"></i> SUMBAR</button>
       </div>
 
       <div id="sumber" class="tab-content active">
         <div class="sub-tab-menu">
-          <button class="sub-tab-btn active" data-subtab="whatsapp">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </button>
-          <button class="sub-tab-btn" data-subtab="instagram">
-            <i class="fab fa-instagram"></i> Instagram
-          </button>
+          <button class="sub-tab-btn active" data-subtab="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+          <button class="sub-tab-btn" data-subtab="instagram"><i class="fab fa-instagram"></i> Instagram</button>
         </div>
-        
+
         <div id="whatsapp" class="sub-tab-content active">
-          <p><i class="fas fa-phone"></i> Informasi melalui WhatsApp dapat diakses melalui nomor: <strong>08888822334</strong></p>
+          <p>
+            <i class="fab fa-whatsapp"></i> Klik untuk menghubungi kami via WhatsApp: 
+            <a href="https://wa.me/6283153300859" target="_blank" style="color: #009765; font-weight: bold;">
+              083153300859
+            </a>
+          </p>
         </div>
-        
+
         <div id="instagram" class="sub-tab-content">
-          <p><i class="fas fa-at"></i> Follow kami di Instagram: <strong>@rsu_annimah</strong></p>
+          <p>
+            <i class="fas fa-at"></i> Follow kami di Instagram:
+            <a href="instagram://user?username=medrec_rsuannimah" 
+              onclick="window.location='https://www.instagram.com/medrec_rsuannimah/'" 
+              style="font-weight: bold; color: #005b96;">
+              @medrec_rsuannimah
+            </a>
+          </p>
         </div>
       </div>
 
       <div id="sumbar" class="tab-content">
         <div class="sub-tab-menu">
-          <button class="sub-tab-btn active" data-subtab="dalam">
-            <i class="fas fa-home"></i> Dalam
-          </button>
-          <button class="sub-tab-btn" data-subtab="luar">
-            <i class="fas fa-external-link-alt"></i> Luar
-          </button>
+          <button class="sub-tab-btn active" data-subtab="dalam"><i class="fas fa-home"></i> Dalam</button>
+          <button class="sub-tab-btn" data-subtab="luar"><i class="fas fa-external-link-alt"></i> Luar</button>
         </div>
-        
+
         <div id="dalam" class="sub-tab-content active">
           <p><i class="fas fa-info-circle"></i> Informasi dari sumber internal rumah sakit:</p>
           <ul style="margin-top: 10px; padding-left: 20px;">
@@ -350,7 +288,7 @@
             <li>Memo direksi</li>
           </ul>
         </div>
-        
+
         <div id="luar" class="sub-tab-content">
           <p><i class="fas fa-globe"></i> Informasi dari sumber eksternal:</p>
           <ul style="margin-top: 10px; padding-left: 20px;">
@@ -387,63 +325,29 @@
   </footer>
 
   <script>
-    // Cek status login
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    const loginRequired = document.getElementById("login-required");
-    const infoContainer = document.getElementById("info-container");
-    const userInfoDiv = document.getElementById("user-info");
-
-    if (loggedInUser) {
-      // Jika sudah login
-      loginRequired.style.display = "none";
-      infoContainer.style.display = "block";
-      
-      userInfoDiv.innerHTML = `
-        <span><i class="fas fa-user"></i> ${loggedInUser}</span>
-        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px; padding: 3px 15px; font-size: 12px;">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
-      `;
-      
-      document.getElementById("logout-btn").addEventListener("click", function(e) {
-        e.preventDefault();
-        localStorage.removeItem("loggedInUser");
-        window.location.href = "login.html";
-      });
-    } else {
-      // Jika belum login
-      loginRequired.style.display = "block";
-      infoContainer.style.display = "none";
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn" style="padding: 3px 15px; font-size: 12px;">
-        <i class="fas fa-sign-in-alt"></i> Login
-      </a>`;
-    }
-
-    // Fungsi Tab Utama
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
-    
+
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         tabBtns.forEach(b => b.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
-        
+
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
       });
     });
 
-    // Fungsi Sub Tab
     const subTabBtns = document.querySelectorAll('.sub-tab-btn');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
-    
+
     subTabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const parentTab = btn.closest('.tab-content');
-        
+
         parentTab.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
         parentTab.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
-        
+
         btn.classList.add('active');
         parentTab.querySelector(`#${btn.dataset.subtab}`).classList.add('active');
       });
