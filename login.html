@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Medical Record</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - RSU AN'NIMAH</title>
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --biru-rs: #005b96;
+      --hijau-medis: #009765;
+    }
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background-color: #ffffff;
+      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
       min-height: 100vh;
-      background-image: url('backgroundrsnmc.jpeg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,112 +29,183 @@
     }
 
     .login-container {
-      background-color: #ffffff49;
-      padding: 30px 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 91, 150, 0.2);
       width: 100%;
-      max-width: 360px;
+      max-width: 400px;
       text-align: center;
       position: relative;
+      overflow: hidden;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--biru-rs), var(--hijau-medis));
+    }
+
+    .logo-login {
+      width: 80px;
+      margin-bottom: 20px;
     }
 
     .login-container h2 {
       margin-bottom: 25px;
-      font-size: 24px;
-      color: #333;
+      font-size: 28px;
+      color: var(--biru-rs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .login-form {
+      margin-top: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--biru-rs);
     }
 
     .login-container input {
       width: 100%;
-      padding: 12px;
-      margin: 6px 0;
-      border-radius: 150px;
-      border: 1px solid #2b792e;
-      font-size: 13px;
+      padding: 14px 14px 14px 45px;
+      border: 2px solid #e0e0e0;
+      border-radius: 50px;
+      font-size: 15px;
+      transition: all 0.3s ease;
     }
 
-    .login-container button {
+    .login-container input:focus {
+      border-color: var(--biru-rs);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.1);
+    }
+
+    .login-btn {
       width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background-color: #009765;
-      color: rgb(255, 255, 255);
+      padding: 14px;
+      margin-top: 10px;
+      background: linear-gradient(90deg, var(--biru-rs), var(--hijau-medis));
+      color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 50px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .login-container button:hover {
-      background-color: #4CAF50;
-      transform: scale(1.05);
+    .login-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 91, 150, 0.3);
     }
 
-    /* Tombol kembali rata kiri bawah login */
     .back-link {
-      margin-top: 10px;
-      text-align: left;
+      margin-top: 25px;
+      text-align: center;
     }
 
     .back-link a {
-      font-size: 13px;
-      color: #003cff;
+      color: var(--biru-rs);
       text-decoration: none;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
     }
 
     .back-link a:hover {
+      color: var(--hijau-medis);
       text-decoration: underline;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 480px) {
       .login-container {
-        padding: 25px 20px;
+        padding: 30px 20px;
       }
-
+      
       .login-container h2 {
-        font-size: 20px;
+        font-size: 24px;
       }
+    }
 
-      .login-container input,
-      .login-container button {
-        font-size: 14px;
-        padding: 10px;
-      }
+    /* ANIMASI */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .login-container {
+      animation: fadeIn 0.6s ease-out;
     }
   </style>
 </head>
 <body>
 
   <div class="login-container">
-    <h2>Login</h2>
-    <form>
-      <input type="text" name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Login</button>
+    <img src="logorsnmc.png" alt="Logo RS" class="logo-login">
+    <h2><i class="fas fa-lock"></i> LOGIN</h2>
+    
+    <form class="login-form">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" placeholder="Username" required>
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-key"></i>
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+      
+      <button type="submit" class="login-btn">
+        <i class="fas fa-sign-in-alt"></i> LOGIN
+      </button>
     </form>
 
-    <!-- Tombol kecil di bawah login, kiri -->
     <div class="back-link">
-      <a href="halaman-utama.html">Kembali ke halaman utama</a>
+      <a href="index.html"><i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama</a>
     </div>
   </div>
 
   <script>
-    document.querySelector("form").addEventListener("submit", function(e) {
+    document.querySelector(".login-form").addEventListener("submit", function(e) {
       e.preventDefault();
       const username = document.querySelector('input[name="username"]').value;
       const password = document.querySelector('input[name="password"]').value;
 
-      if (username === "admingaul" && password === "admin123") {
+      // Contoh credentials (bisa diganti dengan sistem auth sesungguhnya)
+      if ((username === "admin" && password === "admin123") || 
+          (username === "user" && password === "user123")) {
         localStorage.setItem("loggedInUser", username);
-        window.location.href = "halaman-utama.html";
+        window.location.href = "index.html";
       } else {
         alert("Username atau Password salah!");
+        document.querySelector('input[name="password"]').value = "";
       }
     });
+
+    // Auto focus ke field username saat page load
+    document.querySelector('input[name="username"]').focus();
   </script>
 
 </body>
