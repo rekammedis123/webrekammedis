@@ -13,14 +13,14 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #e2f8f1, #1f8664); /* Biru pastel rumah sakit */
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -37,12 +37,13 @@
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
-      color: #ffffff;
+      color: #00754e;
     }
     .judul p {
       font-size: 25px;
       margin-top: 1px;
-      color: #ffffff;
+      font-weight: bold;
+      color: #00754e;
     }
     .judul p::before {
       content: "🏥 ";
@@ -59,7 +60,7 @@
       flex-wrap: wrap;
       gap: 30px;
       padding: 10px;
-      background-color: #0077cc;
+      background: linear-gradient(5deg, #f5d069, #f0dfb1); /* Biru pastel rumah sakit */
       border-radius: 50px;
       font-size: 12px;
       justify-content: center;
@@ -67,7 +68,7 @@
     }
     nav ul li a {
       text-decoration: none;
-      color: #ffffff;
+      color: #3a3a3a;
       font-weight: bold;
       border-radius: 50px;
       padding: 5px 15px;
@@ -77,8 +78,13 @@
       gap: 5px;
     }
     nav ul li a:hover {
-      background-color: #0099ff;
-      transform: translateY(-3px);
+      color: #5aa190;
+      font-weight: bold;
+    }
+    main {
+      flex: 1;
+      padding: 30px 20px;
+      text-align: left;
     }
     main {
       flex: 1;
@@ -98,7 +104,7 @@
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 20px;
-      color: #005b96;
+      color: #008080;
       display: flex;
       align-items: center;
       gap: 15px;
@@ -123,7 +129,7 @@
       transform: scale(1.05);
     }
     footer {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #bdfce8, #1f8664); /* Biru pastel rumah sakit */
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -180,7 +186,7 @@
     }
     .tab-menu button {
       padding: 8px 20px;
-      background-color: #009765;
+      background-color: #20b2aa;
       color: white;
       border: none;
       border-radius: 50px;
@@ -193,14 +199,12 @@
       gap: 5px;
     }
     .tab-menu button:hover {
-      background-color: #00bb77;
+      background-color: #3cb371;
       transform: translateY(-3px);
     }
     .tab-menu button.active {
-      background-color: #0077cc;
-    }
-    .tab-menu button i {
-      font-size: 14px;
+      background-color: #008080;
+      color: white;
     }
     .tab-content {
       display: none;
@@ -235,43 +239,6 @@
       position: absolute;
       left: 0;
       top: -2px;
-    }
-    .upload-box {
-      margin-top: 30px;
-      background-color: #f0f8ff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px dashed #0077cc;
-      display: none;
-    }
-    .upload-box h3 {
-      color: #005b96;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .upload-box input, 
-    .upload-box button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
-    .upload-box button {
-      background-color: #009765;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .upload-box button:hover {
-      background-color: #0077cc;
     }
 
     /* ANIMASI */
@@ -308,7 +275,7 @@
       <h2>PROFIL UNIT REKAM MEDIS</h2>
       
       <div class="tab-menu">
-        <button class="tab-btn active" data-tab="visi">
+        <button class="tab-btn" data-tab="visi">
           <i class="fas fa-eye"></i> VISI MISI
         </button>
         <button class="tab-btn" data-tab="struktur">
@@ -319,14 +286,14 @@
         </button>
       </div>
 
-      <div id="visi" class="tab-content active">
+      <div id="visi" class="tab-content">
         <div class="profil-content">
-          <h3 style="color: #005b96; margin-bottom: 15px;">
+          <h3 style="color: #008080; margin-bottom: 15px;">
             <i class="fas fa-bullseye"></i> Visi Unit Rekam Medis
           </h3>
           <p>Menjadi unit rekam medik yang unggul dalam pengelolaan data dan informasi kesehatan, mendukung pelayanan rumah sakit yang berkualitas, aman, dan terpercaya.</p>
           
-          <h3 style="color: #005b96; margin: 20px 0 15px;">
+          <h3 style="color: #008080; margin: 20px 0 15px;">
             <i class="fas fa-list-check"></i> Misi Unit Rekam Medis
           </h3>
           <ul class="profil-list">
@@ -340,7 +307,7 @@
 
       <div id="struktur" class="tab-content">
         <div class="profil-content">
-          <h3 style="color: #005b96; margin-bottom: 15px;">
+          <h3 style="color: #008080; margin-bottom: 15px;">
             <i class="fas fa-users"></i> Struktur Organisasi
           </h3>
           <p>Unit Rekam Medis RSU An'Nimah terdiri dari:</p>
@@ -350,14 +317,14 @@
             <li><strong>Staf Pendaftaran</strong>: 10 orang</li>
           </ul>
           <div style="margin-top: 20px; text-align: center;">
-            <img src="struktur-organisasi.png" alt="Struktur Organisasi" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white;">
+            <img src="strukturorganisasi.png" alt="Struktur Organisasi" style="max-width: 100%; border: 1px solid #ddd; border-radius: 50px; padding: 10px; background: white;">
           </div>
         </div>
       </div>
 
       <div id="tugas" class="tab-content">
         <div class="profil-content">
-          <h3 style="color: #005b96; margin-bottom: 15px;">
+          <h3 style="color: #008080; margin-bottom: 15px;">
             <i class="fas fa-clipboard-list"></i> Tugas Pokok Unit
           </h3>
           <ul class="profil-list">
@@ -369,18 +336,6 @@
             <li>Menyajikan statistik kesehatan</li>
           </ul>
         </div>
-      </div>
-
-      <div class="upload-box" id="upload-box">
-        <h3><i class="fas fa-upload"></i> UPDATE PROFIL UNIT</h3>
-        <select id="doc-type" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ddd;">
-          <option value="visi">Visi Misi</option>
-          <option value="struktur">Struktur Organisasi</option>
-          <option value="tugas">Tugas Pokok</option>
-        </select>
-        <textarea id="profil-text" placeholder="Isi konten profil..." style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ddd; min-height: 100px;"></textarea>
-        <input type="file" id="file-upload" style="margin-bottom: 15px;">
-        <button><i class="fas fa-save"></i> SIMPAN PERUBAHAN</button>
       </div>
     </div>
   </main>
@@ -418,16 +373,13 @@
         <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
         <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
       `;
-      if (loggedInUser === 'admin') {
-        uploadBox.style.display = "block";
-      }
       document.getElementById("logout-btn").addEventListener("click", function(e) {
         e.preventDefault();
         localStorage.removeItem("loggedInUser");
         window.location.href = "login.html";
       });
     } else {
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a>`;
+      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
     }
 
     // TAB SYSTEM
@@ -435,25 +387,20 @@
     const tabContents = document.querySelectorAll('.tab-content');
     
     tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    // SIMULASI UPDATE PROFIL (BISA DIKEMBANGKAN)
-    document.querySelector('.upload-box button').addEventListener('click', function() {
-      const docType = document.getElementById('doc-type').value;
-      const content = document.getElementById('profil-text').value;
-      
-      if (content) {
-        alert(`Profil ${docType.toUpperCase()} berhasil diperbarui!`);
-        document.getElementById('profil-text').value = '';
-      } else {
-        alert('Harap isi konten profil!');
-      }
+  btn.addEventListener('click', () => {
+    const targetContent = document.getElementById(btn.dataset.tab);
+    const isActive = btn.classList.contains('active');
+    
+    // Reset semua tab dan konten
+    if (!isActive) {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+    }
+    
+    // Toggle status aktif
+    btn.classList.toggle('active', !isActive);
+    targetContent.classList.toggle('active', !isActive);
+  });
     });
   </script>
 </body>
