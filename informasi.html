@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Informasi - Medical Record</title>
-  <!-- FONT AWESOME UNTUK ICON -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -13,14 +12,14 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #e2f8f1, #1f8664); /* Biru pastel rumah sakit */
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -37,12 +36,13 @@
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
-      color: #ffffff;
+      color: #00754e;
     }
     .judul p {
       font-size: 25px;
       margin-top: 1px;
-      color: #ffffff;
+      font-weight: bold;
+      color: #00754e;
     }
     .judul p::before {
       content: "🏥 ";
@@ -51,7 +51,7 @@
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
-      color: #ffffff;
+      color: #3a3a3a;
     }
     nav ul {
       list-style: none;
@@ -59,7 +59,7 @@
       flex-wrap: wrap;
       gap: 30px;
       padding: 10px;
-      background-color: #0077cc;
+      background: linear-gradient(5deg, #f5d069, #f0dfb1); /* Biru pastel rumah sakit */
       border-radius: 50px;
       font-size: 12px;
       justify-content: center;
@@ -67,7 +67,7 @@
     }
     nav ul li a {
       text-decoration: none;
-      color: #ffffff;
+      color: #3a3a3a;
       font-weight: bold;
       border-radius: 50px;
       padding: 5px 15px;
@@ -77,13 +77,12 @@
       gap: 5px;
     }
     nav ul li a:hover {
-      background-color: #0099ff;
-      transform: translateY(-3px);
+      color: #5aa190;
+      font-weight: bold;
     }
     main {
       flex: 1;
       padding: 30px 20px;
-      text-align: left;
     }
     .info-container {
       max-width: 1000px;
@@ -91,14 +90,14 @@
       background-color: white;
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
+      box-shadow: 0 5px 15px rgba(0,128,128,0.1);
       animation: fadeIn 0.8s ease-out;
     }
     .info-container h2 {
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 20px;
-      color: #005b96;
+      color: #008080;
       display: flex;
       align-items: center;
       gap: 15px;
@@ -122,8 +121,9 @@
       background-color: #00bb77;
       transform: scale(1.05);
     }
+
     footer {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #bdfce8, #1f8664); /* Biru pastel rumah sakit */
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -137,41 +137,25 @@
     .footer-right {
       flex: 1 1 100%;
     }
+    .footer-left {
+      display: flex;
+      align-items: flex-start;
+    }
     .footer-left img {
       width: 50px;
       height: 50px;
       margin-right: 15px;
     }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
-    .footer-left strong::before,
-    .footer-center strong::before,
-    .footer-right strong::before {
-      margin-right: 5px;
-    }
-    .footer-left strong::before {
-      content: "🏛️";
-    }
-    .footer-center strong::before {
-      content: "ℹ️";
-    }
-    .footer-right strong::before {
-      content: "🌐";
-    }
+    .footer-left strong::before { content: "🏛️"; margin-right: 5px; }
+    .footer-center strong::before { content: "ℹ️"; margin-right: 5px; }
+    .footer-right strong::before { content: "🌐"; margin-right: 5px; }
+
     @media (min-width: 600px) {
-      .logo {
-        flex-wrap: nowrap;
-      }
-      .footer-left,
-      .footer-center,
-      .footer-right {
+      .footer-left, .footer-center, .footer-right {
         flex: 1;
       }
     }
 
-    /* TAB STYLE */
     .tab-menu {
       display: flex;
       gap: 10px;
@@ -180,7 +164,7 @@
     }
     .tab-menu button {
       padding: 8px 20px;
-      background-color: #009765;
+      background-color: #20b2aa;
       color: white;
       border: none;
       border-radius: 50px;
@@ -193,14 +177,11 @@
       gap: 5px;
     }
     .tab-menu button:hover {
-      background-color: #00bb77;
+      background-color: #3cb371;
       transform: translateY(-3px);
     }
     .tab-menu button.active {
-      background-color: #0077cc;
-    }
-    .tab-menu button i {
-      font-size: 14px;
+      background-color: #008080;
     }
     .tab-content {
       display: none;
@@ -219,27 +200,23 @@
       gap: 8px;
       margin: 15px 0;
     }
-
     .sub-tab-btn {
       padding: 6px 15px;
-      background-color: #f0f7ff;
+      background-color: #e0f7fa;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       font-size: 13px;
       transition: all 0.3s ease;
     }
-
     .sub-tab-btn:hover {
-      background-color: #0099ff;
+      background-color: #20b2aa;
       color: white;
     }
-
     .sub-tab-btn.active {
-      background-color: #0077cc;
+      background-color: #008080;
       color: white;
     }
-
     .sub-tab-content {
       display: none;
       padding: 15px;
@@ -247,10 +224,11 @@
       border-radius: 8px;
       margin-top: 10px;
     }
-
     .sub-tab-content.active {
       display: block;
     }
+
+    /* Info list */
     .info-content {
       line-height: 1.6;
     }
@@ -268,12 +246,14 @@
     }
     .info-list li::before {
       content: "•";
-      color: #009765;
+      color: #20b2aa;
       font-size: 20px;
       position: absolute;
       left: 0;
       top: -2px;
     }
+
+    /* Table */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -285,37 +265,41 @@
       text-align: left;
     }
     th {
-      background-color: #0077cc;
+      background-color: #20b2aa;
       color: white;
     }
     tr:nth-child(even) {
       background-color: #f2f2f2;
     }
+
+    /* Upload box */
     .upload-box {
       margin-top: 30px;
       background-color: #f0f8ff;
       padding: 20px;
       border-radius: 10px;
-      border: 2px dashed #0077cc;
+      border: 2px dashed #20b2aa;
       display: none;
     }
+
     .upload-box h3 {
-      color: #005b96;
+      color: #008080;
       margin-bottom: 15px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .upload-box input, 
-    .upload-box button {
+
+    .upload-box input, .upload-box button {
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
       border-radius: 5px;
       border: 1px solid #ddd;
     }
+
     .upload-box button {
-      background-color: #009765;
+      background-color: #20b2aa;
       color: white;
       border: none;
       cursor: pointer;
@@ -325,11 +309,11 @@
       justify-content: center;
       gap: 8px;
     }
+
     .upload-box button:hover {
-      background-color: #0077cc;
+      background-color: #3cb371;
     }
 
-    /* ANIMASI */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -363,34 +347,16 @@
       <h2>INFORMASI</h2>
       
       <div class="tab-menu">
-        <button class="tab-btn active" data-tab="sumber"><i class="fas fa-database"></i> SUMBER</button>
+        <button class="tab-btn" data-tab="sumber"><i class="fas fa-database"></i> SUMBER</button>
         <button class="tab-btn" data-tab="sumbar"><i class="fas fa-map-marked-alt"></i> SUMBAR</button>
       </div>
 
-      <div id="sumber" class="tab-content active">
+      <div id="sumber" class="tab-content">
         <div class="sub-tab-menu">
-          <button class="sub-tab-btn active" data-subtab="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-          <button class="sub-tab-btn" data-subtab="instagram"><i class="fab fa-instagram"></i> Instagram</button>
-        </div>
-
-        <div id="whatsapp" class="sub-tab-content active">
-          <p>
-            <i class="fab fa-whatsapp"></i> Klik untuk menghubungi kami via WhatsApp: 
-            <a href="https://wa.me/6283153300859" target="_blank" style="color: #009765; font-weight: bold;">
-              083153300859
-            </a>
-          </p>
-        </div>
-
-        <div id="instagram" class="sub-tab-content">
-          <p>
-            <i class="fas fa-at"></i> Follow kami di Instagram:
-            <a href="instagram://user?username=medrec_rsuannimah" 
-              onclick="window.location='https://www.instagram.com/medrec_rsuannimah/'" 
-              style="font-weight: bold; color: #005b96;">
-              @medrec_rsuannimah
-            </a>
-          </p>
+          <button class="sub-tab-btn" data-subtab="Flyer" id="flyerBtn"></i> Flyer</button>
+          <button class="sub-tab-btn" data-subtab="whatsapp" id="whatsappBtn"></i> Whatsapp</button>
+          <button class="sub-tab-btn" data-subtab="rapat" id="rapatBtn"></i> Rapat</button>
+          <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn"></i> Tata Naskah</button>
         </div>
       </div>
 
@@ -455,7 +421,7 @@
         <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
       `;
       if (loggedInUser === 'admin') {
-        uploadBox.style.display = "block";
+        if (uploadBox) uploadBox.style.display = "block";
       }
       document.getElementById("logout-btn").addEventListener("click", function(e) {
         e.preventDefault();
@@ -472,12 +438,21 @@
     
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
+        const targetContent = document.getElementById(btn.dataset.tab);
+    const isActive = btn.classList.contains('active');
+    
+    // Reset semua tab dan konten
+    if (!isActive) {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+    }
+    
+    // Toggle status aktif
+    btn.classList.toggle('active', !isActive);
+    targetContent.classList.toggle('active', !isActive);
+  });
     });
+
     const subTabBtns = document.querySelectorAll('.sub-tab-btn');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
 
@@ -489,21 +464,55 @@
         parentTab.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
 
         btn.classList.add('active');
-        parentTab.querySelector(`#${btn.dataset.subtab}`).classList.add('active');
+        const subtabId = btn.dataset.subtab.toLowerCase();
+        const subtabElement = parentTab.querySelector(`#${subtabId}`);
+        if (subtabElement) subtabElement.classList.add('active');
       });
     });
-    // SIMULASI UPDATE INFORMASI
-    document.querySelector('.upload-box button').addEventListener('click', function() {
-      const docType = document.getElementById('doc-type').value;
-      const content = document.getElementById('info-text').value;
-      
-      if (content) {
-        alert(`Informasi ${docType.toUpperCase()} berhasil diperbarui!`);
-        document.getElementById('info-text').value = '';
-      } else {
-        alert('Harap isi konten informasi!');
+
+    // LINK HANDLER - PERBAIKAN UTAMA DI SINI
+    const links = {
+      flyer: 'https://drive.google.com/drive/folders/1KhbQU9dNNHzu50-iCMx3vy1ozimeb-RQ?usp=sharing',
+      whatsapp: 'https://drive.google.com/drive/folders/1gPI-WEyGb0czLpjUbXey__cBQavyYu2d?usp=sharing',
+      rapat: 'https://drive.google.com/drive/folders/1zVn5Fdqyepy8yxtKIyxXKObvHGOQEq8a?usp=sharing',
+      tatanaskah: 'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK',
+    };
+    
+
+    // Fungsi untuk menangani klik tombol
+    function handleButtonClick(buttonId, linkKey) {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (links[linkKey]) {
+            window.open(links[linkKey], '_blank');
+          }
+        });
       }
-    });
+    }
+
+    // Pasang event listener untuk semua tombol
+    handleButtonClick('flyerBtn', 'flyer');
+    handleButtonClick('whatsappBtn', 'whatsapp');
+    handleButtonClick('rapatBtn', 'rapat');
+    handleButtonClick('tatanaskahBtn', 'tatanaskah');
+
+    // Upload box handler
+    const uploadBtn = document.querySelector('.upload-box button');
+    if (uploadBtn) {
+      uploadBtn.addEventListener('click', function() {
+        const docType = document.getElementById('doc-type')?.value;
+        const content = document.getElementById('info-text')?.value;
+        
+        if (content) {
+          alert(`Informasi ${docType?.toUpperCase() || ''} berhasil diperbarui!`);
+          document.getElementById('info-text').value = '';
+        } else {
+          alert('Harap isi konten informasi!');
+        }
+      });
+    }
   </script>
 </body>
 </html>
