@@ -13,14 +13,14 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #e2f8f1, #1f8664); /* Biru pastel rumah sakit */
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -37,12 +37,13 @@
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
-      color: #ffffff;
+      color: #00754e;
     }
     .judul p {
       font-size: 25px;
       margin-top: 1px;
-      color: #ffffff;
+      font-weight: bold;
+      color: #00754e;
     }
     .judul p::before {
       content: "🏥 ";
@@ -59,7 +60,7 @@
       flex-wrap: wrap;
       gap: 30px;
       padding: 10px;
-      background-color: #0077cc;
+      background: linear-gradient(5deg, #f5d069, #f0dfb1); /* Biru pastel rumah sakit */
       border-radius: 50px;
       font-size: 12px;
       justify-content: center;
@@ -67,7 +68,7 @@
     }
     nav ul li a {
       text-decoration: none;
-      color: #ffffff;
+      color: #3a3a3a;
       font-weight: bold;
       border-radius: 50px;
       padding: 5px 15px;
@@ -77,8 +78,13 @@
       gap: 5px;
     }
     nav ul li a:hover {
-      background-color: #0099ff;
-      transform: translateY(-3px);
+      color: #5aa190;
+      font-weight: bold;
+    }
+    main {
+      flex: 1;
+      padding: 30px 20px;
+      text-align: left;
     }
     
     main {
@@ -99,7 +105,7 @@
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 20px;
-      color: #005b96;
+      color: #008080;
       display: flex;
       align-items: center;
       gap: 15px;
@@ -146,7 +152,7 @@
       transform: scale(1.05);
     }
     footer {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #bdfce8, #1f8664); /* Biru pastel rumah sakit */
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -245,36 +251,7 @@
     .file-list li a:hover {
       text-decoration: underline;
     }
-    .upload-box {
-      margin-top: 30px;
-      background-color: #f0f8ff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px dashed #0077cc;
-      display: none;
-    }
-    .upload-box h3 {
-      color: #005b96;
-      margin-bottom: 15px;
-    }
-    .upload-box input, 
-    .upload-box button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
-    .upload-box button {
-      background-color: #009765;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .upload-box button:hover {
-      background-color: #0077cc;
-    }
+    
 
     /* ANIMASI */
     @keyframes fadeIn {
@@ -333,20 +310,6 @@
         </a>
       </div>
      
-
-      <div class="upload-box" id="upload-box">
-        <h3><i class="fas fa-upload"></i> UPLOAD REGULASI BARU</h3>
-        <input type="text" placeholder="Judul Dokumen" id="display-name">
-        <select id="doc-type">
-          <option value="pedoman">Pedoman</option>
-          <option value="panduan">Panduan</option>
-          <option value="spo">SPO</option>
-          <option value="sk">SK</option>
-          <option value="edaran">Edaran</option>
-        </select>
-        <input type="file" id="file-upload">
-        <button><i class="fas fa-cloud-upload-alt"></i> UPLOAD</button>
-      </div>
     </div>
   </main>
 
@@ -406,20 +369,6 @@
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
       });
-    });
-
-    // FILE UPLOAD SIMULASI (BISA DIKEMBANGKAN)
-    document.querySelector('.upload-box button').addEventListener('click', function() {
-      const fileName = document.getElementById('display-name').value;
-      const docType = document.getElementById('doc-type').value;
-      
-      if (fileName && document.getElementById('file-upload').files.length > 0) {
-        alert(`File "${fileName}" berhasil diupload ke kategori ${docType.toUpperCase()}!`);
-        document.getElementById('display-name').value = '';
-        document.getElementById('file-upload').value = '';
-      } else {
-        alert('Harap isi semua field!');
-      }
     });
   </script>
 </body>
