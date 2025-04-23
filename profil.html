@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profil - Medical Record</title>
+  <title>Regulasi - Medical Record</title>
   <!-- FONT AWESOME UNTUK ICON -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -86,12 +86,13 @@
       padding: 30px 20px;
       text-align: left;
     }
+    
     main {
       flex: 1;
       padding: 30px 20px;
       text-align: left;
     }
-    .profil-container {
+    .regulasi-container {
       max-width: 1000px;
       margin: 0 auto;
       background-color: white;
@@ -100,7 +101,7 @@
       box-shadow: 0 5px 15px rgba(0,91,150,0.1);
       animation: fadeIn 0.8s ease-out;
     }
-    .profil-container h2 {
+    .regulasi-container h2 {
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 20px;
@@ -109,9 +110,31 @@
       align-items: center;
       gap: 15px;
     }
-    .profil-container h2::before {
-      content: "👨‍⚕️";
+    .regulasi-container h2::before {
+      content: "📑";
     }
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .regulasi-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
+      text-align: center;
+    }
+    
+    h1 {
+      color: var(--biru-rs);
+      margin-bottom: 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+
     .login-btn {
       display: inline-flex;
       align-items: center;
@@ -178,67 +201,55 @@
     }
 
     /* TAB STYLE */
-    .tab-menu {
-      display: flex;
-      gap: 10px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-    }
-    .tab-menu button {
-      padding: 8px 20px;
-      background-color: #20b2aa;
+    .drive-btn {
+      background: linear-gradient(135deg, #4285F4, #34A853);
       color: white;
       border: none;
+      padding: 10px 20px;
       border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-      transition: all 0.3s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 15px;
+      width: 150px;
+      justify-content: center;
     }
-    .tab-menu button:hover {
-      background-color: #3cb371;
-      transform: translateY(-3px);
+    
+    .drive-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
-    .tab-menu button.active {
-      background-color: #008080;
-      color: white;
+    
+    .btn-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
     }
-    .tab-content {
-      display: none;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      margin-top: 10px;
-      animation: fadeIn 0.5s ease-out;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    .profil-content {
-      line-height: 1.6;
-    }
-    .profil-content p {
-      margin-bottom: 15px;
-    }
-    .profil-list {
+    .file-list {
       list-style: none;
-      padding-left: 20px;
     }
-    .profil-list li {
-      margin-bottom: 10px;
-      position: relative;
-      padding-left: 25px;
+    .file-list li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
     }
-    .profil-list li::before {
-      content: "•";
-      color: #009765;
-      font-size: 20px;
-      position: absolute;
-      left: 0;
-      top: -2px;
+    .file-list li:last-child {
+      border-bottom: none;
+    }
+    .file-list li a {
+      color: #005b96;
+      text-decoration: none;
+    }
+    .file-list li a:hover {
+      text-decoration: underline;
     }
     /* STYLE DROPDOWN HUBUNGI KAMI */
     .dropdown-hubungi {
@@ -314,72 +325,33 @@
   </header>
 
   <main>
-    <div class="profil-container">
-      <h2>PROFIL UNIT REKAM MEDIS</h2>
+    <div class="regulasi-container">
+      <h2>REGULASI REKAM MEDIS</h2>
       
-      <div class="tab-menu">
-        <button class="tab-btn" data-tab="visi">
-          <i class="fas fa-eye"></i> VISI MISI
-        </button>
-        <button class="tab-btn" data-tab="struktur">
-          <i class="fas fa-sitemap"></i> STRUKTUR ORGANISASI
-        </button>
-        <button class="tab-btn" data-tab="tugas">
-          <i class="fas fa-tasks"></i> TUGAS POKOK
-        </button>
+      <div class="btn-container">
+        <a href="https://drive.google.com/drive/folders/1pFbMD7sXL6Hx8ANMEUZUzJnjyuFXI9nc" target="_blank" class="drive-btn">
+          <i class="fas fa-book"></i> PEDOMAN
+        </a>
+        <a href="https://drive.google.com/panduan" target="_blank" class="drive-btn">
+          <i class="fas fa-book-open"></i> PANDUAN
+        </a>
+        
+        <a href="https://drive.google.com/drive/folders/1oaTcm_O_Mhb-d7lh3TmTwRdcUurHmMiB" target="_blank" class="drive-btn">
+          <i class="fas fa-file-contract"></i> SPO
+        </a>
+        
+        <a href="https://drive.google.com/drive/folders/1kFbCnU0Oxyte3r2AvUYhE0Dl4yO6R_bR" target="_blank" class="drive-btn">
+          <i class="fas fa-file-signature"></i> SK
+        </a>
+        
+        <a href="https://drive.google.com/edaran" target="_blank" class="drive-btn">
+          <i class="fas fa-envelope"></i> EDARAN
+        </a>
+        <a href="https://drive.google.com/drive/folders/1RdhhR4PeVxE9IUh4kIFYH0XRatTE1s3v" target="_blank" class="drive-btn">
+          <i class="fas fa-envelope"></i> ALUR
+        </a>
       </div>
-
-      <div id="visi" class="tab-content">
-        <div class="profil-content">
-          <h3 style="color: #008080; margin-bottom: 15px;">
-            <i class="fas fa-bullseye"></i> Visi Unit Rekam Medis
-          </h3>
-          <p>Menjadi unit rekam medik yang unggul dalam pengelolaan data dan informasi kesehatan, mendukung pelayanan rumah sakit yang berkualitas, aman, dan terpercaya.</p>
-          
-          <h3 style="color: #008080; margin: 20px 0 15px;">
-            <i class="fas fa-list-check"></i> Misi Unit Rekam Medis
-          </h3>
-          <ul class="profil-list">
-            <li>Menyediakan data dan informasi yang akurat dan tepat waktu</li>
-            <li>Meningkatkan pelayanan administrasi rekam medik berbasis teknologi</li>
-            <li>Menjaga kerahasiaan dan keamanan data pasien</li>
-            <li>Mengembangkan sistem dokumentasi yang efisien dan efektif</li>
-          </ul>
-        </div>
-      </div>
-
-      <div id="struktur" class="tab-content">
-        <div class="profil-content">
-          <h3 style="color: #008080; margin-bottom: 15px;">
-            <i class="fas fa-users"></i> Struktur Organisasi
-          </h3>
-          <p>Unit Rekam Medis RSU An'Nimah terdiri dari:</p>
-          <ul class="profil-list">
-            <li><strong>Kepala Unit</strong>: Susi Ika Diani, A.Md.Kes</li>
-            <li><strong>Staf Rekam Medik</strong>: 2 orang</li>
-            <li><strong>Staf Pendaftaran</strong>: 10 orang</li>
-          </ul>
-          <div style="margin-top: 20px; text-align: center;">
-            <img src="strukturorganisasi.png" alt="Struktur Organisasi" style="max-width: 100%; border: 1px solid #ddd; border-radius: 50px; padding: 10px; background: white;">
-          </div>
-        </div>
-      </div>
-
-      <div id="tugas" class="tab-content">
-        <div class="profil-content">
-          <h3 style="color: #008080; margin-bottom: 15px;">
-            <i class="fas fa-clipboard-list"></i> Tugas Pokok Unit
-          </h3>
-          <ul class="profil-list">
-            <li>Mengelola dokumen rekam medis pasien</li>
-            <li>Memastikan kelengkapan berkas rekam medis</li>
-            <li>Mengembangkan sistem informasi rekam medis elektronik</li>
-            <li>Menyiapkan data untuk akreditasi rumah sakit</li>
-            <li>Melakukan coding dan klasifikasi penyakit</li>
-            <li>Menyajikan statistik kesehatan</li>
-          </ul>
-        </div>
-      </div>
+     
     </div>
   </main>
 
@@ -394,8 +366,8 @@
     </div>
     <div class="footer-center">
       <strong>INFORMASI</strong><br />
-        <i class="fas fa-images"></i> GALERI<br />
-        <i class="fas fa-envelope"></i> KONTAK KAMI
+      <i class="fas fa-images"></i> GALERI<br />
+      <i class="fas fa-envelope"></i> KONTAK KAMI
     </div>
     <div class="footer-right">
       <strong>SOCIAL MEDIA</strong><br />
@@ -416,6 +388,9 @@
         <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
         <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
       `;
+      if (loggedInUser === 'admin') {
+        uploadBox.style.display = "block";
+      }
       document.getElementById("logout-btn").addEventListener("click", function(e) {
         e.preventDefault();
         localStorage.removeItem("loggedInUser");
@@ -430,20 +405,12 @@
     const tabContents = document.querySelectorAll('.tab-content');
     
     tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const targetContent = document.getElementById(btn.dataset.tab);
-    const isActive = btn.classList.contains('active');
-    
-    // Reset semua tab dan konten
-    if (!isActive) {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-    }
-    
-    // Toggle status aktif
-    btn.classList.toggle('active', !isActive);
-    targetContent.classList.toggle('active', !isActive);
-  });
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
     });
   </script>
 </body>
