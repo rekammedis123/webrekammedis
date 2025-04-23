@@ -187,6 +187,41 @@
     .welcome-container {
       animation: fadeIn 0.8s ease-out;
     }
+
+    /* STYLE DROPDOWN HUBUNGI KAMI */
+    .dropdown-hubungi {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content-hubungi {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .dropdown-content-hubungi a {
+      color: #333;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+    
+    .dropdown-content-hubungi a:hover {
+      background-color: #e2f8f1;
+      color: #1f8664;
+    }
+    
+    .dropdown-hubungi:hover .dropdown-content-hubungi {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -208,7 +243,15 @@
         <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
         <li><a href="laporan.html"><i class="fas fa-file-medical"></i> LAPORAN</a></li>
         <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-phone"></i> HUBUNGI KAMI</a></li>
+        <li class="dropdown-hubungi">
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
