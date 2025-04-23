@@ -13,14 +13,14 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #e2f8f1, #1f8664); /* Biru pastel rumah sakit */
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -37,12 +37,13 @@
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
-      color: #ffffff;
+      color: #00754e;
     }
     .judul p {
       font-size: 25px;
       margin-top: 1px;
-      color: #ffffff;
+      font-weight: bold;
+      color: #00754e;
     }
     .judul p::before {
       content: "🏥 ";
@@ -51,7 +52,7 @@
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
-      color: #ffffff;
+      color: #3a3a3a;
     }
     nav ul {
       list-style: none;
@@ -59,7 +60,7 @@
       flex-wrap: wrap;
       gap: 30px;
       padding: 10px;
-      background-color: #0077cc;
+      background: linear-gradient(5deg, #f5d069, #f0dfb1); /* Biru pastel rumah sakit */
       border-radius: 50px;
       font-size: 12px;
       justify-content: center;
@@ -67,7 +68,7 @@
     }
     nav ul li a {
       text-decoration: none;
-      color: #ffffff;
+      color: #3a3a3a;
       font-weight: bold;
       border-radius: 50px;
       padding: 5px 15px;
@@ -77,8 +78,8 @@
       gap: 5px;
     }
     nav ul li a:hover {
-      background-color: #0099ff;
-      transform: translateY(-3px);
+      color: #5aa190;
+      font-weight: bold;
     }
     main {
       flex: 1;
@@ -100,7 +101,7 @@
       font-size: 28px;
       font-weight: bold;
       margin-bottom: 20px;
-      color: #005b96;
+      color: #008080;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -116,28 +117,37 @@
       margin: 20px 0;
       flex-wrap: wrap;
     }
-    
-    .tab-btn {
+    .tab-menu button {
       padding: 8px 20px;
-      background-color: #e6f2ff;
+      background-color: #20b2aa;
+      color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 12px;
       transition: all 0.3s ease;
-      color: #005b96;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    
-    .tab-btn:hover {
-      background-color: #009765;
-      color: white;
-      transform: translateY(-2px);
+    .tab-menu button:hover {
+      background-color: #3cb371;
+      transform: translateY(-3px);
     }
-    
-    .tab-btn.active {
-      background-color: #005b96;
-      color: white;
+    .tab-menu button.active {
+      background-color: #008080;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.5s ease-out;
+    }
+    .tab-content.active {
+      display: block;
     }
     
     .tab-content {
@@ -166,17 +176,17 @@
       font-weight: bold;
       font-size: 13px;
       transition: all 0.3s ease;
-      color: #005b96;
+      color: #008080;
     }
     
     .sub-tab-btn:hover {
-      background-color: #009765;
+      background-color: #20b2aa;
       color: white;
       transform: translateY(-2px);
     }
     
     .sub-tab-btn.active {
-      background-color: #005b96;
+      background-color: #008080;
       color: white;
     }
     
@@ -186,7 +196,7 @@
       background-color: #f8faff;
       border-radius: 10px;
       margin-top: 10px;
-      border-left: 4px solid #005b96;
+      border-left: 4px solid #008080;
     }
     
     .sub-tab-content.active {
@@ -203,7 +213,7 @@
     }
     
     .upload-box h3 {
-      color: #005b96;
+      color: #008080;
       margin-bottom: 15px;
     }
     
@@ -231,10 +241,25 @@
       background-color: #00bb77;
       transform: translateY(-2px);
     }
-    
-    /* FOOTER */
+    .login-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 25px;
+      background-color: #009765;
+      border-radius: 50px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: #00bb77;
+      transform: scale(1.05);
+    }
+
     footer {
-      background-color: #005b96;
+      background: linear-gradient(150deg, #bdfce8, #1f8664); /* Biru pastel rumah sakit */
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -320,20 +345,15 @@
     <div class="report-container">
       <h2>LAPORAN</h2>
       <div class="tab-menu">
-        <button class="tab-btn active" data-tab="internal">LAPORAN INTERNAL</button>
+        <button class="tab-btn" data-tab="internal">LAPORAN INTERNAL</button>
         <button class="tab-btn" data-tab="eksternal">LAPORAN EKSTERNAL</button>
       </div>
 
-      <div id="internal" class="tab-content active">
+      <div id="internal" class="tab-content">
         <div class="sub-tab">
-          <button class="sub-tab-btn active" data-subtab="harian">HARIAN</button>
-          <button class="sub-tab-btn" data-subtab="mingguan">MINGGUAN</button>
           <button class="sub-tab-btn" data-subtab="bulanan">BULANAN</button>
-          <button class="sub-tab-btn" data-subtab="triwulan">3 BULAN</button>
-          <button class="sub-tab-btn" data-subtab="sixwulan">6 BULAN</button>
-          <button class="sub-tab-btn" data-subtab="tahunan">TAHUNAN</button>
         </div>
-        <div id="harian" class="sub-tab-content active">
+        <div id="harian" class="sub-tab-content">
           <p>Informasi melalui WhatsApp dapat diakses melalui nomor 08xxxxxxxxxx</p>
         </div>
         <div id="mingguan" class="sub-tab-content">
@@ -355,11 +375,11 @@
 
       <div id="eksternal" class="tab-content">
         <div class="sub-tab">
-          <button class="sub-tab-btn active" data-subtab="skdr">SKDR</button>
+          <button class="sub-tab-btn" data-subtab="skdr">SKDR</button>
           <button class="sub-tab-btn" data-subtab="sars">SARS</button>
           <button class="sub-tab-btn" data-subtab="rl">RL</button>
         </div>
-        <div id="skdr" class="sub-tab-content active">
+        <div id="skdr" class="sub-tab-content">
           <p>Informasi dari sumber internal rumah sakit.</p>
         </div>
         <div id="sars" class="sub-tab-content">
@@ -436,12 +456,20 @@
     const tabContents = document.querySelectorAll('.tab-content');
     
     tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
+  btn.addEventListener('click', () => {
+    const targetContent = document.getElementById(btn.dataset.tab);
+    const isActive = btn.classList.contains('active');
+    
+    // Reset semua tab dan konten
+    if (!isActive) {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+    }
+    
+    // Toggle status aktif
+    btn.classList.toggle('active', !isActive);
+    targetContent.classList.toggle('active', !isActive);
+  });
     });
 
     // Sub-tab functionality
