@@ -52,7 +52,7 @@
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
-      color: #3a3a3a;
+      color: #ffffff;
     }
     nav ul {
       list-style: none;
@@ -356,53 +356,16 @@
       <h2>KEGIATAN</h2>
       
       <div class="tab-menu">
-        <button class="tab-btn" data-tab="jadwal"><i class="fas fa-calendar-alt"></i> JADWAL</button>
-        <button class="tab-btn" data-tab="liburan"><i class="fas fa-umbrella-beach"></i> LIBURAN</button>
+        <button onclick="window.open('https://drive.google.com/drive/folders/1XwPFZviN2lWLNLvQJW0QSN1Ouyanj1jI?usp=sharing', '_blank')" class="tab-btn">
+          <i class="fas fa-calendar-alt"></i> JADWAL
+        </button>
+        <button onclick="window.open('https://docs.google.com/spreadsheets/d/1daQw6_xB_Nwb3K3K4Rs6hHmAngB2G_RjSZwHJSFzMYY/edit?gid=115848623#gid=115848623', '_blank')" class="tab-btn">
+          <i class="fas fa-calendar-alt"></i> JADWAL CUTI DOKTER
+        </button>
+        <button onclick="window.open('https://drive.google.com/drive/folders/10xudNFkSIYp_gxR4JldhKhpzk78NmlBu?usp=sharing', '_blank')" class="tab-btn">
+          <i class="fas fa-calendar-alt"></i> SENSUS HARIAN
+        </button>
       </div>
-
-      <div id="jadwal" class="tab-content">
-        <div class="sub-tab-menu">
-          <button class="sub-tab-btn active" data-subtab="kerja"><i class="fas fa-briefcase"></i> Jadwal Kerja</button>
-          <button class="sub-tab-btn" data-subtab="mancing"><i class="fas fa-fish"></i> Jadwal Mancing</button>
-        </div>
-
-        <div id="kerja" class="sub-tab-content">
-          <div class="btn-container">
-            <a href="https://drive.google.com/drive/folders/1XwPFZviN2lWLNLvQJW0QSN1Ouyanj1jI?usp=sharing" target="_blank" class="ref-btn">
-              <i class="fas fa-file-alt"></i> Lihat Jadwal Kerja
-            </a>
-          </div>
-        </div>
-
-        <div id="mancing" class="sub-tab-content">
-          <div class="btn-container">
-            <a href="YAHAHAHA_KOSONG_AWOKAWOKAWOK" target="_blank" class="ref-btn">
-              <i class="fas fa-fish"></i> Lihat Jadwal Mancing
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div id="liburan" class="tab-content">
-        <div class="sub-tab-menu">
-          <button class="sub-tab-btn active" data-subtab="mingguan"><i class="fas fa-calendar-week"></i> Liburan Mingguan</button>
-          <button class="sub-tab-btn" data-subtab="bulanan"><i class="fas fa-calendar-day"></i> Liburan Bulanan</button>
-        </div>
-
-        <div id="mingguan" class="sub-tab-content active">
-          <div class="btn-container">
-            <a href="YAHAHAHA_KOSONG_AWOKAWOKAWOK" target="_blank" class="ref-btn">
-              <i class="fas fa-calendar-week"></i> Lihat Jadwal Liburan Mingguan
-            </a>
-          </div>
-        </div>
-
-        <div id="bulanan" class="sub-tab-content">
-          <div class="btn-container">
-            <a href="YAHAHAHA_KOSONG_AWOKAWOKAWOK" target="_blank" class="ref-btn">
-              <i class="fas fa-calendar-day"></i> Lihat Jadwal Liburan Bulanan
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -434,7 +397,7 @@
     // USER AUTH
     const userInfoDiv = document.getElementById("user-info");
     const loggedInUser = localStorage.getItem("loggedInUser");
-
+  
     if (loggedInUser) {
       userInfoDiv.innerHTML = `
         <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
@@ -448,42 +411,48 @@
     } else {
       userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
     }
-
+  
     // TAB SYSTEM
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
     
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const targetContent = document.getElementById(btn.dataset.tab);
-    const isActive = btn.classList.contains('active');
-    
-    // Reset semua tab dan konten
-    if (!isActive) {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-    }
-    
-    // Toggle status aktif
-    btn.classList.toggle('active', !isActive);
-    targetContent.classList.toggle('active', !isActive);
+        const target = btn.dataset.tab;
+        if (!target) return; // untuk tombol yang tidak punya data-tab, abaikan
+  
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+  
+        btn.classList.add('active');
+        document.getElementById(target).classList.add('active');
       });
     });
-
+    function handleButtonClick(buttonId, linkKey) {
+      const button = document.getElementById(buttonId);
+      if (button) {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          if (links[linkKey]) {
+            window.open(links[linkKey], '_blank');
+          }
+        });
+      }
+    }
+  
+    // SUB-TAB SYSTEM
     const subTabBtns = document.querySelectorAll('.sub-tab-btn');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
-
+  
     subTabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        const parentTab = btn.closest('.tab-content');
-
-        parentTab.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-        parentTab.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
-
+        const subTarget = btn.dataset.subtab;
+  
+        subTabBtns.forEach(b => b.classList.remove('active'));
+        subTabContents.forEach(c => c.classList.remove('active'));
+  
         btn.classList.add('active');
-        const subtabId = btn.dataset.subtab.toLowerCase();
-        const subtabElement = parentTab.querySelector(`#${subtabId}`);
-        if (subtabElement) subtabElement.classList.add('active');
+        document.getElementById(subTarget).classList.add('active');
       });
     });
   </script>
