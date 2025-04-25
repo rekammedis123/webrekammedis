@@ -17,12 +17,13 @@
     body {
       background-color: #f4f9f9;
       color: #333;
+      font-size: 14px; /* Ukuran font lebih kecil */
     }
 
     header {
       background-color: #74c3ad;
       color: white;
-      padding: 20px 40px;
+      padding: 15px 30px; /* Padding lebih kecil */
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -30,13 +31,13 @@
     }
 
     header h1 {
-      font-size: 24px;
+      font-size: 20px; /* Judul lebih kecil */
     }
 
     header .icons a {
       color: white;
-      margin-left: 20px;
-      font-size: 20px;
+      margin-left: 15px;
+      font-size: 18px;
       transition: transform 0.3s ease;
     }
 
@@ -46,15 +47,21 @@
     }
 
     .container {
-      padding: 40px 20px;
+      padding: 30px 15px; /* Padding lebih kecil */
       max-width: 1000px;
       margin: auto;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 30px;
-      font-size: 28px;
+      margin-bottom: 20px;
+      font-size: 22px; /* Heading lebih kecil */
+      color: #2d6a4f;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
       color: #2d6a4f;
     }
 
@@ -65,10 +72,11 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       border-radius: 8px;
       overflow: hidden;
+      font-size: 13px; /* Ukuran font tabel lebih kecil */
     }
 
     th, td {
-      padding: 15px;
+      padding: 10px 12px; /* Padding sel lebih kecil */
       text-align: left;
       border-bottom: 1px solid #eee;
     }
@@ -76,26 +84,104 @@
     th {
       background-color: #95d5b2;
       color: #fff;
+      font-weight: 500;
     }
 
     tr:hover {
       background-color: #e9f5f2;
-      transition: background-color 0.3s;
     }
 
     footer {
       background-color: #74c3ad;
       color: white;
       text-align: center;
-      padding: 15px 10px;
-      margin-top: 40px;
-      font-size: 14px;
+      padding: 12px 10px;
+      margin-top: 30px;
+      font-size: 13px;
+    }
+
+    /* Form Tambah Data */
+    .add-form {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 4px;
+      color: #2d6a4f;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background-color: #74c3ad;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #5aa78f;
+    }
+
+    .btn-secondary {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+    }
+
+    .delete-btn {
+      padding: 5px 8px;
+      min-width: 30px;
     }
 
     @media (max-width: 600px) {
       th, td {
-        font-size: 14px;
-        padding: 10px;
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      button {
+        width: 100%;
       }
     }
   </style>
@@ -111,58 +197,95 @@
   </header>
 
   <div class="container">
+    <!-- Form Tambah Data Tunggal -->
+    <div class="add-form">
+      <h3>Tambah Kode Baru</h3>
+      <form id="form-icd">
+        <div class="form-group">
+          <label for="icd-type">Jenis ICD</label>
+          <select id="icd-type" required>
+            <option value="">Pilih Jenis ICD</option>
+            <option value="icd10">ICD 10 (Diagnosa)</option>
+            <option value="icd9">ICD 9 CM (Tindakan)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="icd-code">Kode</label>
+          <input type="text" id="icd-code" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="icd-desc">Diagnosa</label>
+          <input type="text" id="icd-desc" placeholder="" required>
+        </div>
+        <div class="form-actions">
+          <button type="reset" class="btn-secondary">Reset</button>
+          <button type="submit" class="btn-primary">Tambah ke Daftar</button>
+        </div>
+      </form>
+    </div>
+
     <h2>Daftar Kode Diagnosa (ICD 10)</h2>
-    <table>
+    <table id="table-icd10">
       <thead>
         <tr>
-          <th>Kode</th>
+          <th width="15%">Kode</th>
           <th>Nama Diagnosa</th>
+          <th width="8%">Aksi</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>I10</td>
           <td>Hipertensi Esensial (Primer)</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
         </tr>
         <tr>
           <td>E11</td>
           <td>Diabetes Mellitus Tipe 2</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
         </tr>
         <tr>
           <td>J45</td>
           <td>Asma</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
         </tr>
         <tr>
           <td>K29</td>
           <td>Gastritis dan Duodenitis</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
         </tr>
       </tbody>
     </table>
 
-    <h2 style="margin-top: 50px;">Daftar Kode Tindakan (ICD 9 CM)</h2>
-    <table>
+    <h2 style="margin-top: 30px;">Daftar Kode Tindakan (ICD 9 CM)</h2>
+    <table id="table-icd9">
       <thead>
         <tr>
-          <th>Kode</th>
+          <th width="15%">Kode</th>
           <th>Nama Tindakan</th>
+          <th width="8%">Aksi</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>96.04</td>
           <td>Pemasangan Ventilator Mekanik</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
         </tr>
         <tr>
           <td>45.13</td>
           <td>Kolonoskopi</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
         </tr>
         <tr>
           <td>38.93</td>
           <td>Pemasangan Infus Sentral</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
         </tr>
         <tr>
           <td>37.22</td>
           <td>Elektrokardiogram (EKG)</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
         </tr>
       </tbody>
     </table>
@@ -172,5 +295,36 @@
     &copy; 2025 RSU An Ni'mah - Unit Rekam Medis
   </footer>
 
+  <script>
+    // Fungsi untuk menambahkan data baru
+    document.getElementById('form-icd').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const type = document.getElementById('icd-type').value;
+      const code = document.getElementById('icd-code').value;
+      const desc = document.getElementById('icd-desc').value;
+      
+      if (type && code && desc) {
+        const tableId = type === 'icd10' ? 'table-icd10' : 'table-icd9';
+        const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+        
+        newRow.innerHTML = `
+          <td>${code}</td>
+          <td>${desc}</td>
+          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, '${tableId}')"><i class="fas fa-trash"></i></button></td>
+        `;
+        
+        // Reset form
+        this.reset();
+      }
+    });
+    
+    // Fungsi untuk menghapus baris
+    function deleteRow(btn, tableId) {
+      const row = btn.closest('tr');
+      document.getElementById(tableId).getElementsByTagName('tbody')[0].removeChild(row);
+    }
+  </script>
 </body>
 </html>
