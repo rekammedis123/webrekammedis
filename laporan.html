@@ -52,7 +52,7 @@
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
-      color: #3a3a3a;
+      color: #ffffff;
     }
     nav ul {
       list-style: none;
@@ -202,45 +202,6 @@
     
     .sub-tab-content.active {
       display: block;
-    }
-    
-    .upload-box {
-      margin-top: 30px;
-      background-color: #f8faff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px dashed #cce0ff;
-      display: none;
-    }
-    
-    .upload-box h3 {
-      color: #008080;
-      margin-bottom: 15px;
-    }
-    
-    .upload-box input[type="text"],
-    .upload-box input[type="file"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #cce0ff;
-      border-radius: 5px;
-    }
-    
-    .upload-box button {
-      background-color: #009765;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    
-    .upload-box button:hover {
-      background-color: #00bb77;
-      transform: translateY(-2px);
     }
     .login-btn {
       display: inline-flex;
@@ -440,13 +401,6 @@
           <button class="sub-tab-btn" data-subtab="rl">RL</button>
         </div>
       </div>
-
-      <div class="upload-box" id="upload-box">
-        <h3><i class="fas fa-upload"></i> Upload File Laporan</h3>
-        <input type="text" placeholder="Nama Tampilkan" id="display-name" />
-        <input type="file" id="file-upload" />
-        <button><i class="fas fa-cloud-upload-alt"></i> Upload</button>
-      </div>
     </div>
   </main>
 
@@ -473,62 +427,62 @@
   </footer>
 
   <script>
+    // Menampilkan info user jika ada
     const userInfoDiv = document.getElementById("user-info");
-    const uploadBox = document.getElementById("upload-box");
     const loggedInUser = localStorage.getItem("loggedInUser");
-
+  
     if (loggedInUser) {
       userInfoDiv.innerHTML = `
         <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
         <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
       `;
-      if (loggedInUser === 'admin') {
-        uploadBox.style.display = "block";
-      }
       document.getElementById("logout-btn").addEventListener("click", function(e) {
         e.preventDefault();
         localStorage.removeItem("loggedInUser");
-        window.location.href = "login.html";
+        location.reload();
       });
-    } else {
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
-      uploadBox.style.display = "none";
     }
-
-    // Tab functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
+  
+    // Fungsi Tab Utama
+    const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const targetContent = document.getElementById(btn.dataset.tab);
-    const isActive = btn.classList.contains('active');
-    
-    // Reset semua tab dan konten
-    if (!isActive) {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-    }
-    
-    // Toggle status aktif
-    btn.classList.toggle('active', !isActive);
-    targetContent.classList.toggle('active', !isActive);
-  });
+  
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+  
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+  
+        button.classList.add('active');
+        document.getElementById(targetTab).classList.add('active');
+      });
     });
-
-    // Sub-tab functionality
-    const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+  
+    // Fungsi Sub Tab
+    const subTabButtons = document.querySelectorAll('.sub-tab-btn');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
-    
-    subTabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const parent = btn.closest('.tab-content');
-        parent.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-        parent.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        parent.querySelector(`#${btn.dataset.subtab}`).classList.add('active');
+  
+    subTabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetSubTab = button.getAttribute('data-subtab');
+  
+        // Hanya aktifkan tombol yang ada di tab yang sedang aktif
+        const currentTab = button.closest('.tab-content');
+        const currentSubButtons = currentTab.querySelectorAll('.sub-tab-btn');
+        const currentSubContents = currentTab.querySelectorAll('.sub-tab-content');
+  
+        currentSubButtons.forEach(btn => btn.classList.remove('active'));
+        currentSubContents.forEach(content => content.classList.remove('active'));
+  
+        button.classList.add('active');
+        const targetContent = currentTab.querySelector('#' + targetSubTab);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
       });
     });
   </script>
+  
 </body>
 </html>
