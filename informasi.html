@@ -12,14 +12,14 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
+      background: linear-gradient(135deg, #ffffff, #ffffff);
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background: linear-gradient(150deg, #e2f8f1, #1f8664); /* Biru pastel rumah sakit */
+      background: linear-gradient(150deg, #e2f8f1, #1f8664);
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
@@ -59,7 +59,7 @@
       flex-wrap: wrap;
       gap: 30px;
       padding: 10px;
-      background: linear-gradient(5deg, #f5d069, #f0dfb1); /* Biru pastel rumah sakit */
+      background: linear-gradient(5deg, #f5d069, #f0dfb1);
       border-radius: 50px;
       font-size: 12px;
       justify-content: center;
@@ -123,7 +123,7 @@
     }
 
     footer {
-      background: linear-gradient(150deg, #bdfce8, #1f8664); /* Biru pastel rumah sakit */
+      background: linear-gradient(150deg, #bdfce8, #1f8664);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -349,6 +349,46 @@
       display: block;
     }
 
+    /* Modal untuk login */
+    .login-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    
+    .login-modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: modalFadeIn 0.3s;
+    }
+    
+    .close-modal {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close-modal:hover {
+      color: black;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -393,9 +433,7 @@
       <div class="tab-menu">
         <button class="tab-btn" data-tab="sumber"><i class="fas fa-database"></i> SUMBER</button>
         <button class="tab-btn" data-tab="sumbar"><i class="fas fa-map-marked-alt"></i> SUMBAR</button>
-        <button class="tab-btn" data-tab="coding" onclick="window.location.href='coding.html'">
-          <i class="fas fa-book-open"></i> CODING
-        </button>
+        <button class="tab-btn" id="codingBtn"><i class="fas fa-book-open"></i> CODING</button>
       </div>
 
       <div id="sumber" class="tab-content">
@@ -433,6 +471,23 @@
       </div>
     </div>
   </main>
+
+  <!-- Modal Login -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 style="color: #008080; margin-bottom: 20px;"><i class="fas fa-sign-in-alt"></i> Login Required</h2>
+      <p>Login Dulu Dong Biar Asik</p>
+      <div style="margin-top: 30px; text-align: center;">
+        <a href="login.html?returnUrl=coding.html" class="login-btn" style="display: inline-block; margin-right: 10px;">
+          <i class="fas fa-sign-in-alt"></i> Login Sekarang
+        </a>
+        <button id="cancelLogin" style="padding: 8px 20px; background-color: #f44336; color: white; border: none; border-radius: 50px; cursor: pointer;">
+          <i class="fas fa-times"></i> Batal
+        </button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-left">
@@ -486,18 +541,18 @@
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const targetContent = document.getElementById(btn.dataset.tab);
-    const isActive = btn.classList.contains('active');
-    
-    // Reset semua tab dan konten
-    if (!isActive) {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      tabContents.forEach(c => c.classList.remove('active'));
-    }
-    
-    // Toggle status aktif
-    btn.classList.toggle('active', !isActive);
-    targetContent.classList.toggle('active', !isActive);
-  });
+        const isActive = btn.classList.contains('active');
+        
+        // Reset semua tab dan konten
+        if (!isActive) {
+          tabBtns.forEach(b => b.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+        }
+        
+        // Toggle status aktif
+        btn.classList.toggle('active', !isActive);
+        targetContent.classList.toggle('active', !isActive);
+      });
     });
 
     const subTabBtns = document.querySelectorAll('.sub-tab-btn');
@@ -517,7 +572,7 @@
       });
     });
 
-    // LINK HANDLER - PERBAIKAN UTAMA DI SINI
+    // LINK HANDLER
     const links = {
       flyer: 'https://drive.google.com/drive/folders/1KhbQU9dNNHzu50-iCMx3vy1ozimeb-RQ?usp=sharing',
       whatsapp: 'https://drive.google.com/drive/folders/1gPI-WEyGb0czLpjUbXey__cBQavyYu2d?usp=sharing',
@@ -525,7 +580,6 @@
       tatanaskah: 'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK',
     };
     
-
     // Fungsi untuk menangani klik tombol
     function handleButtonClick(buttonId, linkKey) {
       const button = document.getElementById(buttonId);
@@ -560,6 +614,41 @@
         }
       });
     }
+
+    // CODING BUTTON LOGIN HANDLER
+    const codingBtn = document.getElementById('codingBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.querySelector('.close-modal');
+    const cancelLogin = document.getElementById('cancelLogin');
+
+    codingBtn.addEventListener('click', function() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      
+      if (loggedInUser) {
+        // Jika sudah login, arahkan ke halaman coding
+        window.location.href = 'coding.html';
+      } else {
+        // Jika belum login, tampilkan modal login
+        loginModal.style.display = 'block';
+      }
+    });
+
+    // Close modal ketika klik close button
+    closeModal.addEventListener('click', function() {
+      loginModal.style.display = 'none';
+    });
+
+    // Close modal ketika klik cancel button
+    cancelLogin.addEventListener('click', function() {
+      loginModal.style.display = 'none';
+    });
+
+    // Close modal ketika klik di luar modal
+    window.addEventListener('click', function(event) {
+      if (event.target == loginModal) {
+        loginModal.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
