@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICD 10 & ICD 9</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #74c3ad;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    header .icons a {
+      color: white;
+      margin-left: 20px;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    header .icons a:hover {
+      transform: scale(1.2);
+      color: #807f71;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #2d6a4f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #95d5b2;
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: #e9f5f2;
+      transition: background-color 0.3s;
+    }
+
+    footer {
+      background-color: #74c3ad;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1><i class="fas fa-book-medical"></i> Kode ICD 10 & ICD 9</h1>
+    <div class="icons">
+      <a href="index.html" title="Beranda"><i class="fas fa-home"></i></a>
+      <a href="informasi.html" title="Informasi"><i class="fas fa-info-circle"></i></a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Daftar Kode Diagnosa (ICD 10)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Kode</th>
+          <th>Nama Diagnosa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>I10</td>
+          <td>Hipertensi Esensial (Primer)</td>
+        </tr>
+        <tr>
+          <td>E11</td>
+          <td>Diabetes Mellitus Tipe 2</td>
+        </tr>
+        <tr>
+          <td>J45</td>
+          <td>Asma</td>
+        </tr>
+        <tr>
+          <td>K29</td>
+          <td>Gastritis dan Duodenitis</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 50px;">Daftar Kode Tindakan (ICD 9 CM)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Kode</th>
+          <th>Nama Tindakan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>96.04</td>
+          <td>Pemasangan Ventilator Mekanik</td>
+        </tr>
+        <tr>
+          <td>45.13</td>
+          <td>Kolonoskopi</td>
+        </tr>
+        <tr>
+          <td>38.93</td>
+          <td>Pemasangan Infus Sentral</td>
+        </tr>
+        <tr>
+          <td>37.22</td>
+          <td>Elektrokardiogram (EKG)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    &copy; 2025 RSU An Ni'mah - Unit Rekam Medis
+  </footer>
+
+</body>
+</html>
