@@ -437,6 +437,7 @@
         <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
         <button class="tab-btn" data-tab="sumbar"><i class="fas fa-map-marked-alt"></i> SUMBAR</button>
         <button class="tab-btn" id="codingBtn"><i class="fas fa-book-open"></i> CODING</button>
+        <button class="tab-btn" id="akunBtn"><i class="fas fa-user-shield"></i> AKUN</button>
       </div>
 
       <div id="sumber" class="tab-content">
@@ -480,9 +481,9 @@
     <div class="login-modal-content">
       <span class="close-modal">&times;</span>
       <h2 style="color: #008080; margin-bottom: 20px;"><i class="fas fa-sign-in-alt"></i> Login Required</h2>
-      <p>Login Dulu Dong Biar Asik</p>
+      <p>Anda harus login terlebih dahulu untuk mengakses fitur ini</p>
       <div style="margin-top: 30px; text-align: center;">
-        <a href="login.html?returnUrl=coding.html" class="login-btn" style="display: inline-block; margin-right: 10px;">
+        <a href="login.html?returnUrl=akun.html" class="login-btn" style="display: inline-block; margin-right: 10px;">
           <i class="fas fa-sign-in-alt"></i> Login Sekarang
         </a>
         <button id="cancelLogin" style="padding: 8px 20px; background-color: #f44336; color: white; border: none; border-radius: 50px; cursor: pointer;">
@@ -618,18 +619,18 @@
       });
     }
 
-    // CODING BUTTON LOGIN HANDLER
-    const codingBtn = document.getElementById('codingBtn');
+    // AKUN BUTTON LOGIN HANDLER
+    const akunBtn = document.getElementById('akunBtn');
     const loginModal = document.getElementById('loginModal');
     const closeModal = document.querySelector('.close-modal');
     const cancelLogin = document.getElementById('cancelLogin');
 
-    codingBtn.addEventListener('click', function() {
+    akunBtn.addEventListener('click', function() {
       const loggedInUser = localStorage.getItem("loggedInUser");
       
       if (loggedInUser) {
-        // Jika sudah login, arahkan ke halaman coding
-        window.location.href = 'coding.html';
+        // Jika sudah login, arahkan ke halaman akun
+        window.location.href = 'manajemenakun.html';
       } else {
         // Jika belum login, tampilkan modal login
         loginModal.style.display = 'block';
@@ -652,6 +653,14 @@
         loginModal.style.display = 'none';
       }
     });
+
+    // CODING BUTTON HANDLER (jika diperlukan)
+    const codingBtn = document.getElementById('codingBtn');
+    if (codingBtn) {
+      codingBtn.addEventListener('click', function() {
+        window.location.href = 'coding.html';
+      });
+    }
   </script>
 </body>
 </html>
