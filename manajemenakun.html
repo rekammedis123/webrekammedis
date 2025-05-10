@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manajemen Akun</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f9f9;
+      color: #333;
+      font-size: 14px;
+    }
+
+    header {
+      background-color: #74c3ad;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 20px;
+    }
+
+    header .icons a {
+      color: white;
+      margin-left: 15px;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    header .icons a:hover {
+      transform: scale(1.2);
+      color: #807f71;
+    }
+
+    .container {
+      padding: 30px 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+      color: #2d6a4f;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #2d6a4f;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #95d5b2;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    tr:hover {
+      background-color: #e9f5f2;
+    }
+
+    footer {
+      background-color: #74c3ad;
+      color: white;
+      text-align: center;
+      padding: 12px 10px;
+      margin-top: 30px;
+      font-size: 13px;
+    }
+
+    /* Form Tambah Data */
+    .add-form {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 4px;
+      color: #2d6a4f;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background-color: #74c3ad;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #5aa78f;
+    }
+
+    .btn-secondary {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+    }
+
+    .delete-btn {
+      padding: 5px 8px;
+      min-width: 30px;
+    }
+
+    .copy-btn {
+      padding: 5px 8px;
+      min-width: 30px;
+      background-color: #a0c4ff;
+      color: white;
+    }
+
+    .copy-btn:hover {
+      background-color: #7fa8e8;
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="logorsnmc.png" alt="Logo Aplikasi" />
+      <div class="judul">
+        <h1>Manajemen Akun</h1>
+      </div>
+    </div>
+    <div class="icons">
+      <a href="index.html" title="Beranda"><i class="fas fa-home"></i></a>
+      <a href="informasi.html" title="Informasi"><i class="fas fa-info-circle"></i></a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Form Tambah Akun -->
+    <div class="add-form">
+      <h3>Tambah Akun Baru</h3>
+      <form id="form-akun">
+        <div class="form-group">
+          <label for="nama-akun">Nama Akun</label>
+          <input type="text" id="nama-akun" placeholder="" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="">
+        </div>
+        <div class="form-group password-container">
+          <label for="password">Kata Sandi</label>
+          <input type="password" id="password" placeholder="">
+          <i class="fas fa-eye password-toggle" onclick="togglePassword()"></i>
+        </div>
+        <div class="form-group">
+          <label for="web-link">Link Web</label>
+          <input type="url" id="web-link" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="keterangan">Keterangan</label>
+          <input type="text" id="keterangan" placeholder="Catatan tambahan">
+        </div>
+        <div class="form-actions">
+          <button type="reset" class="btn-secondary">Reset</button>
+          <button type="submit" class="btn-primary">Simpan Akun</button>
+        </div>
+      </form>
+    </div>
+
+    <h2>Daftar Akun</h2>
+    <table id="table-akun">
+      <thead>
+        <tr>
+          <th width="15%">Nama Akun</th>
+          <th width="15%">Username</th>
+          <th width="15%">Kata Sandi</th>
+          <th>Link Web</th>
+          <th width="15%">Keterangan</th>
+          <th width="12%">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SIPP</td>
+          <td>user123</td>
+          <td>••••••••</td>
+          <td>https://sipp.example.com</td>
+          <td>Sistem Informasi Perencanaan</td>
+          <td>
+            <button class="copy-btn" onclick="copyToClipboard(this, '••••••••')"><i class="fas fa-copy"></i></button>
+            <button class="btn-secondary delete-btn" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>SIMRS</td>
+          <td>admin</td>
+          <td>••••••••</td>
+          <td>https://simrs.example.org</td>
+          <td>Sistem Informasi Rumah Sakit</td>
+          <td>
+            <button class="copy-btn" onclick="copyToClipboard(this, '••••••••')"><i class="fas fa-copy"></i></button>
+            <button class="btn-secondary delete-btn" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>E-Office</td>
+              <td>user456</td>
+          <td>••••••••</td>
+          <td>https://eoffice.example.net</td>
+          <td>Sistem Dokumen Elektronik</td>
+          <td>
+            <button class="copy-btn" onclick="copyToClipboard(this, '••••••••')"><i class="fas fa-copy"></i></button>
+            <button class="btn-secondary delete-btn" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    &copy; 2025 Sistem Manajemen Akun
+  </footer>
+
+  <script>
+  const WEBAPP_URL = 'URL_DEPLOY_BARU_ANDA'; // Ganti dengan URL deploy terbaru
+
+  // Fungsi toggle password visibility
+  function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const toggleIcon = document.querySelector('.password-toggle');
+    
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      toggleIcon.classList.remove('fa-eye');
+      toggleIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      toggleIcon.classList.remove('fa-eye-slash');
+      toggleIcon.classList.add('fa-eye');
+    }
+  }
+
+  // Fungsi untuk copy ke clipboard
+  function copyToClipboard(button, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const originalHTML = button.innerHTML;
+      button.innerHTML = '<i class="fas fa-check"></i>';
+      button.style.backgroundColor = '#4caf50';
+      
+      setTimeout(() => {
+        button.innerHTML = originalHTML;
+        button.style.backgroundColor = '#a0c4ff';
+      }, 2000);
+    }).catch(err => {
+      console.error('Gagal menyalin: ', err);
+      alert('Gagal menyalin ke clipboard');
+    });
+  }
+
+  // Fungsi untuk memuat data
+  async function loadData() {
+    try {
+      console.log("Memulai load data...");
+      const response = await fetch(WEBAPP_URL);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log("Data diterima:", data);
+      
+      // Kosongkan tabel
+      document.querySelector('#table-akun tbody').innerHTML = '';
+      
+      // Isi data ke tabel
+      data.forEach(item => {
+        const tbody = document.getElementById('table-akun').querySelector('tbody');
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.nama}</td>
+          <td>${item.username}</td>
+          <td>••••••••</td>
+          <td>${item.link}</td>
+          <td>${item.keterangan || '-'}</td>
+          <td>
+            <button class="copy-btn" onclick="copyToClipboard(this, '${item.password}')">
+              <i class="fas fa-copy"></i>
+            </button>
+            <button class="btn-secondary delete-btn" onclick="deleteRow(this, '${item.id}')">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+      
+    } catch (error) {
+      console.error("Gagal memuat data:", error);
+      alert("Error memuat data: " + error.message);
+    }
+  }
+
+  // Fungsi untuk menambah data
+  document.getElementById('form-akun').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const nama = document.getElementById('nama-akun').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const link = document.getElementById('web-link').value;
+    const keterangan = document.getElementById('keterangan').value;
+    
+    if (!nama) {
+      alert("Nama Akun wajib diisi!");
+      return;
+    }
+    
+    try {
+      console.log("Mengirim data:", { nama, username, password, link, keterangan });
+      const response = await fetch(WEBAPP_URL, {
+        method: 'POST',
+        body: JSON.stringify({ 
+          nama, 
+          username, 
+          password, 
+          link, 
+          keterangan 
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log("Response dari server:", result);
+      
+      alert("Akun berhasil disimpan!");
+      loadData(); // Muat ulang data
+      this.reset(); // Reset form
+      
+    } catch (error) {
+      console.error("Gagal menyimpan:", error);
+      alert("Gagal menyimpan: " + error.message);
+    }
+  });
+
+  // Fungsi untuk menghapus data
+  async function deleteRow(btn, id) {
+    if (!confirm("Yakin ingin menghapus akun ini?")) return;
+    
+    try {
+      console.log("Menghapus data dengan id:", id);
+      const response = await fetch(WEBAPP_URL, {
+        method: 'POST',
+        body: JSON.stringify({ delete: true, id }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log("Response hapus:", result);
+      
+      btn.closest('tr').remove();
+      alert("Akun berhasil dihapus!");
+      
+    } catch (error) {
+      console.error("Gagal menghapus:", error);
+      alert("Gagal menghapus: " + error.message);
+    }
+  }
+
+  // Muat data saat halaman dimuat
+  window.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>
