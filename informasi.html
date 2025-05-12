@@ -492,6 +492,21 @@
       </div>
     </div>
   </div>
+  <div id="codingModal" class="login-modal">
+  <div class="login-modal-content">
+    <span class="close-modal" onclick="closeModal('codingModal')">&times;</span>
+    <h2 style="color: #008080; margin-bottom: 20px;"><i class="fas fa-lock"></i> Akses Coding</h2>
+    <p>Login diperlukan untuk mengakses halaman Coding</p>
+    <div style="margin-top: 30px; text-align: center;">
+      <a href="login.html?returnUrl=coding.html" class="login-btn" style="display: inline-block; margin-right: 10px;">
+        <i class="fas fa-sign-in-alt"></i> Login Sekarang
+      </a>
+      <button onclick="closeModal('codingModal')" style="padding: 8px 20px; background-color: #f44336; color: white; border: none; border-radius: 50px; cursor: pointer;">
+        <i class="fas fa-times"></i> Batal
+      </button>
+    </div>
+  </div>
+</div>
 
   <footer>
     <div class="footer-left">
@@ -619,48 +634,72 @@
       });
     }
 
+    // Fungsi untuk menutup modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
     // AKUN BUTTON LOGIN HANDLER
     const akunBtn = document.getElementById('akunBtn');
     const loginModal = document.getElementById('loginModal');
-    const closeModal = document.querySelector('.close-modal');
+    const closeModalAkun = document.querySelector('#loginModal .close-modal');
     const cancelLogin = document.getElementById('cancelLogin');
 
     akunBtn.addEventListener('click', function() {
       const loggedInUser = localStorage.getItem("loggedInUser");
       
       if (loggedInUser) {
-        // Jika sudah login, arahkan ke halaman akun
         window.location.href = 'manajemenakun.html';
       } else {
-        // Jika belum login, tampilkan modal login
         loginModal.style.display = 'block';
       }
     });
 
-    // Close modal ketika klik close button
-    closeModal.addEventListener('click', function() {
-      loginModal.style.display = 'none';
+    // CODING BUTTON LOGIN HANDLER
+    const codingBtn = document.getElementById('codingBtn');
+    const codingModal = document.getElementById('codingModal');
+    const closeModalCoding = document.querySelector('#codingModal .close-modal');
+    const cancelCoding = document.getElementById('cancelCoding');
+
+    codingBtn.addEventListener('click', function() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      
+      if (loggedInUser) {
+        window.location.href = 'coding.html';
+      } else {
+        codingModal.style.display = 'block';
+      }
     });
 
-    // Close modal ketika klik cancel button
-    cancelLogin.addEventListener('click', function() {
-      loginModal.style.display = 'none';
+    // Event listeners untuk modal Akun
+    closeModalAkun.addEventListener('click', function() {
+      closeModal('loginModal');
     });
+
+    cancelLogin.addEventListener('click', function() {
+      closeModal('loginModal');
+    });
+
+    // Event listeners untuk modal Coding
+    closeModalCoding.addEventListener('click', function() {
+      closeModal('codingModal');
+    });
+
+    if (cancelCoding) {
+      cancelCoding.addEventListener('click', function() {
+        closeModal('codingModal');
+      });
+    }
 
     // Close modal ketika klik di luar modal
     window.addEventListener('click', function(event) {
       if (event.target == loginModal) {
-        loginModal.style.display = 'none';
+        closeModal('loginModal');
+      }
+      if (event.target == codingModal) {
+        closeModal('codingModal');
       }
     });
-
-    // CODING BUTTON HANDLER (jika diperlukan)
-    const codingBtn = document.getElementById('codingBtn');
-    if (codingBtn) {
-      codingBtn.addEventListener('click', function() {
-        window.location.href = 'coding.html';
-      });
-    }
-  </script>
+</script>
 </body>
 </html>
