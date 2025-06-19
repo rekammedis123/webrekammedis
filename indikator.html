@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="logorekammedis.png" type="image/png">
   <title>Indikator - RSU AN'NIMAH</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -89,7 +88,6 @@
     main {
       flex: 1;
       padding: 30px 20px;
-      text-align: left;
     }
 
     .content-container {
@@ -104,6 +102,7 @@
 
     h2 {
       font-size: 28px;
+      font-weight: bold;
       color: #008080;
       margin-bottom: 20px;
       display: flex;
@@ -116,84 +115,6 @@
       font-family: "Font Awesome 6 Free";
       font-weight: 900; 
       margin-right: 8px;
-    }
-
-    .tab-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 25px;
-    }
-
-    .tab-btn {
-      padding: 10px 20px;
-      background-color: #20b2aa;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .tab-btn:hover {
-      background-color: #3cb371;
-      color: white;
-    }
-
-    .tab-btn.active {
-      background-color: #009765;
-      color: white;
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .indicator-card {
-      background-color: #f5f9ff;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
-
-    .indicator-title {
-      font-weight: bold;
-      color: #008080;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .indicator-value {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-
-    .indicator-progress {
-      height: 10px;
-      background-color: #e0e0e0;
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 15px 0;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(150deg, #81dbbf, #1f8664); /* Biru pastel rumah sakit */
-      width: 0;
-      transition: width 1s ease;
     }
     .login-btn {
       display: inline-flex;
@@ -249,25 +170,51 @@
     .footer-right strong::before {
       content: "🌐";
     }
-    @media (min-width: 600px) {
-      .logo {
-        flex-wrap: nowrap;
-      }
-      .footer-left,
-      .footer-center,
-      .footer-right {
-        flex: 1;
-      }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .tab-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
     }
 
-    @keyframes progressAnimation {
-      from { width: 0; }
-      to { width: var(--progress-value); }
+    .tab-btn {
+      padding: 10px 20px;
+      background-color: #20b2aa;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+
+    .tab-btn:hover {
+      background-color: #3cb371;
+      color: white;
+    }
+
+    .tab-btn.active {
+      background-color: #009765;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }   
+    
     /* STYLE DROPDOWN HUBUNGI KAMI */
     .dropdown-hubungi {
       position: relative;
@@ -302,7 +249,19 @@
     .dropdown-hubungi:hover .dropdown-content-hubungi {
       display: block;
     }
-  }
+    
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  
   </style>
 </head>
 <body>
@@ -320,6 +279,7 @@
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
         <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
         <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN</a></li>
         <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
         <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
         <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
