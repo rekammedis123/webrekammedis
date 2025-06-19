@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="logorekammedis.png" type="image/png">
-  <title>ICD 10 & ICD 9</title>
+  <title>Sistem ICD 10 & ICD 9 Terintegrasi</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
@@ -18,13 +17,13 @@
     body {
       background-color: #f4f9f9;
       color: #333;
-      font-size: 14px; /* Ukuran font lebih kecil */
+      font-size: 14px;
     }
 
     header {
       background-color: #74c3ad;
       color: white;
-      padding: 15px 30px; /* Padding lebih kecil */
+      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -32,7 +31,7 @@
     }
 
     header h1 {
-      font-size: 20px; /* Judul lebih kecil */
+      font-size: 20px;
     }
 
     header .icons a {
@@ -48,7 +47,7 @@
     }
 
     .container {
-      padding: 30px 15px; /* Padding lebih kecil */
+      padding: 30px 15px;
       max-width: 1000px;
       margin: auto;
     }
@@ -56,7 +55,7 @@
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      font-size: 22px; /* Heading lebih kecil */
+      font-size: 22px;
       color: #2d6a4f;
     }
 
@@ -64,6 +63,18 @@
       font-size: 18px;
       margin-bottom: 15px;
       color: #2d6a4f;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
     }
 
     table {
@@ -73,11 +84,11 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       border-radius: 8px;
       overflow: hidden;
-      font-size: 13px; /* Ukuran font tabel lebih kecil */
+      font-size: 13px;
     }
 
     th, td {
-      padding: 10px 12px; /* Padding sel lebih kecil */
+      padding: 10px 12px;
       text-align: left;
       border-bottom: 1px solid #eee;
     }
@@ -101,7 +112,6 @@
       font-size: 13px;
     }
 
-    /* Form Tambah Data */
     .add-form {
       background-color: white;
       padding: 15px;
@@ -171,6 +181,77 @@
       min-width: 30px;
     }
 
+    /* Fitur Pencarian */
+    .search-container {
+      margin-bottom: 20px;
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .search-input-container {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .search-btn {
+      background-color: #74c3ad;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .search-btn:hover {
+      background-color: #5aa78f;
+    }
+    
+    .search-results {
+      margin-top: 10px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+    }
+    
+    .search-result-item {
+      padding: 10px 15px;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .search-result-item:hover {
+      background-color: #f5f9f8;
+    }
+    
+    .search-result-code {
+      font-weight: bold;
+      color: #2d6a4f;
+      font-size: 13px;
+    }
+    
+    .search-result-desc {
+      color: #555;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
     @media (max-width: 600px) {
       th, td {
         font-size: 12px;
@@ -184,13 +265,22 @@
       button {
         width: 100%;
       }
+      
+      .search-input-container {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1><i class="fas fa-book-medical"></i> Kode ICD 10 & ICD 9</h1>
+    <div class="logo">
+      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
+      <div class="judul">
+        <h1>Kode ICD 10 & ICD 9</h1>
+      </div>
+    </div>
     <div class="icons">
       <a href="index.html" title="Beranda"><i class="fas fa-home"></i></a>
       <a href="informasi.html" title="Informasi"><i class="fas fa-info-circle"></i></a>
@@ -198,7 +288,21 @@
   </header>
 
   <div class="container">
-    <!-- Form Tambah Data Tunggal -->
+    <!-- Form Pencarian ICD -->
+    <div class="search-container">
+      <h3>Cari Kode ICD</h3>
+      <div class="search-input-container">
+        <input type="text" id="icd-search" class="search-input" placeholder="Masukkan kode atau nama diagnosa/tindakan...">
+        <button class="search-btn" id="btn-search">
+          <i class="fas fa-search"></i> Cari
+        </button>
+      </div>
+      <div class="search-results" id="search-results">
+        <!-- Hasil pencarian akan muncul di sini -->
+      </div>
+    </div>
+
+    <!-- Form Tambah Data -->
     <div class="add-form">
       <h3>Tambah Kode Baru</h3>
       <form id="form-icd">
@@ -212,11 +316,11 @@
         </div>
         <div class="form-group">
           <label for="icd-code">Kode</label>
-          <input type="text" id="icd-code" placeholder="" required>
+          <input type="text" id="icd-code" placeholder="Contoh: E11.9" required>
         </div>
         <div class="form-group">
-          <label for="icd-desc">Diagnosa</label>
-          <input type="text" id="icd-desc" placeholder="" required>
+          <label for="icd-desc">Deskripsi</label>
+          <input type="text" id="icd-desc" placeholder="Contoh: Diabetes melitus tipe 2" required>
         </div>
         <div class="form-actions">
           <button type="reset" class="btn-secondary">Reset</button>
@@ -230,31 +334,12 @@
       <thead>
         <tr>
           <th width="15%">Kode</th>
-          <th>Nama Diagnosa</th>
+          <th>Deskripsi</th>
           <th width="8%">Aksi</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>I10</td>
-          <td>Hipertensi Esensial (Primer)</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
-        </tr>
-        <tr>
-          <td>E11</td>
-          <td>Diabetes Mellitus Tipe 2</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
-        </tr>
-        <tr>
-          <td>J45</td>
-          <td>Asma</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
-        </tr>
-        <tr>
-          <td>K29</td>
-          <td>Gastritis dan Duodenitis</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd10')"><i class="fas fa-trash"></i></button></td>
-        </tr>
+        <!-- Data akan diisi oleh JavaScript -->
       </tbody>
     </table>
 
@@ -263,31 +348,12 @@
       <thead>
         <tr>
           <th width="15%">Kode</th>
-          <th>Nama Tindakan</th>
+          <th>Deskripsi</th>
           <th width="8%">Aksi</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>96.04</td>
-          <td>Pemasangan Ventilator Mekanik</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
-        </tr>
-        <tr>
-          <td>45.13</td>
-          <td>Kolonoskopi</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
-        </tr>
-        <tr>
-          <td>38.93</td>
-          <td>Pemasangan Infus Sentral</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
-        </tr>
-        <tr>
-          <td>37.22</td>
-          <td>Elektrokardiogram (EKG)</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, 'table-icd9')"><i class="fas fa-trash"></i></button></td>
-        </tr>
+        <!-- Data akan diisi oleh JavaScript -->
       </tbody>
     </table>
   </div>
@@ -297,35 +363,205 @@
   </footer>
 
   <script>
-    // Fungsi untuk menambahkan data baru
-    document.getElementById('form-icd').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const type = document.getElementById('icd-type').value;
-      const code = document.getElementById('icd-code').value;
-      const desc = document.getElementById('icd-desc').value;
-      
-      if (type && code && desc) {
-        const tableId = type === 'icd10' ? 'table-icd10' : 'table-icd9';
-        const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-        const newRow = table.insertRow();
-        
-        newRow.innerHTML = `
-          <td>${code}</td>
-          <td>${desc}</td>
-          <td><button class="btn-secondary delete-btn" onclick="deleteRow(this, '${tableId}')"><i class="fas fa-trash"></i></button></td>
-        `;
-        
-        // Reset form
-        this.reset();
-      }
-    });
-    
-    // Fungsi untuk menghapus baris
-    function deleteRow(btn, tableId) {
-      const row = btn.closest('tr');
-      document.getElementById(tableId).getElementsByTagName('tbody')[0].removeChild(row);
+  // Database ICD-10 dan ICD-9 lokal
+  const icdDatabase = {
+    icd10: [
+      { code: "A00", desc: "Kolera" },
+      { code: "E11.9", desc: "Diabetes melitus tipe 2" },
+      { code: "I10", desc: "Hipertensi esensial (primer)" },
+      { code: "J18.9", desc: "Pneumonia, tidak spesifik" },
+      { code: "K21.9", desc: "Penyakit refluks gastroesofageal" }
+    ],
+    icd9: [
+      { code: "96.04", desc: "Pemasangan ventilator mekanik" },
+      { code: "45.13", desc: "Kolonoskopi" },
+      { code: "38.93", desc: "Pemasangan infus sentral" },
+      { code: "37.22", desc: "Elektrokardiogram (EKG)" }
+    ]
+  };
+
+  // Data yang disimpan di localStorage
+  let storedData = {
+    icd10: [],
+    icd9: []
+  };
+
+  // Muat data dari localStorage saat halaman dimuat
+  function loadFromLocalStorage() {
+    const savedData = localStorage.getItem('icdData');
+    if (savedData) {
+      storedData = JSON.parse(savedData);
+    } else {
+      // Data default jika tidak ada yang tersimpan
+      storedData = {
+        icd10: [...icdDatabase.icd10],
+        icd9: [...icdDatabase.icd9]
+      };
+      saveToLocalStorage();
     }
+    renderTables();
+  }
+
+  // Simpan data ke localStorage
+  function saveToLocalStorage() {
+    localStorage.setItem('icdData', JSON.stringify(storedData));
+  }
+
+  // Render tabel dari data
+  function renderTables() {
+    renderTable('icd10');
+    renderTable('icd9');
+  }
+
+  function renderTable(type) {
+    const tableId = `table-${type}`;
+    const tbody = document.querySelector(`#${tableId} tbody`);
+    tbody.innerHTML = '';
+
+    storedData[type].forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.code}</td>
+        <td>${item.desc}</td>
+        <td>
+          <button class="btn-secondary delete-btn" onclick="deleteRow(this, '${type}', '${item.code}')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Fungsi pencarian
+  function searchICD(query) {
+    if (!query || query.trim().length < 2) {
+      return { count: 0, results: [] };
+    }
+
+    const searchTerm = query.toLowerCase();
+    const allItems = [...storedData.icd10, ...storedData.icd9];
+    
+    const results = allItems.filter(item => 
+      item.code.toLowerCase().includes(searchTerm) || 
+      item.desc.toLowerCase().includes(searchTerm)
+    );
+
+    return {
+      count: results.length,
+      results
+    };
+  }
+
+  // Tampilkan hasil pencarian
+  function showSearchResults(query) {
+    const resultsContainer = document.getElementById('search-results');
+    
+    if (!query || query.trim().length < 2) {
+      resultsContainer.style.display = 'none';
+      return;
+    }
+
+    const { count, results } = searchICD(query);
+    
+    if (count === 0) {
+      resultsContainer.innerHTML = `
+        <div class="search-result-item">
+          Tidak ditemukan hasil untuk "${query}"
+        </div>
+      `;
+    } else {
+      resultsContainer.innerHTML = results.map(item => `
+        <div class="search-result-item" 
+             onclick="fillFormFromSearch('${item.code}', '${item.desc.replace(/'/g, "\\'")}')">
+          <div class="search-result-code">${item.code}</div>
+          <div class="search-result-desc">${item.desc}</div>
+        </div>
+      `).join('');
+    }
+    
+    resultsContainer.style.display = 'block';
+  }
+
+  // Isi form dari hasil pencarian
+  function fillFormFromSearch(code, desc) {
+    document.getElementById('icd-code').value = code;
+    document.getElementById('icd-desc').value = desc;
+    
+    // Deteksi otomatis jenis ICD berdasarkan format kode
+    if (/^[A-Z]\d{2}/.test(code)) {
+      document.getElementById('icd-type').value = 'icd10';
+    } else if (/^\d{2}\.\d{2}/.test(code)) {
+      document.getElementById('icd-type').value = 'icd9';
+    }
+    
+    document.getElementById('search-results').style.display = 'none';
+    document.getElementById('icd-search').value = '';
+  }
+
+  // Tambah data baru
+  document.getElementById('form-icd').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const type = document.getElementById('icd-type').value;
+    const code = document.getElementById('icd-code').value.trim();
+    const desc = document.getElementById('icd-desc').value.trim();
+    
+    if (!type || !code || !desc) {
+      alert("Harap isi semua field!");
+      return;
+    }
+    
+    // Cek duplikasi kode
+    if (storedData[type].some(item => item.code === code)) {
+      alert(`Kode ${code} sudah ada dalam database!`);
+      return;
+    }
+    
+    // Tambahkan data baru
+    storedData[type].push({ code, desc });
+    saveToLocalStorage();
+    renderTables();
+    
+    // Reset form
+    this.reset();
+    alert("Data berhasil ditambahkan!");
+  });
+
+  // Hapus data
+  function deleteRow(btn, type, code) {
+    if (!confirm(`Yakin ingin menghapus kode ${code}?`)) return;
+    
+    storedData[type] = storedData[type].filter(item => item.code !== code);
+    saveToLocalStorage();
+    renderTables();
+  }
+
+  // Event listeners untuk pencarian
+  document.getElementById('btn-search').addEventListener('click', () => {
+    const query = document.getElementById('icd-search').value;
+    showSearchResults(query);
+  });
+
+  document.getElementById('icd-search').addEventListener('input', (e) => {
+    showSearchResults(e.target.value);
+  });
+
+  document.getElementById('icd-search').addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      showSearchResults(e.target.value);
+    }
+  });
+
+  // Tutup hasil pencarian saat klik di luar
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-container')) {
+      document.getElementById('search-results').style.display = 'none';
+    }
+  });
+
+  // Muat data saat halaman dimuat
+  window.addEventListener('DOMContentLoaded', loadFromLocalStorage);
   </script>
 </body>
 </html>
