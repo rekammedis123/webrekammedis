@@ -198,40 +198,6 @@
     .tab-content.active {
       display: block;
     }
-    .sub-tab-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 15px 0;
-    }
-    .sub-tab-btn {
-      padding: 6px 15px;
-      background: linear-gradient(135deg, #4285F4, #34A853);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.3s ease;
-    }
-    .sub-tab-btn:hover {
-      background-color: #20b2aa;
-      color: white;
-    }
-    .sub-tab-btn.active {
-      background-color: #008080;
-      color: white;
-    }
-    .sub-tab-content {
-      display: none;
-      padding: 15px;
-      background-color: #f5f9ff;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-    .sub-tab-content.active {
-      display: block;
-    }
 
     /* Info list */
     .info-content {
@@ -414,6 +380,7 @@
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
         <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
         <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN</a></li>
         <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
         <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
         <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
@@ -436,7 +403,6 @@
       
       <div class="tab-menu">
         <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
-        <button class="tab-btn" data-tab="sumbar"><i class="fas fa-map-marked-alt"></i> SUMBAR</button>
         <button class="tab-btn" id="codingBtn"><i class="fas fa-book-open"></i> CODING</button>
         <button class="tab-btn" id="akunBtn"><i class="fas fa-user-shield"></i> AKUN</button>
       </div>
@@ -449,32 +415,6 @@
           <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn"></i> Tata Naskah</button>
         </div>
       </div>
-
-      <div id="sumbar" class="tab-content">
-        <div class="sub-tab-menu">
-          <button class="sub-tab-btn active" data-subtab="dalam"><i class="fas fa-home"></i> Dalam</button>
-          <button class="sub-tab-btn" data-subtab="luar"><i class="fas fa-external-link-alt"></i> Luar</button>
-        </div>
-
-        <div id="dalam" class="sub-tab-content active">
-          <p><i class="fas fa-info-circle"></i> Informasi dari sumber internal rumah sakit:</p>
-          <ul style="margin-top: 10px; padding-left: 20px;">
-            <li>Bulletin bulanan</li>
-            <li>Pengumuman internal</li>
-            <li>Memo direksi</li>
-          </ul>
-        </div>
-
-        <div id="luar" class="sub-tab-content">
-          <p><i class="fas fa-globe"></i> Informasi dari sumber eksternal:</p>
-          <ul style="margin-top: 10px; padding-left: 20px;">
-            <li>Dinas Kesehatan Provinsi</li>
-            <li>Kementerian Kesehatan</li>
-            <li>Asosiasi Rumah Sakit</li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </main>
 
   <!-- Modal Login -->
