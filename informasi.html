@@ -13,16 +13,17 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #ffffff, #ffffff);
+      background: linear-gradient(135deg, #ffffff, #eeecec);
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background: linear-gradient(150deg, #e2f8f1, #1f8664);
+      background: linear-gradient(150deg, #9fc5b9, #a0ffbd);
       padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px #027e40;
     }
     .logo {
       display: flex;
@@ -30,23 +31,20 @@
       flex-wrap: wrap;
     }
     .logo img {
-      width: 60px;
-      height: 60px;
-      margin-right: 15px;
+      width: 300px;
+      height: 70px;
+      margin-right: 1px;
     }
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
-      color: #00754e;
+      color: #3a3a3a;
     }
-    .judul p {
+    .judul {
       font-size: 25px;
-      margin-top: 1px;
+      margin-top: 15px;
       font-weight: bold;
-      color: #00754e;
-    }
-    .judul p::before {
-      content: "🏥 ";
+      color: #3a3a3a;
     }
     .user-info {
       text-align: right;
@@ -58,13 +56,14 @@
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
+      gap: 5px;
       padding: 10px;
-      background: linear-gradient(5deg, #f5d069, #f0dfb1);
+      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       border-radius: 50px;
-      font-size: 12px;
+      font-size: 13px;
       justify-content: center;
       margin-top: 15px;
+      box-shadow: 0 0 10px #027e40;
     }
     nav ul li a {
       text-decoration: none;
@@ -109,96 +108,106 @@
       font-weight: 900; 
       margin-right: 8px;
     }
-    .login-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      text-decoration: none;
-      color: #ffffff;
-      padding: 8px 25px;
-      background-color: #009765;
-      border-radius: 50px;
-      font-size: 14px;
-      transition: all 0.3s ease;
-    }
-    .login-btn:hover {
-      background-color: #00bb77;
-      transform: scale(1.05);
-    }
-
     footer {
-      background: linear-gradient(150deg, #bdfce8, #1f8664);
+      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 30px 20px;
-      font-size: 14px;
+      font-size: 18px;
       gap: 20px;
-      color: white;
+      color: #3a3a3a;
+      border-top: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px #027e40;
     }
     .footer-left,
     .footer-center,
     .footer-right {
       flex: 1 1 100%;
     }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
     .footer-left img {
       width: 50px;
       height: 50px;
       margin-right: 15px;
     }
-    .footer-left strong::before { content: "🏛️"; margin-right: 5px; }
-    .footer-center strong::before { content: "ℹ️"; margin-right: 5px; }
-    .footer-right strong::before { content: "🌐"; margin-right: 5px; }
-
+    .footer-left {
+      display: flex;
+      align-items: flex-start;
+    }
+    .small{font-size:14px;color:#555}
     @media (min-width: 600px) {
       .footer-left, .footer-center, .footer-right {
         flex: 1;
       }
     }
 
-    .tab-menu {
-      display: flex;
-      gap: 10px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-    }
-    .tab-menu button {
-      padding: 8px 20px;
-      background-color: #20b2aa;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 12px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .tab-menu button:hover {
-      background-color: #3cb371;
-      transform: translateY(-3px);
-    }
-    .tab-menu button.active {
-      background-color: #008080;
-    }
-    .tab-content {
-      display: none;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      margin-top: 10px;
-      animation: fadeIn 0.5s ease-out;
-    }
-    .tab-content.active {
-      display: block;
-    }
-
+                        .tab-menu {
+                        display: flex;
+                        gap: 10px;
+                        margin: 20px 0;
+                        flex-wrap: wrap;
+                      }
+                      .tab-menu button {
+                        padding: 8px 20px;
+                        background-color: #ffffff;
+                        color: #3a3a3a;
+                        border: none;
+                        border-radius: 50px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        font-size: 15px;
+                        transition: all 0.3s ease;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                        box-shadow: 0 0 10px #027e40;
+                      }
+                      .tab-menu button:hover {
+                        background-color: #3cb371;
+                        color: white;
+                        transform: translateY(-1px);
+                      }
+                      .tab-menu button.active {
+                        background-color: #3cb371;
+                        color: white;
+                      }
+                      
+                      .tab-content {
+                        display: none;
+                        padding: 20px;
+                        background-color: #f9f9f9;
+                        border-radius: 10px;
+                        margin-top: 10px;
+                        animation: fadeIn 0.5s ease-out;
+                      }
+                      .tab-content.active {
+                        display: block;
+                      }
+    
+              .sub-tab-menu button {
+                padding: 8px 20px;
+                background-color: #ffffff;
+                color: #3a3a3a;
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                align-items: center;
+                gap: 5px;
+                box-shadow: 0 0 10px #027e40;
+              }
+              .sub-tab-menu button:hover {
+                background-color: #3cb371;
+                color: white;
+                transform: translateY(-1px);
+              }
+              .tab-menu button.active {
+              background-color: #3cb371;
+              color: white;
+              }
+    
     /* Info list */
     .info-content {
       line-height: 1.6;
@@ -223,68 +232,6 @@
       left: 0;
       top: -2px;
     }
-
-    /* Table */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 15px 0;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #20b2aa;
-      color: white;
-    }
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-
-    /* Upload box */
-    .upload-box {
-      margin-top: 30px;
-      background-color: #f0f8ff;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px dashed #20b2aa;
-      display: none;
-    }
-
-    .upload-box h3 {
-      color: #008080;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .upload-box input, .upload-box button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-    }
-
-    .upload-box button {
-      background-color: #20b2aa;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .upload-box button:hover {
-      background-color: #3cb371;
-    }
-    /* STYLE DROPDOWN HUBUNGI KAMI */
     .dropdown-hubungi {
       position: relative;
       display: inline-block;
@@ -368,15 +315,11 @@
 <body>
   <header>
     <div class="logo">
-      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
-      <div class="judul">
-        <h1>MEDICAL RECORD</h1>
-        <p>RSU AN'NIMAH</p>
-      </div>
+      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
     </div>
-    <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
+        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
         <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
         <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
@@ -400,7 +343,6 @@
   <main>
     <div class="info-container">
       <h2>INFORMASI</h2>
-      
       <div class="tab-menu">
         <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
         <button class="tab-btn" id="codingBtn"><i class="fas fa-book-open"></i> CODING</button>
@@ -450,24 +392,10 @@
 </div>
 
   <footer>
-    <div class="footer-left">
-      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
       <div>
         <strong>MEDICAL RECORD</strong><br />
-        <i class="fas fa-map-marker-alt"></i> Unit Rekam Medik Rsu An'Nimah<br />
-        <i class="fas fa-road"></i>Lantai 2 Sebelah Kantin Rsu An'Nimah<br />
+        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
       </div>
-    </div>
-    <div class="footer-center">
-      <strong>INFORMASI</strong><br />
-        <i class="fas fa-images"></i> GALERI<br />
-        <i class="fas fa-envelope"></i> KONTAK KAMI
-    </div>
-    <div class="footer-right">
-      <strong>SOCIAL MEDIA</strong><br />
-      <i class="fab fa-facebook"></i> FACEBOOK<br />
-      <i class="fab fa-instagram"></i> INSTAGRAM<br />
-      <i class="fab fa-whatsapp"></i> WHATSAPP
     </div>
   </footer>
 
@@ -558,22 +486,6 @@
     handleButtonClick('whatsappBtn', 'whatsapp');
     handleButtonClick('rapatBtn', 'rapat');
     handleButtonClick('tatanaskahBtn', 'tatanaskah');
-
-    // Upload box handler
-    const uploadBtn = document.querySelector('.upload-box button');
-    if (uploadBtn) {
-      uploadBtn.addEventListener('click', function() {
-        const docType = document.getElementById('doc-type')?.value;
-        const content = document.getElementById('info-text')?.value;
-        
-        if (content) {
-          alert(`Informasi ${docType?.toUpperCase() || ''} berhasil diperbarui!`);
-          document.getElementById('info-text').value = '';
-        } else {
-          alert('Harap isi konten informasi!');
-        }
-      });
-    }
 
     // Fungsi untuk menutup modal
     function closeModal(modalId) {
