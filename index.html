@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Medical Record</title>
-  <!-- FONT AWESOME UNTUK ICON -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -13,16 +12,18 @@
     }
     html, body {
       height: 100%;
-      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
+      background: linear-gradient(135deg, #ffffff, #eeecec); 
       color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
     header {
-      background: linear-gradient(150deg, #e2f8f1, #1f8664); /* Biru pastel rumah sakit */
+      background: linear-gradient(150deg, #9fc5b9, #a0ffbd); 
       padding: 15px 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px #027e40;
     }
     .logo {
       display: flex;
@@ -30,41 +31,39 @@
       flex-wrap: wrap;
     }
     .logo img {
-      width: 60px;
-      height: 60px;
-      margin-right: 15px;
+      width: 300px;
+      height: 70px;
+      margin-right: 1px;
     }
     .judul h1 {
       font-size: 30px;
       font-weight: bold;
-      color: #00754e;
+      color: #3a3a3a;
     }
-    .judul p {
+    .judul {
       font-size: 25px;
-      margin-top: 1px;
+      margin-top: 15px;
       font-weight: bold;
-      color: #00754e;
-    }
-    .judul p::before {
-      content: "🏥 ";
+      color: #3a3a3a;
     }
     .user-info {
       text-align: right;
       font-size: 13px;
       margin-top: 10px;
-      color: #ffffff;
+      color: #3a3a3a;
     }
     nav ul {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
+      gap: 5px;
       padding: 10px;
-      background: linear-gradient(5deg, #f5d069, #f0dfb1); /* Biru pastel rumah sakit */
+      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       border-radius: 50px;
-      font-size: 12px;
+      font-size: 13px;
       justify-content: center;
       margin-top: 15px;
+      box-shadow: 0 0 10px #027e40;
     }
     nav ul li a {
       text-decoration: none;
@@ -98,7 +97,7 @@
       font-size: 50px;
       font-weight: bold;
       margin-bottom: 15px;
-      color: #009765;
+      color: #008080;
       display: flex;
       align-items: center;
       gap: 15px;
@@ -106,32 +105,56 @@
     .welcome-container h2::before {
       content: "👨‍⚕️";
     }
+
+    .logout-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #007e58;
+      font-weight: bold;
+      font-size: 11px;
+      transition: all 0.3s ease;
+    }
+    .logout-btn:hover {
+      transform: scale(-1px);
+      color: #00bb77;
+    }
+    .login-btn:hover {
+      background-color: #00bb77;
+      transform: scale(-1px);
+      color: #ffffff;
+    }
     .login-btn {
       display: inline-flex;
       align-items: center;
       gap: 5px;
       text-decoration: none;
-      color: #ffffff;
+      color: #000000;
+      font-weight: bold;
       padding: 8px 25px;
-      background-color: #009765;
+      background-color: #ffffff;
       border-radius: 50px;
-      font-size: 14px;
+      font-size: 15px;
       transition: all 0.3s ease;
+      box-shadow: 0 0 10px #027e40;
     }
     .login-btn:hover {
       background-color: #00bb77;
-      transform: scale(1.05);
+      transform: scale(-1px);
+      color: #ffffff;
     }
-
     footer {
-      background: linear-gradient(150deg, #bdfce8, #1f8664); /* Biru pastel rumah sakit */
+      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       padding: 30px 20px;
-      font-size: 14px;
+      font-size: 18px;
       gap: 20px;
-      color: white;
+      color: #3a3a3a;
+      border-top: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px #027e40;
     }
     .footer-left,
     .footer-center,
@@ -143,28 +166,21 @@
       height: 50px;
       margin-right: 15px;
     }
-
+    .footer-left,
+    .footer-center,
+    .footer-right {
+      flex: 1 1 100%;
+    }
+    .footer-left img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
     .footer-left {
       display: flex;
       align-items: flex-start;
     }
-
-    .footer-left strong::before,
-    .footer-center strong::before,
-    .footer-right strong::before {
-      margin-right: 5px;
-    }
-
-    .footer-left strong::before {
-      content: "🏛️";
-    }
-    .footer-center strong::before {
-      content: "ℹ️";
-    }
-    .footer-right strong::before {
-      content: "🌐";
-    }
-
+    .small{font-size:14px;color:#555}
     @media (min-width: 600px) {
       .logo {
         flex-wrap: nowrap;
@@ -174,12 +190,8 @@
       .footer-right {
         flex: 1;
       }
-      .welcome-container h2 {
-        font-size: 70px;
-      }
     }
 
-    /* ANIMASI */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -188,7 +200,6 @@
       animation: fadeIn 0.8s ease-out;
     }
 
-    /* STYLE DROPDOWN HUBUNGI KAMI */
     .dropdown-hubungi {
       position: relative;
       display: inline-block;
@@ -228,15 +239,12 @@
 
   <header>
     <div class="logo">
-      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
-      <div class="judul">
-        <h1>MEDICAL RECORD</h1>
-        <p>RSU AN'NIMAH</p>
-      </div>
+      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
     </div>
     <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
+        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
         <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
         <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
@@ -265,25 +273,12 @@
   </main>
 
   <footer>
-    <div class="footer-left">
-      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
       <div>
         <strong>MEDICAL RECORD</strong><br />
-        <i class="fas fa-map-marker-alt"></i> UNIT REKAM MEDIK RSU AN'NIMAH<br />
-        <i class="fas fa-road"></i> lantai 2 Sebelah Kanan Kantin Rsu An'Nimah<br />
+        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
       </div>
     </div>
-    <div class="footer-center">
-      <strong>INFORMASI</strong><br />
-      <i class="fas fa-images"></i> GALERI<br />
-      <i class="fas fa-envelope"></i> KONTAK KAMI
-    </div>
-    <div class="footer-right">
-      <strong>SOCIAL MEDIA</strong><br />
-      <i class="fab fa-facebook"></i> FACEBOOK<br />
-      <i class="fab fa-instagram"></i> INSTAGRAM<br />
-      <i class="fab fa-whatsapp"></i> WHATSAPP
-    </div>
+
   </footer>
 
   <script>
@@ -292,19 +287,24 @@
     const loggedInUser = localStorage.getItem("loggedInUser");
 
     if (loggedInUser) {
-      userInfoDiv.innerHTML = `
-        <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
-        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      `;
-      document.getElementById("logout-btn").addEventListener("click", function(e) {
-        e.preventDefault();
-        localStorage.removeItem("loggedInUser");
-        window.location.href = "login.html";
-      });
-    } else {
-      
-      welcomeLoginBtn.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
-    }
+  userInfoDiv.innerHTML = `
+    <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
+    <a href="#" id="logout-btn" class="logout-btn" style="margin-left: 10px;">
+      <i class="fas fa-sign-out-alt"></i>
+    </a>
+  `;
+  document.getElementById("logout-btn").addEventListener("click", function(e) {
+    e.preventDefault();
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  });
+} else {
+  welcomeLoginBtn.innerHTML = `
+    <a href="login.html" class="login-btn">
+      <i class="fas fa-sign-in-alt"></i> Login Skuy
+    </a>
+  `;
+}
   </script>
 
 </body>
