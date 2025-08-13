@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="logorekammedis.png" type="image/png">
   <title>Login - RSU AN'NIMAH</title>
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -189,28 +188,49 @@
   </div>
 
   <script>
-    document.querySelector(".login-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const username = document.querySelector('input[name="username"]').value;
-      const password = document.querySelector('input[name="password"]').value;
+  // Fungsi untuk ambil parameter dari URL
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-      // Contoh credentials (bisa diganti dengan sistem auth sesungguhnya)
-      if ((username === "admin" && password === "admin123") || 
-          (username === "susi" && password === "susi123")
-            (username === "fatim" && password === "fatim123")
-            (username === "yoga" && password === "martil235"
-          )) {
-        localStorage.setItem("loggedInUser", username);
-        window.location.href = "index.html";
+  // Baca parameter redirect (misal beranda.html atau coding.html)
+  const redirectTarget = getQueryParam("redirect");
+
+  // Kalau sudah login sebelumnya, langsung redirect ke target
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser && redirectTarget) {
+    window.location.href = redirectTarget;
+  }
+
+  document.querySelector(".login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = document.querySelector('input[name="username"]').value.trim();
+    const password = document.querySelector('input[name="password"]').value.trim();
+
+    // Contoh kredensial
+    if (
+      (username === "admin" && password === "admin123") ||
+      (username === "susi" && password === "susi123") ||
+      (username === "fatim" && password === "fatim123") ||
+      (username === "yoga" && password === "martil235")
+    ) {
+      localStorage.setItem("loggedInUser", username);
+      // Redirect ke halaman tujuan (kalau ada), kalau tidak default ke index.html
+      if (redirectTarget) {
+        window.location.href = redirectTarget;
       } else {
-        alert("Username atau Password salah!");
-        document.querySelector('input[name="password"]').value = "";
+        window.location.href = "index.html";
       }
-    });
+    } else {
+      alert("Username atau Password salah!");
+      document.querySelector('input[name="password"]').value = "";
+    }
+  });
 
-    // Auto focus ke field username saat page load
-    document.querySelector('input[name="username"]').focus();
-  </script>
+  // Autofocus ke username
+  document.querySelector('input[name="username"]').focus();
+</script>
 
 </body>
 </html>
