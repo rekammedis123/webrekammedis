@@ -363,7 +363,6 @@
   </footer>
 
   <script>
-  // Database ICD-10 dan ICD-9 lokal
   const icdDatabase = {
     icd10: [
       { code: "A00", desc: "Kolera" },
@@ -380,19 +379,13 @@
     ]
   };
 
-  // Data yang disimpan di localStorage
-  let storedData = {
-    icd10: [],
-    icd9: []
-  };
+  let storedData = { icd10: [], icd9: [] };
 
-  // Muat data dari localStorage saat halaman dimuat
   function loadFromLocalStorage() {
     const savedData = localStorage.getItem('icdData');
     if (savedData) {
       storedData = JSON.parse(savedData);
     } else {
-      // Data default jika tidak ada yang tersimpan
       storedData = {
         icd10: [...icdDatabase.icd10],
         icd9: [...icdDatabase.icd9]
@@ -402,12 +395,10 @@
     renderTables();
   }
 
-  // Simpan data ke localStorage
   function saveToLocalStorage() {
     localStorage.setItem('icdData', JSON.stringify(storedData));
   }
 
-  // Render tabel dari data
   function renderTables() {
     renderTable('icd10');
     renderTable('icd9');
@@ -433,111 +424,91 @@
     });
   }
 
-  // Fungsi pencarian
   function searchICD(query) {
-    if (!query || query.trim().length < 2) {
-      return { count: 0, results: [] };
-    }
-
+    if (!query || query.trim().length < 2) return { count: 0, results: [] };
     const searchTerm = query.toLowerCase();
     const allItems = [...storedData.icd10, ...storedData.icd9];
-    
-    const results = allItems.filter(item => 
-      item.code.toLowerCase().includes(searchTerm) || 
+    const results = allItems.filter(item =>
+      item.code.toLowerCase().includes(searchTerm) ||
       item.desc.toLowerCase().includes(searchTerm)
     );
-
-    return {
-      count: results.length,
-      results
-    };
+    return { count: results.length, results };
   }
 
-  // Tampilkan hasil pencarian
   function showSearchResults(query) {
     const resultsContainer = document.getElementById('search-results');
-    
     if (!query || query.trim().length < 2) {
       resultsContainer.style.display = 'none';
       return;
     }
-
     const { count, results } = searchICD(query);
-    
-    if (count === 0) {
-      resultsContainer.innerHTML = `
-        <div class="search-result-item">
-          Tidak ditemukan hasil untuk "${query}"
-        </div>
-      `;
-    } else {
-      resultsContainer.innerHTML = results.map(item => `
-        <div class="search-result-item" 
-             onclick="fillFormFromSearch('${item.code}', '${item.desc.replace(/'/g, "\\'")}')">
-          <div class="search-result-code">${item.code}</div>
-          <div class="search-result-desc">${item.desc}</div>
-        </div>
-      `).join('');
-    }
-    
+    resultsContainer.innerHTML = count === 0
+      ? `<div class="search-result-item">Tidak ditemukan hasil untuk "${query}"</div>`
+      : results.map(item => `
+          <div class="search-result-item" onclick="fillFormFromSearch('${item.code}', '${item.desc.replace(/'/g, "\\'")}')">
+            <div class="search-result-code">${item.code}</div>
+            <div class="search-result-desc">${item.desc}</div>
+          </div>
+        `).join('');
     resultsContainer.style.display = 'block';
   }
 
-  // Isi form dari hasil pencarian
   function fillFormFromSearch(code, desc) {
     document.getElementById('icd-code').value = code;
     document.getElementById('icd-desc').value = desc;
-    
-    // Deteksi otomatis jenis ICD berdasarkan format kode
-    if (/^[A-Z]\d{2}/.test(code)) {
-      document.getElementById('icd-type').value = 'icd10';
-    } else if (/^\d{2}\.\d{2}/.test(code)) {
-      document.getElementById('icd-type').value = 'icd9';
-    }
-    
+    document.getElementById('icd-type').value = /^[A-Z]\d{2}/.test(code) ? 'icd10' : 'icd9';
     document.getElementById('search-results').style.display = 'none';
     document.getElementById('icd-search').value = '';
   }
 
-  // Tambah data baru
   document.getElementById('form-icd').addEventListener('submit', function(e) {
     e.preventDefault();
-    
+
     const type = document.getElementById('icd-type').value;
     const code = document.getElementById('icd-code').value.trim();
     const desc = document.getElementById('icd-desc').value.trim();
-    
+
     if (!type || !code || !desc) {
       alert("Harap isi semua field!");
       return;
     }
-    
-    // Cek duplikasi kode
+
     if (storedData[type].some(item => item.code === code)) {
       alert(`Kode ${code} sudah ada dalam database!`);
       return;
     }
-    
-    // Tambahkan data baru
+
     storedData[type].push({ code, desc });
     saveToLocalStorage();
     renderTables();
-    
-    // Reset form
-    this.reset();
-    alert("Data berhasil ditambahkan!");
+
+    // Kirim ke Google Sheets via Apps Script
+    fetch("https://script.google.com/macros/s/AKfycbwm3eCakEbC7cOABm3Px8ko-BIifArtOEq1uKM_Zr7D9wfUNO_KqGg7xHvzgs18jqTl/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ type, code, desc })
+    })
+    .then(res => res.text())
+    .then(response => {
+      console.log("Respon dari Apps Script:", response);
+      alert("Data berhasil disimpan ke Google Sheets!");
+      document.getElementById('form-icd').reset();
+    })
+    .catch(err => {
+      console.error("Gagal kirim ke Google Sheets:", err);
+      alert("Data lokal tersimpan, tapi gagal kirim ke Google Sheets.");
+    });
   });
 
-  // Hapus data
   function deleteRow(btn, type, code) {
     if (!confirm(`Yakin ingin menghapus kode ${code}?`)) return;
-    
     storedData[type] = storedData[type].filter(item => item.code !== code);
     saveToLocalStorage();
     renderTables();
   }
 
-  // Event listeners untuk pencarian
   document.getElementById('btn-search').addEventListener('click', () => {
     const query = document.getElementById('icd-search').value;
     showSearchResults(query);
@@ -553,15 +524,13 @@
     }
   });
 
-  // Tutup hasil pencarian saat klik di luar
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.search-container')) {
       document.getElementById('search-results').style.display = 'none';
     }
   });
 
-  // Muat data saat halaman dimuat
   window.addEventListener('DOMContentLoaded', loadFromLocalStorage);
-  </script>
+</script>
 </body>
 </html>
