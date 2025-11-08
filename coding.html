@@ -83,25 +83,27 @@
       loadFromLocalStorage();
 
       // Kirim ke Google Sheets via Apps Script
-      fetch("https://script.google.com/macros/s/AKfycbwcbiLLbIiRvqPK4aFMVTDcJsMeuq3le3_UHOry1r8Prwj2h-kP5Wv9TrFb1ajWwUtY/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newItem)
-      })
-      .then(res => res.text())
-      .then(response => {
-        if (response.startsWith("Error")) {
-          alert("Gagal simpan ke Google Sheets: " + response);
-        } else {
-          alert("Data berhasil disimpan ke Google Sheets!");
-          document.getElementById('form-icd').reset();
-        }
-      })
-      .catch(err => {
-        console.error("Gagal kirim:", err);
-        alert("Terjadi kesalahan saat mengirim data.");
-      });
-    });
+      fetch("https://script.google.com/macros/s/AKfycbxSPLXiv8lLHmlD1-58e6al11YM0cpNKTBpKEbXTSduC0m_EStCHfcITXPHSuMC7iRH/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(newItem)
+})
+.then(res => res.text())
+.then(response => {
+  console.log("Respon dari Apps Script:", response); // ✅ Tambahan log di sini
+
+  if (response.startsWith("Error")) {
+    alert("Gagal simpan ke Google Sheets: " + response);
+  } else {
+    alert("Data berhasil disimpan ke Google Sheets!");
+    document.getElementById('form-icd').reset();
+  }
+})
+.catch(err => {
+  console.error("Gagal kirim:", err);
+  alert("Terjadi kesalahan saat mengirim data.");
+});
+});
 
     // Load saat halaman dibuka
     loadFromLocalStorage();
