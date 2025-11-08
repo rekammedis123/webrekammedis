@@ -1,536 +1,110 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sistem ICD 10 & ICD 9 Terintegrasi</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Form ICD</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: #f4f9f9;
-      color: #333;
-      font-size: 14px;
-    }
-
-    header {
-      background-color: #74c3ad;
-      color: white;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-      font-size: 20px;
-    }
-
-    header .icons a {
-      color: white;
-      margin-left: 15px;
-      font-size: 18px;
-      transition: transform 0.3s ease;
-    }
-
-    header .icons a:hover {
-      transform: scale(1.2);
-      color: #807f71;
-    }
-
-    .container {
-      padding: 30px 15px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 22px;
-      color: #2d6a4f;
-    }
-
-    h3 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #2d6a4f;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .logo img {
-      width: 40px;
-      height: 40px;
-      margin-right: 10px;
-    }
-
-    table {
-      width: 100%;
+    table, th, td {
+      border: 1px solid black;
       border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-      font-size: 13px;
-    }
-
-    th, td {
-      padding: 10px 12px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    th {
-      background-color: #95d5b2;
-      color: #fff;
-      font-weight: 500;
-    }
-
-    tr:hover {
-      background-color: #e9f5f2;
-    }
-
-    footer {
-      background-color: #74c3ad;
-      color: white;
-      text-align: center;
-      padding: 12px 10px;
-      margin-top: 30px;
-      font-size: 13px;
-    }
-
-    .add-form {
-      background-color: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-bottom: 25px;
-    }
-
-    .form-group {
-      margin-bottom: 12px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 4px;
-      color: #2d6a4f;
-      font-weight: 500;
-      font-size: 13px;
-    }
-
-    .form-group input, 
-    .form-group select {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 13px;
-    }
-
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    button {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background-color 0.3s;
-      font-size: 13px;
-    }
-
-    .btn-primary {
-      background-color: #74c3ad;
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background-color: #5aa78f;
-    }
-
-    .btn-secondary {
-      background-color: #f0f0f0;
-      color: #333;
-    }
-
-    .btn-secondary:hover {
-      background-color: #e0e0e0;
-    }
-
-    .delete-btn {
-      padding: 5px 8px;
-      min-width: 30px;
-    }
-
-    /* Fitur Pencarian */
-    .search-container {
-      margin-bottom: 20px;
-      background-color: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    
-    .search-input-container {
-      display: flex;
-      gap: 10px;
-    }
-    
-    .search-input {
-      flex: 1;
-      padding: 10px 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    
-    .search-btn {
-      background-color: #74c3ad;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 0 20px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .search-btn:hover {
-      background-color: #5aa78f;
-    }
-    
-    .search-results {
-      margin-top: 10px;
-      border: 1px solid #eee;
-      border-radius: 4px;
-      max-height: 300px;
-      overflow-y: auto;
-      display: none;
-    }
-    
-    .search-result-item {
-      padding: 10px 15px;
-      border-bottom: 1px solid #f5f5f5;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    
-    .search-result-item:hover {
-      background-color: #f5f9f8;
-    }
-    
-    .search-result-code {
-      font-weight: bold;
-      color: #2d6a4f;
-      font-size: 13px;
-    }
-    
-    .search-result-desc {
-      color: #555;
-      font-size: 12px;
-      margin-top: 2px;
-    }
-
-    @media (max-width: 600px) {
-      th, td {
-        font-size: 12px;
-        padding: 8px 10px;
-      }
-      
-      .form-actions {
-        flex-direction: column;
-      }
-      
-      button {
-        width: 100%;
-      }
-      
-      .search-input-container {
-        flex-direction: column;
-      }
+      padding: 6px;
     }
   </style>
 </head>
 <body>
+  <h2>Tambah Kode ICD</h2>
+  <form id="form-icd">
+    <label>Jenis ICD:</label>
+    <select id="icd-type">
+      <option value="ICD-10">ICD-10</option>
+      <option value="ICD-9">ICD-9</option>
+    </select><br><br>
 
-  <header>
-    <div class="logo">
-      <img src="logorsnmc.png" alt="Logo Rumah Sakit" />
-      <div class="judul">
-        <h1>Kode ICD 10 & ICD 9</h1>
-      </div>
-    </div>
-    <div class="icons">
-      <a href="index.html" title="Beranda"><i class="fas fa-home"></i></a>
-      <a href="informasi.html" title="Informasi"><i class="fas fa-info-circle"></i></a>
-    </div>
-  </header>
+    <label>Kode:</label>
+    <input type="text" id="icd-code" required><br><br>
 
-  <div class="container">
-    <!-- Form Pencarian ICD -->
-    <div class="search-container">
-      <h3>Cari Kode ICD</h3>
-      <div class="search-input-container">
-        <input type="text" id="icd-search" class="search-input" placeholder="Masukkan kode atau nama diagnosa/tindakan...">
-        <button class="search-btn" id="btn-search">
-          <i class="fas fa-search"></i> Cari
-        </button>
-      </div>
-      <div class="search-results" id="search-results">
-        <!-- Hasil pencarian akan muncul di sini -->
-      </div>
-    </div>
+    <label>Deskripsi:</label>
+    <input type="text" id="icd-desc" required><br><br>
 
-    <!-- Form Tambah Data -->
-    <div class="add-form">
-      <h3>Tambah Kode Baru</h3>
-      <form id="form-icd">
-        <div class="form-group">
-          <label for="icd-type">Jenis ICD</label>
-          <select id="icd-type" required>
-            <option value="">Pilih Jenis ICD</option>
-            <option value="icd10">ICD 10 (Diagnosa)</option>
-            <option value="icd9">ICD 9 CM (Tindakan)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="icd-code">Kode</label>
-          <input type="text" id="icd-code" placeholder="Contoh: E11.9" required>
-        </div>
-        <div class="form-group">
-          <label for="icd-desc">Deskripsi</label>
-          <input type="text" id="icd-desc" placeholder="Contoh: Diabetes melitus tipe 2" required>
-        </div>
-        <div class="form-actions">
-          <button type="reset" class="btn-secondary">Reset</button>
-          <button type="submit" class="btn-primary">Tambah ke Daftar</button>
-        </div>
-      </form>
-    </div>
+    <button type="submit">Kirim</button>
+  </form>
 
-    <h2>Daftar Kode Diagnosa (ICD 10)</h2>
-    <table id="table-icd10">
-      <thead>
-        <tr>
-          <th width="15%">Kode</th>
-          <th>Deskripsi</th>
-          <th width="8%">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data akan diisi oleh JavaScript -->
-      </tbody>
-    </table>
-
-    <h2 style="margin-top: 30px;">Daftar Kode Tindakan (ICD 9 CM)</h2>
-    <table id="table-icd9">
-      <thead>
-        <tr>
-          <th width="15%">Kode</th>
-          <th>Deskripsi</th>
-          <th width="8%">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Data akan diisi oleh JavaScript -->
-      </tbody>
-    </table>
-  </div>
-
-  <footer>
-    &copy; 2025 RSU An Ni'mah - Unit Rekam Medis
-  </footer>
+  <h3>Daftar Kode ICD yang Sudah Dimasukkan</h3>
+  <table id="icd-table">
+    <thead>
+      <tr>
+        <th>Jenis ICD</th>
+        <th>Kode</th>
+        <th>Deskripsi</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
   <script>
-  const icdDatabase = {
-    icd10: [
-      { code: "A00", desc: "Kolera" },
-      { code: "E11.9", desc: "Diabetes melitus tipe 2" },
-      { code: "I10", desc: "Hipertensi esensial (primer)" },
-      { code: "J18.9", desc: "Pneumonia, tidak spesifik" },
-      { code: "K21.9", desc: "Penyakit refluks gastroesofageal" }
-    ],
-    icd9: [
-      { code: "96.04", desc: "Pemasangan ventilator mekanik" },
-      { code: "45.13", desc: "Kolonoskopi" },
-      { code: "38.93", desc: "Pemasangan infus sentral" },
-      { code: "37.22", desc: "Elektrokardiogram (EKG)" }
-    ]
-  };
+    const tableBody = document.querySelector("#icd-table tbody");
 
-  let storedData = { icd10: [], icd9: [] };
-
-  function loadFromLocalStorage() {
-    const savedData = localStorage.getItem('icdData');
-    if (savedData) {
-      storedData = JSON.parse(savedData);
-    } else {
-      storedData = {
-        icd10: [...icdDatabase.icd10],
-        icd9: [...icdDatabase.icd9]
-      };
-      saveToLocalStorage();
+    function loadFromLocalStorage() {
+      const data = JSON.parse(localStorage.getItem("icdData") || "[]");
+      tableBody.innerHTML = "";
+      data.forEach(item => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${item.type}</td><td>${item.code}</td><td>${item.desc}</td>`;
+        tableBody.appendChild(row);
+      });
     }
-    renderTables();
-  }
 
-  function saveToLocalStorage() {
-    localStorage.setItem('icdData', JSON.stringify(storedData));
-  }
+    function saveToLocalStorage(newItem) {
+      const data = JSON.parse(localStorage.getItem("icdData") || "[]");
+      data.push(newItem);
+      localStorage.setItem("icdData", JSON.stringify(data));
+    }
 
-  function renderTables() {
-    renderTable('icd10');
-    renderTable('icd9');
-  }
+    document.getElementById('form-icd').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-  function renderTable(type) {
-    const tableId = `table-${type}`;
-    const tbody = document.querySelector(`#${tableId} tbody`);
-    tbody.innerHTML = '';
+      const type = document.getElementById('icd-type').value;
+      const code = document.getElementById('icd-code').value.trim();
+      const desc = document.getElementById('icd-desc').value.trim();
 
-    storedData[type].forEach(item => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${item.code}</td>
-        <td>${item.desc}</td>
-        <td>
-          <button class="btn-secondary delete-btn" onclick="deleteRow(this, '${type}', '${item.code}')">
-            <i class="fas fa-trash"></i>
-          </button>
-        </td>
-      `;
-      tbody.appendChild(row);
+      if (!type || !code || !desc) {
+        alert("Harap isi semua field!");
+        return;
+      }
+
+      const existing = JSON.parse(localStorage.getItem("icdData") || "[]");
+      if (existing.some(item => item.code === code && item.type === type)) {
+        alert(`Kode ${code} sudah ada untuk ${type}!`);
+        return;
+      }
+
+      const newItem = { type, code, desc };
+      saveToLocalStorage(newItem);
+      loadFromLocalStorage();
+
+      // Kirim ke Google Sheets via Apps Script
+      fetch("https://script.google.com/macros/s/AKfycbxxxxxxxxxxxxxxxxxxxxxxxxxxxx/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newItem)
+      })
+      .then(res => res.text())
+      .then(response => {
+        if (response.startsWith("Error")) {
+          alert("Gagal simpan ke Google Sheets: " + response);
+        } else {
+          alert("Data berhasil disimpan ke Google Sheets!");
+          document.getElementById('form-icd').reset();
+        }
+      })
+      .catch(err => {
+        console.error("Gagal kirim:", err);
+        alert("Terjadi kesalahan saat mengirim data.");
+      });
     });
-  }
 
-  function searchICD(query) {
-    if (!query || query.trim().length < 2) return { count: 0, results: [] };
-    const searchTerm = query.toLowerCase();
-    const allItems = [...storedData.icd10, ...storedData.icd9];
-    const results = allItems.filter(item =>
-      item.code.toLowerCase().includes(searchTerm) ||
-      item.desc.toLowerCase().includes(searchTerm)
-    );
-    return { count: results.length, results };
-  }
-
-  function showSearchResults(query) {
-    const resultsContainer = document.getElementById('search-results');
-    if (!query || query.trim().length < 2) {
-      resultsContainer.style.display = 'none';
-      return;
-    }
-    const { count, results } = searchICD(query);
-    resultsContainer.innerHTML = count === 0
-      ? `<div class="search-result-item">Tidak ditemukan hasil untuk "${query}"</div>`
-      : results.map(item => `
-          <div class="search-result-item" onclick="fillFormFromSearch('${item.code}', '${item.desc.replace(/'/g, "\\'")}')">
-            <div class="search-result-code">${item.code}</div>
-            <div class="search-result-desc">${item.desc}</div>
-          </div>
-        `).join('');
-    resultsContainer.style.display = 'block';
-  }
-
-  function fillFormFromSearch(code, desc) {
-    document.getElementById('icd-code').value = code;
-    document.getElementById('icd-desc').value = desc;
-    document.getElementById('icd-type').value = /^[A-Z]\d{2}/.test(code) ? 'icd10' : 'icd9';
-    document.getElementById('search-results').style.display = 'none';
-    document.getElementById('icd-search').value = '';
-  }
-
-  document.getElementById('form-icd').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const type = document.getElementById('icd-type').value;
-    const code = document.getElementById('icd-code').value.trim();
-    const desc = document.getElementById('icd-desc').value.trim();
-
-    if (!type || !code || !desc) {
-      alert("Harap isi semua field!");
-      return;
-    }
-
-    if (storedData[type].some(item => item.code === code)) {
-      alert(`Kode ${code} sudah ada dalam database!`);
-      return;
-    }
-
-    storedData[type].push({ code, desc });
-    saveToLocalStorage();
-    renderTables();
-
-    // Kirim ke Google Sheets via Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbx4y8NMYofNQIFZjv4uIAUTtsZr2Kbna2rLg4r2MEq3BX9r8b3YbGVCuwAYj6EATIuz/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ type, code, desc })
-    })
-    .then(res => res.text())
-    .then(response => {
-      console.log("Respon dari Apps Script:", response);
-      alert("Data berhasil disimpan ke Google Sheets!");
-      document.getElementById('form-icd').reset();
-    })
-    .catch(err => {
-      console.error("Gagal kirim ke Google Sheets:", err);
-      alert("Data lokal tersimpan, tapi gagal kirim ke Google Sheets.");
-    });
-  });
-
-  function deleteRow(btn, type, code) {
-    if (!confirm(`Yakin ingin menghapus kode ${code}?`)) return;
-    storedData[type] = storedData[type].filter(item => item.code !== code);
-    saveToLocalStorage();
-    renderTables();
-  }
-
-  document.getElementById('btn-search').addEventListener('click', () => {
-    const query = document.getElementById('icd-search').value;
-    showSearchResults(query);
-  });
-
-  document.getElementById('icd-search').addEventListener('input', (e) => {
-    showSearchResults(e.target.value);
-  });
-
-  document.getElementById('icd-search').addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-      showSearchResults(e.target.value);
-    }
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.search-container')) {
-      document.getElementById('search-results').style.display = 'none';
-    }
-  });
-
-  window.addEventListener('DOMContentLoaded', loadFromLocalStorage);
-</script>
+    // Load saat halaman dibuka
+    loadFromLocalStorage();
+  </script>
 </body>
 </html>
