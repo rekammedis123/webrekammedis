@@ -4,18 +4,8 @@
   <meta charset="UTF-8">
   <title>Permintaan Resume Medis</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    h2 {
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+    body { font-family: Arial; padding: 20px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
     input, button {
       margin-top: 5px;
       padding: 8px;
@@ -24,14 +14,9 @@
       box-sizing: border-box;
     }
     button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
+      background-color: #4CAF50; color: white; border: none; cursor: pointer;
     }
-    button:hover {
-      background-color: #45a049;
-    }
+    button:hover { background-color: #45a049; }
   </style>
 </head>
 <body>
@@ -62,14 +47,10 @@
   </form>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxsaKlHtmLqDvVBTILWF7mYLuy36S_OHxVdBTIDuUQ/dev";
-
     document.getElementById("resumeForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
       const formData = new FormData(e.target);
-
-      fetch(scriptURL, {
+      fetch("https://script.google.com/macros/s/AKfycbxD_jFKAql_j54KbC8TYWz1ecJ4l8TTYcJjQjE_PCNNtvvuHXPcXO3wYOeqvxAXmAaj/exec", {
         method: "POST",
         body: formData
       })
