@@ -50,13 +50,13 @@
     document.getElementById("resumeForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
-  fetch("https://script.google.com/macros/s/AKfycby3AsXBw7s6Z9nj_F3sL-E-5PZT5jC5ucNB-IdFOiS2ciysZ1IhFKUPg0Vh9AjJGdDP/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwgX3DVAoUZaTPUGpjxQahyZ5o3ZgZrLF6-lFqkh6N89yXRpbWXNXSu3jktALXQYDmh/exec", {
     method: "POST",
     body: formData,
     mode: "no-cors"
   })
   .then(() => {
-    alert("✅ Permintaan berhasil dikirim (tanpa respon)");
+    alert("✅ Permintaan berhasil dikirim");
     e.target.reset();
   })
   .catch(err => {
