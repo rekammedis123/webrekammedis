@@ -48,22 +48,22 @@
 
   <script>
     document.getElementById("resumeForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      fetch("https://script.google.com/macros/s/AKfycbyCmcMYBwvsL55oZxk3mXCRCaVPkq8zIKW7rF30n_xMWUiEjAG4lTBNwRxjykcaFk61/exec", {
-        method: "POST",
-        body: formData
-      })
-      .then(res => res.text())
-      .then(msg => {
-        alert("✅ " + msg);
-        e.target.reset();
-      })
-      .catch(err => {
-        console.error("Fetch error:", err);
-        alert("❌ Gagal mengirim: " + err.message);
-      });
-    });
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  fetch("https://script.google.com/macros/s/AKfycbxsaKlHtmLqDvVBTILWF7mYLuy36S_OHxVdBTIDuUQ/dev", {
+    method: "POST",
+    body: formData,
+    mode: "no-cors"
+  })
+  .then(() => {
+    alert("✅ Permintaan berhasil dikirim (tanpa respon)");
+    e.target.reset();
+  })
+  .catch(err => {
+    console.error("Fetch error:", err);
+    alert("❌ Gagal mengirim: " + err.message);
+  });
+});
   </script>
 </body>
 </html>
