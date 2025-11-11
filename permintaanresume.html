@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Permintaan Resume Medis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, button {
+      margin-top: 5px;
+      padding: 8px;
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h2>Form Permintaan Resume Medis</h2>
+  <form id="resumeForm">
+    <label>Nama Pasien:</label>
+    <input type="text" name="nama_pasien" required>
+
+    <label>Tanggal Lahir:</label>
+    <input type="date" name="tgl_lahir" required>
+
+    <label>Jenis Kelamin:</label>
+    <input type="text" name="jk" required>
+
+    <label>NO. Rekam Medis:</label>
+    <input type="text" name="no_rm" required>
+
+    <label>Alamat:</label>
+    <input type="text" name="alamat" required>
+
+    <label>Nama Petugas Rekam Medis:</label>
+    <input type="text" name="petugas" required>
+
+    <label>Tanggal Permintaan:</label>
+    <input type="date" name="tgl_permintaan" required>
+
+    <button type="submit">Kirim Permintaan</button>
+  </form>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxsaKlHtmLqDvVBTILWF7mYLuy36S_OHxVdBTIDuUQ/dev";
+
+    document.getElementById("resumeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(msg => {
+        alert("✅ " + msg);
+        e.target.reset();
+      })
+      .catch(err => {
+        console.error("Fetch error:", err);
+        alert("❌ Gagal mengirim: " + err.message);
+      });
+    });
+  </script>
+</body>
+</html>
