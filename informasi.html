@@ -317,10 +317,9 @@
     <div class="logo">
       <img src="logopanjang.png" alt="Logo Rumah Sakit" />
     </div>
-    <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
+        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i> BERANDA</a></li>
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
         <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
         <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
@@ -346,82 +345,29 @@
       <h2>INFORMASI</h2>
       <div class="tab-menu">
         <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
-        <button class="tab-btn" id="codingBtn"><i class="fas fa-book-open"></i> CODING</button>
-        <button class="tab-btn" id="akunBtn"><i class="fas fa-user-shield"></i> AKUN</button>
+        <button class="tab-btn" onclick="window.location.href='coding.html'"><i class="fas fa-book-open"></i> CODING</button>
+        <button class="tab-btn" onclick="window.location.href='manajemenakun.html'"><i class="fas fa-user-shield"></i> AKUN</button>
       </div>
 
       <div id="sumber" class="tab-content">
         <div class="sub-tab-menu">
-          <button class="sub-tab-btn" data-subtab="Flyer" id="flyerBtn"></i> Flyer</button>
-          <button class="sub-tab-btn" data-subtab="whatsapp" id="whatsappBtn"></i> Whatsapp</button>
-          <button class="sub-tab-btn" data-subtab="rapat" id="rapatBtn"></i> Rapat</button>
-          <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn"></i> Tata Naskah</button>
+          <button class="sub-tab-btn" data-subtab="Flyer" id="flyerBtn">Flyer</button>
+          <button class="sub-tab-btn" data-subtab="whatsapp" id="whatsappBtn">Whatsapp</button>
+          <button class="sub-tab-btn" data-subtab="rapat" id="rapatBtn">Rapat</button>
+          <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn">Tata Naskah</button>
         </div>
       </div>
+    </div>
   </main>
-  <!-- Modal Login -->
-  <div id="loginModal" class="login-modal">
-    <div class="login-modal-content">
-      <span class="close-modal">&times;</span>
-      <h2 style="color: #008080; margin-bottom: 20px;"><i class="fas fa-sign-in-alt"></i> Login Required</h2>
-      <p>Anda harus login terlebih dahulu untuk mengakses fitur ini</p>
-      <div style="margin-top: 30px; text-align: center;">
-        <a href="login.html?redirect=manajemenakun.html" class="login-btn" style="display: inline-block; margin-right: 10px;">
-          <i class="fas fa-sign-in-alt"></i> Login Sekarang
-        </a>
-        <button id="cancelLogin" style="padding: 8px 20px; background-color: #f44336; color: white; border: none; border-radius: 50px; cursor: pointer;">
-          <i class="fas fa-times"></i> Batal
-        </button>
-      </div>
-    </div>
-  </div>
-  <div id="codingModal" class="login-modal">
-  <div class="login-modal-content">
-    <span class="close-modal" onclick="closeModal('codingModal')">&times;</span>
-    <h2 style="color: #008080; margin-bottom: 20px;"><i class="fas fa-lock"></i> Akses Coding</h2>
-    <p>Login diperlukan untuk mengakses halaman Coding</p>
-    <div style="margin-top: 30px; text-align: center;">
-      <a href="login.html?redirect=coding.html" class="login-btn" style="display: inline-block; margin-right: 10px;">
-        <i class="fas fa-sign-in-alt"></i> Login Sekarang
-      </a>
-      <button onclick="closeModal('codingModal')" style="padding: 8px 20px; background-color: #f44336; color: white; border: none; border-radius: 50px; cursor: pointer;">
-        <i class="fas fa-times"></i> Batal
-      </button>
-    </div>
-  </div>
-</div>
 
   <footer>
-      <div>
-        <strong>MEDICAL RECORD</strong><br />
-        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-      </div>
+    <div>
+      <strong>MEDICAL RECORD</strong><br />
+      <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
     </div>
   </footer>
 
-  <script>
-    // USER AUTH
-    const userInfoDiv = document.getElementById("user-info");
-    const uploadBox = document.getElementById("upload-box");
-    const loggedInUser = localStorage.getItem("loggedInUser");
-
-    if (loggedInUser) {
-      userInfoDiv.innerHTML = `
-        <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
-        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      `;
-      if (loggedInUser === 'admin') {
-        if (uploadBox) uploadBox.style.display = "block";
-      }
-      document.getElementById("logout-btn").addEventListener("click", function(e) {
-        e.preventDefault();
-        localStorage.removeItem("loggedInUser");
-        window.location.href = "login.html";
-      });
-    } else {
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
-    }
-
+    <script>
     // TAB SYSTEM
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -431,15 +377,13 @@
         const targetContent = document.getElementById(btn.dataset.tab);
         const isActive = btn.classList.contains('active');
         
-        // Reset semua tab dan konten
         if (!isActive) {
           tabBtns.forEach(b => b.classList.remove('active'));
           tabContents.forEach(c => c.classList.remove('active'));
         }
         
-        // Toggle status aktif
         btn.classList.toggle('active', !isActive);
-        targetContent.classList.toggle('active', !isActive);
+        if (targetContent) targetContent.classList.toggle('active', !isActive);
       });
     });
 
@@ -468,7 +412,6 @@
       tatanaskah: 'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK',
     };
     
-    // Fungsi untuk menangani klik tombol
     function handleButtonClick(buttonId, linkKey) {
       const button = document.getElementById(buttonId);
       if (button) {
@@ -481,78 +424,11 @@
       }
     }
 
-    // Pasang event listener untuk semua tombol
     handleButtonClick('flyerBtn', 'flyer');
     handleButtonClick('whatsappBtn', 'whatsapp');
     handleButtonClick('rapatBtn', 'rapat');
     handleButtonClick('tatanaskahBtn', 'tatanaskah');
-
-    // Fungsi untuk menutup modal
-    function closeModal(modalId) {
-      document.getElementById(modalId).style.display = 'none';
-    }
-
-    // AKUN BUTTON LOGIN HANDLER
-    const akunBtn = document.getElementById('akunBtn');
-    const loginModal = document.getElementById('loginModal');
-    const closeModalAkun = document.querySelector('#loginModal .close-modal');
-    const cancelLogin = document.getElementById('cancelLogin');
-
-    akunBtn.addEventListener('click', function() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      
-      if (loggedInUser) {
-        window.location.href = 'manajemenakun.html';
-      } else {
-        loginModal.style.display = 'block';
-      }
-    });
-
-    // CODING BUTTON LOGIN HANDLER
-    const codingBtn = document.getElementById('codingBtn');
-    const codingModal = document.getElementById('codingModal');
-    const closeModalCoding = document.querySelector('#codingModal .close-modal');
-    const cancelCoding = document.getElementById('cancelCoding');
-
-    codingBtn.addEventListener('click', function() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      
-      if (loggedInUser) {
-        window.location.href = 'coding.html';
-      } else {
-        codingModal.style.display = 'block';
-      }
-    });
-
-    // Event listeners untuk modal Akun
-    closeModalAkun.addEventListener('click', function() {
-      closeModal('loginModal');
-    });
-
-    cancelLogin.addEventListener('click', function() {
-      closeModal('loginModal');
-    });
-
-    // Event listeners untuk modal Coding
-    closeModalCoding.addEventListener('click', function() {
-      closeModal('codingModal');
-    });
-
-    if (cancelCoding) {
-      cancelCoding.addEventListener('click', function() {
-        closeModal('codingModal');
-      });
-    }
-
-    // Close modal ketika klik di luar modal
-    window.addEventListener('click', function(event) {
-      if (event.target == loginModal) {
-        closeModal('loginModal');
-      }
-      if (event.target == codingModal) {
-        closeModal('codingModal');
-      }
-    });
-</script>
+  </script>
 </body>
 </html>
+
