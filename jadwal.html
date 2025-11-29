@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jadwal - Medical Record</title>
-  <!-- FONT AWESOME UNTUK ICON -->
+
+  <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="logorekammedis.png" type="image/png">
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box;
@@ -46,19 +48,13 @@
       font-weight: bold;
       color: #3a3a3a;
     }
-    .user-info {
-      text-align: right;
-      font-size: 13px;
-      margin-top: 10px;
-      color: #ffffff;
-    }
     nav ul {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: 5px;
       padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
+      background: #ffffff;
       border-radius: 50px;
       font-size: 13px;
       justify-content: center;
@@ -85,48 +81,47 @@
       padding: 30px 20px;
       text-align: left;
     }
+
     .jadwal-container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  animation: fadeIn 0.8s ease-out;
-}
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-out;
+    }
 
-.jadwal-container h2 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #008080;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  
-}
+    .jadwal-container h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #008080;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-.jadwal-container h2::before {
-  content: "📅";
-}
+    .jadwal-container h2::before {
+      content: "📅";
+    }
 
-.note {
-  margin-bottom: 25px;
-  padding-left: 0;
-  padding-right: 0;
-}
+    .note {
+      margin-bottom: 25px;
+      padding-left: 0;
+      padding-right: 0;
+    }
 
-.note h3 {
-  margin: 0;
-  font-size: 16px;
-  color: #555;
-  text-align: left;
-  padding-left: 55px;
-}
-
+    .note h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #555;
+      text-align: left;
+      padding-left: 55px;
+    }
 
     footer {
-      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
+      background: #ffffff;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
@@ -137,188 +132,164 @@
       border-top: 2px solid rgba(255,255,255,0.2);
       box-shadow: 0 0 10px #027e40;
     }
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
-    .small{font-size:14px;color:#555}
-    @media (min-width: 600px) {
-      .logo {
-        flex-wrap: nowrap;
-      }
-      .footer-left,
-      .footer-center,
-      .footer-right {
-        flex: 1;
-      }
-    }
+
     .tabs {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
     }
+
     .tab {
-        padding: 10px 20px;
-        background: #20b2aa;
-        color: #fff;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: .3s;
+      padding: 10px 20px;
+      background: #20b2aa;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: .3s;
     }
 
     .tab.active {
-        background: #3cb371;
-        font-weight: bold;
+      background: #3cb371;
+      font-weight: bold;
     }
 
     .file-list {
-        margin-top: 20px;
+      margin-top: 20px;
     }
 
     .file-item {
-        padding: 15px;
-        border-radius: 10px;
-        background: #f3fdf9;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        border: 1px solid #d7f3ea;
-        transition: .3s;
+      padding: 15px;
+      border-radius: 10px;
+      background: #f3fdf9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      border: 1px solid #d7f3ea;
+      transition: .3s;
     }
 
     .file-item:hover {
-        transform: translateX(5px);
-        background: #e8fff5;
+      transform: translateX(5px);
+      background: #e8fff5;
     }
 
     .file-name {
-        font-weight: bold;
-        color: #333;
+      font-weight: bold;
+      color: #333;
     }
 
     .btn-open {
-        padding: 8px 15px;
-        background: #20b2aa;
-        color: #fff;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 13px;
-        transition: .3s;
+      padding: 8px 15px;
+      background: #20b2aa;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      transition: .3s;
     }
 
     .btn-open:hover {
-        background: #3cb371;
+      background: #3cb371;
+    }
+
+    /* 🔥 LOADING ANIMASI KEREN */
+    #loading {
+  font-size: 18px;
+  color: #4e4e4e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #b2dfdb;
+  border-top: 3px solid #00796b;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+    @keyframes fadeText {
+      from { opacity: 0.6; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes typingAnim {
+      from { width: 0; }
+      to   { width: 170px; }
+    }
+
+    @keyframes blinkCursor {
+      50% { border-color: transparent; }
     }
 
     @keyframes fadeIn {
-        from {opacity: 0; transform: translateY(10px)}
-        to {opacity: 1; transform: translateY(0)}
-    }
-    
-    /* STYLE DROPDOWN HUBUNGI KAMI */
-    .dropdown-hubungi {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content-hubungi {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    
-    .dropdown-content-hubungi a {
-      color: #333;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      font-size: 12px;
-      transition: all 0.3s;
-    }
-    
-    .dropdown-content-hubungi a:hover {
-      background-color: #e2f8f1;
-      color: #1f8664;
-    }
-    
-    .dropdown-hubungi:hover .dropdown-content-hubungi {
-      display: block;
+      from {opacity: 0; transform: translateY(10px)}
+      to {opacity: 1; transform: translateY(0)}
     }
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
-        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-        <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
-        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
-        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-        <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li class="dropdown-hubungi">
-          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
-          <div class="dropdown-content-hubungi">
-            <a href="#"><i class="fas fa-envelope"></i> Email</a>
-            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <div class=jadwal-container>
-      <h2>JADWAL REKAM MEDIK</h2>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logopanjang.png" alt="Logo Rumah Sakit" />
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="jadwal-container">
+
+    <h2>JADWAL REKAM MEDIK</h2>
+
     <div class="note">
       <h3>" Kalo Tukeran Jadwal Jangan Lupa ngomong Mbak Susi Lurd 🗿 #thanksinsomnia "</h3>
     </div>
+
     <div class="tabs" id="yearTabs"></div>
 
-    <div id="loading">⏳ Sedang memuat jadwal...</div>
-    <div id="fileList" class="file-list"></div>
+    <!-- 🔥 ANIMASI LOADING -->
+    <div id="loading">
+  <div class="spinner"></div>
+  <span>Sedang memuat jadwal...</span>
 </div>
-    </div>
-  </main>
-  <footer>
-      <div>
-        <strong>MEDICAL RECORD</strong><br />
-        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-      </div>
-    </div>
-  </footer>
 
-  <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbw_y2PNC_Ckv-A_u2TCPbtz7kkx3KdkWAL2985PlMEpJZG1tAfq4kaPztWWBUi7RJsW/exec"; // Ganti dengan URL Web App kamu
+    <div id="fileList" class="file-list"></div>
+  </div>
+</main>
+
+<footer>
+  <div>
+    <strong>MEDICAL RECORD</strong><br />
+    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+  </div>
+</footer>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbw_y2PNC_Ckv-A_u2TCPbtz7kkx3KdkWAL2985PlMEpJZG1tAfq4kaPztWWBUi7RJsW/exec";
 let allFiles = [];
 
 async function loadFiles() {
@@ -326,15 +297,13 @@ async function loadFiles() {
         const res = await fetch(API_URL);
         allFiles = await res.json();
 
-        const loading = document.getElementById("loading");
-        loading.style.display = "none";
+        document.getElementById("loading").style.display = "none";
 
         if (allFiles.length === 0) {
             document.getElementById("fileList").innerHTML = "<p>Tidak ada file jadwal.</p>";
             return;
         }
 
-        // Ambil daftar tahun unik dari data
         const years = [...new Set(allFiles.map(f => f.year))];
         const tabs = document.getElementById("yearTabs");
         tabs.innerHTML = "";
@@ -351,7 +320,6 @@ async function loadFiles() {
             tabs.appendChild(tab);
         });
 
-        // Render default (tahun pertama)
         renderFiles(years[0]);
 
     } catch (error) {
@@ -368,15 +336,18 @@ function renderFiles(year) {
     files.forEach(f => {
         const item = document.createElement("div");
         item.className = "file-item";
+
         item.innerHTML = `
             <div class="file-name">${f.name}</div>
             <a class="btn-open" href="${f.url}" target="_blank">Buka</a>
         `;
+
         list.appendChild(item);
     });
 }
 
 loadFiles();
-  </script>
+</script>
+
 </body>
 </html>
