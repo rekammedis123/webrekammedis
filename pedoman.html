@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedoman - Medical Record</title>
+
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="logorekammedis.png" type="image/png">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
+    body { background:linear-gradient(135deg,#ffffff,#eeecec); color:#333; min-height:100vh; display:flex; flex-direction:column; }
+    header { background:linear-gradient(150deg,#ffffff,#66a378); padding:15px 20px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+    .logo img { width:300px; height:70px; }
+    nav ul { list-style:none; display:flex; flex-wrap:wrap; gap:5px; padding:10px; background:#fff; border-radius:50px; font-size:13px; justify-content:center; margin-top:15px; box-shadow:0 0 10px #027e40; }
+    nav ul li a { text-decoration:none; color:#3a3a3a; font-weight:bold; border-radius:50px; padding:5px 15px; transition:0.3s; display:flex; align-items:center; gap:5px; }
+    nav ul li a:hover { color:#5aa190; }
+    main { flex:1; padding:30px 20px; }
+    .pedoman-container { max-width:900px; margin:30px auto; padding:25px; background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); animation: fadeIn 0.8s ease-out; } 
+    .pedoman-container h2 { font-size:24px; font-weight:bold; margin-bottom:20px; color:#444; display:flex; align-items:center; gap:10px; }
+    .pedoman-container h2 i { color:#20b2aa; }
+    #loading { font-size:16px; color:#555; display:flex; align-items:center; gap:10px; }
+    .spinner { width:16px; height:16px; border:3px solid #ddd; border-top:3px solid #20b2aa; border-radius:50%; animation:spin 0.9s linear infinite; }
+    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    .file-list { list-style:none; padding:0; margin:0; }
+    .file-item { display:flex; justify-content:space-between; align-items:center; padding:12px 15px; border-bottom:1px solid #eee; transition:background 0.3s; }
+    .file-item:hover { background:#f5fdfb; }
+    .file-name { display:flex; align-items:center; gap:10px; font-weight:500; color:#333; }
+    .file-name i { color:#20b2aa; }
+    .btn-open { color:#20b2aa; text-decoration:none; font-size:14px; font-weight:bold; }
+    .btn-open:hover { color:#3cb371; }
+    footer { background:#fff; display:flex; justify-content:space-between; padding:30px 20px; font-size:18px; color:#3a3a3a; box-shadow:0 0 10px #027e40; }
+    .dropdown-hubungi {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content-hubungi {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .dropdown-content-hubungi a {
+      color: #333;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+    
+    .dropdown-content-hubungi a:hover {
+      background-color: #e2f8f1;
+      color: #1f8664;
+    }
+    
+    .dropdown-hubungi:hover .dropdown-content-hubungi {
+      display: block;
+    }
+
+    /* ANIMASI */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="logopanjang.png" alt="Logo Rumah Sakit" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="pedoman-container">
+    <h2><i class="fa-solid fa-file"></i> PEDOMAN UNIT REKAM MEDIK</h2>
+    <div id="loading"><div class="spinner"></div><span>Sedang memuat...</span></div>
+    <ul id="fileList" class="file-list"></ul>
+  </div>
+</main>
+
+<footer>
+  <div>
+    <strong>MEDICAL RECORD</strong><br />
+    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+  </div>
+</footer>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbywuOq0bYl_AF7d3jsJeZPxBpfREhpLxS3dKk1fBAJHGy3tKkB4XNSr8g_8NoJ1Mnh16w/exec"; // URL Web App dari Apps Script Pedoman
+let allFiles = [];
+
+async function loadFiles() {
+  try {
+    const res = await fetch(API_URL);
+    allFiles = await res.json();
+    document.getElementById("loading").style.display = "none";
+
+    if (allFiles.length === 0) {
+      document.getElementById("fileList").innerHTML = "<li>Tidak ada file Pedoman.</li>";
+      return;
+    }
+    renderFiles();
+  } catch (error) {
+    console.error(error);
+    document.getElementById("loading").innerText = "❌ Gagal memuat data";
+  }
+}
+
+function renderFiles() {
+  const list = document.getElementById("fileList");
+  list.innerHTML = "";
+  allFiles.forEach(f => {
+    const li = document.createElement("li");
+    li.className = "file-item";
+    li.innerHTML = `
+      <div class="file-name"><i class="fa-regular fa-file"></i> ${f.name}</div>
+      <a class="btn-open" href="${f.url}" target="_blank">Buka</a>
+    `;
+    list.appendChild(li);
+  });
+}
+
+loadFiles();
+</script>
+</body>
+</html>
