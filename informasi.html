@@ -20,10 +20,10 @@
       min-height: 100vh;
     }
     header {
-      background: linear-gradient(150deg, #9fc5b9, #a0ffbd);
+      background: linear-gradient(150deg, #ffffff, #66a378); 
       padding: 15px 20px;
-      border-bottom: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
     }
     .logo {
       display: flex;
@@ -174,9 +174,10 @@
                       
                       .tab-content {
                         display: none;
-                        padding: 20px;
-                        background-color: #f9f9f9;
-                        border-radius: 10px;
+                        padding: 15px;
+                        background-color: #ffffff00;
+                        box-shadow: 0 0 10px #00000015;
+                        border-radius: 50px;
                         margin-top: 10px;
                         animation: fadeIn 0.5s ease-out;
                       }
@@ -317,9 +318,10 @@
     <div class="logo">
       <img src="logopanjang.png" alt="Logo Rumah Sakit" />
     </div>
+    <div class="user-info" id="user-info"></div>
     <nav>
       <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i> BERANDA</a></li>
+        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
         <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
         <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
@@ -339,96 +341,97 @@
       </ul>
     </nav>
   </header>
-
   <main>
-    <div class="info-container">
-      <h2>INFORMASI</h2>
-      <div class="tab-menu">
-        <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
-        <button class="tab-btn" onclick="window.location.href='coding.html'"><i class="fas fa-book-open"></i> CODING</button>
-        <button class="tab-btn" onclick="window.location.href='manajemenakun.html'"><i class="fas fa-user-shield"></i> AKUN</button>
-      </div>
+  <div class="info-container">
+    <h2>INFORMASI</h2>
+    <div class="tab-menu">
+      <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
+       <button class="tab-btn" onclick="location.href='coding.html'">
+      <i class="fas fa-book-open"></i> CODING
+    </button>
+    <button class="tab-btn" onclick="location.href='manajemenakun.html'">
+      <i class="fas fa-user-shield"></i> AKUN
+    </button>
+    </div>
 
-      <div id="sumber" class="tab-content">
-        <div class="sub-tab-menu">
-          <button class="sub-tab-btn" data-subtab="Flyer" id="flyerBtn">Flyer</button>
-          <button class="sub-tab-btn" data-subtab="whatsapp" id="whatsappBtn">Whatsapp</button>
-          <button class="sub-tab-btn" data-subtab="rapat" id="rapatBtn">Rapat</button>
-          <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn">Tata Naskah</button>
-        </div>
+    <div id="sumber" class="tab-content">
+      <div class="sub-tab-menu">
+        <button class="sub-tab-btn" data-subtab="Flyer" id="flyerBtn">Flyer</button>
+        <button class="sub-tab-btn" data-subtab="whatsapp" id="whatsappBtn">Whatsapp</button>
+        <button class="sub-tab-btn" data-subtab="rapat" id="rapatBtn">Rapat</button>
+        <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn">Tata Naskah</button>
       </div>
     </div>
-  </main>
+  </div>
+</main>
 
-  <footer>
-    <div>
-      <strong>MEDICAL RECORD</strong><br />
-      <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-    </div>
-  </footer>
+<footer>
+  <div>
+    <strong>MEDICAL RECORD</strong><br />
+    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+  </div>
+</footer>
 
-    <script>
-    // TAB SYSTEM
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetContent = document.getElementById(btn.dataset.tab);
-        const isActive = btn.classList.contains('active');
-        
-        if (!isActive) {
-          tabBtns.forEach(b => b.classList.remove('active'));
-          tabContents.forEach(c => c.classList.remove('active'));
-        }
-        
-        btn.classList.toggle('active', !isActive);
-        if (targetContent) targetContent.classList.toggle('active', !isActive);
-      });
-    });
-
-    const subTabBtns = document.querySelectorAll('.sub-tab-btn');
-    const subTabContents = document.querySelectorAll('.sub-tab-content');
-
-    subTabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const parentTab = btn.closest('.tab-content');
-
-        parentTab.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-        parentTab.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
-
-        btn.classList.add('active');
-        const subtabId = btn.dataset.subtab.toLowerCase();
-        const subtabElement = parentTab.querySelector(`#${subtabId}`);
-        if (subtabElement) subtabElement.classList.add('active');
-      });
-    });
-
-    // LINK HANDLER
-    const links = {
-      flyer: 'https://drive.google.com/drive/folders/1KhbQU9dNNHzu50-iCMx3vy1ozimeb-RQ?usp=sharing',
-      whatsapp: 'https://drive.google.com/drive/folders/1gPI-WEyGb0czLpjUbXey__cBQavyYu2d?usp=sharing',
-      rapat: 'https://drive.google.com/drive/folders/1zVn5Fdqyepy8yxtKIyxXKObvHGOQEq8a?usp=sharing',
-      tatanaskah: 'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK',
-    };
-    
-    function handleButtonClick(buttonId, linkKey) {
-      const button = document.getElementById(buttonId);
-      if (button) {
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (links[linkKey]) {
-            window.open(links[linkKey], '_blank');
-          }
-        });
+<script>
+  // TAB SYSTEM
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetContent = document.getElementById(btn.dataset.tab);
+      const isActive = btn.classList.contains('active');
+      
+      if (!isActive) {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
       }
-    }
+      
+      if (targetContent) {
+        btn.classList.toggle('active', !isActive);
+        targetContent.classList.toggle('active', !isActive);
+      }
+    });
+  });
 
-    handleButtonClick('flyerBtn', 'flyer');
-    handleButtonClick('whatsappBtn', 'whatsapp');
-    handleButtonClick('rapatBtn', 'rapat');
-    handleButtonClick('tatanaskahBtn', 'tatanaskah');
-  </script>
+  const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+  subTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parentTab = btn.closest('.tab-content');
+      parentTab.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+      parentTab.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
+      
+      btn.classList.add('active');
+      const subtabId = btn.dataset.subtab.toLowerCase();
+      const subtabElement = parentTab.querySelector(`#${subtabId}`);
+      if (subtabElement) subtabElement.classList.add('active');
+    });
+  });
+
+  // LINK HANDLER
+  const links = {
+    flyer: 'https://drive.google.com/drive/folders/1KhbQU9dNNHzu50-iCMx3vy1ozimeb-RQ?usp=sharing',
+    whatsapp: 'https://drive.google.com/drive/folders/1gPI-WEyGb0czLpjUbXey__cBQavyYu2d?usp=sharing',
+    rapat: 'https://drive.google.com/drive/folders/1zVn5Fdqyepy8yxtKIyxXKObvHGOQEq8a?usp=sharing',
+    tatanaskah: 'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK',
+  };
+  
+  function handleButtonClick(buttonId, linkKey) {
+    const button = document.getElementById(buttonId);
+    if (button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (links[linkKey]) {
+          window.open(links[linkKey], '_blank');
+        }
+      });
+    }
+  }
+
+  handleButtonClick('flyerBtn', 'flyer');
+  handleButtonClick('whatsappBtn', 'whatsapp');
+  handleButtonClick('rapatBtn', 'rapat');
+  handleButtonClick('tatanaskahBtn', 'tatanaskah');
+</script>
 </body>
 </html>
-
