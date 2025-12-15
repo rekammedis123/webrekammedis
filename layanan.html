@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="logorekammedis.png" type="image/png">
-  <title>Layanan Internal - Medical Record</title>
+  <title>Indikator - RSU AN'NIMAH</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -21,10 +21,10 @@
       min-height: 100vh;
     }
     header {
-      background: linear-gradient(150deg, #9fc5b9, #a0ffbd);
+      background: linear-gradient(150deg, #ffffff, #66a378); 
       padding: 15px 20px;
-      border-bottom: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
     }
     .logo {
       display: flex;
@@ -279,22 +279,25 @@
       </ul>
     </nav>
   </header>
+
   <main>
     <div class="content-container">
       <h2>LAYANAN INTERNAL</h2>
       
-      <div class="tab-menu">
-        <button onclick="window.open('https://drive.google.com/drive/folders/14KQRpYzQTluUabzeba1otW5c2__IM_Wz')" class="tab-btn">
-          <i class="fas fa-book"></i> PENGAJUAN SKL PENGGANTI
-        </button>
-        <button onclick="window.open('https://drive.google.com/drive/folders/1PS4Yz5s8n9oEq0b35ZhhxytDeYn3Pwc0')" class="tab-btn">
-          <i class="fas fa-sitemap"></i> PENGAJUAN RPK
-        </button>
-        <button onclick="window.open('https://drive.google.com/drive/folders/1zOk1ynESK-l7NAMQRqBZ4zVCH5bJX0o1')" class="tab-btn">
-          <i class="fas fa-database"></i> PERMINTAAN DATA
-        </button>
-        
-      </div>
+     <div class="tab-menu">
+  <button onclick="window.open('https://drive.google.com/drive/folders/14KQRpYzQTluUabzeba1otW5c2__IM_Wz')" class="tab-btn">
+    <i class="fas fa-book"></i> PENGAJUAN SKL PENGGANTI
+  </button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1PS4Yz5s8n9oEq0b35ZhhxytDeYn3Pwc0')" class="tab-btn">
+    <i class="fas fa-sitemap"></i> PENGAJUAN RPK
+  </button>
+  <button onclick="window.open('https://drive.google.com/drive/folders/1zOk1ynESK-l7NAMQRqBZ4zVCH5bJX0o1')" class="tab-btn">
+    <i class="fas fa-database"></i> PERMINTAAN DATA
+  </button>
+  <button onclick="window.open('./permintaanresume.html', '_blank')" class="tab-btn">
+    <i class="fas fa-database"></i> PERMINTAAN RESUME MEDIS
+  </button>
+</div>
     </main>
   <footer>
       <div>
@@ -347,9 +350,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
