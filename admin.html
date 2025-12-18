@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - Medical Record</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { margin: 0; background: #f4f7fb; display: flex; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 260px;
+      background: linear-gradient(180deg,#2e8b57,#1f6f4a);
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      transition: 0.3s;
+    }
+    .sidebar a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      padding: 25px;
+    }
+
+    /* HEADER */
+    .header {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .card h3 { margin: 0; color: #2e8b57; }
+
+    /* CONTENT */
+    .content {
+      margin-top: 25px;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .hidden { display: none; }
+
+    /* FORM */
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #2e8b57;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover { background: #256d45; }
+
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2><i class="fas fa-user-shield"></i> ADMIN</h2>
+    <a href="#" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="#" onclick="showSection('profil')"><i class="fas fa-user"></i> Profil Unit</a>
+    <a href="#" onclick="showSection('regulasi')"><i class="fas fa-book"></i> Regulasi</a>
+    <a href="#" onclick="showSection('informasi')"><i class="fas fa-info-circle"></i> Informasi</a>
+    <a href="#" onclick="showSection('sotk')"><i class="fas fa-sitemap"></i> SOTK</a>
+    <a href="#" onclick="showSection('slider')"><i class="fas fa-images"></i> Slider</a>
+    <a href="#" onclick="showSection('setting')"><i class="fas fa-cog"></i> Pengaturan</a>
+    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h2>Admin Panel Medical Record</h2>
+      <div>Login sebagai <strong>Admin</strong></div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="content">
+      <div class="cards">
+        <div class="card"><h3>Profil</h3><p>Kelola Visi, Misi, Struktur</p></div>
+        <div class="card"><h3>Regulasi</h3><p>Upload PDF & Dokumen</p></div>
+        <div class="card"><h3>Informasi</h3><p>Update Konten Publik</p></div>
+        <div class="card"><h3>SOTK</h3><p>Kelola File Google Drive</p></div>
+      </div>
+    </div>
+
+    <!-- PROFIL -->
+    <div id="profil" class="content hidden">
+  <h3>Kelola Profil Unit</h3>
+  <label>Visi</label>
+  <textarea id="visi" rows="3" placeholder="Isi visi unit..."></textarea>
+
+  <label>Misi</label>
+  <textarea id="misi" rows="4" placeholder="Isi misi unit..."></textarea>
+
+  <label>Struktur Organisasi (teks)</label>
+  <textarea id="struktur" rows="4" placeholder="Isi struktur organisasi..."></textarea>
+
+  <label>Link Preview SOTK (Google Drive)</label>
+  <input type="text" id="sotkLink" placeholder="https://drive.google.com/file/d/.../preview" />
+
+  <button onclick="simpanProfil()">Simpan Profil</button>
+  <p id="profilStatus"></p>
+</div>
+
+    <!-- REGULASI -->
+    <div id="regulasi" class="content hidden">
+      <h3>Upload Regulasi</h3>
+      <input type="file" />
+      <button>Upload</button>
+    </div>
+
+    <!-- INFORMASI -->
+    <div id="informasi" class="content hidden">
+      <h3>Kelola Informasi</h3>
+      <textarea rows="6" placeholder="Konten informasi..."></textarea>
+      <button>Simpan</button>
+    </div>
+
+    <!-- SOTK -->
+    <div id="sotk" class="content hidden">
+      <h3>Link SOTK Google Drive</h3>
+      <input type="text" placeholder="Paste link preview Google Drive" />
+      <button>Simpan</button>
+    </div>
+
+    <!-- SLIDER -->
+    <div id="slider" class="content hidden">
+      <h3>Kelola Slider</h3>
+      <input type="file" multiple />
+      <button>Upload</button>
+    </div>
+
+    <!-- SETTING -->
+    <div id="setting" class="content hidden">
+      <h3>Pengaturan Web</h3>
+      <input type="text" placeholder="Judul Website" />
+      <button>Simpan</button>
+    </div>
+
+  </div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+  }
+  const API_URL = 'https://script.google.com/macros/s/AKfycbzzdTxxBiuxuxY_-ImGvexAWEWBrPjthMGyNpX74_89V3UwbJP1ibA3kcK0ll1sA9GBAg/exec';
+
+  function simpanProfil() {
+  const data = {
+    visi: document.getElementById('visi').value,
+    misi: document.getElementById('misi').value,
+    struktur: document.getElementById('struktur').value,
+    sotk_link: document.getElementById('sotkLink').value
+  };
+
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    document.getElementById('profilStatus').innerText = '✅ Profil berhasil disimpan';
+  })
+  .catch(() => {
+    document.getElementById('profilStatus').innerText = '❌ Gagal menyimpan';
+  });
+}
+</script>
+
+</body>
+</html>
