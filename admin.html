@@ -2,65 +2,176 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - Medical Record</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-body { font-family: Arial; background:#f4f7fb; padding:40px }
-.box { background:#fff; padding:30px; max-width:600px; margin:auto; border-radius:12px }
-input, textarea, button {
-  width:100%; margin-top:10px; padding:10px;
-  border-radius:8px; border:1px solid #ccc;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  display: flex;
 }
-button { background:#2e8b57; color:white; border:none }
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg,#2e8b57,#1f6f4a);
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.sidebar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.sidebar a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 25px;
+}
+.header {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+}
+
+/* CONTENT */
+.content {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.hidden { display: none; }
+
+label { font-weight: bold; display: block; margin-top: 15px; }
+textarea, input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+button {
+  margin-top: 20px;
+  padding: 12px;
+  background: #2e8b57;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background: #256d45;
+}
+.status {
+  margin-top: 15px;
+  font-weight: bold;
+}
 </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>Admin Profil Unit</h2>
+<div class="sidebar">
+  <h2><i class="fas fa-user-shield"></i> ADMIN</h2>
+  <a href="#" onclick="showSection('profil')">
+    <i class="fas fa-user"></i> Profil Unit
+  </a>
+</div>
 
-  <input id="admin" placeholder="Nama Admin">
+<div class="main">
 
-  <textarea id="visi" placeholder="Visi"></textarea>
-  <textarea id="misi" placeholder="Misi"></textarea>
-  <textarea id="struktur" placeholder="Struktur"></textarea>
-  <input id="sotk" placeholder="Link SOTK">
+  <div class="header">
+    <h2>Admin Panel - Medical Record</h2>
+    <div>Login sebagai <b>Admin</b></div>
+  </div>
 
-  <button onclick="simpan()">💾 Simpan</button>
-  <p id="status"></p>
+  <!-- PROFIL -->
+  <div id="profil" class="content">
+    <h3>Kelola Profil Unit</h3>
+
+    <label>Visi</label>
+    <textarea id="visi" rows="3"></textarea>
+
+    <label>Misi</label>
+    <textarea id="misi" rows="4"></textarea>
+
+    <label>Struktur Organisasi</label>
+    <textarea id="struktur" rows="4"></textarea>
+
+    <label>Link Preview SOTK (Google Drive)</label>
+    <input type="text" id="sotkLink">
+
+    <button onclick="simpanProfil()">💾 Simpan Profil</button>
+    <div id="profilStatus" class="status"></div>
+  </div>
+
 </div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxCozwY3pgXc1o4YuWOQ5jFwYflohgqwGhjH4t9p82FKnNNFG2e26pYoJlki4pPvLaT0A/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzzzw7iroVgV-nz7AFcbxKU706DEux8TyAVMkYsGT7nWPvgYspB6YBWIIDNxNpUWCQ5/exec';
 
-function simpan() {
+function showSection(id) {
+  document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  loadProfil();
+}
+
+function loadProfil() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      visi.value = data.visi || '';
+      misi.value = data.misi || '';
+      struktur.value = data.struktur || '';
+      sotkLink.value = data.sotk_link || '';
+    });
+}
+
+function simpanProfil() {
   const data = {
-    admin: admin.value,
     visi: visi.value,
     misi: misi.value,
     struktur: struktur.value,
-    sotk_link: sotk.value
+    sotk_link: sotkLink.value,
+    admin: 'Admin'
   };
+
+  profilStatus.innerText = '⏳ Menyimpan...';
 
   fetch(API_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
   })
   .then(res => res.json())
-  .then(res => {
-    status.innerText = res.success ? '✅ ' + res.message : '❌ ' + res.message;
+  .then(() => {
+    profilStatus.innerText = '✅ Profil berhasil disimpan';
   })
-  .catch(() => status.innerText = '❌ Gagal koneksi');
+  .catch(err => {
+    profilStatus.innerText = '❌ Gagal menyimpan';
+    console.error(err);
+  });
 }
 
-fetch(API_URL)
-  .then(res => res.json())
-  .then(d => {
-    visi.value = d.visi || '';
-    misi.value = d.misi || '';
-    struktur.value = d.struktur || '';
-    sotk.value = d.sotk_link || '';
-  });
+loadProfil();
 </script>
 
 </body>
