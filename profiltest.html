@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="logorekammedis.png" type="image/png">
+  <title>Profil - Medical Record</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Verdana,Tahoma,sans-serif
+}
+html,body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#fff,#eeecec);
+  color:#333;
+  display:flex;
+  flex-direction:column
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(150deg,#fff,#66a378);
+  padding:15px 20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.1)
+}
+.logo{display:flex;align-items:center}
+.logo img{width:300px;height:70px}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  padding:10px;
+  background:#fff;
+  border-radius:50px;
+  justify-content:center;
+  box-shadow:0 0 10px #027e40
+}
+nav ul li a{
+  text-decoration:none;
+  color:#3a3a3a;
+  font-weight:bold;
+  padding:5px 15px;
+  border-radius:50px;
+  display:flex;
+  align-items:center;
+  gap:5px
+}
+nav ul li a:hover{color:#5aa190}
+
+/* MAIN */
+main{
+  flex:1;
+  padding:30px 20px;
+}
+.profil-container{
+  max-width:1000px;
+  margin:auto;
+  background:#fff;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,91,150,.1);
+  animation:fadeIn .8s
+}
+.profil-container h2{
+  font-size:40px;
+  color:#008080;
+  display:flex;
+  gap:15px
+}
+.profil-container h2::before{content:"👨‍⚕️"}
+
+/* TAB */
+.tab-menu{
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+  flex-wrap:wrap
+}
+.tab-menu button{
+  padding:8px 20px;
+  border:none;
+  border-radius:50px;
+  background:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 10px #027e40
+}
+.tab-menu button.active,
+.tab-menu button:hover{
+  background:#3cb371;
+  color:#fff
+}
+.tab-content{
+  display:none;
+  padding:20px;
+  background:#f9f9f9;
+  border-radius:10px;
+  animation:fadeIn .5s
+}
+.tab-content.active{display:block}
+
+/* SOTK */
+.sotk-container{
+  display:none;
+  margin-top:25px;
+  background:#f9f9f9;
+  padding:20px;
+  border-radius:15px;
+}
+.sotk-container iframe{
+  width:100%;
+  height:80vh;
+  border:none;
+  border-radius:15px;
+  margin-top:20px;
+  box-shadow:0 0 15px rgba(0,0,0,.2);
+  background:#fff
+}
+
+/* SLIDER */
+.slider-container{
+  max-width:800px;
+  margin:40px auto;
+  position:relative;
+  overflow:hidden;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.2)
+}
+.slider{
+  display:flex;
+  height:400px;
+  transition:transform .5s
+}
+.slide{min-width:100%}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slider-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border:none;
+  border-radius:50%;
+  background:rgba(255,255,255,.7);
+  cursor:pointer
+}
+.prev-btn{left:15px}
+.next-btn{right:15px}
+.dots-container{
+  position:absolute;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px
+}
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(255,255,255,.5);
+  cursor:pointer
+}
+.dot.active{background:#fff}
+
+/* FOOTER */
+footer{
+  background:#fff;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 0 10px #027e40
+}
+.small{font-size:14px;color:#555}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logopanjang.png">
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-book"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<div class="profil-container">
+
+<h2>PROFIL UNIT REKAM MEDIS</h2>
+
+<div class="tab-menu">
+  <button class="tab-btn" data-tab="visi">VISI MISI</button>
+  <button class="tab-btn" data-tab="struktur">STRUKTUR</button>
+  <button class="tab-btn" data-tab="sotk">SOTK</button>
+</div>
+
+<div id="visi" class="tab-content">
+  <p id="visiText">Memuat visi...</p>
+  <div id="misiText"></div>
+</div>
+
+<div id="struktur" class="tab-content">
+  <div id="strukturText">Memuat struktur...</div>
+
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide"><img src="image 1.jpeg"></div>
+      <div class="slide"><img src="image 2.jpeg"></div>
+    </div>
+    <button class="slider-btn prev-btn">&#10094;</button>
+    <button class="slider-btn next-btn">&#10095;</button>
+    <div class="dots-container">
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</div>
+
+<div id="sotk" class="sotk-container">
+  <h3>SOTK</h3>
+  <iframe id="sotkFrame" loading="lazy"></iframe>
+</div>
+
+</div>
+</main>
+
+<footer>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+</footer>
+
+<script>
+const tabBtns=document.querySelectorAll('.tab-btn');
+const tabContents=document.querySelectorAll('.tab-content');
+const sotk=document.getElementById('sotk');
+const API_URL='https://script.google.com/macros/s/AKfycbzzdTxxBiuxuxY_-ImGvexAWEWBrPjthMGyNpX74_89V3UwbJP1ibA3kcK0ll1sA9GBAg/exec';
+
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const target=btn.dataset.tab;
+    const content=document.getElementById(target);
+
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    tabContents.forEach(c=>c.classList.remove('active'));
+    sotk.style.display='none';
+
+    btn.classList.add('active');
+    target==='sotk'
+      ? sotk.style.display='block'
+      : content.classList.add('active');
+  });
+});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelector('.tab-btn[data-tab="visi"]').click();
+});
+
+fetch(API_URL)
+.then(r=>r.json())
+.then(d=>{
+  visiText.innerText=d.visi||'-';
+  strukturText.innerText=d.struktur||'-';
+  if(d.sotk_link) sotkFrame.src=d.sotk_link;
+});
+</script>
+
+</body>
+</html>
