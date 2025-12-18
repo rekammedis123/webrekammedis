@@ -9,7 +9,6 @@
     * { box-sizing: border-box; font-family: Arial, sans-serif; }
     body { margin: 0; background: #f4f7fb; display: flex; }
 
-    /* SIDEBAR */
     .sidebar {
       width: 260px;
       background: linear-gradient(180deg,#2e8b57,#1f6f4a);
@@ -17,10 +16,7 @@
       min-height: 100vh;
       padding: 20px;
     }
-    .sidebar h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+    .sidebar h2 { text-align: center; margin-bottom: 30px; }
     .sidebar a {
       display: block;
       color: white;
@@ -30,17 +26,10 @@
       margin-bottom: 8px;
       transition: 0.3s;
     }
-    .sidebar a:hover {
-      background: rgba(255,255,255,0.2);
-    }
+    .sidebar a:hover { background: rgba(255,255,255,0.2); }
 
-    /* MAIN */
-    .main {
-      flex: 1;
-      padding: 25px;
-    }
+    .main { flex: 1; padding: 25px; }
 
-    /* HEADER */
     .header {
       background: white;
       padding: 20px;
@@ -52,7 +41,6 @@
       margin-bottom: 25px;
     }
 
-    /* CARDS */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -66,7 +54,6 @@
     }
     .card h3 { margin: 0; color: #2e8b57; }
 
-    /* CONTENT */
     .content {
       margin-top: 25px;
       background: white;
@@ -77,7 +64,6 @@
 
     .hidden { display: none; }
 
-    /* FORM */
     input, textarea, button {
       width: 100%;
       padding: 10px;
@@ -94,124 +80,130 @@
     }
     button:hover { background: #256d45; }
 
+    .meta {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h2><i class="fas fa-user-shield"></i> ADMIN</h2>
-    <a href="#" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
-    <a href="#" onclick="showSection('profil')"><i class="fas fa-user"></i> Profil Unit</a>
-    <a href="#" onclick="showSection('regulasi')"><i class="fas fa-book"></i> Regulasi</a>
-    <a href="#" onclick="showSection('informasi')"><i class="fas fa-info-circle"></i> Informasi</a>
-    <a href="#" onclick="showSection('sotk')"><i class="fas fa-sitemap"></i> SOTK</a>
-    <a href="#" onclick="showSection('slider')"><i class="fas fa-images"></i> Slider</a>
-    <a href="#" onclick="showSection('setting')"><i class="fas fa-cog"></i> Pengaturan</a>
-    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <!-- HEADER -->
-    <div class="header">
-      <h2>Admin Panel Medical Record</h2>
-      <div>Login sebagai <strong>Admin</strong></div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="content">
-      <div class="cards">
-        <div class="card"><h3>Profil</h3><p>Kelola Visi, Misi, Struktur</p></div>
-        <div class="card"><h3>Regulasi</h3><p>Upload PDF & Dokumen</p></div>
-        <div class="card"><h3>Informasi</h3><p>Update Konten Publik</p></div>
-        <div class="card"><h3>SOTK</h3><p>Kelola File Google Drive</p></div>
-      </div>
-    </div>
-
-    <!-- PROFIL -->
-    <div id="profil" class="content hidden">
-  <h3>Kelola Profil Unit</h3>
-  <label>Visi</label>
-  <textarea id="visi" rows="3" placeholder="Isi visi unit..."></textarea>
-
-  <label>Misi</label>
-  <textarea id="misi" rows="4" placeholder="Isi misi unit..."></textarea>
-
-  <label>Struktur Organisasi (teks)</label>
-  <textarea id="struktur" rows="4" placeholder="Isi struktur organisasi..."></textarea>
-
-  <label>Link Preview SOTK (Google Drive)</label>
-  <input type="text" id="sotkLink" placeholder="https://drive.google.com/file/d/.../preview" />
-
-  <button onclick="simpanProfil()">Simpan Profil</button>
-  <p id="profilStatus"></p>
+<div class="sidebar">
+  <h2><i class="fas fa-user-shield"></i> ADMIN</h2>
+  <a href="#" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
+  <a href="#" onclick="showSection('profil')"><i class="fas fa-user"></i> Profil Unit</a>
+  <a href="#" onclick="showSection('regulasi')"><i class="fas fa-book"></i> Regulasi</a>
+  <a href="#" onclick="showSection('informasi')"><i class="fas fa-info-circle"></i> Informasi</a>
+  <a href="#" onclick="showSection('sotk')"><i class="fas fa-sitemap"></i> SOTK</a>
+  <a href="#" onclick="showSection('slider')"><i class="fas fa-images"></i> Slider</a>
+  <a href="#" onclick="showSection('setting')"><i class="fas fa-cog"></i> Pengaturan</a>
+  <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
 </div>
 
-    <!-- REGULASI -->
-    <div id="regulasi" class="content hidden">
-      <h3>Upload Regulasi</h3>
-      <input type="file" />
-      <button>Upload</button>
-    </div>
+<div class="main">
 
-    <!-- INFORMASI -->
-    <div id="informasi" class="content hidden">
-      <h3>Kelola Informasi</h3>
-      <textarea rows="6" placeholder="Konten informasi..."></textarea>
-      <button>Simpan</button>
-    </div>
-
-    <!-- SOTK -->
-    <div id="sotk" class="content hidden">
-      <h3>Link SOTK Google Drive</h3>
-      <input type="text" placeholder="Paste link preview Google Drive" />
-      <button>Simpan</button>
-    </div>
-
-    <!-- SLIDER -->
-    <div id="slider" class="content hidden">
-      <h3>Kelola Slider</h3>
-      <input type="file" multiple />
-      <button>Upload</button>
-    </div>
-
-    <!-- SETTING -->
-    <div id="setting" class="content hidden">
-      <h3>Pengaturan Web</h3>
-      <input type="text" placeholder="Judul Website" />
-      <button>Simpan</button>
-    </div>
-
+  <div class="header">
+    <h2>Admin Panel Medical Record</h2>
+    <div>Login sebagai <strong>Admin</strong></div>
   </div>
 
-<script>
-  function showSection(id) {
-    document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
-    document.getElementById(id).classList.remove('hidden');
-  }
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzzdTxxBiuxuxY_-ImGvexAWEWBrPjthMGyNpX74_89V3UwbJP1ibA3kcK0ll1sA9GBAg/exec';
+  <div id="dashboard" class="content">
+    <div class="cards">
+      <div class="card"><h3>Profil</h3><p>Kelola Visi, Misi, Struktur</p></div>
+      <div class="card"><h3>Regulasi</h3><p>Upload PDF & Dokumen</p></div>
+      <div class="card"><h3>Informasi</h3><p>Update Konten Publik</p></div>
+      <div class="card"><h3>SOTK</h3><p>Kelola File Google Drive</p></div>
+    </div>
+  </div>
 
-  function simpanProfil() {
-  const data = {
-    visi: document.getElementById('visi').value,
-    misi: document.getElementById('misi').value,
-    struktur: document.getElementById('struktur').value,
-    sotk_link: document.getElementById('sotkLink').value
+  <div id="profil" class="content hidden">
+    <h3>Kelola Profil Unit</h3>
+
+    <label>Nama Admin</label>
+    <input type="text" id="updatedBy" placeholder="Nama pengupdate">
+
+    <label>Visi</label>
+    <textarea id="visi" rows="3"></textarea>
+
+    <label>Misi</label>
+    <textarea id="misi" rows="4"></textarea>
+
+    <label>Struktur Organisasi</label>
+    <textarea id="struktur" rows="4"></textarea>
+
+    <label>Link Preview SOTK</label>
+    <input type="text" id="sotkLink" />
+
+    <button onclick="simpanProfil()">Simpan Profil</button>
+    <p id="profilStatus"></p>
+
+    <div class="meta">
+      Terakhir update: <strong id="updatedAt">-</strong><br>
+      Oleh: <strong id="updatedByInfo">-</strong>
+    </div>
+  </div>
+
+  <div id="regulasi" class="content hidden"><h3>Upload Regulasi</h3></div>
+  <div id="informasi" class="content hidden"><h3>Kelola Informasi</h3></div>
+  <div id="sotk" class="content hidden"><h3>Kelola SOTK</h3></div>
+  <div id="slider" class="content hidden"><h3>Kelola Slider</h3></div>
+  <div id="setting" class="content hidden"><h3>Pengaturan</h3></div>
+
+</div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbzCQRbjS9eyL2F8nQNOMcFtCr7c78RCpvvDZEo3Ec4-tURS816JLSDEfCUyqq0W8jWspQ/exec';
+
+// cache DOM
+const visi = document.getElementById('visi');
+const misi = document.getElementById('misi');
+const struktur = document.getElementById('struktur');
+const sotkLink = document.getElementById('sotkLink');
+const profilStatus = document.getElementById('profilStatus');
+const updatedBy = document.getElementById('updatedBy');
+const updatedAt = document.getElementById('updatedAt');
+const updatedByInfo = document.getElementById('updatedByInfo');
+
+function showSection(id) {
+  document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  if (id === 'profil') loadProfil();
+}
+
+function loadProfil() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      visi.value = data.visi || '';
+      misi.value = data.misi || '';
+      struktur.value = data.struktur || '';
+      sotkLink.value = data.sotk_link || '';
+      updatedAt.innerText = data.updated_at || '-';
+      updatedByInfo.innerText = data.updated_by || '-';
+    });
+}
+
+function simpanProfil() {
+  const payload = {
+    visi: visi.value,
+    misi: misi.value,
+    struktur: struktur.value,
+    sotk_link: sotkLink.value,
+    updated_by: updatedBy.value || 'Admin'
   };
 
   fetch(API_URL, {
     method: 'POST',
-    body: JSON.stringify(data)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
   })
   .then(res => res.json())
   .then(() => {
-    document.getElementById('profilStatus').innerText = '✅ Profil berhasil disimpan';
+    profilStatus.innerText = '✅ Profil berhasil disimpan';
+    loadProfil();
   })
-  .catch(() => {
-    document.getElementById('profilStatus').innerText = '❌ Gagal menyimpan';
-  });
+  .catch(() => profilStatus.innerText = '❌ Gagal menyimpan');
 }
 </script>
 
