@@ -1,210 +1,66 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel - Medical Record</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    * { box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { margin: 0; background: #f4f7fb; display: flex; }
-
-    .sidebar {
-      width: 260px;
-      background: linear-gradient(180deg,#2e8b57,#1f6f4a);
-      color: white;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .sidebar h2 { text-align: center; margin-bottom: 30px; }
-    .sidebar a {
-      display: block;
-      color: white;
-      text-decoration: none;
-      padding: 12px 15px;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      transition: 0.3s;
-    }
-    .sidebar a:hover { background: rgba(255,255,255,0.2); }
-
-    .main { flex: 1; padding: 25px; }
-
-    .header {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      margin-bottom: 25px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
-    .card h3 { margin: 0; color: #2e8b57; }
-
-    .content {
-      margin-top: 25px;
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .hidden { display: none; }
-
-    input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #2e8b57;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-    button:hover { background: #256d45; }
-
-    .meta {
-      margin-top: 15px;
-      font-size: 13px;
-      color: #666;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Admin Panel</title>
+<style>
+body { font-family: Arial; background:#f4f7fb; padding:40px }
+.box { background:#fff; padding:30px; max-width:600px; margin:auto; border-radius:12px }
+input, textarea, button {
+  width:100%; margin-top:10px; padding:10px;
+  border-radius:8px; border:1px solid #ccc;
+}
+button { background:#2e8b57; color:white; border:none }
+</style>
 </head>
 <body>
 
-<div class="sidebar">
-  <h2><i class="fas fa-user-shield"></i> ADMIN</h2>
-  <a href="#" onclick="showSection('dashboard')"><i class="fas fa-home"></i> Dashboard</a>
-  <a href="#" onclick="showSection('profil')"><i class="fas fa-user"></i> Profil Unit</a>
-  <a href="#" onclick="showSection('regulasi')"><i class="fas fa-book"></i> Regulasi</a>
-  <a href="#" onclick="showSection('informasi')"><i class="fas fa-info-circle"></i> Informasi</a>
-  <a href="#" onclick="showSection('sotk')"><i class="fas fa-sitemap"></i> SOTK</a>
-  <a href="#" onclick="showSection('slider')"><i class="fas fa-images"></i> Slider</a>
-  <a href="#" onclick="showSection('setting')"><i class="fas fa-cog"></i> Pengaturan</a>
-  <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
-</div>
+<div class="box">
+  <h2>Admin Profil Unit</h2>
 
-<div class="main">
+  <input id="admin" placeholder="Nama Admin">
 
-  <div class="header">
-    <h2>Admin Panel Medical Record</h2>
-    <div>Login sebagai <strong>Admin</strong></div>
-  </div>
+  <textarea id="visi" placeholder="Visi"></textarea>
+  <textarea id="misi" placeholder="Misi"></textarea>
+  <textarea id="struktur" placeholder="Struktur"></textarea>
+  <input id="sotk" placeholder="Link SOTK">
 
-  <div id="dashboard" class="content">
-    <div class="cards">
-      <div class="card"><h3>Profil</h3><p>Kelola Visi, Misi, Struktur</p></div>
-      <div class="card"><h3>Regulasi</h3><p>Upload PDF & Dokumen</p></div>
-      <div class="card"><h3>Informasi</h3><p>Update Konten Publik</p></div>
-      <div class="card"><h3>SOTK</h3><p>Kelola File Google Drive</p></div>
-    </div>
-  </div>
-
-  <div id="profil" class="content hidden">
-    <h3>Kelola Profil Unit</h3>
-
-    <label>Nama Admin</label>
-    <input type="text" id="updatedBy" placeholder="Nama pengupdate">
-
-    <label>Visi</label>
-    <textarea id="visi" rows="3"></textarea>
-
-    <label>Misi</label>
-    <textarea id="misi" rows="4"></textarea>
-
-    <label>Struktur Organisasi</label>
-    <textarea id="struktur" rows="4"></textarea>
-
-    <label>Link Preview SOTK</label>
-    <input type="text" id="sotkLink" />
-
-    <button onclick="simpanProfil()">Simpan Profil</button>
-    <p id="profilStatus"></p>
-
-    <div class="meta">
-      Terakhir update: <strong id="updatedAt">-</strong><br>
-      Oleh: <strong id="updatedByInfo">-</strong>
-    </div>
-  </div>
-
-  <div id="regulasi" class="content hidden"><h3>Upload Regulasi</h3></div>
-  <div id="informasi" class="content hidden"><h3>Kelola Informasi</h3></div>
-  <div id="sotk" class="content hidden"><h3>Kelola SOTK</h3></div>
-  <div id="slider" class="content hidden"><h3>Kelola Slider</h3></div>
-  <div id="setting" class="content hidden"><h3>Pengaturan</h3></div>
-
+  <button onclick="simpan()">💾 Simpan</button>
+  <p id="status"></p>
 </div>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbzCQRbjS9eyL2F8nQNOMcFtCr7c78RCpvvDZEo3Ec4-tURS816JLSDEfCUyqq0W8jWspQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw7MWhmAJLlctAkmBbH0__q95Yoc12q0q5kyMREc8Mj/dev';
 
-// cache DOM
-const visi = document.getElementById('visi');
-const misi = document.getElementById('misi');
-const struktur = document.getElementById('struktur');
-const sotkLink = document.getElementById('sotkLink');
-const profilStatus = document.getElementById('profilStatus');
-const updatedBy = document.getElementById('updatedBy');
-const updatedAt = document.getElementById('updatedAt');
-const updatedByInfo = document.getElementById('updatedByInfo');
-
-function showSection(id) {
-  document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
-  if (id === 'profil') loadProfil();
-}
-
-function loadProfil() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      visi.value = data.visi || '';
-      misi.value = data.misi || '';
-      struktur.value = data.struktur || '';
-      sotkLink.value = data.sotk_link || '';
-      updatedAt.innerText = data.updated_at || '-';
-      updatedByInfo.innerText = data.updated_by || '-';
-    });
-}
-
-function simpanProfil() {
-  const payload = {
+function simpan() {
+  const data = {
+    admin: admin.value,
     visi: visi.value,
     misi: misi.value,
     struktur: struktur.value,
-    sotk_link: sotkLink.value,
-    updated_by: updatedBy.value || 'Admin'
+    sotk_link: sotk.value
   };
 
   fetch(API_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
   })
   .then(res => res.json())
-  .then(() => {
-    profilStatus.innerText = '✅ Profil berhasil disimpan';
-    loadProfil();
+  .then(res => {
+    status.innerText = res.success ? '✅ ' + res.message : '❌ ' + res.message;
   })
-  .catch(() => profilStatus.innerText = '❌ Gagal menyimpan');
+  .catch(() => status.innerText = '❌ Gagal koneksi');
 }
+
+fetch(API_URL)
+  .then(res => res.json())
+  .then(d => {
+    visi.value = d.visi || '';
+    misi.value = d.misi || '';
+    struktur.value = d.struktur || '';
+    sotk.value = d.sotk_link || '';
+  });
 </script>
 
 </body>
