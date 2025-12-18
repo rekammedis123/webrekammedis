@@ -5,93 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profil Unit - Medical Record</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
 body {
-  margin:0;
   font-family: Arial, sans-serif;
-  background:#f4f7fb;
-}
-
-header {
-  background:linear-gradient(90deg,#2e8b57,#1f6f4a);
-  color:white;
-  padding:25px;
-  text-align:center;
+  background: #f4f7fb;
+  margin: 0;
+  padding: 30px;
 }
 
 .container {
-  max-width:900px;
-  margin:30px auto;
-  background:white;
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #2e8b57;
+  margin-bottom: 10px;
 }
 
 .section {
-  margin-bottom:30px;
-}
-
-.section h2 {
-  color:#2e8b57;
-  border-left:6px solid #2e8b57;
-  padding-left:12px;
-}
-
-.meta {
-  font-size:13px;
-  color:#777;
-  margin-bottom:20px;
+  margin-bottom: 30px;
 }
 
 iframe {
-  width:100%;
-  height:520px;
-  border:none;
-  border-radius:12px;
-  box-shadow:0 12px 30px rgba(0,0,0,.15);
+  width: 100%;
+  height: 480px;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 
-footer {
-  text-align:center;
-  padding:20px;
-  color:#666;
-  font-size:14px;
+.footer {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #555;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Profil Unit Rekam Medis</h1>
-  <p>RSU AN NI'MAH</p>
-</header>
-
 <div class="container">
-
-  <div class="meta">
-    Terakhir diperbarui: 
-    <strong id="lastUpdate">-</strong> 
-    oleh 
-    <strong id="lastAdmin">-</strong>
-  </div>
 
   <div class="section">
     <h2>Visi</h2>
-    <p id="visi">Memuat...</p>
+    <p id="visi"></p>
   </div>
 
   <div class="section">
     <h2>Misi</h2>
-    <p id="misi">Memuat...</p>
+    <p id="misi"></p>
   </div>
 
   <div class="section">
     <h2>Struktur Organisasi</h2>
-    <p id="struktur">Memuat...</p>
+    <p id="struktur"></p>
   </div>
 
   <div class="section">
@@ -99,36 +71,29 @@ footer {
     <iframe id="sotkFrame"></iframe>
   </div>
 
+  <div class="footer">
+    <p>
+      Terakhir diperbarui oleh <b id="admin"></b><br>
+      <span id="lastUpdate"></span>
+    </p>
+  </div>
+
 </div>
 
-<footer>
-  © 2025 Unit Rekam Medis RSU AN NI'MAH
-</footer>
-
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxCozwY3pgXc1o4YuWOQ5jFwYflohgqwGhjH4t9p82FKnNNFG2e26pYoJlki4pPvLaT0A/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzzzw7iroVgV-nz7AFcbxKU706DEux8TyAVMkYsGT7nWPvgYspB6YBWIIDNxNpUWCQ5/exec';
 
 fetch(API_URL)
   .then(res => res.json())
   .then(data => {
-    document.getElementById('visi').innerText = data.visi || '-';
-    document.getElementById('misi').innerText = data.misi || '-';
-    document.getElementById('struktur').innerText = data.struktur || '-';
-
-    if (data.sotk_link) {
-      document.getElementById('sotkFrame').src = data.sotk_link;
-    }
-
-    // info update (baris ke-3 di sheet)
-    document.getElementById('lastUpdate').innerText =
-      data['Last Update'] || new Date().toLocaleString();
-
-    document.getElementById('lastAdmin').innerText =
-      data.admin || '-';
-  })
-  .catch(() => {
-    document.querySelector('.container').innerHTML =
-      '<p style="color:red">Gagal memuat data profil</p>';
+    visi.innerText = data.visi || '-';
+    misi.innerText = data.misi || '-';
+    struktur.innerText = data.struktur || '-';
+    sotkFrame.src = data.sotk_link || '';
+    admin.innerText = data.admin || 'Admin';
+    lastUpdate.innerText = data.last_update
+      ? new Date(data.last_update).toLocaleString('id-ID')
+      : '-';
   });
 </script>
 
