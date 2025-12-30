@@ -2,120 +2,27 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Admin Pemusnahan DRM | Medical Record</title>
+<title>Admin Pemusnahan DRM</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-:root{
-  --green:#16a34a;
-  --green-dark:#166534;
-  --green-soft:#dcfce7;
-  --bg:#f0fdf4;
-  --text:#064e3b;
-  --line:#e5e7eb;
-}
-*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
-body{margin:0;background:var(--bg)}
-.layout{display:flex;min-height:100vh}
-
-/* SIDEBAR */
-.sidebar{
-  width:260px;
-  background:linear-gradient(180deg,var(--green),var(--green-dark));
-  color:#fff;
-  padding:25px 20px;
-}
-.brand{text-align:center;margin-bottom:40px}
-.brand i{font-size:42px;margin-bottom:10px}
-.brand h2{margin:0;font-size:20px;font-weight:600}
-
-.menu a{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 18px;margin-bottom:14px;
-  color:#ecfdf5;text-decoration:none;
-  border-radius:14px;transition:.3s;font-size:15px;
-}
-.menu a:hover,.menu a.active{
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(6px);
-  transform:translateX(6px);
-}
-
-/* CONTENT */
-.content{flex:1;padding:35px}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
-.header h1{margin:0;color:var(--text)}
-.user{
-  background:#fff;padding:10px 18px;border-radius:999px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-  color:var(--green-dark);font-size:14px;
-}
-
-/* CARD */
-.card{
-  background:#fff;border-radius:18px;
-  padding:26px;margin-bottom:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-.card h3{margin-top:0;color:var(--green-dark)}
-
-/* FORM */
-label{font-size:13px;color:#065f46}
-input,textarea{
-  width:100%;padding:11px 12px;
-  border-radius:10px;border:1px solid var(--line);
-  margin:6px 0 14px;
-}
-textarea{min-height:120px}
-
-button.primary{
-  background:var(--green);color:#fff;
-  border:none;padding:12px;
-  border-radius:12px;font-weight:600;cursor:pointer;
-}
-
-/* LIST */
-.list{border-top:1px solid var(--line);margin-top:10px}
-.item{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 6px;border-bottom:1px solid var(--line);
-}
-.item strong{color:#065f46}
-.item small{color:#6b7280}
-
-.actions{display:flex;gap:6px}
-.btn{
-  width:28px;height:28px;border-radius:8px;
-  border:1px solid var(--line);
-  background:#f9fafb;cursor:pointer;font-size:12px;
-}
-.btn.edit{color:#065f46}
-.btn.delete{color:#b91c1c}
-
-footer{text-align:center;font-size:13px;color:#065f46;margin-top:40px}
+body{font-family:Arial;background:#f0fdf4;margin:0}
+.container{max-width:900px;margin:40px auto;background:#fff;padding:30px;border-radius:14px}
+input,textarea{width:100%;padding:10px;margin:6px 0 14px}
+button{background:#16a34a;color:#fff;border:none;padding:12px 20px;border-radius:10px;cursor:pointer}
+.item{border-bottom:1px solid #ddd;padding:10px 0}
 </style>
 </head>
 
 <body>
-<div class="layout">
-<aside class="sidebar">…</aside>
+<div class="container">
+<h2>Admin Pemusnahan DRM</h2>
 
-<main class="content">
-<div class="header">
-  <h1>Pemusnahan DRM</h1>
-  <div class="user"><i class="fas fa-user-shield"></i> Admin</div>
-</div>
-
-<div class="card">
-<h3>Tambah Dokumentasi</h3>
-
-<label>Judul Kegiatan</label>
+<label>Judul</label>
 <input id="judul">
 
 <label>Tanggal</label>
-<input id="tanggal">
+<input type="date" id="tanggal">
 
 <label>Lokasi</label>
 <input id="lokasi">
@@ -123,74 +30,49 @@ footer{text-align:center;font-size:13px;color:#065f46;margin-top:40px}
 <label>Narasi</label>
 <textarea id="isi"></textarea>
 
-<label>Foto Dokumentasi (JPG / PNG)</label>
-<input type="file" id="foto" accept="image/jpeg,image/png">
+<label>Foto</label>
+<input type="file" id="foto" accept="image/*">
 
-<button class="primary" onclick="simpan()">Simpan</button>
+<button onclick="simpan()">Simpan</button>
 <p id="status"></p>
-</div>
 
-<div class="card">
-<h3>Daftar Dokumentasi</h3>
-<div class="list" id="list"></div>
-</div>
-
-<footer>© 2025 Admin Medical Record RSU An Ni'mah</footer>
-</main>
+<hr>
+<h3>Data Tersimpan</h3>
+<div id="list"></div>
 </div>
 
 <script>
-const API="https://script.google.com/macros/s/AKfycby-ZQ3obQ7jkIsEi2tu-HQyINZmlcP04sElMDG-VuMvZnAThwgeU2gLrsj9gCmYsP4T/exec";
-let data=[];
+const API_URL = "https://script.google.com/macros/s/AKfycby-ZQ3obQ7jkIsEi2tu-HQyINZmlcP04sElMDG-VuMvZnAThwgeU2gLrsj9gCmYsP4T/exec";
+const list = document.getElementById("list");
 
 function load(){
- fetch(API,{
+ fetch(API_URL,{
   method:"POST",
-  headers:{
-    "Content-Type":"application/json"
-  },
   body:JSON.stringify({action:"get"})
  })
  .then(r=>r.json())
  .then(d=>{
-   console.log("LOAD:",d);
-   data=d||[];
-   render();
- })
- .catch(err=>{
-   console.error(err);
- });
-}
-
-function render(){
- list.innerHTML="";
- data.forEach(x=>{
-  list.innerHTML+=`
-  <div class="item">
-    <div>
-      <strong>${x.judul}</strong><br>
-      <small>${x.tanggal} • ${x.lokasi}</small>
-    </div>
-    <div class="actions">
-      <button class="btn delete" onclick="hapus('${x.id}')">
-        <i class="fas fa-trash"></i>
-      </button>
-    </div>
-  </div>`;
+   list.innerHTML="";
+   d.forEach(x=>{
+     list.innerHTML+=`
+      <div class="item">
+        <b>${x.judul}</b><br>
+        ${x.tanggal} - ${x.lokasi}<br>
+        <img src="${x.foto}" width="120"><br>
+        <button onclick="hapus('${x.id}')">Hapus</button>
+      </div>`;
+   });
  });
 }
 
 function simpan(){
  const file = foto.files[0];
- if(!file){alert("Foto wajib diisi");return;}
+ if(!file){alert("Foto wajib");return;}
 
  const reader = new FileReader();
  reader.onload = ()=>{
-  fetch(API,{
+  fetch(API_URL,{
    method:"POST",
-   headers:{
-     "Content-Type":"application/json"
-   },
    body:JSON.stringify({
      action:"save",
      judul:judul.value,
@@ -201,34 +83,24 @@ function simpan(){
    })
   })
   .then(r=>r.json())
-  .then(res=>{
-    console.log("SAVE:",res);
+  .then(()=>{
     status.innerText="✅ Tersimpan";
-    judul.value=tanggal.value=lokasi.value=isi.value="";
+    judul.value=lokasi.value=isi.value="";
     foto.value="";
     load();
-  })
-  .catch(err=>{
-    console.error(err);
-    status.innerText="❌ Gagal simpan";
   });
  };
  reader.readAsDataURL(file);
 }
 
 function hapus(id){
- if(!confirm("Hapus data ini?"))return;
- fetch(API,{
+ fetch(API_URL,{
   method:"POST",
-  headers:{
-    "Content-Type":"application/json"
-  },
   body:JSON.stringify({action:"hapus",id})
- }).then(()=>load());
+ }).then(load);
 }
 
 load();
 </script>
-
 </body>
 </html>
