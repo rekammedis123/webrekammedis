@@ -2,21 +2,207 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Admin Pemusnahan DRM</title>
+<title>Admin Pemusnahan | Medical Record</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-body{font-family:Arial;background:#f0fdf4;margin:0}
-.container{max-width:900px;margin:40px auto;background:#fff;padding:30px;border-radius:14px}
-input,textarea{width:100%;padding:10px;margin:6px 0 14px}
-button{background:#16a34a;color:#fff;border:none;padding:12px 20px;border-radius:10px;cursor:pointer}
-.item{border-bottom:1px solid #ddd;padding:10px 0}
+:root{
+  --green:#16a34a;
+  --green-dark:#166534;
+  --green-soft:#dcfce7;
+  --bg:#f0fdf4;
+  --text:#064e3b;
+  --line:#e5e7eb;
+}
+
+*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{
+  margin:0;
+  background:var(--bg);
+  overflow-x:hidden;
+}
+.layout{display:flex;min-height:100vh}
+
+/* ===== ANIMATION ===== */
+@keyframes slideLeft{
+  from{opacity:0;transform:translateX(-40px)}
+  to{opacity:1;transform:translateX(0)}
+}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeScale{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:260px;
+  background:linear-gradient(180deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:25px 20px;
+  animation:slideLeft .0s ease forwards;
+}
+.brand{text-align:center;margin-bottom:40px}
+.brand i{font-size:42px;margin-bottom:10px}
+.brand h2{margin:0;font-size:20px;font-weight:600}
+
+.menu a{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;margin-bottom:14px;
+  color:#ecfdf5;text-decoration:none;
+  border-radius:14px;
+  transition:.3s;font-size:15px;
+}
+.menu a:hover,.menu a.active{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(6px);
+  transform:translateX(6px);
+}
+
+/* ===== CONTENT ===== */
+.content{
+  flex:1;
+  padding:35px;
+  animation:fadeScale .5s ease forwards;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+  animation:slideUp .5s ease forwards;
+}
+.header h1{margin:0;color:var(--text)}
+
+.user{
+  background:#fff;
+  padding:10px 18px;
+  border-radius:999px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  color:var(--green-dark);
+  font-size:14px;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  margin-bottom:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  opacity:0;
+  animation:slideUp .6s ease forwards;
+}
+.card:nth-of-type(1){animation-delay:.15s}
+.card:nth-of-type(2){animation-delay:.3s}
+
+.card h3{margin-top:0;color:var(--green-dark)}
+
+/* FORM */
+label{font-size:13px;color:#065f46}
+input,textarea{
+  width:100%;
+  padding:11px 12px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  margin:6px 0 14px;
+}
+textarea{min-height:100px}
+
+button.primary{
+  background:var(--green);
+  color:#fff;
+  border:none;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+button.primary:hover{background:var(--green-dark)}
+
+/* ===== LIST ===== */
+.item{
+  display:flex;
+  gap:18px;
+  padding:16px 6px;
+  border-bottom:1px solid var(--line);
+  opacity:0;
+  animation:slideUp .45s ease forwards;
+}
+.item img{
+  width:160px;
+  border-radius:14px;
+  object-fit:cover;
+  box-shadow:0 6px 14px rgba(0,0,0,.15);
+}
+.info{flex:1}
+.judul{font-weight:600;color:#065f46}
+.meta{font-size:13px;color:#6b7280;margin:4px 0 8px}
+.narasi{
+  background:var(--green-soft);
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:14px;
+  line-height:1.6;
+}
+.actions{margin-left:auto}
+.actions button{
+  background:#fee2e2;
+  border:1px solid #fecaca;
+  color:#b91c1c;
+  width:34px;height:34px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+footer{
+  text-align:center;
+  font-size:13px;
+  color:#065f46;
+  margin-top:40px;
+  opacity:0;
+  animation:fadeScale .5s ease forwards;
+  animation-delay:.4s;
+}
 </style>
 </head>
 
 <body>
-<div class="container">
-<h2>Admin Pemusnahan DRM</h2>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <i class="fas fa-notes-medical"></i>
+    <h2>ADMIN MR</h2>
+  </div>
+  <nav class="menu">
+    <a href="admin_index.html"><i class="fas fa-gauge-high"></i> Dashboard</a>
+    <a href="admin_regulasi.html"><i class="fas fa-file-medical"></i> Regulasi</a>
+    <a href="admin_informasi.html"><i class="fas fa-circle-info"></i> Informasi</a>
+    <a href="admin_jadwal.html"><i class="fas fa-calendar-check"></i> Jadwal</a>
+    <a class="active"><i class="fas fa-fire"></i> Pemusnahan</a>
+    <a href="admin_indikator.html"><i class="fas fa-chart-simple"></i> Indikator</a>
+  </nav>
+</aside>
+
+<!-- CONTENT -->
+<main class="content">
+
+<div class="header">
+  <h1>Pemusnahan DRM</h1>
+  <div class="user"><i class="fas fa-user-shield"></i> Admin</div>
+</div>
+
+<div class="card">
+<h3>Input Pemusnahan</h3>
 
 <label>Judul</label>
 <input id="judul">
@@ -33,17 +219,28 @@ button{background:#16a34a;color:#fff;border:none;padding:12px 20px;border-radius
 <label>Foto</label>
 <input type="file" id="foto" accept="image/*">
 
-<button onclick="simpan()">Simpan</button>
+<button class="primary" onclick="simpan()">Simpan</button>
 <p id="status"></p>
+</div>
 
-<hr>
-<h3>Data Tersimpan</h3>
+<div class="card">
+<h3>Data Pemusnahan</h3>
 <div id="list"></div>
 </div>
 
+<footer>© 2025 Admin Medical Record RSU An Ni'mah</footer>
+</main>
+</div>
+
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycby-ZQ3obQ7jkIsEi2tu-HQyINZmlcP04sElMDG-VuMvZnAThwgeU2gLrsj9gCmYsP4T/exec";
-const list = document.getElementById("list");
+const API_URL="https://script.google.com/macros/s/AKfycby-ZQ3obQ7jkIsEi2tu-HQyINZmlcP04sElMDG-VuMvZnAThwgeU2gLrsj9gCmYsP4T/exec";
+const list=document.getElementById("list");
+
+function driveImg(url){
+ if(!url) return "";
+ const id=url.match(/[-\\w]{25,}/);
+ return id?`https://drive.google.com/thumbnail?id=${id[0]}&sz=w1000`:url;
+}
 
 function load(){
  fetch(API_URL,{
@@ -52,48 +249,55 @@ function load(){
  })
  .then(r=>r.json())
  .then(d=>{
-   list.innerHTML="";
-   d.forEach(x=>{
-     list.innerHTML+=`
-      <div class="item">
-        <b>${x.judul}</b><br>
-        ${x.tanggal} - ${x.lokasi}<br>
-        <img src="${x.foto}" width="120"><br>
-        <button onclick="hapus('${x.id}')">Hapus</button>
-      </div>`;
-   });
+  list.innerHTML="";
+  d.forEach((x,i)=>{
+   list.innerHTML+=`
+    <div class="item" style="animation-delay:${i*0.08}s">
+      <img src="${driveImg(x.foto)}">
+      <div class="info">
+        <div class="judul">${x.judul}</div>
+        <div class="meta">
+          ${new Date(x.tanggal).toLocaleDateString("id-ID")} • ${x.lokasi}
+        </div>
+        <div class="narasi">${x.isi || "-"}</div>
+      </div>
+      <div class="actions">
+        <button onclick="hapus('${x.id}')">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>`;
+  });
  });
 }
 
 function simpan(){
- const file = foto.files[0];
+ const file=foto.files[0];
  if(!file){alert("Foto wajib");return;}
-
- const reader = new FileReader();
- reader.onload = ()=>{
+ const reader=new FileReader();
+ reader.onload=()=>{
   fetch(API_URL,{
    method:"POST",
    body:JSON.stringify({
-     action:"save",
-     judul:judul.value,
-     tanggal:tanggal.value,
-     lokasi:lokasi.value,
-     isi:isi.value,
-     foto:reader.result
+    action:"save",
+    judul:judul.value,
+    tanggal:tanggal.value,
+    lokasi:lokasi.value,
+    isi:isi.value,
+    foto:reader.result
    })
-  })
-  .then(r=>r.json())
-  .then(()=>{
-    status.innerText="✅ Tersimpan";
-    judul.value=lokasi.value=isi.value="";
-    foto.value="";
-    load();
+  }).then(()=>{
+   status.innerText="✅ Tersimpan";
+   judul.value=lokasi.value=isi.value="";
+   foto.value="";
+   load();
   });
  };
  reader.readAsDataURL(file);
 }
 
 function hapus(id){
+ if(!confirm("Hapus data ini?"))return;
  fetch(API_URL,{
   method:"POST",
   body:JSON.stringify({action:"hapus",id})
