@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="logorekammedis.png" type="image/png">
   <title>Login - RSU AN'NIMAH</title>
+
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
     :root {
       --biru-rs: #005b96;
       --hijau-medis: #009765;
+      --bg-soft: #eef6ff;
     }
-    
+
     * {
       margin: 0;
       padding: 0;
@@ -21,24 +24,54 @@
     }
 
     body {
-      background: linear-gradient(135deg, #e6f2ff, #cce0ff);
+      background: linear-gradient(135deg, #f4f9ff, #e3f0ff);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
+      overflow: hidden;
     }
 
+    /* ===== ANIMASI BACKGROUND ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(0,91,150,.08), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(0,151,101,.08), transparent 60%);
+      animation: bgMove 10s infinite alternate ease-in-out;
+      z-index: -1;
+    }
+
+    @keyframes bgMove {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    /* ===== LOGIN CARD ===== */
     .login-container {
-      background-color: white;
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 91, 150, 0.2);
+      background: #fff;
       width: 100%;
       max-width: 400px;
+      padding: 40px 30px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0, 91, 150, 0.18);
       text-align: center;
       position: relative;
-      overflow: hidden;
+      animation: cardIn 0.7s ease;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .login-container::before {
@@ -49,91 +82,107 @@
       width: 100%;
       height: 8px;
       background: linear-gradient(90deg, var(--biru-rs), var(--hijau-medis));
+      border-radius: 18px 18px 0 0;
     }
 
     .logo-login {
-      width: 80px;
-      margin-bottom: 20px;
+      width: 85px;
+      margin-bottom: 15px;
+      animation: fadeDown 0.8s ease;
     }
 
-    .login-container h2 {
-      margin-bottom: 25px;
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
       font-size: 28px;
       color: var(--biru-rs);
+      margin-bottom: 25px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      animation: fadeIn 1s ease;
     }
 
     .login-form {
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .input-group {
-      margin-bottom: 20px;
       position: relative;
+      margin-bottom: 18px;
+      animation: fadeUp 0.9s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .input-group i {
       position: absolute;
-      left: 15px;
+      left: 16px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--biru-rs);
+      font-size: 15px;
     }
 
     .login-container input {
       width: 100%;
-      padding: 14px 14px 14px 45px;
-      border: 2px solid #e0e0e0;
+      padding: 14px 14px 14px 46px;
       border-radius: 50px;
+      border: 2px solid #e0e6ef;
       font-size: 15px;
-      transition: all 0.3s ease;
+      transition: 0.3s ease;
     }
 
     .login-container input:focus {
-      border-color: var(--biru-rs);
       outline: none;
-      box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.1);
+      border-color: var(--biru-rs);
+      box-shadow: 0 0 0 3px rgba(0,91,150,.12);
     }
 
     .login-btn {
       width: 100%;
       padding: 14px;
-      margin-top: 10px;
-      background: linear-gradient(90deg, var(--biru-rs), var(--hijau-medis));
-      color: white;
+      margin-top: 12px;
       border: none;
       border-radius: 50px;
+      background: linear-gradient(90deg, var(--biru-rs), var(--hijau-medis));
+      color: #fff;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      transition: 0.3s ease;
+      animation: fadeUp 1s ease;
     }
 
     .login-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 91, 150, 0.3);
+      box-shadow: 0 8px 18px rgba(0,91,150,.35);
     }
 
     .back-link {
       margin-top: 25px;
-      text-align: center;
+      animation: fadeIn 1.2s ease;
     }
 
     .back-link a {
-      color: var(--biru-rs);
       text-decoration: none;
       font-size: 14px;
+      color: var(--biru-rs);
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      transition: all 0.3s ease;
+      gap: 6px;
+      transition: 0.3s ease;
     }
 
     .back-link a:hover {
@@ -141,23 +190,19 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 480px) {
-      .login-container {
-        padding: 30px 20px;
-      }
-      
-      .login-container h2 {
-        font-size: 24px;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .login-container {
-      animation: fadeIn 0.6s ease-out;
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 22px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
@@ -166,73 +211,64 @@
   <div class="login-container">
     <img src="logorsnmc.png" alt="Logo RS" class="logo-login">
     <h2><i class="fas fa-lock"></i> LOGIN</h2>
-    
+
     <form class="login-form">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" name="username" placeholder="Username" required>
       </div>
-      
+
       <div class="input-group">
         <i class="fas fa-key"></i>
         <input type="password" name="password" placeholder="Password" required>
       </div>
-      
+
       <button type="submit" class="login-btn">
         <i class="fas fa-sign-in-alt"></i> LOGIN
       </button>
     </form>
 
     <div class="back-link">
-      <a href="index.html"><i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama</a>
+      <a href="admin_index.html">
+        <i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama
+      </a>
     </div>
   </div>
 
   <script>
-  // Fungsi untuk ambil parameter dari URL
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
-
-  // Baca parameter redirect (misal beranda.html atau coding.html)
-  const redirectTarget = getQueryParam("redirect");
-
-  // Kalau sudah login sebelumnya, langsung redirect ke target
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  if (loggedInUser && redirectTarget) {
-    window.location.href = redirectTarget;
-  }
-
-  document.querySelector(".login-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const username = document.querySelector('input[name="username"]').value.trim();
-    const password = document.querySelector('input[name="password"]').value.trim();
-
-    // Contoh kredensial
-    if (
-      (username === "admin" && password === "admin123") ||
-      (username === "susi" && password === "susi123") ||
-      (username === "fatim" && password === "fatim123") ||
-      (username === "yoga" && password === "martil235")
-    ) {
-      localStorage.setItem("loggedInUser", username);
-      // Redirect ke halaman tujuan (kalau ada), kalau tidak default ke index.html
-      if (redirectTarget) {
-        window.location.href = redirectTarget;
-      } else {
-        window.location.href = "index.html";
-      }
-    } else {
-      alert("Username atau Password salah!");
-      document.querySelector('input[name="password"]').value = "";
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
     }
-  });
 
-  // Autofocus ke username
-  document.querySelector('input[name="username"]').focus();
-</script>
+    const redirectTarget = getQueryParam("redirect");
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    if (loggedInUser && redirectTarget) {
+      window.location.href = redirectTarget;
+    }
+
+    document.querySelector(".login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.querySelector('input[name="username"]').value.trim();
+      const password = document.querySelector('input[name="password"]').value.trim();
+
+      if (
+        (username === "admin" && password === "admin123") ||
+        (username === "susi" && password === "susi123") ||
+        (username === "fatim" && password === "fatim123") ||
+        (username === "yoga" && password === "martil235")
+      ) {
+        localStorage.setItem("loggedInUser", username);
+        window.location.href = redirectTarget || "admin_index.html";
+      } else {
+        alert("Username atau Password salah!");
+        document.querySelector('input[name="password"]').value = "";
+      }
+    });
+
+    document.querySelector('input[name="username"]').focus();
+  </script>
 
 </body>
 </html>
-
