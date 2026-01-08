@@ -46,7 +46,6 @@ body{
   background:linear-gradient(180deg,var(--green),var(--green-dark));
   color:#fff;
   padding:25px 20px;
-  animation:slideLeft .8s ease forwards;
 }
 .brand{text-align:center;margin-bottom:40px}
 .brand i{font-size:42px;margin-bottom:10px}
@@ -143,6 +142,11 @@ footer{
   animation:fadeScale .5s ease forwards;
   animation-delay:.5s;
 }
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%}
+}
 </style>
 </head>
 
@@ -161,7 +165,7 @@ footer{
     <a href="admin_informasi.html"><i class="fas fa-circle-info"></i> Informasi</a>
     <a href="admin_jadwal.html"><i class="fas fa-calendar-check"></i> Jadwal</a>
     <a href="admin_pemusnahan.html"><i class="fas fa-trash"></i> Pemusnahan</a>
-    <a href="admin_indikator.html"><i class="fas fa-chart-simple"></i> Indikator</a>
+    <a href="admin_indikatorbor.html"><i class="fas fa-chart-simple"></i> Indikator</a>
   </nav>
 </aside>
 
@@ -193,7 +197,7 @@ footer{
       <p>Atur jadwal kegiatan & petugas</p>
     </a>
 
-    <a href="admin_indikator.html" class="box">
+    <a href="admin_indikatorbor.html" class="box">
       <i class="fas fa-chart-simple"></i>
       <h3>Indikator</h3>
       <p>Kelola indikator unit & nasional</p>
