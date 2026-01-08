@@ -2,347 +2,371 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="icon" href="logorekammedis.png" type="image/png">
-<title>Indikator - Medical Record</title>
+<title>Admin Indikator | Medical Record</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Verdana}
-html,body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#fff,#eeecec);
-  display:flex;
-  flex-direction:column;
+:root{
+  --green:#16a34a;
+  --green-dark:#166534;
+  --green-soft:#dcfce7;
+  --bg:#f0fdf4;
+  --text:#064e3b;
+  --line:#e5e7eb;
+}
+*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{margin:0;background:var(--bg)}
+.layout{display:flex;min-height:100vh}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  width:260px;
+  background:linear-gradient(180deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:25px 20px;
+}
+.brand{text-align:center;margin-bottom:40px}
+.brand i{font-size:42px;margin-bottom:10px}
+.brand h2{margin:0;font-size:20px}
+
+.menu a{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;margin-bottom:14px;
+  color:#ecfdf5;text-decoration:none;
+  border-radius:14px;
+  transition:.3s;
+}
+.menu a:hover,.menu a.active{
+  background:rgba(255,255,255,.18);
+  transform:translateX(6px);
 }
 
-/* ===== HEADER SAMA PERSIS ===== */
-header{
-  background:linear-gradient(150deg,#fff,#66a378);
-  padding:15px 20px;
-  box-shadow:0 2px 10px rgba(0,0,0,.1);
-  border-bottom:2px solid rgba(255,255,255,.8);
-}
-.logo{display:flex;align-items:center}
-.logo img{width:300px;height:70px}
-.user-info{text-align:right;font-size:13px;color:#fff;margin-top:10px}
-
-nav ul{
-  list-style:none;
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  padding:10px;
-  background:#fff;
-  border-radius:50px;
-  justify-content:center;
-  margin-top:15px;
-  box-shadow:0 0 10px #027e40;
-}
-nav ul li a{
-  text-decoration:none;
-  color:#3a3a3a;
-  font-weight:bold;
-  border-radius:50px;
-  padding:5px 15px;
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-nav ul li a:hover{color:#5aa190}
-
-.dropdown-hubungi{position:relative}
-.dropdown-content-hubungi{
-  display:none;
-  position:absolute;
-  background:#f9f9f9;
-  min-width:160px;
-  box-shadow:0 8px 16px rgba(0,0,0,.2);
-  border-radius:10px;
-  overflow:hidden;
-  z-index:99;
-}
-.dropdown-content-hubungi a{
-  padding:10px 15px;
-  font-size:12px;
-  display:block;
-  color:#333;
-}
-.dropdown-content-hubungi a:hover{
-  background:#e2f8f1;
-  color:#1f8664;
-}
-.dropdown-hubungi:hover .dropdown-content-hubungi{display:block}
-
-/* ===== MAIN ===== */
-main{flex:1;padding:30px 20px}
-
-.content-container{
-  max-width:1200px;
-  margin:auto;
-  background:#fff;
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,128,128,.1);
+/* ===== CONTENT (ANIMASI AMAN) ===== */
+.content{
+  flex:1;
+  padding:35px;
   opacity:0;
-  transform:scale(.98);
-  animation:fadeIn .4s ease forwards;
+  transform:translateY(18px);
+  transition:.6s ease;
 }
-@keyframes fadeIn{to{opacity:1;transform:scale(1)}}
+.content.show{
+  opacity:1;
+  transform:none;
+}
 
-h2{color:#008080;margin-bottom:20px}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+.header h1{margin:0;color:var(--text)}
+.user{
+  background:#fff;
+  padding:10px 18px;
+  border-radius:999px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  color:var(--green-dark);
+  font-size:14px;
+}
 
+/* ===== CARD (SEMBUL) ===== */
 .card{
-  background:#f9f9f9;
-  padding:20px;
-  border-radius:12px;
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
   margin-bottom:25px;
-}
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 
-.fade{opacity:0;transition:.25s}
+  opacity:0;
+  transform:translateY(24px) scale(.98);
+  transition:.55s ease;
+}
+.card.show{
+  opacity:1;
+  transform:none;
+}
+.card h3{margin-top:0;color:var(--green-dark)}
+
+/* ===== FORM ===== */
+label{font-size:13px;color:#065f46}
+input,select{
+  width:100%;
+  padding:11px 12px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  margin:6px 0 14px;
+}
 
 /* ===== TABLE ===== */
 table{width:100%;border-collapse:collapse}
-th,td{border:1px solid #ccc;padding:6px;text-align:center}
-th{background:#3cb371;color:#fff}
-input,select{width:100%;padding:5px;border-radius:5px;border:1px solid #bbb}
+th,td{
+  border:1px solid var(--line);
+  padding:6px;
+  text-align:center;
+}
+th{background:var(--green);color:#fff}
+.good{background:#dcfce7}
+.warn{background:#fff7cd}
+.bad{background:#fee2e2}
 
 /* ===== BUTTON ===== */
-.btn{
-  padding:10px 24px;
-  background:#009765;
+button.primary{
+  background:var(--green);
   color:#fff;
   border:none;
-  border-radius:50px;
-  font-weight:bold;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:600;
   cursor:pointer;
 }
-.btn.loading{background:#999}
-
-/* ===== FOOTER SAMA PERSIS ===== */
-footer{
-  background:#fff;
-  display:flex;
-  justify-content:space-between;
-  padding:30px 20px;
-  font-size:18px;
-  box-shadow:0 0 10px #027e40;
+button.primary:hover{background:var(--green-dark)}
+button.secondary{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  cursor:pointer;
 }
-.small{font-size:14px;color:#555}
 
-/* loader */
-#loader{
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  font-size:13px;
+  color:#065f46;
+  margin-top:40px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%}
+}
+
+/* ===== LOADING (FIXED) ===== */
+.loading{
   position:fixed;
   inset:0;
-  background:rgba(255,255,255,.6);
+  background:rgba(0,0,0,.25);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:20px;
-  color:#009765;
-  z-index:999;
+  z-index:9999;
   opacity:0;
   pointer-events:none;
-  transition:.25s;
+  transition:.3s;
 }
-#loader.show{opacity:1;pointer-events:auto}
+.loading.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.spinner{
+  width:30px;height:30px;
+  border:3px solid #bbf7d0;
+  border-top:3px solid var(--green);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== FADE (ASLI, TIDAK DIUBAH) ===== */
+.fade{
+  opacity:0;
+  transform:translateY(10px);
+  transition:.4s;
+}
+.fade.show{
+  opacity:1;
+  transform:none;
+}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:var(--green);
+  color:#fff;
+  padding:14px 20px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,.2);
+  opacity:0;
+  transform:translateY(20px);
+  transition:.4s;
+  z-index:9999;
+}
+.toast.show{
+  opacity:1;
+  transform:none;
+}
 </style>
 </head>
 
+<div class="loading" id="loading"><div class="spinner"></div></div>
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i> Data berhasil disimpan</div>
+
 <body>
+<div class="layout">
 
-<div id="loader">
-  <i class="fas fa-spinner fa-spin"></i>&nbsp; Memuat data...
-</div>
-
-<header>
-  <div class="logo">
-    <img src="logopanjang.png">
+<aside class="sidebar">
+  <div class="brand">
+    <i class="fas fa-notes-medical"></i>
+    <h2>ADMIN MR</h2>
   </div>
-  <div class="user-info"></div>
-  <nav>
-    <ul>
-      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
-      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
-      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
-      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
-      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-      <li class="dropdown-hubungi">
-        <a><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
-        <div class="dropdown-content-hubungi">
-          <a href="#"><i class="fas fa-envelope"></i> Email</a>
-          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-        </div>
-      </li>
-    </ul>
+  <nav class="menu">
+    <a href="admin_index.html"><i class="fas fa-gauge-high"></i> Dashboard</a>
+    <a href="admin_regulasi.html"><i class="fas fa-file-medical"></i> Regulasi</a>
+    <a href="admin_informasi.html"><i class="fas fa-circle-info"></i> Informasi</a>
+    <a href="admin_jadwal.html"><i class="fas fa-calendar-check"></i> Jadwal</a>
+    <a href="admin_pemusnahan.html"><i class="fas fa-calendar-check"></i> Pemusnahan</a>
+    <a class="active"><i class="fas fa-chart-simple"></i> Indikator</a>
   </nav>
-</header>
+</aside>
 
-<main>
-<div class="content-container">
+<main class="content" id="content">
 
-<h2>📊 Indikator Rawat Inap</h2>
-
-<div class="card">
-<strong>Tahun:</strong>
-<select id="tahun">
-<option>2025</option>
-<option>2026</option>
-</select>
+<div class="header">
+  <h1>Indikator Rawat Inap</h1>
+  <div class="user"><i class="fas fa-user-shield"></i> Admin</div>
 </div>
 
 <div class="card">
-<h3>Input Data 12 Bulan</h3><br>
+<h3>Input Data Indikator</h3>
+<label>Tahun</label>
+<select id="tahun"><option>2025</option><option>2026</option></select>
+
 <table id="inputTable">
 <thead>
-<tr>
-<th>Bulan</th><th>TT</th><th>HP</th><th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th>
-</tr>
+<tr><th>Bulan</th><th>TT</th><th>HP</th><th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th></tr>
 </thead>
 <tbody></tbody>
 </table><br>
-<button class="btn" id="btnSimpan">💾 Simpan Data</button>
+
+<button class="primary" onclick="simpan()">💾 Simpan</button>
+<button class="secondary">📤 Export Excel</button>
 </div>
 
-<div class="card fade" id="cardTabel">
+<div class="card">
 <h3 id="judulTabel"></h3>
 <table>
 <thead>
-<tr>
-<th>Bulan</th><th>TT</th><th>HP</th><th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th>
-</tr>
+<tr><th>Bulan</th><th>TT</th><th>HP</th><th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th></tr>
 </thead>
 <tbody id="tabelData"></tbody>
 </table>
 </div>
 
-<div class="card fade" id="cardGrafik">
+<div class="card">
 <h3 id="judulGrafik"></h3>
 <div style="height:420px"><canvas id="chart"></canvas></div>
 </div>
 
-</div>
+<footer>© 2025 Admin Medical Record RSU An Ni'mah</footer>
 </main>
-
-<footer>
-  <div>
-    <strong>MEDICAL RECORD</strong><br>
-    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-  </div>
-</footer>
-
+</div>
 
 <script>
-const URL="https://script.google.com/macros/s/AKfycbwT-X3FTiCNqz97_UcCgbeZylbA0bhT52mZxZ6hkOgahQsN7cXWuusopyml0i9STObf/exec";
+const URL="https://script.google.com/macros/s/AKfycbyS6F1g4_EA2pdQywCymutFVjcAWhD0qoZGVkrACZPC97cENoWdh7r6vWQ7DihV14XD/exec";
+const bulan=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+const TARGET={BOR:[60,85],LOS:[6,9],TOI:[1,3],BTO:[40,999]};
+const tbody=document.querySelector("#inputTable tbody");
+const chartEl=document.getElementById("chart");
+const loading=document.getElementById("loading");
+const toast=document.getElementById("toast");
+const content=document.getElementById("content");
+const cards=document.querySelectorAll(".card");
 
-const bulanList=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-const tbodyInput=document.querySelector("#inputTable tbody");
-
-bulanList.forEach(b=>{
-tbodyInput.innerHTML+=`
-<tr>
-<td><strong>${b}</strong></td>
-<td><input type="number" data-bulan="${b}" data-field="tt"></td>
-<td><input type="number" data-bulan="${b}" data-field="hp"></td>
-<td><input type="number" step="0.01" data-bulan="${b}" data-field="bor"></td>
-<td><input type="number" step="0.01" data-bulan="${b}" data-field="los"></td>
-<td><input type="number" step="0.01" data-bulan="${b}" data-field="toi"></td>
-<td><input type="number" step="0.01" data-bulan="${b}" data-field="bto"></td>
-</tr>`;
+bulan.forEach(b=>{
+  tbody.innerHTML+=`
+  <tr>
+    <td>${b}</td>
+    <td><input data-b="${b}" data-f="tt"></td>
+    <td><input data-b="${b}" data-f="hp"></td>
+    <td><input data-b="${b}" data-f="bor"></td>
+    <td><input data-b="${b}" data-f="los"></td>
+    <td><input data-b="${b}" data-f="toi"></td>
+    <td><input data-b="${b}" data-f="bto"></td>
+  </tr>`;
 });
+
+function showLoading(){loading.classList.add("show")}
+function hideLoading(){loading.classList.remove("show")}
+function showToast(){toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2500)}
+
+function simpan(){
+  showLoading();
+  const th=tahun.value,data=[];
+  bulan.forEach(b=>{
+    const o={tahun:th,bulan:b};
+    document.querySelectorAll(`[data-b="${b}"]`).forEach(i=>o[i.dataset.f]=Number(i.value)||0);
+    data.push(o);
+  });
+  fetch(URL,{method:"POST",body:JSON.stringify({bulk:true,data})})
+    .then(()=>{loadData();showToast()});
+}
 
 let chart;
-btnSimpan.onclick=simpanSemua;
-
-function getVal(v){
-  return parseFloat(String(v||0).replace(",", "."))||0;
-}
-
-function showLoader(v=true){
-  loader.classList.toggle("show",v);
-}
-
-function simpanSemua(){
-btnSimpan.classList.add("loading");
-btnSimpan.innerHTML='<i class="fa fa-spinner fa-spin"></i> Menyimpan...';
-
-const th=tahun.value;
-const data=[];
-
-bulanList.forEach(b=>{
-const obj={tahun:th,bulan:b};
-document.querySelectorAll(`[data-bulan="${b}"]`).forEach(i=>{
-obj[i.dataset.field]=getVal(i.value);
-});
-data.push(obj);
-});
-
-fetch(URL,{method:"POST",body:JSON.stringify({bulk:true,data})})
-.then(()=>loadData())
-.finally(()=>{
-btnSimpan.classList.remove("loading");
-btnSimpan.innerHTML="💾 Simpan Data";
-});
-}
-
 function loadData(){
-showLoader(true);
-cardTabel.classList.add("fade");
-cardGrafik.classList.add("fade");
+  showLoading();
+  fetch(URL+"?tahun="+tahun.value)
+    .then(r=>r.json())
+    .then(d=>{
+  isiInputDariServer(d); // <<< INI KUNCINYA 🔥
 
-fetch(URL+"?tahun="+tahun.value)
-.then(r=>r.json())
-.then(data=>{
-let tbody="";
-const bor=[],los=[],toi=[],bto=[];
+  let html="",bor=[],los=[],toi=[],bto=[];
+  bulan.forEach(b=>{
+    const x=d.find(i=>i.bulan===b)||{};
+    html+=`
+    <tr>
+      <td>${b}</td>
+      <td>${x.tt||0}</td>
+      <td>${x.hp||0}</td>
+      <td class="${x.bor<60?'bad':x.bor>85?'warn':'good'}">${x.bor||0}</td>
+      <td class="${x.los<6?'bad':x.los>9?'warn':'good'}">${x.los||0}</td>
+      <td class="${x.toi<1?'bad':x.toi>3?'warn':'good'}">${x.toi||0}</td>
+      <td class="${x.bto<40?'bad':'good'}">${x.bto||0}</td>
+    </tr>`;
+    bor.push(x.bor||0);
+    los.push(x.los||0);
+    toi.push(x.toi||0);
+    bto.push(x.bto||0);
+  });
 
-bulanList.forEach(b=>{
-const d=data.find(x=>x.bulan===b)||{};
-tbody+=`
-<tr>
-<td>${b}</td>
-<td>${d.tt||0}</td><td>${d.hp||0}</td>
-<td>${d.bor||0}</td><td>${d.los||0}</td>
-<td>${d.toi||0}</td><td>${d.bto||0}</td>
-</tr>`;
-bor.push(d.bor||0);los.push(d.los||0);toi.push(d.toi||0);bto.push(d.bto||0);
-});
-
-tabelData.innerHTML=tbody;
-
-if(chart)chart.destroy();
-chart=new Chart(chartEl,{
-data:{
-labels:bulanList,
-datasets:[
-{type:"bar",label:"BOR (%)",data:bor},
-{type:"line",label:"LOS",data:los},
-{type:"line",label:"TOI",data:toi},
-{type:"line",label:"BTO",data:bto}
-]
-},
-options:{responsive:true,maintainAspectRatio:false}
-});
-
-setTimeout(()=>{
-cardTabel.classList.remove("fade");
-cardGrafik.classList.remove("fade");
-showLoader(false);
-},200);
-});
+  tabelData.innerHTML=html;
+      if(chart) chart.destroy();
+      chart=new Chart(chartEl,{data:{labels:bulan,datasets:[
+        {type:"bar",label:"BOR",data:bor},
+        {type:"line",label:"LOS",data:los},
+        {type:"line",label:"TOI",data:toi},
+        {type:"line",label:"BTO",data:bto}
+      ]},options:{responsive:true,maintainAspectRatio:false}});
+      judulTabel.innerText="Rekap Tahun "+tahun.value;
+      judulGrafik.innerText="Grafik Tahun "+tahun.value;
+      hideLoading();
+    });
+}
+function isiInputDariServer(data){
+  bulan.forEach(b=>{
+    const x = data.find(i=>i.bulan===b) || {};
+    document.querySelectorAll(`[data-b="${b}"]`).forEach(inp=>{
+      inp.value = x[inp.dataset.f] || "";
+    });
+  });
 }
 
-const chartEl=document.getElementById("chart");
-tahun.addEventListener("change",loadData);
-loadData();
-</script> 
-
+window.addEventListener("load",()=>{
+  content.classList.add("show");
+  cards.forEach((c,i)=>setTimeout(()=>c.classList.add("show"),i*150));
+  loadData();
+});
+tahun.onchange=loadData;
+</script>
 </body>
 </html>
