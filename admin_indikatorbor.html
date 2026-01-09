@@ -305,58 +305,148 @@ function simpan(){
   const th=tahun.value,data=[];
   bulan.forEach(b=>{
     const o={tahun:th,bulan:b};
-    document.querySelectorAll(`[data-b="${b}"]`).forEach(i=>o[i.dataset.f]=Number(i.value.replace(",", ".")) || 0);
+    document.querySelectorAll(`[data-b="${b}"]`).forEach(i=>o[i.dataset.f] = parseIDNumber(i.value));
     data.push(o);
   });
   fetch(URL,{method:"POST",body:JSON.stringify({bulk:true,data})})
     .then(()=>{loadData();showToast()});
 }
+function parseIDNumber(val){
+  if(!val) return 0;
+  return Number(
+    val
+      .toString()
+      .replace(/\./g, "")   // hapus titik ribuan
+      .replace(",", ".")    // koma → desimal
+  ) || 0;
+}
+function formatID(val){
+  if(val === "" || val === null || isNaN(val)) return "0";
+  return Number(val).toLocaleString("id-ID");
+}
+function formatID2(val){
+  if(val === "" || val === null || isNaN(val)) return "0,00";
+  return Number(val).toLocaleString("id-ID", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
 
 let chart;
+
 function loadData(){
   showLoading();
+
   fetch(URL+"?tahun="+tahun.value)
     .then(r=>r.json())
     .then(d=>{
-  isiInputDariServer(d); // <<< INI KUNCINYA 🔥
 
-  let html="",bor=[],los=[],toi=[],bto=[];
-  bulan.forEach(b=>{
-    const x=d.find(i=>i.bulan===b)||{};
-    html+=`
-    <tr>
-      <td>${b}</td>
-      <td>${x.tt||0}</td>
-      <td>${x.hp||0}</td>
-      <td class="${x.bor<60?'bad':x.bor>85?'warn':'good'}">${x.bor||0}</td>
-      <td class="${x.los<6?'bad':x.los>9?'warn':'good'}">${x.los||0}</td>
-      <td class="${x.toi<1?'bad':x.toi>3?'warn':'good'}">${x.toi||0}</td>
-      <td class="${x.bto<40?'bad':'good'}">${x.bto||0}</td>
-    </tr>`;
-    bor.push(x.bor||0);
-    los.push(x.los||0);
-    toi.push(x.toi||0);
-    bto.push(x.bto||0);
-  });
+      isiInputDariServer(d);
 
-  tabelData.innerHTML=html;
+      let html="";
+      let bor=[], los=[], toi=[], bto=[];
+
+      bulan.forEach(b=>{
+        const x = d.find(i=>i.bulan===b) || {};
+
+        html+=`
+        <tr>
+          <td>${b}</td>
+          <td>${formatID(x.tt)}</td>
+          <td>${formatID(x.hp)}</td>
+          <td class="${x.bor<60?'bad':x.bor>85?'warn':'good'}">${formatID2(x.bor)}</td>
+          <td class="${x.los<6?'bad':x.los>9?'warn':'good'}">${formatID2(x.los)}</td>
+          <td class="${x.toi<1?'bad':x.toi>3?'warn':'good'}">${formatID2(x.toi)}</td>
+          <td class="${x.bto<40?'bad':'good'}">${formatID2(x.bto)}</td>
+        </tr>
+        `;
+
+        bor.push(x.bor||0);
+        los.push(x.los||0);
+        toi.push(x.toi||0);
+        bto.push(x.bto||0);
+      });
+
+      tabelData.innerHTML = html;
+      judulTabel.innerText = "Rekap Tahun " + tahun.value;
+      judulGrafik.innerText = "Grafik Tahun " + tahun.value;
+
       if(chart) chart.destroy();
-      chart=new Chart(chartEl,{data:{labels:bulan,datasets:[
-        {type:"bar",label:"BOR",data:bor},
-        {type:"line",label:"LOS",data:los},
-        {type:"line",label:"TOI",data:toi},
-        {type:"line",label:"BTO",data:bto}
-      ]},options:{responsive:true,maintainAspectRatio:false}});
-      judulTabel.innerText="Rekap Tahun "+tahun.value;
-      judulGrafik.innerText="Grafik Tahun "+tahun.value;
+
+      chart = new Chart(chartEl,{
+  data:{
+    labels:bulan,
+    datasets:[
+      {
+        type:"bar",
+        label:"BOR (%)",
+        data:bor,
+        backgroundColor:"rgba(22,163,74,0.6)",
+        yAxisID:"y",
+        order:1
+      },
+      {
+        type:"line",
+        label:"LOS",
+        data:los,
+        borderColor:"#2563eb",
+        tension:0.3,
+        yAxisID:"y1",
+        order:2
+      },
+      {
+        type:"line",
+        label:"TOI",
+        data:toi,
+        borderColor:"#dc2626",
+        tension:0.3,
+        yAxisID:"y1",
+        order:2
+      },
+      {
+        type:"line",
+        label:"BTO",
+        data:bto,
+        borderColor:"#ca8a04",
+        tension:0.3,
+        yAxisID:"y1",
+        order:2
+      }
+    ]
+  },
+  options:{
+    responsive:true,
+    maintainAspectRatio:false,
+    scales:{
+      y:{
+        position:"left",
+        title:{ display:true, text:"BOR (%)" },
+        min:0,
+        max:100
+      },
+      y1:{
+        position:"right",
+        title:{ display:true, text:"LOS / TOI / BTO" },
+        grid:{ drawOnChartArea:false },
+        min:0
+      }
+    }
+  }
+});
+
       hideLoading();
     });
 }
+
 function isiInputDariServer(data){
   bulan.forEach(b=>{
     const x = data.find(i=>i.bulan===b) || {};
     document.querySelectorAll(`[data-b="${b}"]`).forEach(inp=>{
-      inp.value = x[inp.dataset.f] || "";
+      const v = x[inp.dataset.f] ?? 0;
+
+      inp.value = ["bor","los","toi","bto"].includes(inp.dataset.f)
+        ? formatID2(v)
+        : formatID(v);
     });
   });
 }
