@@ -65,6 +65,31 @@
       color: #5aa190;
       font-weight: bold;
     }
+
+    /* ===== ADMIN BUTTON ===== */
+    .admin-btn{
+      position:fixed;
+      top:15px;
+      right:20px;
+      z-index:999;
+      background:linear-gradient(135deg,#16a34a,#22c55e);
+      color:#fff;
+      padding:8px 16px;
+      border-radius:30px;
+      font-size:12px;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      box-shadow:0 5px 15px rgba(0,0,0,.25);
+      transition:.3s ease;
+    }
+    .admin-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(0,0,0,.3);
+      background:linear-gradient(135deg,#15803d,#22c55e);
+    }
+
     main {
       flex: 1;
       padding: 30px 20px;
@@ -91,11 +116,24 @@
     footer { background:#fff; display:flex; flex-wrap: wrap; justify-content:space-between; padding:30px 20px;
       gap: 20px;font-size: 18px; color:#3a3a3a; border-top: 2px solid rgba(255,255,255,0.2); box-shadow:0 0 10px #027e40; }
     
-    .small {font-size:14px;color:#555}
+    .small{font-size:14px;color:#555}
     @media (min-width: 600px) {
-    .dropdown-hubungi {
+      .footer-left, .footer-center, .footer-right {
+        flex: 1; }
+        }
+
+      .dropdown-hubungi {
       position: relative;
       display: inline-block;
+    }
+    .file-link{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    }
+
+    .file-link:hover .file-item{
+      background:#95b19d2d;      
     }
     
     .dropdown-content-hubungi {
@@ -132,10 +170,33 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-  }
+  
+      /* ANIMASI LIST */
+    .file-list.anim-out {
+      animation: fadeOut 0.25s ease forwards;
+    }
+
+    .file-list.anim-in {
+      animation: fadeInSlide 0.35s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(8px); }
+    }
+
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    
   </style>
 </head>
 <body>
+  <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
+  <i class="fas fa-user-shield"></i> Admin Dashboard
+  </a>
 <header>
   <div class="logo">
     <img src="logopanjang.png" alt="Logo Rumah Sakit" />
@@ -219,18 +280,33 @@ async function loadFiles() {
 
 function renderFiles(year) {
   const list = document.getElementById("fileList");
-  list.innerHTML = "";
-  const files = allFiles.filter(f => f.year === year);
 
-  files.forEach(f => {
-    const li = document.createElement("li");
-    li.className = "file-item";
-    li.innerHTML = `
-      <div class="file-name"><i class="fa-regular fa-file"></i> ${f.name}</div>
-      <a class="btn-open" href="${f.url}" target="_blank">Buka</a>
-    `;
-    list.appendChild(li);
-  });
+  // animasi keluar
+  list.classList.remove("anim-in");
+  list.classList.add("anim-out");
+
+  setTimeout(() => {
+    list.innerHTML = "";
+    const files = allFiles.filter(f => f.year === year);
+
+    files.forEach(f => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="${f.url}" target="_blank" class="file-link">
+          <div class="file-item">
+            <div class="file-name">
+              <i class="fa-regular fa-file"></i> ${f.name}
+            </div>
+        </a>
+      `;
+      list.appendChild(li);
+    });
+
+    // animasi masuk
+    list.classList.remove("anim-out");
+    list.classList.add("anim-in");
+
+  }, 250); 
 }
 
 loadFiles();
