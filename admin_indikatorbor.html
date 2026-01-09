@@ -305,7 +305,7 @@ function simpan(){
   const th=tahun.value,data=[];
   bulan.forEach(b=>{
     const o={tahun:th,bulan:b};
-    document.querySelectorAll(`[data-b="${b}"]`).forEach(i=>o[i.dataset.f]=Number(i.value)||0);
+    document.querySelectorAll(`[data-b="${b}"]`).forEach(i=>o[i.dataset.f]=Number(i.value.replace(",", ".")) || 0);
     data.push(o);
   });
   fetch(URL,{method:"POST",body:JSON.stringify({bulk:true,data})})
