@@ -114,6 +114,44 @@ h2{
 .select-wrapper select:focus{
   size:6;
 }
+/* ===== ADMIN BUTTON ===== */
+  .admin-btn{
+    position:fixed;
+    top:15px;
+    right:20px;
+    z-index:999;
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:#fff;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:12px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+    transition:.3s ease;
+  }
+    .admin-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+    background:linear-gradient(135deg,#15803d,#22c55e);
+  }
+
+@media (max-width: 1024px) {
+  .admin-btn {
+    position: relative;
+    top: auto;
+    align-self: flex-start; 
+    right: auto;
+    width: fit-content;
+    margin-top: 15px;
+  }
+  .logo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 
 /* ===== TABLE ===== */
 table{width:100%;border-collapse:collapse}
@@ -204,7 +242,12 @@ footer{
 <body>
 
 <header>
-  <div class="logo"><img src="logopanjang.png"></div>
+  <div class="logo">
+    <img src="logopanjang.png">
+    <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
+        <i class="fas fa-user-shield"></i> Admin Dashboard
+      </a>
+  </div>
   <nav>
       <ul>
         <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
