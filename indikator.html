@@ -1,176 +1,256 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="icon" href="logorekammedis.png">
-<title>Indikator Rawat Inap - Medical Record</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logorekammedis.png" type="image/png">
+  <title>Indikator - RSU AN'NIMAH</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
+    }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    html, body {
+      height: 100%;
+      background: linear-gradient(135deg, #ffffff, #eeecec);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(150deg, #ffffff, #66a378); 
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo img {
+      width: 300px;
+      height: 70px;
+      margin-right: 1px;
+    }
+    .judul h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #3a3a3a;
+    }
+    .judul {
+      font-size: 25px;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #3a3a3a;
+    }
+    .user-info {
+      text-align: right;
+      font-size: 13px;
+      margin-top: 10px;
+      color: #ffffff;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 10px;
+      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
+      border-radius: 50px;
+      font-size: 13px;
+      justify-content: center;
+      margin-top: 15px;
+      box-shadow: 0 0 10px #027e40;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #3a3a3a;
+      font-weight: bold;
+      border-radius: 50px;
+      padding: 5px 15px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    nav ul li a:hover {
+      color: #5aa190;
+      font-weight: bold;
+    }
 
-<style>
-:root{
-  --green:#16a34a;
-}
+    main {
+      flex: 1;
+      padding: 30px 20px;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Verdana}
-html,body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#ffffff,#eeecec);
-  display:flex;
-  flex-direction:column;
-}
+    .content-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
+      animation: fadeIn 0.8s ease-out;
+    }
 
-/* ===== HEADER ===== */
-header{
-  background:linear-gradient(150deg,#ffffff,#66a378);
-  padding:15px 20px;
-  box-shadow:0 2px 10px rgba(0,0,0,.1);
-}
-.logo img{width:300px;height:70px}
-nav ul{
-  list-style:none;
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  padding:10px;
-  justify-content:center;
-  margin-top:15px;
-  background:#fff;
-  border-radius:50px;
-  font-size:13px;
-  box-shadow:0 0 10px #027e40;
-}
-nav ul li a{
-  text-decoration:none;
-  color:#3a3a3a;
-  font-weight:bold;
-  padding:5px 15px;
-  border-radius:50px;
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
-nav ul li a:hover{color:#5aa190}
+    h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #008080;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-/* ===== MAIN ===== */
-main{flex:1;padding:30px 20px}
-.content{
-  max-width:1200px;
-  margin:auto;
-  background:#fff;
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,128,128,.1);
-}
+    h2::before {
+      content: "\f201";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900; 
+      margin-right: 8px;
+    }
+    .login-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #ffffff;
+      padding: 8px 25px;
+      background-color: #009765;
+      border-radius: 50px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: #00bb77;
+      transform: scale(1.05);
+    }
+    footer {
+      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 30px 20px;
+      font-size: 18px;
+      gap: 20px;
+      color: #3a3a3a;
+      border-top: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 10px #027e40;
+    }
+    .footer-left,
+    .footer-center,
+    .footer-right {
+      flex: 1 1 100%;
+    }
+    .footer-left img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+    .footer-left,
+    .footer-center,
+    .footer-right {
+      flex: 1 1 100%;
+    }
+    .footer-left img {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+    .footer-left {
+      display: flex;
+      align-items: flex-start;
+    }
+    .small{font-size:14px;color:#555}
+    .tab-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
 
-h2{
-  font-size:28px;
-  color:#008080;
-  margin-bottom:20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-/* ===== CARD ===== */
-.card{
-  background:#f9f9f9;
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:25px;
-  box-shadow:0 0 10px #00000015;
-  opacity:0;
-  transform:translateY(25px);
-  transition:.6s ease;
-}
-.card.show{
-  opacity:1;
-  transform:none;
-}
-
-/* ===== SELECT TAHUN ===== */
-.select-wrapper{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:16px;
-}
-
-.select-wrapper select{
-  padding:8px 14px;
-  border-radius:10px;
-  border:1px solid #3a3a3a;
-  font-size:16px;
-  font-weight:bold;
-  color:#3a3a3a;
-  outline:none;
-  cursor:pointer;
-  min-width:140px;
-}
-
-/* ketika difokuskan → jadi tinggi & bisa scroll */
-.select-wrapper select:focus{
-  size:6;
-}
-/* ===== ADMIN BUTTON ===== */
-  .admin-btn{
-    position:fixed;
-    top:15px;
-    right:20px;
-    z-index:999;
-    background:linear-gradient(135deg,#16a34a,#22c55e);
-    color:#fff;
-    padding:8px 16px;
-    border-radius:30px;
-    font-size:12px;
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    box-shadow:0 5px 15px rgba(0,0,0,.25);
-    transition:.3s ease;
-  }
+    /* ===== ADMIN BUTTON ===== */
+    .admin-btn{
+      position:fixed;
+      top:15px;
+      right:20px;
+      z-index:999;
+      background:linear-gradient(135deg,#16a34a,#22c55e);
+      color:#fff;
+      padding:8px 16px;
+      border-radius:30px;
+      font-size:12px;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      box-shadow:0 5px 15px rgba(0,0,0,.25);
+      transition:.3s ease;
+    }
     .admin-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,0,0,.3);
-    background:linear-gradient(135deg,#15803d,#22c55e);
-  }
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(0,0,0,.3);
+      background:linear-gradient(135deg,#15803d,#22c55e);
+    }
+    @media (max-width: 1024px) {
+    .admin-btn {
+      position: relative;
+      top: auto;
+      right: auto;
+      margin-top: 15px;
+    }
+    .logo {
+      flex-direction: column;
+      align-items: flex-start;
+      }
+    }
 
-@media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    align-self: flex-start; 
-    right: auto;
-    width: fit-content;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+    .tab-btn {
+      padding: 8px 20px;
+      background-color: #ffffff;
+      color: #3a3a3a;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 0 10px #027e40;
+    }
 
-/* ===== TABLE ===== */
-table{width:100%;border-collapse:collapse}
-th,td{border:1px solid #ccc;padding:6px;text-align:center}
-th{background:#3cb371;color:#fff}
+    .tab-btn:hover {
+      background-color: #3cb371;
+      color: white;
+      transform: translateY(-1px);
+    }
 
-.good{background:#d4f8e8}
-.warn{background:#fff3cd}
-.bad{background:#f8d7da}
+    .tab-btn.active {
+      background-color: #3cb371;
+      color: white;
+    }
 
-/* ===== FOOTER ===== */
-footer{
-  background:#fff;
-  padding:30px 20px;
-  box-shadow:0 0 10px #027e40;
-}
-.small{font-size:14px;color:#555}
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.5s ease-out;
+    }
 
-.dropdown-hubungi {
+    .tab-content.active {
+      display: block;
+    }   
+    
+    /* STYLE DROPDOWN HUBUNGI KAMI */
+    .dropdown-hubungi {
       position: relative;
       display: inline-block;
     }
@@ -203,52 +283,30 @@ footer{
     .dropdown-hubungi:hover .dropdown-content-hubungi {
       display: block;
     }
+    
 
-/* ===== LOADING ===== */
-.loading{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.25);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-}
-.loading.show{
-  opacity:1;
-  pointer-events:auto;
-}
-.spinner{
-  width:36px;height:36px;
-  border:4px solid #bbf7d0;
-  border-top:4px solid var(--green);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  h2{font-size:20px}
-  table{font-size:12px}
-  .card table{display:block;overflow-x:auto;white-space:nowrap}
-}
-</style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  
+  </style>
 </head>
-
 <body>
-
-<header>
-  <div class="logo">
-    <img src="logopanjang.png">
-    <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
+  <header>
+    <div class="logo">
+      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
+      <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
         <i class="fas fa-user-shield"></i> Admin Dashboard
       </a>
-  </div>
-  <nav>
+    </div>
+    <nav>
       <ul>
         <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
         <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
@@ -269,131 +327,75 @@ footer{
         </li>
       </ul>
     </nav>
-</header>
+  </header>
 
-<div class="loading" id="loading"><div class="spinner"></div></div>
+  <main>
+    <div class="content-container">
+      <h2>INDIKATOR KINERJA</h2>
+      
+      <div class="tab-menu">
+        <button onclick="window.open('https://drive.google.com/drive/folders/159wroCWuLH_wPB8_bGpq7ppB62cQFG9b?usp=sharing', '_blank')" class="tab-btn">
+          <i class="fas fa-arrow-trend-up"></i> IMUT
+        </button>
+        <button onclick="window.open('https://drive.google.com/drive/folders/10xudNFkSIYp_gxR4JldhKhpzk78NmlBu?usp=sharing', '_blank')" class="tab-btn">
+          <i class="fas fa-procedures"></i> SENSUS HARIAN RAWAT INAP
+        </button>
+        <button onclick="window.open('https://drive.google.com/drive/folders/1ETmdzkvzPZqiUSahkOmOqpEtemqkMtk1', '_blank')" class="tab-btn">
+          <i class="fas fa-chart-area"></i> KPI
+        </button>
+        <button class="tab-btn" onclick="location.href='indikatorbor.html'">
+      <i class="fas fa-user-shield"></i> INDIKATOR INTERNAL REKAM MEDIS
+    </button>
+      </div>
+    </main>
+  <footer>
+      <div>
+        <strong>MEDICAL RECORD</strong><br />
+        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+      </div>
+    </div>
+  </footer>
 
-<main>
-<div class="content">
+  <script>
+    // Fungsi User Login
+    const userInfoDiv = document.getElementById("user-info");
+    const loggedInUser = localStorage.getItem("loggedInUser");
 
-<h2>📊 INDIKATOR BOR LOS TOI</h2>
+    if (loggedInUser) {
+      userInfoDiv.innerHTML = `
+        <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
+        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </a>
+      `;
+      document.getElementById("logout-btn").addEventListener("click", function(e) {
+        e.preventDefault();
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "login.html";
+      });
+    } else {
+      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
+    }
 
-<div class="card">
-  <div class="select-wrapper">
-    <strong>📅 Tahun</strong>
-    <select id="tahun"></select>
-  </div>
-</div>
-
-<div class="card">
-<h3 id="judulTabel"></h3>
-<table>
-<thead>
-<tr>
-<th>Bulan</th><th>TT</th><th>HP</th><th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th>
-</tr>
-</thead>
-<tbody id="tabelData"></tbody>
-</table>
-</div>
-
-<div class="card">
-<h3 id="judulGrafik"></h3>
-<div style="height:420px">
-  <canvas id="chartCanvas"></canvas>
-</div>
-</div>
-
-</div>
-</main>
-
-<footer>
-<strong>MEDICAL RECORD</strong>
-<div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-</footer>
-
-<script>
-const loading=document.getElementById("loading");
-const cards=document.querySelectorAll(".card");
-const tahun=document.getElementById("tahun");
-
-const URL="https://script.google.com/macros/s/AKfycbyS6F1g4_EA2pdQywCymutFVjcAWhD0qoZGVkrACZPC97cENoWdh7r6vWQ7DihV14XD/exec";
-const bulan=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
-const TARGET={BOR:[60,85],LOS:[6,9],TOI:[1,3],BTO:[40,999]};
-let chart;
-
-/* ===== AUTO TAHUN ===== */
-(function(){
-  const now=new Date().getFullYear();
-  for(let y=2020;y<=now+1;y++){
-    const o=document.createElement("option");
-    o.value=y;o.textContent=y;
-    if(y===now)o.selected=true;
-    tahun.appendChild(o);
-  }
-})();
-
-function showLoader(v){loading.classList.toggle("show",v)}
-function showCards(){
-  cards.forEach((c,i)=>{
-    c.classList.remove("show");
-    setTimeout(()=>c.classList.add("show"),i*160);
+    // Fungsi Tab
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+    const targetContent = document.getElementById(btn.dataset.tab);
+    const isActive = btn.classList.contains('active');
+    
+    // Reset semua tab dan konten
+    if (!isActive) {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+    }
+    
+    // Toggle status aktif
+    btn.classList.toggle('active', !isActive);
+    targetContent.classList.toggle('active', !isActive);
   });
-}
-function getClass(v,[min,max]){
-  if(v<min)return"bad";
-  if(v>max)return"warn";
-  return"good";
-}
-
-function loadData(){
-  showLoader(true);
-  fetch(URL+"?tahun="+tahun.value)
-  .then(r=>r.json())
-  .then(d=>{
-    let html="",bor=[],los=[],toi=[],bto=[];
-    bulan.forEach(b=>{
-      const x=d.find(i=>i.bulan===b)||{};
-      html+=`<tr>
-        <td>${b}</td>
-        <td>${x.tt||0}</td>
-        <td>${x.hp||0}</td>
-        <td class="${getClass(x.bor||0,TARGET.BOR)}">${x.bor||0}</td>
-        <td class="${getClass(x.los||0,TARGET.LOS)}">${x.los||0}</td>
-        <td class="${getClass(x.toi||0,TARGET.TOI)}">${x.toi||0}</td>
-        <td class="${getClass(x.bto||0,TARGET.BTO)}">${x.bto||0}</td>
-      </tr>`;
-      bor.push(x.bor||0);
-      los.push(x.los||0);
-      toi.push(x.toi||0);
-      bto.push(x.bto||0);
-    });
-    tabelData.innerHTML=html;
-
-    if(chart) chart.destroy();
-    chart=new Chart(chartCanvas,{
-      data:{
-        labels:bulan,
-        datasets:[
-          {type:"bar",label:"BOR",data:bor},
-          {type:"line",label:"LOS",data:los},
-          {type:"line",label:"TOI",data:toi},
-          {type:"line",label:"BTO",data:bto}
-        ]
-      },
-      options:{responsive:true,maintainAspectRatio:false}
-    });
-
-    judulTabel.innerText="📋 Rekap Tahun "+tahun.value;
-    judulGrafik.innerText="📈 Grafik Tahun "+tahun.value;
-    showLoader(false);
-    setTimeout(showCards,120);
-  });
-}
-
-tahun.onchange=loadData;
-loadData();
-</script>
-
+});
+  </script>
 </body>
 </html>
