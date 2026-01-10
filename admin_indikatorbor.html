@@ -10,11 +10,11 @@
 
 <style>
 :root{
-  --green:#16a34a;
-  --green-dark:#166534;
-  --green-soft:#dcfce7;
-  --bg:#f0fdf4;
-  --text:#064e3b;
+  --green:#329951;
+  --green-dark:#329951;
+  --green-soft:#ffffff;
+  --bg:#ffffff;
+  --text:#329951;
   --line:#e5e7eb;
 }
 *{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
@@ -24,18 +24,18 @@ body{margin:0;background:var(--bg)}
 /* ===== SIDEBAR ===== */
 .sidebar{
   width:260px;
-  background:linear-gradient(180deg,var(--green),var(--green-dark));
+  background:linear-gradient(180deg,#16a34a,#15803d);
   color:#fff;
   padding:25px 20px;
 }
 .brand{text-align:center;margin-bottom:40px}
 .brand i{font-size:42px;margin-bottom:10px}
-.brand h2{margin:0;font-size:20px}
+.brand h2{margin:0;font-size:20px;font-weight:600}
 
 .menu a{
   display:flex;align-items:center;gap:14px;
   padding:14px 18px;margin-bottom:14px;
-  color:#ecfdf5;text-decoration:none;
+  color:#ffffff;text-decoration:none;
   border-radius:14px;
   transition:.3s;
 }
@@ -65,13 +65,29 @@ body{margin:0;background:var(--bg)}
 }
 .header h1{margin:0;color:var(--text)}
 .user{
-  background:#fff;
-  padding:10px 18px;
-  border-radius:999px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-  color:var(--green-dark);
-  font-size:14px;
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
+.logout{
+  background:#ef4444;
+  color:#fff;
+  border:none;
+  padding:10px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:.3s;
+}
+.logout:hover{
+  background:#dc2626;
+  transform:translateY(-2px);
+}
+
 
 /* ===== CARD (SEMBUL) ===== */
 .card{
@@ -208,7 +224,8 @@ footer{
 }
 </style>
 </head>
-
+   
+</div>
 <div class="loading" id="loading"><div class="spinner"></div></div>
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i> Data berhasil disimpan</div>
 
@@ -234,7 +251,14 @@ footer{
 
 <div class="header">
   <h1>Indikator Rawat Inap</h1>
-  <div class="user"><i class="fas fa-user-shield"></i> Admin</div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <div class="user">
+      <i class="fas fa-user-shield"></i> Admin
+    </div>
+    <button class="logout" onclick="logout()">
+      <i class="fas fa-right-from-bracket"></i> Logout
+    </button>
+  </div>
 </div>
 
 <div class="card">
@@ -273,6 +297,9 @@ footer{
 </div>
 
 <script>
+if(sessionStorage.getItem("adminLogin") !== "true"){
+  window.location.href = "admin_index.html";
+}
 const URL="https://script.google.com/macros/s/AKfycbyS6F1g4_EA2pdQywCymutFVjcAWhD0qoZGVkrACZPC97cENoWdh7r6vWQ7DihV14XD/exec";
 const bulan=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 const TARGET={BOR:[60,85],LOS:[6,9],TOI:[1,3],BTO:[40,999]};
@@ -470,6 +497,13 @@ window.addEventListener("load",()=>{
   loadData();
 });
 tahun.onchange=loadData;
+
+function logout(){
+  if(confirm("Yakin ingin logout?")){
+    sessionStorage.removeItem("adminLogin");
+    window.location.href = "admin_index.html";
+  }
+}
 </script>
 </body>
 </html>
