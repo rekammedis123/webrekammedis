@@ -9,11 +9,11 @@
 
 <style>
 :root{
-  --green:#16a34a;
-  --green-dark:#166534;
-  --green-soft:#dcfce7;
-  --bg:#f0fdf4;
-  --text:#064e3b;
+  --green:#329951;
+  --green-dark:#329951;
+  --green-soft:#ffffff;
+  --bg:#ffffff;
+  --text:#329951;
   --line:#e5e7eb;
 }
 
@@ -42,10 +42,9 @@ body{
 /* ===== SIDEBAR ===== */
 .sidebar{
   width:260px;
-  background:linear-gradient(180deg,var(--green),var(--green-dark));
+  background:linear-gradient(180deg,#16a34a,#15803d);
   color:#fff;
   padding:25px 20px;
-  animation:slideLeft .0s ease forwards;
 }
 .brand{text-align:center;margin-bottom:40px}
 .brand i{font-size:42px;margin-bottom:10px}
@@ -54,7 +53,7 @@ body{
 .menu a{
   display:flex;align-items:center;gap:14px;
   padding:14px 18px;margin-bottom:14px;
-  color:#ecfdf5;text-decoration:none;
+  color:#ffffff;text-decoration:none;
   border-radius:14px;
   transition:.3s;font-size:15px;
 }
@@ -69,24 +68,55 @@ body{
   flex:1;
   padding:35px;
   animation:fadeScale .5s ease forwards;
+  position:relative;
+  z-index:1;
 }
 
+/* 🔐 HEADER DIPAKSA PALING ATAS */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin-bottom:30px;
   animation:slideUp .5s ease forwards;
+  position:relative;
+  z-index:9999;
 }
 .header h1{margin:0;color:var(--text)}
 
 .user{
-  background:#fff;
-  padding:10px 18px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  position:relative;
+  z-index:9999;
+}
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:relative;
+  z-index:9999;
+}
+.logout{
+  background:#ef4444;
+  color:#fff;
+  border:none;
+  padding:10px 16px;
   border-radius:999px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-  color:var(--green-dark);
-  font-size:14px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:.3s;
+  position:relative;
+  z-index:9999;
+}
+.logout:hover{
+  background:#dc2626;
+  transform:translateY(-2px);
 }
 
 /* ===== CARD ===== */
@@ -98,6 +128,8 @@ body{
   box-shadow:0 10px 25px rgba(0,0,0,.08);
   opacity:0;
   animation:slideUp .4s ease forwards;
+  position:relative;
+  z-index:1;
 }
 .card:nth-of-type(1){animation-delay:.10s}
 .card:nth-of-type(2){animation-delay:.3s}
@@ -135,6 +167,8 @@ button.primary:hover{background:var(--green-dark)}
   border-bottom:1px solid var(--line);
   opacity:0;
   animation:slideUp .45s ease forwards;
+  position:relative;
+  z-index:1;
 }
 .item img{
   width:160px;
@@ -170,7 +204,10 @@ footer{
   opacity:0;
   animation:fadeScale .5s ease forwards;
   animation-delay:.4s;
+  position:relative;
+  z-index:1;
 }
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
   .layout{flex-direction:column}
@@ -203,7 +240,15 @@ footer{
 
 <div class="header">
   <h1>Pemusnahan DRM</h1>
-  <div class="user"><i class="fas fa-user-shield"></i> Admin</div>
+
+  <div class="header-right">
+    <div class="user">
+      <i class="fas fa-user-shield"></i> Admin
+    </div>
+    <button class="logout" id="btnLogout">
+      <i class="fas fa-right-from-bracket"></i> Logout
+    </button>
+  </div>
 </div>
 
 <div class="card">
@@ -238,6 +283,10 @@ footer{
 </div>
 
 <script>
+if(sessionStorage.getItem("adminLogin") !== "true"){
+  window.location.href = "admin_index.html";
+}
+
 const API_URL="https://script.google.com/macros/s/AKfycby-ZQ3obQ7jkIsEi2tu-HQyINZmlcP04sElMDG-VuMvZnAThwgeU2gLrsj9gCmYsP4T/exec";
 const list=document.getElementById("list");
 
@@ -310,6 +359,13 @@ function hapus(id){
 }
 
 load();
+
+document.getElementById("btnLogout").addEventListener("click", function(){
+  if(confirm("Yakin ingin logout?")){
+    sessionStorage.removeItem("adminLogin");
+    window.location.href = "admin_index.html";
+  }
+});
 </script>
 </body>
 </html>
