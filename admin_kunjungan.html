@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Admin Kunjungan | Medical Record</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --green:#16a34a;
+  --bg:#ffffff;
+  --line:#e5e7eb;
+}
+*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{margin:0;background:var(--bg)}
+.layout{display:flex;min-height:100vh}
+
+.sidebar{
+  width:260px;
+  background:linear-gradient(180deg,#16a34a,#15803d);
+  color:#fff;
+  padding:25px 20px;
+}
+.brand{text-align:center;margin-bottom:40px}
+.brand i{font-size:42px}
+.brand h2{margin:10px 0 0;font-size:20px}
+
+.menu a{
+  display:flex;gap:14px;align-items:center;
+  padding:14px 18px;margin-bottom:14px;
+  color:#fff;text-decoration:none;
+  border-radius:14px;
+  transition:.3s;
+}
+.menu a:hover,.menu a.active{
+  background:rgba(255,255,255,.18);
+  transform:translateX(6px);
+}
+
+.content{
+  flex:1;
+  padding:35px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.6s;
+}
+.content.show{opacity:1;transform:none}
+
+.header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:30px;
+}
+.header h1{margin:0;color:#166534}
+
+.logout{
+  background:#ef4444;color:#fff;
+  border:none;padding:10px 16px;
+  border-radius:999px;cursor:pointer;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  margin-bottom:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  opacity:0;
+  transform:translateY(20px);
+  transition:.5s;
+}
+.card.show{opacity:1;transform:none}
+
+label{font-size:13px;color:#166534}
+select,input{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  margin:6px 0 14px;
+}
+
+table{width:100%;border-collapse:collapse}
+th,td{
+  border:1px solid var(--line);
+  padding:6px;
+  text-align:center;
+}
+th{background:var(--green);color:#fff}
+
+button.primary{
+  background:var(--green);
+  color:#fff;border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.loading{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.25);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+}
+.loading.show{opacity:1;pointer-events:auto}
+.spinner{
+  width:30px;height:30px;
+  border:3px solid #bbf7d0;
+  border-top:3px solid var(--green);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{text-align:center;font-size:13px;color:#166534;margin-top:40px}
+</style>
+</head>
+
+<body>
+
+<div class="loading" id="loading"><div class="spinner"></div></div>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="brand">
+    <i class="fas fa-notes-medical"></i>
+    <h2>ADMIN MR</h2>
+  </div>
+  <nav class="menu">
+    <a href="admin_index.html"><i class="fas fa-gauge-high"></i> Dashboard</a>
+    <a href="admin_regulasi.html"><i class="fas fa-file-medical"></i> Regulasi</a>
+    <a class="active"><i class="fas fa-chart-simple"></i> Kunjungan Pasien</a>
+    <a href="admin_jadwal.html"><i class="fas fa-calendar-check"></i> Jadwal</a>
+    <a href="admin_pemusnahan.html"><i class="fas fa-calendar-check"></i> Pemusnahan</a>
+    <a href="admin_indikatorbor.html"><i class="fas fa-chart-simple"></i> Indikator</a>
+  </nav>
+</aside>
+
+<main class="content" id="content">
+
+<div class="header">
+  <h1>Kunjungan Pasien</h1>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<div class="card">
+<h3>Input Kunjungan</h3>
+<label>Tahun</label>
+<select id="tahun"></select>
+
+<table id="inputTable">
+<thead>
+<tr>
+  <th>Bulan</th>
+  <th>Rawat Jalan</th>
+  <th>Rawat Inap</th>
+  <th>IGD</th>
+  <th>Total</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><br>
+
+<button class="primary" onclick="simpan()">💾 Simpan</button>
+</div>
+
+<div class="card">
+<h3 id="judulTabel"></h3>
+<table>
+<thead>
+<tr>
+  <th>Bulan</th>
+  <th>Rawat Jalan</th>
+  <th>Rawat Inap</th>
+  <th>IGD</th>
+  <th>Total</th>
+</tr>
+</thead>
+<tbody id="tabelData"></tbody>
+</table>
+</div>
+
+<div class="card">
+<h3 id="judulGrafik"></h3>
+<div style="height:420px">
+  <canvas id="chartKunjungan"></canvas>
+</div>
+</div>
+
+<footer>© 2025 Admin Medical Record RSU An Ni'mah</footer>
+</main>
+</div>
+
+<script>
+if(sessionStorage.getItem("adminLogin")!=="true"){
+  location.href="admin_index.html";
+}
+
+const API_URL="https://script.google.com/macros/s/AKfycbz833hLYkNk5v4_Bi1OD-XZBWcpG5k9jUKRh1Zti9gpB31b3QPgN0Y3cTKn5FL-6WSV/exec";
+const bulan=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+const tbody=document.querySelector("#inputTable tbody");
+const tahun=document.getElementById("tahun");
+const loading=document.getElementById("loading");
+const cards=document.querySelectorAll(".card");
+const chartEl=document.getElementById("chartKunjungan");
+
+let chart;
+
+bulan.forEach(b=>{
+  tbody.innerHTML+=`
+  <tr>
+    <td>${b}</td>
+    <td><input data-b="${b}" data-f="rj" oninput="hitungTotal('${b}')"></td>
+    <td><input data-b="${b}" data-f="ri" oninput="hitungTotal('${b}')"></td>
+    <td><input data-b="${b}" data-f="igd" oninput="hitungTotal('${b}')"></td>
+    <td><input data-b="${b}" data-f="total" readonly style="background:#f0fdf4;font-weight:bold"></td>
+  </tr>`;
+});
+
+function hitungTotal(b){
+  const rj=+document.querySelector(`[data-b="${b}"][data-f="rj"]`).value||0;
+  const ri=+document.querySelector(`[data-b="${b}"][data-f="ri"]`).value||0;
+  const igd=+document.querySelector(`[data-b="${b}"][data-f="igd"]`).value||0;
+  document.querySelector(`[data-b="${b}"][data-f="total"]`).value=rj+ri+igd;
+}
+
+function show(v){loading.classList.toggle("show",v)}
+
+function simpan(){
+  show(true);
+  const data=[];
+  bulan.forEach(b=>{
+    const o={tahun:tahun.value,bulan:b};
+    document.querySelectorAll(`[data-b="${b}"]`)
+      .forEach(i=>o[i.dataset.f]=Number(i.value)||0);
+    data.push(o);
+  });
+  fetch(API_URL,{method:"POST",body:JSON.stringify({bulk:true,data})})
+    .then(()=>loadData());
+}
+
+function loadData(){
+  show(true);
+  fetch(API_URL+"?tahun="+tahun.value)
+  .then(r=>r.json())
+  .then(d=>{
+    let html="", rj=[], ri=[], igd=[], total=[];
+    bulan.forEach(b=>{
+      const x=d.find(i=>i.bulan===b)||{};
+      html+=`
+      <tr>
+        <td>${b}</td>
+        <td>${x.rj||0}</td>
+        <td>${x.ri||0}</td>
+        <td>${x.igd||0}</td>
+        <td><strong>${x.total||0}</strong></td>
+      </tr>`;
+      rj.push(x.rj||0);
+      ri.push(x.ri||0);
+      igd.push(x.igd||0);
+      total.push(x.total||0);
+    });
+
+    tabelData.innerHTML=html;
+    judulTabel.innerText="Rekap Tahun "+tahun.value;
+    judulGrafik.innerText="Grafik Kunjungan Tahun "+tahun.value;
+
+    if(chart) chart.destroy();
+    chart=new Chart(chartEl,{
+      data:{
+        labels:bulan,
+        datasets:[
+          {type:"bar",label:"Rawat Jalan",data:rj},
+          {type:"bar",label:"Rawat Inap",data:ri},
+          {type:"bar",label:"IGD",data:igd},
+          {type:"line",label:"Total",data:total,tension:.3}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false}
+    });
+    show(false);
+  });
+}
+
+(function(){
+  const now=new Date().getFullYear();
+  for(let y=2020;y<=now+1;y++){
+    tahun.innerHTML+=`<option ${y===now?"selected":""}>${y}</option>`;
+  }
+})();
+
+window.onload=()=>{
+  content.classList.add("show");
+  cards.forEach((c,i)=>setTimeout(()=>c.classList.add("show"),i*120));
+  loadData();
+};
+tahun.onchange=loadData;
+
+function logout(){
+  if(confirm("Logout?")){
+    sessionStorage.removeItem("adminLogin");
+    location.href="admin_index.html";
+  }
+}
+</script>
+</body>
+</html>
