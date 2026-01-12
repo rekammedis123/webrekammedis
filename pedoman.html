@@ -58,7 +58,11 @@
       gap: 20px;font-size: 18px; color:#3a3a3a; border-top: 2px solid rgba(255,255,255,0.2); box-shadow:0 0 10px #027e40; }
     
     .small {font-size:14px;color:#555}
-   
+   /* ANIMASI */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .dropdown-hubungi {
       position: relative;
       display: inline-block;
@@ -129,11 +133,6 @@
       align-items: flex-start;
     }
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   }
   </style>
 </head>
