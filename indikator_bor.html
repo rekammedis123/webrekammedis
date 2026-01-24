@@ -1,124 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="logorekammedis.ico">
-<title>Indikator Rawat Inap - Medical Record</title>
+<title>Indikator BOR LOS TOI | Medical Record</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-:root{--green:#16a34a;}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Verdana}
-html,body{min-height:100vh;background:linear-gradient(135deg,#ffffff,#eeecec);display:flex;flex-direction:column;}
-header {
-      background: linear-gradient(150deg, #ffffff, #66a378); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
-    }
-.logo img{width:300px;height:70px}
-nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      border-radius: 50px;
-      font-size: 13px;
-      justify-content: center;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #3a3a3a;
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 5px 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    nav ul li a:hover {
-      color: #5aa190;
-      font-weight: bold;
-    }
-    main {
-      flex: 1;
-      padding: 30px 20px;
-    }
-    .content{
-      max-width:1200px;
-      margin:auto;
-      background:#fff;
-      padding:30px;
-      border-radius:15px;
-      box-shadow:0 5px 15px rgba(0,128,128,.1);
-      opacity:0;
-      transform:translateY(25px);
-      transition:.6s ease;
-    }
-
-    .content.show{
-      opacity:1;
-      transform:none;
-    }
-h2{font-size:28px;color:#088a6e;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
-.card{background:#f9f9f9;padding:20px;border-radius:15px;margin-bottom:25px;box-shadow:0 0 10px #00000015;opacity:0;transform:translateY(25px);transition:.6s ease;}
-.card.show{opacity:1;transform:none;}
-.select-wrapper{display:flex;align-items:center;gap:12px;font-size:16px;}
-.select-wrapper select{padding:8px 14px;border-radius:10px;border:1px solid #3a3a3a;font-size:16px;font-weight:bold;color:#3a3a3a;cursor:pointer;}
-
-/* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-    @media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    align-self: flex-start; 
-    right: auto;
-    width: fit-content;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
 }
-table{width:100%;border-collapse:collapse}
-th,td{border:1px solid #ccc;padding:6px;text-align:center}
-th{background:#3cb371;color:#fff}
-.good{background:#d4f8e8}
-.warn{background:#fff3cd}
-.bad{background:#f8d7da}
 
-.dropdown-hubungi {
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+
+html,body{
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+}
+.logo img{width:300px;height:70px}
+
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* ===== MAIN ===== */
+main{flex:1;padding:30px 20px}
+
+.content{
+  max-width:1300px;
+  margin:auto;
+  background:var(--card);
+  padding:30px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(30px);
+  transition:.6s;
+}
+.content.show{opacity:1;transform:none}
+
+/* ===== LAYOUT ===== */
+.layout{
+  display:grid;
+  grid-template-columns:1fr 300px;
+  gap:25px;
+}
+@media(max-width:1000px){
+  .layout{grid-template-columns:1fr}
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  background:linear-gradient(180deg,#ffffff,#f0fdf4);
+  border-radius:20px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  height:fit-content;
+}
+.sidebar h3{
+  color:var(--green);
+  margin-bottom:15px;
+  display:flex;
+  gap:8px;
+}
+.sidebar ul{list-style:none}
+.sidebar ul li a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  margin-bottom:10px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+  color:#333;
+  background:#fff;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+  transition:.3s;
+}
+.sidebar ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  transform:translateX(5px);
+}
+
+/* ===== CARD ===== */
+h2{
+  font-size:28px;
+  color:var(--green);
+  margin-bottom:25px;
+  display:flex;
+  gap:10px;
+}
+
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:20px;
+  margin-bottom:25px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(25px);
+  transition:.6s;
+}
+.card.show{opacity:1;transform:none}
+
+select{
+  padding:8px 16px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-weight:600;
+}
+
+/* ===== TABLE ===== */
+.table-responsive{overflow-x:auto}
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  border-radius:14px;
+  overflow:hidden;
+}
+th{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:10px;
+}
+td{
+  padding:10px;
+  text-align:center;
+}
+tr:nth-child(even){background:#f0fdf4}
+
+.good{background:#d1fae5}
+.warn{background:#fef3c7}
+.bad{background:#fee2e2}
+/* STYLE DROPDOWN HUBUNGI KAMI */
+    .dropdown-hubungi {
       position: relative;
       display: inline-block;
     }
@@ -139,10 +221,9 @@ th{background:#3cb371;color:#fff}
       padding: 10px 15px;
       text-decoration: none;
       display: block;
-      font-size: 12px;
+      font-weight: 600;
       transition: all 0.3s;
     }
-    
     .dropdown-content-hubungi a:hover {
       background-color: #e2f8f1;
       color: #1f8664;
@@ -151,34 +232,70 @@ th{background:#3cb371;color:#fff}
     .dropdown-hubungi:hover .dropdown-content-hubungi {
       display: block;
     }
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
 
-footer{background:#fff;padding:30px 20px;box-shadow:0 0 10px #027e40;}
-.small{font-size:14px;color:#555}
-.loading{position:fixed;inset:0;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:.3s;}
-.loading.show{opacity:1;pointer-events:auto;}
-.spinner{width:36px;height:36px;border:4px solid #bbf7d0;border-top:4px solid var(--green);border-radius:50%;animation:spin 1s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* ===== LOADING ===== */
+.loading{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+.loading.show{opacity:1;pointer-events:auto}
+.spinner{
+  width:36px;height:36px;
+  border:4px solid #ececec;
+  border-top:4px solid var(--green);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">
-    <img src="logopanjang.png">
-    <a href="admin_index.html" class="admin-btn"><i class="fas fa-user-shield"></i> Admin Dashboard</a>
+  <div class="header-bar">
+    <div class="logo">
+      <img src="logopanjang.png">
+    </div>
+
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
   </div>
+
   <nav>
-      <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
-        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-        <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
-        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
-        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-        <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li class="dropdown-hubungi">
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
           <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
           <div class="dropdown-content-hubungi">
             <a href="#"><i class="fas fa-envelope"></i> Email</a>
@@ -187,8 +304,8 @@ footer{background:#fff;padding:30px 20px;box-shadow:0 0 10px #027e40;}
             <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
           </div>
         </li>
-      </ul>
-    </nav>
+    </ul>
+  </nav>
 </header>
 
 <div class="loading" id="loading"><div class="spinner"></div></div>
@@ -198,32 +315,51 @@ footer{background:#fff;padding:30px 20px;box-shadow:0 0 10px #027e40;}
 
 <h2>📊 INDIKATOR BOR LOS TOI</h2>
 
+<div class="layout">
+
+<!-- ===== MAIN ===== -->
+<div>
+
 <div class="card">
-  <div class="select-wrapper">
-    <strong>📅 Tahun</strong>
-    <select id="tahun"></select>
+  <strong>📅 Tahun</strong>
+  <select id="tahun"></select>
+</div>
+
+<div class="card">
+  <h3 id="judulTabel"></h3>
+  <div class="table-responsive">
+    <table id="tabelExport">
+      <thead>
+        <tr>
+          <th>Bulan</th><th>TT</th><th>HP</th>
+          <th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th>
+        </tr>
+      </thead>
+      <tbody id="tabelData"></tbody>
+    </table>
   </div>
 </div>
 
 <div class="card">
-<h3 id="judulTabel"></h3>
-<table id="tabelExport">
-<thead>
-<tr>
-<th>Bulan</th><th>TT</th><th>HP</th><th>BOR</th><th>LOS</th><th>TOI</th><th>BTO</th>
-</tr>
-</thead>
-<tbody id="tabelData"></tbody>
-</table>
+  <h3 id="judulGrafik"></h3>
+  <div style="height:420px">
+    <canvas id="chartCanvas"></canvas>
+  </div>
 </div>
 
-<div class="card">
-<h3 id="judulGrafik"></h3>
-<div style="height:420px">
-  <canvas id="chartCanvas"></canvas>
-</div>
 </div>
 
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <h3><i class="fas fa-list"></i> Daftar Indikator</h3>
+  <ul>
+    <li><a href="imut.html"><i class="fas fa-chart-line"></i> Indikator Mutu </a></li>
+    <li><a href="indikatorbor.html"><i class="fas fa-bed"></i> Indikator BOR LOS TOI</a></li>
+    <li><a href="kunjungan_pasien.html"><i class="fas fa-users"></i> Indikator Kunjungan Pasien</a></li>
+  </ul>
+</aside>
+
+</div>
 </div>
 </main>
 
@@ -231,6 +367,7 @@ footer{background:#fff;padding:30px 20px;box-shadow:0 0 10px #027e40;}
 <strong>MEDICAL RECORD</strong>
 <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
 </footer>
+
 
 <script>
 const loading=document.getElementById("loading");
