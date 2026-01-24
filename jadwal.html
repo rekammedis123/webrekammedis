@@ -1,183 +1,112 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jadwal - Medical Record</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="logorekammedis.ico">
+<title>Jadwal | Medical Record</title>
 
-  <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="logorekammedis.ico">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
-    }
-    html, body {
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff, #eeecec); 
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(150deg, #ffffff, #66a378); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo img {
-      width: 300px;
-      height: 70px;
-      margin-right: 1px;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      border-radius: 50px;
-      font-size: 13px;
-      justify-content: center;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #3a3a3a;
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 5px 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    nav ul li a:hover {
-      color: #5aa190;
-      font-weight: bold;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-    @media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+<style>
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
 }
 
-    main {
-      flex: 1;
-      padding: 30px 20px;
-      text-align: left;
-    }
-    main { flex:1; padding:30px 20px; }
-    .jadwal-container { max-width:900px; margin:30px auto; padding:25px; background:#fff; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
-    .jadwal-container h2 { font-size:24px; font-weight:bold; margin-bottom:15px; color:#088a6e; display:flex; align-items:center; gap:10px; }
-    .jadwal-container h2 i { color:#088a6e; }
-    .note { margin-bottom:20px; font-size:14px; color:#555; }
-    .tabs { display:flex; gap:10px; margin-bottom:20px; }
-    .tab { padding:8px 15px; background:#20b2aa; color:#fff; border-radius:6px; cursor:pointer; transition:.3s; font-size:14px; }
-    .tab.active { background:#3cb371; font-weight:bold; }
-    #loading { font-size:16px; color:#555; display:flex; align-items:center; gap:10px; }
-    .spinner { width:16px; height:16px; border:3px solid #ddd; border-top:3px solid #20b2aa; border-radius:50%; animation:spin 0.9s linear infinite; }
-    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-    .file-list { list-style:none; padding:0; margin:0; }
-    .file-item { display:flex; justify-content:space-between; align-items:center; padding:12px 15px; border-bottom:1px solid #eee; transition:background 0.3s; }
-    .file-item:hover { background:#f5fdfb; }
-    .file-name { display:flex; align-items:center; gap:10px; font-weight:500; color:#333; }
-    .file-name i { color:#20b2aa; }
-    .btn-open { color:#20b2aa; text-decoration:none; font-size:14px; font-weight:bold; }
-    .btn-open:hover { color:#3cb371; }
-    footer { background:#fff; display:flex; flex-wrap: wrap; justify-content:space-between; padding:30px 20px;
-      gap: 20px;font-size: 18px; color:#3a3a3a; border-top: 2px solid rgba(255,255,255,0.2); box-shadow:0 0 10px #027e40; }
-    
-    .small{font-size:14px;color:#555}
-  /* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-    @media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    align-self: flex-start; 
-    right: auto;
-    width: fit-content;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',Arial;
 }
-      .dropdown-hubungi {
+
+html,body{
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  color:#333;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo img{
+  width:300px;
+  height:70px;
+}
+
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover,
+nav ul li a.active{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* STYLE DROPDOWN HUBUNGI KAMI */
+    .dropdown-hubungi {
       position: relative;
       display: inline-block;
-    }
-    .file-link{
-    text-decoration:none;
-    color:inherit;
-    display:block;
-    }
-
-    .file-link:hover .file-item{
-      background:#95b19d2d;      
     }
     
     .dropdown-content-hubungi {
@@ -196,10 +125,9 @@
       padding: 10px 15px;
       text-decoration: none;
       display: block;
-      font-size: 12px;
+      font-weight: 600;
       transition: all 0.3s;
     }
-    
     .dropdown-content-hubungi a:hover {
       background-color: #e2f8f1;
       color: #1f8664;
@@ -209,152 +137,285 @@
       display: block;
     }
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  
-      /* ANIMASI LIST */
-    .file-list.anim-out {
-      animation: fadeOut 0.25s ease forwards;
-    }
+/* ===== MAIN ===== */
+main{
+  flex:1;
+  padding:40px 20px;
+}
 
-    .file-list.anim-in {
-      animation: fadeInSlide 0.35s ease forwards;
-    }
+/* ===== PAGE TITLE ===== */
+.page-title{
+  max-width:1100px;
+  margin:0 auto 30px;
+  background:var(--card);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .5s ease;
+}
+.page-title h1{
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:32px;
+}
 
-    @keyframes fadeOut {
-      from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(8px); }
-    }
+/* ===== JADWAL CARD ===== */
+.jadwal-container{
+  max-width:900px;
+  margin:auto;
+  background:var(--card);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .5s ease;
+}
 
-    @keyframes fadeInSlide {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.jadwal-container h2{
+  color:var(--green);
+  font-size:26px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
 
-    
-  </style>
+.note{
+  font-size:14px;
+  color:#666;
+  margin-bottom:20px;
+  font-style:italic;
+}
+
+/* ===== TABS ===== */
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+.tab{
+  padding:6px 16px;
+  border-radius:50px;
+  background:#e9f7f0;
+  color:#444;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+.tab.active,
+.tab:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* ===== LOADING ===== */
+#loading{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#555;
+  margin-bottom:15px;
+}
+.spinner{
+  width:16px;
+  height:16px;
+  border:3px solid #ddd;
+  border-top:3px solid var(--green);
+  border-radius:50%;
+  animation:spin .9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== FILE LIST ===== */
+.file-list{
+  list-style:none;
+}
+.file-link{
+  text-decoration:none;
+  color:inherit;
+}
+.file-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  border-bottom:1px solid #eee;
+  transition:.3s;
+}
+.file-item:hover{
+  background:#f0faf6;
+}
+.file-name{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:500;
+}
+.file-name i{
+  color:var(--green);
+}
+
+/* ===== LIST ANIM ===== */
+.file-list.anim-out{
+  animation:fadeOut .25s ease forwards;
+}
+.file-list.anim-in{
+  animation:fadeInSlide .35s ease forwards;
+}
+@keyframes fadeOut{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(8px)}
+}
+@keyframes fadeInSlide{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
-  
+
 <header>
-  <div class="logo">
-    <img src="logopanjang.png" alt="Logo Rumah Sakit" />
-    <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
-  <i class="fas fa-user-shield"></i> Admin Dashboard
-  </a>
+  <div class="header-bar">
+    <div class="logo">
+      <img src="logopanjang.png">
+    </div>
+
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
   </div>
+
   <nav>
     <ul>
       <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
       <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-      <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
       <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-      <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
       <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-      <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
       <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
       <li class="dropdown-hubungi">
-          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
-          <div class="dropdown-content-hubungi">
-            <a href="#"><i class="fas fa-envelope"></i> Email</a>
-            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-          </div>
-        </li>
+        <a><i class="fas fa-phone"></i> HUBUNGI KAMI</a>
+        <div class="dropdown-content-hubungi">
+          <a href="#"><i class="fas fa-envelope"></i> Email</a>
+          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+        </div>
+      </li>
     </ul>
   </nav>
 </header>
 
 <main>
-  <div class="jadwal-container">
-    <h2><i class="fa-solid fa-calendar-days"></i> JADWAL REKAM MEDIK</h2>
-    <div class="note">" Kalo Tukeran Jadwal Jangan Lupa ngomong Mbak Susi Lurd 🗿 #thanksinsomnia "</div>
-    <div class="tabs" id="yearTabs"></div>
-    <div id="loading"><div class="spinner"></div><span>Sedang memuat jadwal...</span></div>
-    <ul id="fileList" class="file-list"></ul>
+
+<section class="page-title">
+  <h1><i class="fas fa-calendar-days"></i> JADWAL REKAM MEDIK</h1>
+  <div class="note">"Kalo tukeran jadwal jangan lupa ngomong Mbak Susi 🗿"</div>
+</section>
+
+<section class="jadwal-container">
+  <div class="tabs" id="yearTabs"></div>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <span>Sedang memuat jadwal...</span>
   </div>
+
+  <ul id="fileList" class="file-list"></ul>
+</section>
+
 </main>
 
 <footer>
-  <div>
-    <strong>MEDICAL RECORD</strong><br />
-    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-  </div>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
 </footer>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbw_y2PNC_Ckv-A_u2TCPbtz7kkx3KdkWAL2985PlMEpJZG1tAfq4kaPztWWBUi7RJsW/exec";
-let allFiles = [];
+const API_URL="https://script.google.com/macros/s/AKfycbw_y2PNC_Ckv-A_u2TCPbtz7kkx3KdkWAL2985PlMEpJZG1tAfq4kaPztWWBUi7RJsW/exec";
+let allFiles=[];
 
-async function loadFiles() {
-  try {
-    const res = await fetch(API_URL);
-    allFiles = await res.json();
-    document.getElementById("loading").style.display = "none";
+async function loadFiles(){
+  try{
+    const res=await fetch(API_URL);
+    allFiles=await res.json();
+    document.getElementById("loading").style.display="none";
 
-    if (allFiles.length === 0) {
-      document.getElementById("fileList").innerHTML = "<li>Tidak ada file jadwal.</li>";
+    if(!allFiles.length){
+      document.getElementById("fileList").innerHTML="<li>Tidak ada jadwal.</li>";
       return;
     }
 
-    const years = [...new Set(allFiles.map(f => f.year))];
-    const tabs = document.getElementById("yearTabs");
-    tabs.innerHTML = "";
+    const years=[...new Set(allFiles.map(f=>f.year))];
+    const tabs=document.getElementById("yearTabs");
+    tabs.innerHTML="";
 
-    years.forEach((y, idx) => {
-      const tab = document.createElement("div");
-      tab.className = "tab" + (idx === 0 ? " active" : "");
-      tab.innerText = y;
-      tab.onclick = () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
+    years.forEach((y,i)=>{
+      const t=document.createElement("div");
+      t.className="tab"+(i===0?" active":"");
+      t.textContent=y;
+      t.onclick=()=>{
+        document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+        t.classList.add("active");
         renderFiles(y);
       };
-      tabs.appendChild(tab);
+      tabs.appendChild(t);
     });
 
     renderFiles(years[0]);
-  } catch (error) {
-    document.getElementById("loading").innerText = "❌ Gagal memuat data";
+  }catch{
+    document.getElementById("loading").textContent="❌ Gagal memuat data";
   }
 }
 
-function renderFiles(year) {
-  const list = document.getElementById("fileList");
-
-  // animasi keluar
+function renderFiles(year){
+  const list=document.getElementById("fileList");
   list.classList.remove("anim-in");
   list.classList.add("anim-out");
 
-  setTimeout(() => {
-    list.innerHTML = "";
-    const files = allFiles.filter(f => f.year === year);
-
-    files.forEach(f => {
-      const li = document.createElement("li");
-      li.innerHTML = `
+  setTimeout(()=>{
+    list.innerHTML="";
+    allFiles.filter(f=>f.year===year).forEach(f=>{
+      const li=document.createElement("li");
+      li.innerHTML=`
         <a href="${f.url}" target="_blank" class="file-link">
           <div class="file-item">
             <div class="file-name">
               <i class="fa-regular fa-file"></i> ${f.name}
             </div>
-        </a>
-      `;
+          </div>
+        </a>`;
       list.appendChild(li);
     });
-
-    // animasi masuk
     list.classList.remove("anim-out");
     list.classList.add("anim-in");
-
-  }, 250); 
+  },250);
 }
 
 loadFiles();
 </script>
+
 </body>
 </html>
