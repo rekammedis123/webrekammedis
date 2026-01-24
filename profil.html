@@ -1,270 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="logorekammedis.ico">
-  <title>Profil - Medical Record</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
-    }
-    html, body {
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff, #eeecec); 
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(150deg, #ffffff, #66a378); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo img {
-      width: 300px;
-      height: 70px;
-      margin-right: 1px;
-    }
-    .judul h1 {
-      font-size: 30px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .judul {
-      font-size: 25px;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .user-info {
-      text-align: right;
-      font-size: 13px;
-      margin-top: 10px;
-      color: #ffffff;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      border-radius: 50px;
-      font-size: 13px;
-      justify-content: center;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #3a3a3a;
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 5px 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    nav ul li a:hover {
-      color: #5aa190;
-      font-weight: bold;
-    }
-    main {
-      flex: 1;
-      padding: 30px 20px;
-      text-align: left;
-    }
-    main {
-      flex: 1;
-      padding: 30px 20px;
-      text-align: left;
-    }
-    .profil-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
-      animation: fadeIn 0.8s ease-out;
-    }
-    .profil-container h2 {
-      font-size: 40px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #088a6e;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .profil-container h2::before {
-      content: "👨‍⚕️";
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="logorekammedis.ico">
+<title>Profil | Medical Record</title>
 
-    /* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-    @media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    align-self: flex-start; 
-    right: auto;
-    width: fit-content;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
 }
 
-    footer {
-      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 30px 20px;
-      font-size: 18px;
-      gap: 20px;
-      color: #3a3a3a;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
-    }
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
-    .small{font-size:14px;color:#555}
-    @media (min-width: 600px) {
-      .logo {
-        flex-wrap: nowrap;
-      }
-      .footer-left,
-      .footer-center,
-      .footer-right {
-        flex: 1;
-      }
-    }
-    header .icons a {
-      color: white;
-      margin-left: 15px;
-      font-size: 18px;
-      transition: transform 0.3s ease;
-    }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
 
-    header .icons a:hover {
-      transform: scale(1.2);
-      color: #807f71;
-    }
+body{
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-    /* TAB STYLE */
-    .tab-menu {
-      display: flex;
-      gap: 10px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-    }
-    .tab-menu button {
-      padding: 8px 20px;
-      background-color: #ffffff;
-      color: #3a3a3a;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 0 5px #00000027;
-    }
-    .tab-menu button:hover {
-      background-color: #3cb371;
-      color: white;
-      transform: translateY(-1px);
-    }
-    .tab-menu button.active {
-      background-color: #3cb371;
-      color: white;
-    }
-    .tab-content {
-      display: none;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      margin-top: 10px;
-      animation: fadeIn 0.5s ease-out;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    .profil-content {
-      line-height: 1.6;
-    }
-    .profil-content p {
-      margin-bottom: 15px;
-    }
-    .profil-list {
-      list-style: none;
-      padding-left: 20px;
-    }
-    .profil-list li {
-      margin-bottom: 10px;
-      position: relative;
-      padding-left: 25px;
-    }
-    .profil-list li::before {
-      content: "•";
-      color: #009765;
-      font-size: 20px;
-      position: absolute;
-      left: 0;
-      top: -2px;
-    }
-    /* STYLE DROPDOWN HUBUNGI KAMI */
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.logo img{width:300px;height:70px}
+
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+
+/* NAV */
+nav ul{
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* ===== MAIN ===== */
+main{flex:1;padding:40px 20px}
+
+.profil-container{
+  max-width:1100px;
+  margin:auto;
+  background:var(--card);
+  padding:35px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .6s ease;
+}
+.profil-container h2{
+  font-size:36px;
+  color:var(--green);
+  margin-bottom:25px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+/* ===== TAB ===== */
+.tab-menu{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+.tab-btn{
+  padding:8px 20px;
+  border:none;
+  border-radius:50px;
+  background:#fff;
+  box-shadow:0 0 6px rgba(0,0,0,.15);
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+.tab-btn.active,
+.tab-btn:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+.tab-content{
+  display:none;
+  padding:25px;
+  background:#f9f9f9;
+  border-radius:15px;
+}
+.tab-content.active{display:block}
+
+.profil-list{
+  list-style:none;
+  margin-top:15px;
+}
+.profil-list li{
+  margin-bottom:10px;
+  padding-left:22px;
+  position:relative;
+}
+.profil-list li::before{
+  content:"✔";
+  color:var(--green);
+  position:absolute;
+  left:0;
+}
+
+/* SLIDER */
+.slider-container{
+  margin-top:25px;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.slider{
+  display:flex;
+  transition:.5s;
+}
+.slide{min-width:100%}
+.slide img{
+  width:100%;
+  height:380px;
+  object-fit:cover;
+}
+.slider-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#fff;
+  border:none;
+  width:40px;height:40px;
+  border-radius:50%;
+  cursor:pointer;
+}
+.prev-btn{left:15px}
+.next-btn{right:15px}
+
+/* ===== SOTK ===== */
+.sotk-container{
+  display:none;
+  margin-top:25px;
+}
+.sotk-container iframe{
+  width:100%;
+  height:80vh;
+  border:none;
+  border-radius:15px;
+  box-shadow:var(--shadow);
+}
+ /* STYLE DROPDOWN HUBUNGI KAMI */
     .dropdown-hubungi {
       position: relative;
       display: inline-block;
@@ -286,145 +222,9 @@
       padding: 10px 15px;
       text-decoration: none;
       display: block;
-      font-size: 12px;
+      font-weight: 600;
       transition: all 0.3s;
     }
-    .slider-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 50px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
-    /* Slider Track */
-        .slider {
-            display: flex;
-            height: 400px;
-            transition: transform 0.5s ease-in-out;
-        }
-        
-        /* Individual Slides */
-        .slide {
-            min-width: 100%;
-            position: relative;
-        }
-        
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Slide Caption (Optional) */
-        .slide-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        /* Navigation Buttons */
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            color: #333;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-        
-        .slider-btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-        }
-        
-        .prev-btn {
-            left: 20px;
-        }
-        
-        .next-btn {
-            right: 20px;
-        }
-        
-        /* Dots Navigation */
-        .dots-container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .dot.active {
-            background: white;
-        }
-        .sotk-container{
-            display:none;
-            margin-top:25px;
-            background:#fff;
-            padding:20px;
-            border-radius:15px;
-            box-shadow:0 0 15px rgba(0,0,0,.15)
-            }
-            .sotk-container iframe {
-            width: 100%;
-            height: 80vh;
-            border: none;                /* ❌ no border */
-            border-radius: 15px;
-            margin-top:25px;
-            box-shadow: 0 0 10px #00000038;
-            background: #fff;
-            }
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .slider {
-                height: 300px;
-            }
-            
-            .slider-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 1.2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .slider {
-                height: 250px;
-            }
-            
-            .slide-caption {
-                padding: 10px;
-                font-size: 0.9rem;
-            }
-        }
-      
     .dropdown-content-hubungi a:hover {
       background-color: #e2f8f1;
       color: #1f8664;
@@ -433,33 +233,46 @@
     .dropdown-hubungi:hover .dropdown-content-hubungi {
       display: block;
     }
+/* FOOTER */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
-    <header>
-    <div class="logo">
-      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
-      <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
-  <i class="fas fa-user-shield"></i> Admin Dashboard
-  </a>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
-        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-        <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
-        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
-        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-        <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li class="dropdown-hubungi">
+
+<header>
+  <div class="logo">
+    <img src="logopanjang.png">
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
           <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
           <div class="dropdown-content-hubungi">
             <a href="#"><i class="fas fa-envelope"></i> Email</a>
@@ -468,189 +281,94 @@
             <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
           </div>
         </li>
-      </ul>
-    </nav>
-  </header>
+    </ul>
+  </nav>
+</header>
 
-  <main>
-    <div class="profil-container">
-      <h2>PROFIL UNIT REKAM MEDIS</h2>
-      
-      <div class="tab-menu">
-        <button class="tab-btn" data-tab="visi"><i class="fas fa-eye"></i> VISI MISI</button>
-        <button class="tab-btn" data-tab="struktur"><i class="fas fa-sitemap"></i> STRUKTUR ORGANISASI</button>
-        <button class="tab-btn" data-tab="sotk"> <i class="fas fa-tasks"></i> SOTK </button>
-      </div>
+<main>
+<div class="profil-container">
+  <h2><i class="fas fa-user-doctor"></i> PROFIL UNIT REKAM MEDIS</h2>
 
-      <div id="visi" class="tab-content">
-        <div class="profil-content">
-          <h3 style="color: #008080; margin-bottom: 15px;"><i class="fas fa-bullseye"></i> Visi Unit Rekam Medis</h3>
-          <p>Menjadi unit rekam medik yang unggul dalam pengelolaan data dan informasi kesehatan, mendukung pelayanan rumah sakit yang berkualitas, aman, dan terpercaya.</p>
-          <h3 style="color: #008080; margin: 20px 0 15px;"><i class="fas fa-list-check"></i> Misi Unit Rekam Medis</h3>
-          <ul class="profil-list">
-            <li>Menyediakan data dan informasi yang akurat dan tepat waktu</li>
-            <li>Meningkatkan pelayanan administrasi rekam medik berbasis teknologi</li>
-            <li>Menjaga kerahasiaan dan keamanan data pasien</li>
-            <li>Mengembangkan sistem dokumentasi yang efisien dan efektif</li>
-          </ul>
-        </div>
-      </div>
-
-      <div id="struktur" class="tab-content">
-        <div class="profil-content">
-          <h3 style="color: #008080; margin-bottom: 15px;"><i class="fas fa-users"></i> Struktur Organisasi</h3>
-          <p>Unit Rekam Medis RSU An'Nimah terdiri dari:</p>
-          <ul class="profil-list">
-            <li><strong>Kepala Unit</strong>: Susi Ika Diani, A.Md.Kes</li>
-            <li><strong>Staf Rekam Medik</strong>: 2 orang</li>
-            <li><strong>Staf Customer Care</strong>: 2 orang</li>
-            <li><strong>Staf Pendaftaran</strong>: 10 orang</li>
-          </ul>
-
-          <!-- SLIDER MULAI -->
-          <div class="slider-container">
-            <div class="slider">
-              <div class="slide">
-                <img src="image 1.jpeg" alt="Nature Image">
-                <div class="slide-caption"></div>
-              </div>
-              <div class="slide">
-                <img src="image 2.jpeg" alt="City Image">
-                <div class="slide-caption"></div>
-              </div>
-              <div class="slide">
-                <img src="https://source.unsplash.com/random/800x400?technology" alt="Tech Image">
-                <div class="slide-caption">Modern Technology</div>
-              </div>
-              <div class="slide">
-                <img src="https://source.unsplash.com/random/800x400?animal" alt="Animal Image">
-                <div class="slide-caption">Wild Animal</div>
-              </div>
-            </div>
-            <!-- NAVIGATION -->
-            <button class="slider-btn prev-btn">&#10094;</button>
-            <button class="slider-btn next-btn">&#10095;</button>
-            <div class="dots-container">
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-            </div>
-      </div>
-    </div>
-    </div>
-    <div id="sotk" class="sotk-container">
-  <h3><i class="fas fa-folder-open"></i> Struktur Organisasi & Tata Kerja (SOTK)</h3>
-
-  <iframe
-    src="https://drive.google.com/file/d/1ubQAJ4dYhd5h55eCH9B2M3jIXkYz_Amb/preview"
-    loading="lazy"
-    allow="autoplay"
-  ></iframe>
-</div>
+  <div class="tab-menu">
+    <button class="tab-btn active" data-tab="visi"><i class="fas fa-eye"></i> VISI MISI</button>
+    <button class="tab-btn" data-tab="struktur"><i class="fas fa-sitemap"></i> STRUKTUR</button>
+    <button class="tab-btn" data-tab="sotk"><i class="fas fa-folder-open"></i> SOTK</button>
   </div>
-  </main>
 
-  <footer>
-      <div>
-        <strong>MEDICAL RECORD</strong><br />
-        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-      </div>
+  <div id="visi" class="tab-content active">
+    <h3>Visi</h3>
+    <p>Menjadi unit rekam medik yang unggul dalam pengelolaan data dan informasi kesehatan.</p>
+
+    <h3 style="margin-top:15px">Misi</h3>
+    <ul class="profil-list">
+      <li>Data akurat & tepat waktu</li>
+      <li>Pelayanan berbasis teknologi</li>
+      <li>Kerahasiaan data pasien</li>
+      <li>Sistem dokumentasi efektif</li>
+    </ul>
+  </div>
+
+  <div id="struktur" class="tab-content">
+    <ul class="profil-list">
+      <li>Kepala Unit: Susi Ika Diani, A.Md.Kes</li>
+      <li>Staf Rekam Medik: 2 orang</li>
+      <li>Customer Care: 2 orang</li>
+      <li>Pendaftaran: 10 orang</li>
+    </ul>
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide"><img src="image 1.jpeg"></div>
+      <div class="slide"><img src="image 2.jpeg"></div>
+      <div class="slide"><img src="image 3.jpeg"></div>
     </div>
-  </footer>
-  <script>
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-  const sotk = document.getElementById('sotk');
+    <button class="slider-btn prev-btn">&#10094;</button>
+    <button class="slider-btn next-btn">&#10095;</button>
+  </div>
+</div>
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+  <div id="sotk" class="sotk-container">
+    <iframe src="https://drive.google.com/file/d/1ubQAJ4dYhd5h55eCH9B2M3jIXkYz_Amb/preview"></iframe>
+  </div>
 
-      const target = btn.dataset.tab; // ✅ DITAMBAH
-      const targetContent = document.getElementById(target);
-      const isActive = btn.classList.contains('active');
+</div>
+</main>
 
-      if (!isActive) {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        sotk.style.display = 'none'; // reset SOTK
-      }
-      btn.classList.add('active');
-      if (target === 'sotk') {
-        sotk.style.display = 'block';
-      } else {
-        targetContent.classList.add('active');
-      }
+<footer>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+</footer>
 
-    });
-  });
+<script>
+const tabs=document.querySelectorAll('.tab-btn');
+const contents=document.querySelectorAll('.tab-content');
+const sotk=document.getElementById('sotk');
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-    const slideCount = slides.length;
-    let currentIndex = 0;
-    let slideInterval;
+tabs.forEach(btn=>{
+  btn.onclick=()=>{
+    tabs.forEach(b=>b.classList.remove('active'));
+    contents.forEach(c=>c.classList.remove('active'));
+    sotk.style.display='none';
 
-    function goToSlide(index) {
-      currentIndex = (index + slideCount) % slideCount;
-      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-      updateDots();
-    }
+    btn.classList.add('active');
+    const target=btn.dataset.tab;
+    if(target==='sotk') sotk.style.display='block';
+    else document.getElementById(target).classList.add('active');
+  }
+});
 
-    function updateDots() {
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
-    }
+let index=0;
+const slider=document.querySelector('.slider');
+const slides=document.querySelectorAll('.slide');
 
-    function nextSlide() {
-      goToSlide(currentIndex + 1);
-    }
-
-    function prevSlide() {
-      goToSlide(currentIndex - 1);
-    }
-
-    function startAutoSlide() {
-      slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function resetAutoSlide() {
-      clearInterval(slideInterval);
-      startAutoSlide();
-    }
-
-    prevBtn.addEventListener('click', () => {
-      prevSlide();
-      resetAutoSlide();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      nextSlide();
-      resetAutoSlide();
-    });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        goToSlide(i);
-        resetAutoSlide();
-      });
-    });
-
-    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
-    slider.addEventListener('mouseleave', startAutoSlide);
-
-    goToSlide(0);
-    startAutoSlide();
-  });
+document.querySelector('.next-btn').onclick=()=>{
+  index=(index+1)%slides.length;
+  slider.style.transform=`translateX(-${index*100}%)`;
+}
+document.querySelector('.prev-btn').onclick=()=>{
+  index=(index-1+slides.length)%slides.length;
+  slider.style.transform=`translateX(-${index*100}%)`;
+}
 </script>
-  </body>
+
+</body>
 </html>
-
-
-
-
