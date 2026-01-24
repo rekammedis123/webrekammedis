@@ -1,224 +1,332 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SPO - Medical Record</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SPO | Medical Record</title>
 
-  <!-- FONT AWESOME -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="logorekammedis.ico">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
-    }
-    html, body {
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff, #eeecec); 
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(150deg, #ffffff, #66a378); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo img {
-      width: 300px;
-      height: 70px;
-      margin-right: 1px;
-    }
-    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; background: #fff; border-radius: 50px; font-size: 13px; justify-content: center; margin-top: 15px; box-shadow: 0 0 10px #027e40; }
-    nav ul li a { text-decoration: none; color: #3a3a3a; font-weight: bold; border-radius: 50px; padding: 5px 15px; transition: 0.3s; display: flex; align-items: center; gap: 5px; }
-    nav ul li a:hover { color: #5aa190; }
-    main { flex: 1; padding: 30px 20px; }
-    .spo-container { max-width: 900px; margin: 30px auto; padding: 25px; background: #fff; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-    .spo-container h2 { font-size: 24px; font-weight: bold; margin-bottom: 20px; color: #444; display:flex; align-items:center; gap:10px; }
-    .spo-container h2 i { color:#20b2aa; }
-    #loading { font-size:16px; color:#555; display:flex; align-items:center; gap:10px; }
-    .spinner { width:16px; height:16px; border:3px solid #ddd; border-top:3px solid #20b2aa; border-radius:50%; animation:spin 0.9s linear infinite; }
-    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
-    .file-list { list-style:none; padding:0; margin:0; }
-    .file-item { display:flex; justify-content:space-between; align-items:center; padding:12px 15px; border-bottom:1px solid #eee; transition:background 0.3s; }
-    .file-item:hover { background:#f5fdfb; }
-    .file-name { display:flex; align-items:center; gap:10px; font-weight:500; color:#333; }
-    .file-name i { color:#20b2aa; }
-    .btn-open { color:#20b2aa; text-decoration:none; font-size:14px; font-weight:bold; }
-    .btn-open:hover { color:#3cb371; }
-    footer { background:#fff; display:flex; flex-wrap: wrap; justify-content:space-between; padding:30px 20px;
-      gap: 20px;font-size: 18px; color:#3a3a3a; border-top: 2px solid rgba(255,255,255,0.2); box-shadow:0 0 10px #027e40; }
-    .small {font-size:14px;color:#555}
+<link rel="icon" href="logorekammedis.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-     /* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-      @media (max-width: 1024px) {
-    .admin-btn {
-      position: relative;
-      top: auto;
-      align-self: flex-start; 
-      right: auto;
-      width: fit-content;
-      margin-top: 15px;
-    }
-    .logo {
-      flex-direction: column;
-      align-items: flex-start;
-      }
-    }
+<style>
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
+}
 
-    .dropdown-hubungi {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content-hubungi {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    
-    .dropdown-content-hubungi a {
-      color: #333;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      font-size: 12px;
-      transition: all 0.3s;
-    }
-    
-    .dropdown-content-hubungi a:hover {
-      background-color: #e2f8f1;
-      color: #1f8664;
-    }
-    
-    .dropdown-hubungi:hover .dropdown-content-hubungi {
-      display: block;
-    }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+body{
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.logo img{width:300px;height:70px}
+
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* NAV */
+nav ul{
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* DROPDOWN */
+.dropdown-hubungi{position:relative}
+.dropdown-content-hubungi{
+  display:none;
+  position:absolute;
+  background:#fff;
+  min-width:170px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  z-index:9;
+}
+.dropdown-content-hubungi a{
+  padding:10px 14px;
+  display:block;
+  font-size:13px;
+  color:#333;
+  text-decoration:none;
+}
+.dropdown-content-hubungi a:hover{
+  background:#e8f6f0;
+  color:var(--green-dark);
+}
+.dropdown-hubungi:hover .dropdown-content-hubungi{display:block}
+
+/* ===== MAIN ===== */
+main{flex:1;padding:40px 20px}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  animation:fadeUp .6s ease;
+}
+
+/* TITLE */
+.title-container{
+  background:#fff;
+  border-radius:18px;
+  padding:28px 30px;
+  margin-bottom:30px;
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.title-icon{
+  font-size:36px;
+  color:var(--green);
+}
+.title-text h2{
+  font-size:26px;
+  color:var(--green-dark);
+}
+.title-text p{
+  font-size:14px;
+  color:#555;
+  margin-top:5px;
+}
+
+/* CARD */
+.spo-card{
+  background:#fff;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:var(--shadow);
+}
+
+/* LOADING */
+#loading{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#555;
+}
+.spinner{
+  width:18px;
+  height:18px;
+  border:3px solid #ddd;
+  border-top:3px solid var(--green);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FILE LIST */
+.file-list{
+  list-style:none;
+  margin-top:15px;
+}
+.file-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px;
+  border-bottom:1px solid #eee;
+  transition:.3s;
+}
+.file-item:hover{
+  background:#f0faf6;
+}
+.file-name{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+}
+.file-name i{color:var(--green)}
+.btn-open{
+  text-decoration:none;
+  font-size:13px;
+  padding:6px 14px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+.btn-open:hover{opacity:.9}
+
+/* FOOTER */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
-  <header>
-  <div class="logo">
-    <img src="logopanjang.png" alt="Logo Rumah Sakit" />
-    <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
-  <i class="fas fa-user-shield"></i> Admin Dashboard
-  </a>
+
+<header>
+  <div class="header-bar">
+    <div class="logo">
+      <img src="logopanjang.png">
+    </div>
+
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
   </div>
+
   <nav>
     <ul>
       <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
       <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-      <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
       <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-      <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
       <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-      <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
       <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
       <li class="dropdown-hubungi">
-          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
-          <div class="dropdown-content-hubungi">
-            <a href="#"><i class="fas fa-envelope"></i> Email</a>
-            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-          </div>
-        </li>
+        <a><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+        <div class="dropdown-content-hubungi">
+          <a href="#"><i class="fas fa-envelope"></i> Email</a>
+          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+        </div>
+      </li>
     </ul>
   </nav>
 </header>
+
 <main>
-  <div class="spo-container">
-    <h2><i class="fa-solid fa-file"></i> SPO UNIT REKAM MEDIK & PENDAFTARAN</h2>
+<div class="container">
+
+  <div class="title-container">
+    <div class="title-icon"><i class="fas fa-file-alt"></i></div>
+    <div class="title-text">
+      <h2>SPO UNIT REKAM MEDIS & PENDAFTARAN</h2>
+      <p>Standar Prosedur Operasional Unit Rekam Medis</p>
+    </div>
+  </div>
+
+  <div class="spo-card">
     <div id="loading">
       <div class="spinner"></div>
-      <span>Sedang memuat...</span>
+      <span>Sedang memuat data SPO...</span>
     </div>
     <ul id="fileList" class="file-list"></ul>
   </div>
+
+</div>
 </main>
+
 <footer>
-  <div>
-    <strong>MEDICAL RECORD</strong><br />
-    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-  </div>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
 </footer>
+
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbysBGmgj4sj0HUY2qmHReyfi4JCoT0GcRn212x01u2k6IDLeRgPcZXGNf8tHZGHlIm7/exec";
-let allFiles = [];
+let allFiles=[];
 
-async function loadFiles() {
-  try {
-    const res = await fetch(API_URL);
-    allFiles = await res.json();
-    document.getElementById("loading").style.display = "none";
+async function loadFiles(){
+  try{
+    const res=await fetch(API_URL);
+    allFiles=await res.json();
+    document.getElementById("loading").style.display="none";
 
-    if (allFiles.length === 0) {
-      document.getElementById("fileList").innerHTML = "<li>Tidak ada file SPO.</li>";
+    if(!allFiles.length){
+      document.getElementById("fileList").innerHTML="<li>Tidak ada file SPO.</li>";
       return;
     }
     renderFiles();
-  } catch (error) {
-    console.error(error);
-    document.getElementById("loading").innerText = "❌ Gagal memuat data";
+  }catch(e){
+    document.getElementById("loading").innerText="❌ Gagal memuat data";
   }
 }
 
-function renderFiles() {
-  const list = document.getElementById("fileList");
-  list.innerHTML = "";
-  allFiles.forEach(f => {
-    const li = document.createElement("li");
-    li.className = "file-item";
-    li.innerHTML = `
-      <div class="file-name"><i class="fa-regular fa-file"></i> ${f.name}</div>
+function renderFiles(){
+  const list=document.getElementById("fileList");
+  list.innerHTML="";
+  allFiles.forEach(f=>{
+    const li=document.createElement("li");
+    li.className="file-item";
+    li.innerHTML=`
+      <div class="file-name"><i class="fas fa-file"></i> ${f.name}</div>
       <a class="btn-open" href="${f.url}" target="_blank">Buka</a>
     `;
     list.appendChild(li);
   });
 }
-
 loadFiles();
 </script>
+
 </body>
 </html>
