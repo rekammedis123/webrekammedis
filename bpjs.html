@@ -1,360 +1,285 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="logorekammedis.png" type="image/png">
-  <title>BPJS - Medical Record</title>
-  <!-- FONT AWESOME UNTUK ICON -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
-    }
-    html, body {
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(150deg, #9fc5b9, #a0ffbd); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo img {
-      width: 300px;
-      height: 70px;
-      margin-right: 1px;
-    }
-    .judul h1 {
-      font-size: 30px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .judul {
-      font-size: 25px;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .judul p::before {
-      content: "🏥 ";
-    }
-    .user-info {
-      text-align: right;
-      font-size: 13px;
-      margin-top: 10px;
-      color: #ffffff;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      border-radius: 50px;
-      font-size: 13px;
-      justify-content: center;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #3a3a3a;
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 5px 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    nav ul li a:hover {
-      color: #5aa190;
-      font-weight: bold;
-    }
-    main {
-      flex: 1;
-      padding: 30px 20px;
-      text-align: left;
-    }
-    
-    main {
-      flex: 1;
-      padding: 30px 20px;
-      text-align: left;
-    }
-    .regulasi-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
-      animation: fadeIn 0.8s ease-out;
-    }
-    .regulasi-container h2 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #008080;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .regulasi-container h1 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #008080;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .regulasi-container h2::before {
-      content: "\f5c3";
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900; 
-      margin-right: 8px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-    .regulasi-card {
-      background: white;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
-      text-align: center;
-    }
-    
-    h1 {
-      color: var(--biru-rs);
-      margin-bottom: 0 auto;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-    footer {
-      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 30px 20px;
-      font-size: 18px;
-      gap: 20px;
-      color: #3a3a3a;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
-    }
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
-    .small{font-size:14px;color:#555}
-    @media (min-width: 600px) {
-      .logo {
-        flex-wrap: nowrap;
-      }
-      .footer-left,
-      .footer-center,
-      .footer-right {
-        flex: 1;
-      }
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="logorekammedis.ico">
+<title>BPJS | Medical Record</title>
 
-    /* TAB STYLE */
-    .drive-btn {
-      background: linear-gradient(135deg, #4285F4, #34A853);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 50px;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      margin: 15px;
-      width: 150px;
-      justify-content: center;
-    }
-    
-    .drive-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    }
-    
-    .btn-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-    }
-    .file-list {
-      list-style: none;
-    }
-    .file-list li {
-      padding: 10px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-    }
-    .file-list li:last-child {
-      border-bottom: none;
-    }
-    .file-list li a {
-      color: #005b96;
-      text-decoration: none;
-    }
-    .file-list li a:hover {
-      text-decoration: underline;
-    }
-    /* STYLE DROPDOWN HUBUNGI KAMI */
-    .dropdown-hubungi {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content-hubungi {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    
-    .dropdown-content-hubungi a {
-      color: #333;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      font-size: 12px;
-      transition: all 0.3s;
-    }
-    
-    .dropdown-content-hubungi a:hover {
-      background-color: #e2f8f1;
-      color: #1f8664;
-    }
-    
-    .dropdown-hubungi:hover .dropdown-content-hubungi {
-      display: block;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+<style>
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
+}
 
-    /* NEW STYLES FOR BPJS CONTENT */
-    .bpjs-content {
-      margin-top: 20px;
-    }
-    .bpjs-title {
-      color: #1f8664;
-      font-size: 24px;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .sandi-box {
-    padding: 5px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    border-left: 4px solid #c8f1e4;
-    cursor: pointer;
-    transition: all 0.3s;
-    max-width: 250px;
-    word-wrap: break-word;
-    white-space: normal;
-    }
-    .sandi-box:hover {
-      background: #d0f0e4;
-    }
-    .sandi-box i {
-      margin-right: 10px;
-      color: #1f8664;
-    }
-    .tujuan-list {
-      margin-top: 20px;
-    }
-    .tujuan-item {
-      margin-bottom: 15px;
-      padding-left: 20px;
-      position: relative;
-    }
-    .tujuan-item:before {
-      content: "•";
-      color: #1f8664;
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-    }
-    .tujuan-item h3 {
-      color: #1f8664;
-      margin-bottom: 5px;
-    }
-  </style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',Arial;
+}
+
+html,body{
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+  color:#333;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo img{
+  width:300px;
+  height:70px;
+}
+
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover,
+nav ul li a.active{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown-hubungi{position:relative}
+.dropdown-content-hubungi{
+  display:none;
+  position:absolute;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  top:100%;
+  left:0;
+  z-index:10;
+}
+.dropdown-content-hubungi a{
+  display:block;
+  padding:10px 15px;
+  color:#444;
+  text-decoration:none;
+  font-weight: 600;
+}
+.dropdown-content-hubungi a:hover{
+  background:#e9f7f0;
+  color:var(--green-dark);
+}
+.dropdown-hubungi:hover .dropdown-content-hubungi{
+  display:block;
+}
+
+/* ===== MAIN ===== */
+main{
+  flex:1;
+  padding:40px 20px;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-title{
+  max-width:1100px;
+  margin:0 auto 30px;
+  background:var(--card);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .5s ease;
+}
+.page-title h1{
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:32px;
+}
+.admin-btn{
+  position:absolute;
+  top:20px;right:20px;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+/* ===== CONTENT CARD ===== */
+.bpjs-container{
+  max-width:1000px;
+  margin:auto;
+  background:var(--card);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .5s ease;
+}
+
+.bpjs-title{
+  font-size:26px;
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.bpjs-container p{
+  color:#555;
+  margin-bottom:15px;
+  line-height:1.6;
+}
+
+/* ===== BUTTON ===== */
+.link-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 22px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+  margin-bottom:20px;
+  transition:.3s;
+}
+.link-btn:hover{
+  transform:translateY(-3px);
+}
+
+/* ===== SANDI BOX ===== */
+.sandi-box{
+  padding:12px 15px;
+  border-radius:14px;
+  margin:20px 0;
+  border-left:5px solid var(--green);
+  background:#f7fbf9;
+  cursor:pointer;
+  transition:.3s;
+  max-width:320px;
+}
+.sandi-box:hover{
+  background:#e9f7f0;
+}
+.sandi-box i{
+  color:var(--green-dark);
+}
+
+/* ===== TUJUAN ===== */
+.tujuan-list{
+  margin-top:20px;
+}
+.tujuan-item{
+  margin-bottom:15px;
+  padding-left:18px;
+  position:relative;
+}
+.tujuan-item::before{
+  content:"•";
+  color:var(--green);
+  position:absolute;
+  left:0;
+  font-weight:bold;
+}
+.tujuan-item h3{
+  color:var(--green-dark);
+  margin-bottom:5px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
+
+/* ===== ANIM ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
-  <header>
+
+<header>
+  <div class="header-bar">
     <div class="logo">
-      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
+      <img src="logopanjang.png">
     </div>
-    <nav>
-      <ul>
-        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-        <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
-        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
-        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-        <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li class="dropdown-hubungi">
+
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
           <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
           <div class="dropdown-content-hubungi">
             <a href="#"><i class="fas fa-envelope"></i> Email</a>
@@ -363,118 +288,67 @@
             <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
           </div>
         </li>
-      </ul>
-    </nav>
-  </header>
+    </ul>
+  </nav>
+</header>
 
-  <main>
-    <div class="regulasi-container">
+<main>
 
-      <div class="bpjs-content">
-        <h1 class="bpjs-title">
-          <i class="fas fa-file-alt"></i> USER MANUAL APLIKASI VCLAIM VERSI 6.0.0
-        </h1><h1 class="">
-        </h1><h1 class="">
-        </h1>
-          <p>Untuk mengakses layanan VClaim, silakan klik tombol berikut:</p>
-          <a href="https://drive.google.com/file/d/17rdaMknHX9Peh96aBZh9iiGsY_eh03KV/view" target="_blank" style="display: inline-block; margin: 10px ; padding: 4px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 50px; ">
-            🔗 Kunjungi VClaim
-          </a>
-        <div class="sandi-box" onclick="copySandi()">
-          <hr style="margin: 2px 0;">
-          <i class="fas fa-key"></i> <small>(Klik untuk menyalin kata sandi)</small>
-        </div>
-        
-        <h1>TUJUAN</h1>
-        <p>Panduan pengguna ini disusun untuk memberikan petunjuk dan pemahaman yang jelas kepada pengguna dalam menggunakan aplikasi vclaim secara optimal.</p>
-        
-        <div class="tujuan-list">
-          <div class="tujuan-item">
-            <h3>1. Membantu Pengguna Baru</h3>
-            <p>Memberikan panduan langkah demi langkah bagi pengguna yang baru pertama kali menggunakan aplikasi agar dapat memahami fitur dan cara penggunaannya dengan mudah.</p>
-          </div>
-          
-          <div class="tujuan-item">
-            <h3>2. Mengurangi Kesalahan Penggunaan</h3>
-            <p>Mencegah kesalahan dalam pengoperasian aplikasi yang dapat terjadi akibat ketidaktahuan atau salah pengertian terhadap fungsi-fungsi yang tersedia.</p>
-          </div>
-          
-          <div class="tujuan-item">
-            <h3>3. Meningkatkan Efektivitas dan Efisiensi</h3>
-            <p>Membantu pengguna menyelesaikan tugas-tugasnya secara lebih cepat dan tepat dengan memanfaatkan semua fitur aplikasi secara maksimal.</p>
-          </div>
-          
-          <div class="tujuan-item">
-            <h3>4. Standarisasi Prosedur</h3>
-            <p>Menjadi acuan baku dalam penggunaan aplikasi sehingga seluruh pengguna mengikuti prosedur yang sama dalam menjalankan sistem.</p>
-          </div>
-          
-          <div class="tujuan-item">
-            <h3>5. Sebagai Referensi Cepat</h3>
-            <p>Mempermudah pengguna untuk mencari solusi ketika mengalami kendala atau kebingungan dalam menggunakan fitur tertentu.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="btn-container">
-        <!-- You can add buttons here if needed -->
-      </div>
+<section class="page-title">
+  <h2 class="bpjs-title">
+    <i class="fas fa-file-alt"></i> USER MANUAL APLIKASI VCLAIM VERSI 6.0.0
+  </h2>
+   <p>Untuk mengakses layanan VClaim, silakan klik tombol berikut:</p>
+  <div class="sandi-box" onclick="copySandi()">
+    <i class="fas fa-key"></i> <small>Klik untuk menyalin kata sandi</small>
+  </div>
+  <a href="https://drive.google.com/file/d/17rdaMknHX9Peh96aBZh9iiGsY_eh03KV/view" target="_blank" class="link-btn">
+    <i class="fas fa-link"></i> Kunjungi VClaim
+  </a>
+</section>
+
+<section class="bpjs-container">
+
+  <h3 style="color:#1f7f53;">TUJUAN</h3>
+  <p>Panduan ini disusun untuk memberikan pemahaman penggunaan aplikasi VClaim secara optimal.</p>
+
+  <div class="tujuan-list">
+    <div class="tujuan-item">
+      <h3>1. Membantu Pengguna Baru</h3>
+      <p>Panduan langkah demi langkah bagi pengguna baru.</p>
     </div>
-  </main>
-
-  <footer>
-      <div>
-        <strong>MEDICAL RECORD</strong><br />
-        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-      </div>
+    <div class="tujuan-item">
+      <h3>2. Mengurangi Kesalahan Penggunaan</h3>
+      <p>Mencegah kesalahan dalam pengoperasian aplikasi.</p>
     </div>
-  </footer>
+    <div class="tujuan-item">
+      <h3>3. Efektivitas & Efisiensi</h3>
+      <p>Membantu menyelesaikan pekerjaan lebih cepat dan tepat.</p>
+    </div>
+    <div class="tujuan-item">
+      <h3>4. Standarisasi Prosedur</h3>
+      <p>Menjadi acuan penggunaan aplikasi.</p>
+    </div>
+    <div class="tujuan-item">
+      <h3>5. Referensi Cepat</h3>
+      <p>Solusi cepat saat terjadi kendala.</p>
+    </div>
+  </div>
 
-  <script>
-    // USER AUTH
-    const userInfoDiv = document.getElementById("user-info");
-    const uploadBox = document.getElementById("upload-box");
-    const loggedInUser = localStorage.getItem("loggedInUser");
+</section>
+</main>
 
-    if (loggedInUser) {
-      userInfoDiv.innerHTML = `
-        <span><i class="fas fa-user"></i> User : ${loggedInUser}</span>
-        <a href="#" id="logout-btn" class="login-btn" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i> Logout</a>
-      `;
-      if (loggedInUser === 'admin') {
-        uploadBox.style.display = "block";
-      }
-      document.getElementById("logout-btn").addEventListener("click", function(e) {
-        e.preventDefault();
-        localStorage.removeItem("loggedInUser");
-        window.location.href = "login.html";
-      });
-    } else {
-      userInfoDiv.innerHTML = `<a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login Skuy</a>`;
-    }
+<footer>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+</footer>
 
-    // TAB SYSTEM
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
+<script>
+function copySandi(){
+  navigator.clipboard.writeText("Bhogast2024")
+  .then(()=>alert("Sandi berhasil disalin 👍"));
+}
+</script>
 
-    // COPY SANDI FUNCTION
-    function copySandi() {
-      const sandiText = "Bhogast2024";
-      navigator.clipboard.writeText(sandiText).then(() => {
-        alert("Sandi telah disalin ke clipboard!");
-      }).catch(err => {
-        console.error('Gagal menyalin sandi: ', err);
-      });
-    }
-  </script>
 </body>
 </html>
