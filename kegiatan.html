@@ -1,415 +1,292 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="logorekammedis.ico">
-  <title>Kegiatan - Medical Record</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
-    }
-    html, body {
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff, #eeecec);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(150deg, #ffffff, #66a378); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo img {
-      width: 300px;
-      height: 70px;
-      margin-right: 1px;
-    }
-    .judul h1 {
-      font-size: 30px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .judul {
-      font-size: 25px;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .user-info {
-      text-align: right;
-      font-size: 13px;
-      margin-top: 10px;
-      color: #ffffff;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      border-radius: 50px;
-      font-size: 13px;
-      justify-content: center;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #3a3a3a;
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 5px 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    nav ul li a:hover {
-      color: #5aa190;
-      font-weight: bold;
-    }
-    main {
-      flex: 1;
-      padding: 30px 20px;
-      text-align: left;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="logorekammedis.ico">
+<title>Kegiatan | Medical Record</title>
 
-    /* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-    
-    .kegiatan-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,91,150,0.1);
-      animation: fadeIn 0.8s ease-out;
-    }
-    .kegiatan-container h2 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #088a6e;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .kegiatan-container h2::before {
-      content: "📅";
-    }
-    .login-btn:hover {
-      background-color: #00bb77;
-      transform: scale(1.05);
-    }
-    footer {
-      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 30px 20px;
-      font-size: 18px;
-      gap: 20px;
-      color: #3a3a3a;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
-    }
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
-    .small{font-size:14px;color:#555}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* ===== ADMIN BUTTON ===== */
-    .admin-btn{
-      position:fixed;
-      top:15px;
-      right:20px;
-      z-index:999;
-      background:linear-gradient(135deg,#16a34a,#22c55e);
-      color:#fff;
-      padding:8px 16px;
-      border-radius:30px;
-      font-size:12px;
-      text-decoration:none;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 5px 15px rgba(0,0,0,.25);
-      transition:.3s ease;
-    }
-    .admin-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 20px rgba(0,0,0,.3);
-      background:linear-gradient(135deg,#15803d,#22c55e);
-    }
-    @media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    align-self: flex-start; 
-    right: auto;
-    width: fit-content;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+<style>
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
 }
-    /* TAB STYLE */
-    .tab-menu {
-      display: flex;
-      gap: 10px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-    }
-    .tab-menu button {
-      padding: 8px 20px;
-      background-color: #ffffff;
-      color: #3a3a3a;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    .tab-menu button:hover {
-      background-color: #3cb371;
-      color: white;
-      transform: translateY(-1px);
-    }
-    .tab-menu button.active {
-      background-color: #3cb371;
-      color: white;
-    }
-    .tab-content {
-      display: none;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 10px;
-      margin-top: 10px;
-      animation: fadeIn 0.5s ease-out;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    .sub-tab-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 15px 0;
-    }
 
-    .sub-tab-btn {
-      padding: 6px 15px;
-      background-color: #20b2aa;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.3s ease;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',Arial;
+}
 
-    .sub-tab-btn:hover {
-      background-color: #3cb371;
-      color: white;
-    }
+html,body{
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+}
 
-    .sub-tab-btn.active {
-      background-color: #008080;
-      color: white;
-    }
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px 20px;
+  box-shadow:var(--shadow);
+  position:relative;
+}
 
-    .sub-tab-content {
-      display: none;
-      padding: 15px;
-      background-color: #f5f9ff;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
+.logo{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
 
-    .sub-tab-content.active {
-      display: block;
-    }
-    
-    /* Tombol Referensi */
-    .ref-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 25px;
-      background: linear-gradient(135deg, #4285F4, #34A853);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: none;
-      margin: 10px;
-      transition: all 0.3s;
-    }
-    .ref-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .btn-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    /* STYLE DROPDOWN HUBUNGI KAMI */
-    .dropdown-hubungi {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content-hubungi {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    
-    .dropdown-content-hubungi a {
-      color: #333;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      font-size: 12px;
-      transition: all 0.3s;
-    }
-    
-    .dropdown-content-hubungi a:hover {
-      background-color: #e2f8f1;
-      color: #1f8664;
-    }
-    
-    .dropdown-hubungi:hover .dropdown-content-hubungi {
-      display: block;
-    }
+.logo img{
+  width:300px;
+}
 
-    /* ANIMASI */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:12px;
+  margin-top:20px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:7px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+  white-space:nowrap;
+}
+
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown-hubungi{position:relative}
+.dropdown-content-hubungi{
+  display:none;
+  position:absolute;
+  top:42px;
+  left:0;
+  background:#fff;
+  min-width:180px;
+  box-shadow:var(--shadow);
+  border-radius:14px;
+  overflow:hidden;
+  z-index:10;
+}
+.dropdown-content-hubungi a{
+  padding:10px 15px;
+  font-weight:600;
+  display:flex;
+  gap:8px;
+  color:#333;
+}
+.dropdown-content-hubungi a:hover{
+  background:#e9f7f0;
+  color:var(--green-dark);
+}
+.dropdown-hubungi:hover .dropdown-content-hubungi{display:block}
+
+/* ===== MAIN ===== */
+main{
+  flex:1;
+  padding:40px 20px;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-title{
+  max-width:1100px;
+  margin:0 auto 35px;
+  background:linear-gradient(135deg,#ffffff,#f0fdf4);
+  padding:35px;
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .6s ease;
+}
+.page-title h1{
+  font-size:32px;
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.page-title p{margin-top:8px;color:#555}
+
+/* ===== KEGIATAN GRID ===== */
+.kegiatan-grid{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  animation:fadeUp .6s ease;
+}
+
+.kegiatan-card{
+  background:var(--card);
+  padding:35px 25px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.kegiatan-card:hover{
+  transform:translateY(-6px);
+}
+.kegiatan-card i{
+  font-size:42px;
+  color:var(--green);
+  margin-bottom:15px;
+}
+.kegiatan-card h3{
+  color:var(--green);
+  margin-bottom:6px;
+}
+.kegiatan-card span{
+  font-size:14px;
+  color:#555;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.small{font-size:14px;color:#666}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+
+</style>
 </head>
+
 <body>
-    <header>
+
+<header>
+  <div class="header-bar">
     <div class="logo">
-      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
-      <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
-  <i class="fas fa-user-shield"></i> Admin Dashboard
-  </a>
+      <img src="logopanjang.png">
     </div>
-    <nav>
-      <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
-        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-        <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
-        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
-        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-        <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li class="dropdown-hubungi">
-          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
-          <div class="dropdown-content-hubungi">
-            <a href="#"><i class="fas fa-envelope"></i> Email</a>
-            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <div class="kegiatan-container">
-      <h2>KEGIATAN</h2>
-      <div class="tab-menu">
-  <button onclick="window.location.href='jadwal.html'" class="tab-btn">
-    <i class="fas fa-calendar-alt"></i> JADWAL
-  </button>
-  <button onclick="window.open('https://docs.google.com/spreadsheets/d/1daQw6_xB_Nwb3K3K4Rs6hHmAngB2G_RjSZwHJSFzMYY/edit?gid=115848623#gid=115848623', '_blank')" class="tab-btn">
-    <i class="fas fa-user-md"></i> JADWAL CUTI DOKTER
-  </button>
-  <button onclick="window.open('https://drive.google.com/drive/folders/1fRqh8NrAoExDYz3PpySuo9eQoo7hLJJO', '_blank')" class="tab-btn">
-    <i class="fas fa-random"></i> POA
-  </button>
-</div>
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
+  </div>
 
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
+        <a><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+        <div class="dropdown-content-hubungi">
+          <a href="#"><i class="fas fa-envelope"></i> Email</a>
+          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
         </div>
-      </div>
-    </div>
-  </main>
-  <footer>
-      <div>
-        <strong>MEDICAL RECORD</strong><br />
-        <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-      </div>
-    </div>
-  </footer>
+      </li>
+    </ul>
+  </nav>
+</header>
 
-  <script>
+<main>
+
+<section class="page-title">
+  <h1><i class="fas fa-calendar-check"></i> Kegiatan Unit</h1>
+  <p>Agenda dan aktivitas Unit Rekam Medis RSU An’Nimah</p>
+</section>
+
+<section class="kegiatan-grid">
+
+  <div class="kegiatan-card" onclick="location.href='jadwal.html'">
+    <i class="fas fa-calendar-alt"></i>
+    <h3>JADWAL</h3>
+    <span>Jadwal kegiatan & agenda</span>
+  </div>
+
+  <div class="kegiatan-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1daQw6_xB_Nwb3K3K4Rs6hHmAngB2G_RjSZwHJSFzMYY','_blank')">
+    <i class="fas fa-user-md"></i>
+    <h3>JADWAL CUTI DOKTER</h3>
+    <span>Informasi cuti dokter</span>
+  </div>
+
+  <div class="kegiatan-card" onclick="window.open('https://drive.google.com/drive/folders/1fRqh8NrAoExDYz3PpySuo9eQoo7hLJJO','_blank')">
+    <i class="fas fa-random"></i>
+    <h3>POA</h3>
+    <span>Plan of Action</span>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+</footer>
+
+<script>
     // USER AUTH
     const userInfoDiv = document.getElementById("user-info");
     const loggedInUser = localStorage.getItem("loggedInUser");
@@ -474,4 +351,3 @@
   </script>
 </body>
 </html>
-
