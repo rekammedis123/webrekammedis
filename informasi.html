@@ -1,476 +1,379 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="logorekammedis.ico">
-  <title>Informasi - Medical Record</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', Verdana, Geneva, Tahoma, sans-serif;
-    }
-    html, body {
-      height: 100%;
-      background: linear-gradient(135deg, #ffffff, #eeecec);
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      background: linear-gradient(150deg, #ffffff, #66a378); 
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.808);
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .logo img {
-      width: 300px;
-      height: 70px;
-      margin-right: 1px;
-    }
-    .judul h1 {
-      font-size: 30px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .judul {
-      font-size: 25px;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #3a3a3a;
-    }
-    .user-info {
-      text-align: right;
-      font-size: 13px;
-      margin-top: 10px;
-      color: hsl(0, 0%, 100%);
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      padding: 10px;
-      background: linear-gradient(5deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      border-radius: 50px;
-      font-size: 13px;
-      justify-content: center;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #027e40;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #3a3a3a;
-      font-weight: bold;
-      border-radius: 50px;
-      padding: 5px 15px;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    nav ul li a:hover {
-      color: #5aa190;
-      font-weight: bold;
-    }
-    main {
-      flex: 1;
-      padding: 30px 20px;
-    }
-    .info-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background-color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,128,128,0.1);
-      animation: fadeIn 0.8s ease-out;
-    }
-    .info-container h2 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #088a6e;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .info-container h2::before {
-      content: "\f05a";
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900; 
-      margin-right: 8px;
-    }
-    footer {
-      background: linear-gradient(150deg, #ffffff, #ffffff); /* Biru pastel rumah sakit */
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 30px 20px;
-      font-size: 18px;
-      gap: 20px;
-      color: #3a3a3a;
-      border-top: 2px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 10px #027e40;
-    }
-    .footer-left,
-    .footer-center,
-    .footer-right {
-      flex: 1 1 100%;
-    }
-    .footer-left img {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-    }
-    .footer-left {
-      display: flex;
-      align-items: flex-start;
-    }
-    .small{font-size:14px;color:#555}
-    @media (min-width: 600px) {
-      .footer-left, .footer-center, .footer-right {
-        flex: 1;
-      }
-    }
-    /* ===== ADMIN BUTTON ===== */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="logorekammedis.ico">
+<title>Informasi | Medical Record</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',Arial;
+}
+
+html,body{
+  min-height:100vh;
+  background:var(--bg);
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.logo img{width:300px;height:70px}
+
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* ADMIN */
 .admin-btn{
-  position:fixed;
-  top:15px;
-  right:20px;
-  z-index:999;
-  background:linear-gradient(135deg,#16a34a,#22c55e);
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
   color:#fff;
-  padding:8px 16px;
+  padding:8px 18px;
   border-radius:30px;
   font-size:12px;
   text-decoration:none;
   display:flex;
   align-items:center;
   gap:8px;
-  box-shadow:0 5px 15px rgba(0,0,0,.25);
-  transition:.3s ease;
+  box-shadow:var(--shadow);
+  transition:.3s;
 }
-.admin-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
-  background:linear-gradient(135deg,#15803d,#22c55e);
-}
-@media (max-width: 1024px) {
-  .admin-btn {
-    position: relative;
-    top: auto;
-    right: auto;
-    margin-top: 15px;
-  }
-  .logo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-                        .tab-menu {
-                        display: flex;
-                        gap: 10px;
-                        margin: 20px 0;
-                        flex-wrap: wrap;
-                      }
-                      .tab-menu button {
-                        padding: 8px 20px;
-                        background-color: #ffffff;
-                        color: #3a3a3a;
-                        border: none;
-                        border-radius: 50px;
-                        cursor: pointer;
-                        font-weight: bold;
-                        font-size: 15px;
-                        transition: all 0.3s ease;
-                        display: flex;
-                        align-items: center;
-                        gap: 5px;
-                        box-shadow: 0 0 5px #00000027;
-                      }
-                      .tab-menu button:hover {
-                        background-color: #3cb371;
-                        color: white;
-                        transform: translateY(-1px);
-                      }
-                      .tab-menu button.active {
-                        background-color: #3cb371;
-                        color: white;
-                      }
-                      
-                      .tab-content {
-                        display: none;
-                        padding: 15px;
-                        background-color: #ffffff00;
-                        box-shadow: 0 0 10px #00000015;
-                        border-radius: 50px;
-                        margin-top: 10px;
-                        animation: fadeIn 0.5s ease-out;
-                      }
-                      .tab-content.active {
-                        display: block;
-                      }
-    
-              .sub-tab-menu button {
-                padding: 8px 20px;
-                background-color: #ffffff;
-                color: #3a3a3a;
-                border: none;
-                border-radius: 50px;
-                cursor: pointer;
-                font-weight: bold;
-                font-size: 15px;
-                transition: all 0.3s ease;
-                align-items: center;
-                gap: 5px;
-                box-shadow: 0 0 5px #00000027;
-              }
-              .sub-tab-menu button:hover {
-                background-color: #3cb371;
-                color: white;
-                transform: translateY(-1px);
-              }
-              .tab-menu button.active {
-              background-color: #3cb371;
-              color: white;
-              }
-    
-    /* Info list */
-    .info-content {
-      line-height: 1.6;
-    }
-    .info-content p {
-      margin-bottom: 15px;
-    }
-    .info-list {
-      list-style: none;
-      padding-left: 20px;
-    }
-    .info-list li {
-      margin-bottom: 10px;
-      position: relative;
-      padding-left: 25px;
-    }
-    .info-list li::before {
-      content: "•";
-      color: #20b2aa;
-      font-size: 20px;
-      position: absolute;
-      left: 0;
-      top: -2px;
-    }
-    .dropdown-hubungi {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content-hubungi {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    
-    .dropdown-content-hubungi a {
-      color: #333;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-      font-size: 12px;
-      transition: all 0.3s;
-    }
-    
-    .dropdown-content-hubungi a:hover {
-      background-color: #e2f8f1;
-      color: #1f8664;
-    }
-    
-    .dropdown-hubungi:hover .dropdown-content-hubungi {
-      display: block;
-    }
+.admin-btn:hover{transform:translateY(-2px)}
 
-    /* Modal untuk login */
-    .login-modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-    }
-    
-    .login-modal-content {
-      background-color: #fefefe;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      animation: modalFadeIn 0.3s;
-    }
-    
-    .close-modal {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    
-    .close-modal:hover {
-      color: black;
-    }
-    
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: translateY(-50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+/* ===== MAIN ===== */
+main{
+  flex:1;
+  padding:40px 20px;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-title{
+  max-width:1100px;
+  margin:0 auto 30px;
+  background:var(--card);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .5s ease;
+}
+.page-title h1{
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:32px;
+}
+.page-title p{
+  margin-top:8px;
+  color:#555;
+}
+
+/* ===== CONTENT ===== */
+.info-container{
+  max-width:1000px;
+  margin:auto;
+  background:var(--card);
+  padding:30px;
+  border-radius:24px;
+  box-shadow:var(--shadow);
+}
+
+/* ===== TAB CARD (STYLE REGULASI) ===== */
+.tab-menu{
+  max-width:1100px;
+  margin:auto;
+  color:#1f7f53;
+  padding:30px;
+  border-radius:22px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+  animation:fadeUp .5s ease;
+}
+
+.tab-menu button{
+  background:var(--card);
+  padding: 30px;;
+  border:none;
+  color:var(--green);
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  text-align:center;
+  transition:.35s ease;
+}
+
+/* icon */
+.tab-menu button i{
+  font-size:36px;
+  color:var(--green);
+  margin-bottom:15px;
+}
+
+/* title */
+.tab-menu button h3{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+/* desc */
+.tab-menu button span{
+  font-size:13px;
+  color:#777;
+}
+
+/* hover = regulasi */
+.tab-menu button:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,.15);
+}
+
+/* active = regulasi highlight */
+.tab-menu button.active{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+.tab-menu button.active i,
+.tab-menu button.active span{
+  color:#fff;
+}
+
+/* ===== SUB TAB (BIAR MASIH PIL) ===== */
+.sub-tab-menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.sub-tab-menu button{
+  background:#fff;
+  border:none;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.sub-tab-menu button:hover{
+  background:#149454;
+  color:#fff;
+  transform:translateY(-3px);
+}
+
+.tab-content{
+  display:none;
+  animation:fadeUp .4s ease;
+}
+.tab-content.active{
+  display:block;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
+
+/* ===== DROPDOWN ===== */
+.dropdown-hubungi{position:relative}
+.dropdown-content-hubungi{
+  display:none;
+  position:absolute;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  top:100%;
+  left:0;
+}
+.dropdown-content-hubungi a{
+  display:block;
+  padding:10px 15px;
+  color:#444;
+  text-decoration:none;
+  font-size:13px;
+}
+.dropdown-content-hubungi a:hover{
+  background:#e9f7f0;
+  color:var(--green-dark);
+}
+.dropdown-hubungi:hover .dropdown-content-hubungi{
+  display:block;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
+
 <body>
-    <header>
+
+<header>
+  <div class="header-bar">
     <div class="logo">
-      <img src="logopanjang.png" alt="Logo Rumah Sakit" />
-      <a href="admin_index.html" class="admin-btn" title="Admin Dashboard">
-        <i class="fas fa-user-shield"></i> Admin Dashboard
-      </a>
-    </div>
-    <div class="user-info" id="user-info"></div>
-    <nav>
-      <ul>
-        <li><a href="index.html" title="Beranda"><i class="fas fa-home"></i>BERANDA</a></li></li>
-        <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
-        <li><a href="regulasi.html"><i class="fa-solid fa-swatchbook"></i> REGULASI</a></li>
-        <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
-        <li><a href="layanan.html"><i class="fa-solid fa-headset"></i> LAYANAN INTERNAL</a></li>
-        <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
-        <li><a href="laporan.html"><i class="fa-solid fa-database"></i> LAPORAN</a></li>
-        <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
-        <li class="dropdown-hubungi">
-          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
-          <div class="dropdown-content-hubungi">
-            <a href="#"><i class="fas fa-envelope"></i> Email</a>
-            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-  <div class="info-container">
-    <h2>INFORMASI</h2>
-    <div class="tab-menu">
-      <button class="tab-btn" data-tab="sumber"><i class="fa-brands fa-sourcetree"></i> SUMBER</button>
-       <button class="tab-btn" onclick="location.href='coding.html'">
-      <i class="fas fa-book-open"></i> CODING
-    </button>
-    <button class="tab-btn" onclick="location.href='pemusnahan.html'">
-      <i class="fas fa-user-shield"></i> DOKUMENTASI PEMUSNAHAN BERKAS RM
-    </button>
+      <img src="logopanjang.png">
     </div>
 
-    <div id="sumber" class="tab-content">
-      <div class="sub-tab-menu">
-        <button class="sub-tab-btn" data-subtab="Flyer" id="flyerBtn">Flyer</button>
-        <button class="sub-tab-btn" data-subtab="whatsapp" id="whatsappBtn">Whatsapp</button>
-        <button class="sub-tab-btn" data-subtab="rapat" id="rapatBtn">Rapat</button>
-        <button class="sub-tab-btn" data-subtab="tatanaskah" id="tatanaskahBtn">Tata Naskah</button>
-      </div>
-    </div>
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
   </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
+        <a><i class="fas fa-phone"></i> HUBUNGI KAMI</a>
+        <div class="dropdown-content-hubungi">
+          <a href="#"><i class="fas fa-envelope"></i> Email</a>
+          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-title">
+  <h1><i class="fas fa-info-circle"></i> Informasi</h1>
+</section>
+
+  <div class="tab-menu">
+  <button class="tab-btn" data-tab="sumber">
+    <i class="fas fa-sitemap"></i>
+    <h3>SUMBER</h3>
+    <span>Sumber informasi</span>
+  </button>
+
+  <button onclick="location.href='coding.html'">
+    <i class="fas fa-book-open"></i>
+    <h3>CODING</h3>
+    <span>Informasi coding</span>
+  </button>
+
+  <button onclick="location.href='pemusnahan.html'">
+    <i class="fas fa-user-shield"></i>
+    <h3>PEMUSNAHAN RM</h3>
+    <span>Dokumen pemusnahan</span>
+  </button>
+</div>
+
+<div id="sumber" class="tab-content">
+  <div class="sub-tab-menu">
+    <button>Flyer</button>
+    <button>WhatsApp</button>
+    <button>Rapat</button>
+    <button>Tata Naskah</button>
+  </div>
+</div>
+
+</section>
+
 </main>
 
 <footer>
-  <div>
-    <strong>MEDICAL RECORD</strong><br />
-    <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
-  </div>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
 </footer>
 
 <script>
-  // TAB SYSTEM
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-  
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetContent = document.getElementById(btn.dataset.tab);
-      const isActive = btn.classList.contains('active');
-      
-      if (!isActive) {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-      }
-      
-      if (targetContent) {
-        btn.classList.toggle('active', !isActive);
-        targetContent.classList.toggle('active', !isActive);
-      }
-    });
-  });
+const tabBtns=document.querySelectorAll('.tab-btn');
+const tabContents=document.querySelectorAll('.tab-content');
 
-  const subTabBtns = document.querySelectorAll('.sub-tab-btn');
-  subTabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const parentTab = btn.closest('.tab-content');
-      parentTab.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-      parentTab.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
-      
-      btn.classList.add('active');
-      const subtabId = btn.dataset.subtab.toLowerCase();
-      const subtabElement = parentTab.querySelector(`#${subtabId}`);
-      if (subtabElement) subtabElement.classList.add('active');
-    });
-  });
-
-  // LINK HANDLER
-  const links = {
-    flyer: 'https://drive.google.com/drive/folders/1KhbQU9dNNHzu50-iCMx3vy1ozimeb-RQ?usp=sharing',
-    whatsapp: 'https://drive.google.com/drive/folders/1gPI-WEyGb0czLpjUbXey__cBQavyYu2d?usp=sharing',
-    rapat: 'https://drive.google.com/drive/folders/1zVn5Fdqyepy8yxtKIyxXKObvHGOQEq8a?usp=sharing',
-    tatanaskah: 'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK',
-  };
-  
-  function handleButtonClick(buttonId, linkKey) {
-    const button = document.getElementById(buttonId);
-    if (button) {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (links[linkKey]) {
-          window.open(links[linkKey], '_blank');
-        }
-      });
-    }
+tabBtns.forEach(btn=>{
+  btn.onclick=()=>{
+    tabBtns.forEach(b=>b.classList.remove('active'));
+    tabContents.forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
   }
+});
 
-  handleButtonClick('flyerBtn', 'flyer');
-  handleButtonClick('whatsappBtn', 'whatsapp');
-  handleButtonClick('rapatBtn', 'rapat');
-  handleButtonClick('tatanaskahBtn', 'tatanaskah');
+const links={
+  flyer:'https://drive.google.com/drive/folders/1KhbQU9dNNHzu50-iCMx3vy1ozimeb-RQ',
+  whatsapp:'https://drive.google.com/drive/folders/1gPI-WEyGb0czLpjUbXey__cBQavyYu2d',
+  rapat:'https://drive.google.com/drive/folders/1zVn5Fdqyepy8yxtKIyxXKObvHGOQEq8a',
+  tatanaskah:'https://drive.google.com/drive/folders/1mq9LyStksMK9u4yzxL8qAWE-s4TrzkpK'
+};
+
+Object.keys(links).forEach(id=>{
+  document.getElementById(id+'Btn').onclick=()=>window.open(links[id],'_blank');
+});
 </script>
+
 </body>
 </html>
-
-
