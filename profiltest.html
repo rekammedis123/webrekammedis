@@ -1,101 +1,324 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="logorekammedis.ico">
-<title>Profil Unit - Medical Record</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="logorekammedis.ico">
+<title>Regulasi | Medical Record</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  margin: 0;
-  padding: 30px;
+:root{
+  --green:#2fa36b;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --card:#ffffff;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',Arial;
 }
 
-h2 {
-  color: #2e8b57;
-  margin-bottom: 10px;
+html,body{
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-.section {
-  margin-bottom: 30px;
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
 }
 
-iframe {
-  width: 100%;
-  height: 480px;
-  border-radius: 15px;
-  border: none;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+.logo{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.logo img{width:300px;height:70px}
+
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:12px;
+  margin-top:20px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
 }
 
-.footer {
-  margin-top: 30px;
-  font-size: 14px;
-  color: #555;
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  font-size:14px;
+  border-radius:50px;
+  padding:7px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+  white-space:nowrap;
 }
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+
+/* DROPDOWN */
+.dropdown-hubungi{position:relative}
+.dropdown-content-hubungi{
+  display:none;
+  position:absolute;
+  top:42px;
+  left:0;
+  background:#fff;
+  min-width:180px;
+  box-shadow:var(--shadow);
+  border-radius:14px;
+  overflow:hidden;
+  z-index:10;
+}
+.dropdown-content-hubungi a{
+  padding:10px 15px;
+  font-weight:600;
+  font-size:14px;
+  display:flex;
+  gap:8px;
+  color:#333;
+}
+.dropdown-content-hubungi a:hover{
+  background:#e9f7f0;
+  color:var(--green-dark);
+}
+.dropdown-hubungi:hover .dropdown-content-hubungi{display:block}
+
+/* ===== MAIN ===== */
+main{
+  flex:1;
+  padding:40px 20px;
+}
+
+/* ===== PAGE TITLE ===== */
+.page-title{
+  max-width:1200px;
+  margin:0 auto 35px;
+  background:linear-gradient(135deg,#ffffff,#f0fdf4);
+  padding:35px;
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  animation:fadeUp .6s ease;
+}
+.page-title h1{
+  font-size:32px;
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.page-title p{margin-top:8px;color:#555}
+
+/* ===== REGULASI GRID ===== */
+.regulasi-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+  animation:fadeUp .6s ease;
+}
+
+.regulasi-card{
+  background:var(--card);
+  padding:32px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+  cursor:pointer;
+  text-align:center;
+}
+.regulasi-card:hover{transform:translateY(-6px)}
+.regulasi-card i{
+  font-size:38px;
+  color:var(--green);
+  margin-bottom:15px;
+}
+.regulasi-card h3{
+  color:var(--green);
+  margin-bottom:6px;
+}
+.regulasi-card span{
+  font-size:14px;
+  color:#555;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <div class="section">
-    <h2>Visi</h2>
-    <p id="visi"></p>
+<header>
+  <div class="logo">
+    <img src="logopanjang.png">
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
   </div>
 
-  <div class="section">
-    <h2>Misi</h2>
-    <p id="misi"></p>
+    <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-title">
+  <h1><i class="fas fa-swatchbook"></i> Regulasi Rekam Medis</h1>
+  <p>Pedoman, SOP, kebijakan & dokumen Unit Rekam Medis RSU An’Nimah</p>
+</section>
+
+<section class="regulasi-grid">
+
+  <div class="regulasi-card" onclick="location.href='pedoman.html'">
+    <i class="fas fa-book"></i>
+    <h3>PEDOMAN</h3>
+    <span>Pedoman kerja Rekam Medis</span>
   </div>
 
-  <div class="section">
-    <h2>Struktur Organisasi</h2>
-    <p id="struktur"></p>
+  <div class="regulasi-card" onclick="window.open('https://drive.google.com/panduan','_blank')">
+    <i class="fas fa-book-open"></i>
+    <h3>PANDUAN</h3>
+    <span>Panduan pelaksanaan</span>
   </div>
 
-  <div class="section">
-    <h2>SOTK</h2>
-    <iframe id="sotkFrame"></iframe>
+  <div class="regulasi-card" onclick="location.href='spo.html'">
+    <i class="fas fa-file-contract"></i>
+    <h3>SPO</h3>
+    <span>Standar Prosedur Operasional</span>
   </div>
 
-  <div class="footer">
-    <p>
-      Terakhir diperbarui oleh <b id="admin"></b><br>
-      <span id="lastUpdate"></span>
-    </p>
+  <div class="regulasi-card" onclick="window.open('https://drive.google.com/drive/folders/1kFbCnU0Oxyte3r2AvUYhE0Dl4yO6R_bR','_blank')">
+    <i class="fas fa-file-signature"></i>
+    <h3>SK</h3>
+    <span>Surat Keputusan</span>
   </div>
 
-</div>
+  <div class="regulasi-card" onclick="window.open('https://drive.google.com/drive/folders/1O8trYav35e8RgmmlxWjDwhvUCpW_0POh','_blank')">
+    <i class="fas fa-envelope"></i>
+    <h3>EDARAN</h3>
+    <span>Surat Edaran</span>
+  </div>
+
+  <div class="regulasi-card" onclick="window.open('https://drive.google.com/drive/folders/1RdhhR4PeVxE9IUh4kIFYH0XRatTE1s3v','_blank')">
+    <i class="fas fa-route"></i>
+    <h3>ALUR</h3>
+    <span>Alur pelayanan</span>
+  </div>
+
+  <div class="regulasi-card" onclick="location.href='bpjs.html'">
+    <i class="fas fa-hospital-user"></i>
+    <h3>BPJS</h3>
+    <span>Dokumen BPJS</span>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <strong>MEDICAL RECORD</strong>
+  <div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+</footer>
+
+</body>
+</html>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbzzzw7iroVgV-nz7AFcbxKU706DEux8TyAVMkYsGT7nWPvgYspB6YBWIIDNxNpUWCQ5/exec';
+/* ===== USER AUTH ===== */
+const userInfoDiv = document.getElementById("user-info");
+const uploadBox = document.getElementById("upload-box");
+const loggedInUser = localStorage.getItem("loggedInUser");
 
-fetch(API_URL)
-  .then(res => res.json())
-  .then(data => {
-    visi.innerText = data.visi || '-';
-    misi.innerText = data.misi || '-';
-    struktur.innerText = data.struktur || '-';
-    sotkFrame.src = data.sotk_link || '';
-    admin.innerText = data.admin || 'Admin';
-    lastUpdate.innerText = data.last_update
-      ? new Date(data.last_update).toLocaleString('id-ID')
-      : '-';
-  });
+if (loggedInUser) {
+  userInfoDiv.innerHTML = `
+    <i class="fas fa-user"></i> ${loggedInUser}
+    <a href="#" id="logout-btn" style="margin-left:10px">Logout</a>
+  `;
+  if (loggedInUser === "admin") uploadBox.style.display = "block";
+
+  document.getElementById("logout-btn").onclick = e=>{
+    e.preventDefault();
+    localStorage.removeItem("loggedInUser");
+    location.href="login.html";
+  }
+}else{
+  userInfoDiv.innerHTML = `<a href="login.html">Login</a>`;
+}
 </script>
 
 </body>
