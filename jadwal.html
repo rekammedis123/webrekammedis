@@ -90,6 +90,7 @@ nav ul li a{
   text-decoration:none;
   color:#444;
   font-weight:600;
+  font-size: 14px;
   border-radius:50px;
   padding:6px 16px;
   display:flex;
@@ -125,7 +126,7 @@ nav ul li a.active{
       padding: 10px 15px;
       text-decoration: none;
       display: block;
-      font-weight: 600;
+      font-size: 14px;
       transition: all 0.3s;
     }
     .dropdown-content-hubungi a:hover {
@@ -316,14 +317,14 @@ footer{
       <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
       <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
       <li class="dropdown-hubungi">
-        <a><i class="fas fa-phone"></i> HUBUNGI KAMI</a>
-        <div class="dropdown-content-hubungi">
-          <a href="#"><i class="fas fa-envelope"></i> Email</a>
-          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-        </div>
-      </li>
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
     </ul>
   </nav>
 </header>
