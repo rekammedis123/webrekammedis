@@ -212,7 +212,7 @@ footer{
     <option value="icd9">ICD 9</option>
     <option value="mcu">MCU</option>
   </select>
-  <input id="kode" placeholder="Kode ICD">
+  <input id="kode" placeholder="Kode ICD" oninput="this.value=this.value.toUpperCase()">
   <input id="deskripsi" placeholder="Deskripsi">
   <input id="catatan" placeholder="Catatan / Keterangan">
   <button class="btn" onclick="tambahICD()">Simpan</button>
