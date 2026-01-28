@@ -110,6 +110,7 @@ nav ul li a{
   text-decoration:none;
   color:#444;
   font-weight:600;
+  font-size:14px;
   border-radius:50px;
   padding:6px 16px;
   display:flex;
@@ -152,6 +153,16 @@ main{
   font-family:"Font Awesome 6 Free";
   font-weight:900;
 }
+.laporan-container h3{
+  color:var(--green);
+  margin-bottom:8px;
+}
+button span {
+  font-size: 14px;
+  font-weight: 450;
+  color: #555;
+  letter-spacing: 0.3px;
+}
 
 /* ===== TAB CARD ===== */
 .tab-menu{
@@ -185,12 +196,8 @@ main{
 
 .tab-menu button:hover{
   transform:translateY(-6px);
-  background:linear-gradient(135deg,var(--green),var(--green-dark));
-  color:#fff;
 }
-.tab-menu button:hover i{
-  color:#fff;
-}
+
 
 /* ===== FOOTER ===== */
 footer{
@@ -215,6 +222,7 @@ footer{
 .dropdown-content-hubungi a{
   display:block;
   padding:10px 15px;
+  font-size:14px;
   color:#444;
   text-decoration:none;
   font-size:13px;
@@ -250,7 +258,6 @@ footer{
       <i class="fas fa-user-shield"></i> Admin Dashboard
     </a>
   </div>
-
   <nav>
     <ul>
       <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
@@ -262,14 +269,14 @@ footer{
       <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
       <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
       <li class="dropdown-hubungi">
-        <a><i class="fas fa-phone"></i> HUBUNGI KAMI</a>
-        <div class="dropdown-content-hubungi">
-          <a href="#"><i class="fas fa-envelope"></i> Email</a>
-          <a href="#"><i class="fas fa-phone"></i> Telepon</a>
-          <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
-        </div>
-      </li>
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
     </ul>
   </nav>
 </header>
@@ -284,24 +291,29 @@ footer{
     <div class="tab-menu">
       <button onclick="window.open('https://drive.google.com/drive/folders/1lYGg3077i7PTouMVn7Ks3nXyOFZPfh7C','_blank')">
         <i class="fas fa-sign-in-alt"></i>
-        LAPORAN INTERNAL
+        <h3>LAPORAN INTERNAL</h3>
+        <span>Laporan Bulanan Rekam Medis</span>
       </button>
 
       <button onclick="window.open('https://','_blank')">
         <i class="fas fa-sign-out-alt"></i>
-        LAPORAN EKSTERNAL
+        <h3>LAPORAN EKSTERNAL</h3>
+        <span>On Progress</span>
       </button>
       <button onclick="window.open('https://drive.google.com/drive/folders/1ETmdzkvzPZqiUSahkOmOqpEtemqkMtk1','_blank')">
         <i class="fa-solid fa-chart-column"></i>
-        STATISTIK
+        <h3>STATISTIK</h3>
+        <span>Data Kunjungan Pasien</span>
       </button>
       <button onclick="window.open('https://docs.google.com/spreadsheets/d/19dS4uTYxv-ok3uz5am2kQBceAh5aCzbHnimlX2dqkRA','_blank')">
         <i class="fa-solid fa-chart-column"></i>
-        REKAPITULASI SEP
+        <h3>REKAPITULASI SEP</h3>
+        <span>Kendala Approval SEP Manual</span>
       </button>
       <button onclick="window.open('https://docs.google.com/spreadsheets/d/1JUCFc1wupNa3qsltPKn86TKUzO40si0N60qW0EP-ivg','_blank')">
         <i class="fas fa-database"></i>
-        RAWAT JALAN
+        <h3>RAWAT JALAN</h3>
+        <span>Rekapitulasi Pendaftaran Pasien Rawat Jalan / Tindak Lanjut Pasien</span>
       </button>
     </div>
 </section>
