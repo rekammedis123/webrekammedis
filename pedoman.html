@@ -81,6 +81,7 @@ nav ul li a{
   text-decoration:none;
   color:#444;
   font-weight:600;
+  font-size:14px;
   border-radius:50px;
   padding:6px 16px;
   display:flex;
@@ -151,7 +152,40 @@ main{
 .file-list{
   list-style:none;
 }
-
+/* STYLE DROPDOWN HUBUNGI KAMI */
+    .dropdown-hubungi {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content-hubungi {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .dropdown-content-hubungi a {
+      color: #333;
+      padding: 10px 15px;
+      font-size:14px;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .dropdown-content-hubungi a:hover {
+      background-color: #e2f8f1;
+      color: #1f8664;
+    }
+    
+    .dropdown-hubungi:hover .dropdown-content-hubungi {
+      display: block;
+    }
 /* ===== ITEM KLIK FULL ===== */
 .file-link{
   text-decoration:none;
@@ -224,8 +258,7 @@ footer{
       <i class="fas fa-user-shield"></i> Admin Dashboard
     </a>
   </div>
-
-  <nav>
+<nav>
     <ul>
       <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
       <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
@@ -235,6 +268,15 @@ footer{
       <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
       <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
       <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
     </ul>
   </nav>
 </header>
