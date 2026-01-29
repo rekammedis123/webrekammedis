@@ -210,6 +210,7 @@ main{flex:1;padding:40px 20px}
   gap:10px;
 }
 
+
 /* DASHBOARD */
 .dashboard{
   margin-top:50px;
@@ -238,6 +239,23 @@ main{flex:1;padding:40px 20px}
   display:flex;
   gap:8px;
 }
+
+.dash-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.dash-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
 
 /* FOOTER */
 footer{
@@ -330,6 +348,7 @@ footer{
   </div>
 
   <div class="dashboard">
+  <a href="indikator.html" class="dash-link">
     <div class="dash-card">
       <h3><i class="fas fa-chart-line"></i> Menu Indikator</h3>
       <ul>
@@ -340,18 +359,30 @@ footer{
         <li><i class="fas fa-check-circle"></i> Kunjungan</li>
       </ul>
     </div>
-
-    <div class="dash-card">
-      <h3><i class="fas fa-headset"></i> Layanan Internal</h3>
-      <ul>
-        <li><i class="fas fa-check-circle"></i> Regulasi & SOP</li>
+  </a>
+    
+    <a href="daftarasuransi.html" class="dash-link">
+  <div class="dash-card">
+    <h3><i class="fas fa-file-medical"></i> Daftar Asuransi</h3>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> CAR</li>
+      <li><i class="fas fa-check-circle"></i> BRI Life</li>
+      <li><i class="fas fa-check-circle"></i> Prudential</li>
+      <li><i class="fas fa-check-circle"></i> Dan Lain - lain</li>
+    </ul>
+  </div>
+</a>
+<a href="layanan.html" class="dash-link">
+  <div class="dash-card">
+    <h3><i class="fas fa-headset"></i> Layanan Internal</h3>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Regulasi & SOP</li>
         <li><i class="fas fa-check-circle"></i> Informasi</li>
         <li><i class="fas fa-check-circle"></i> Laporan</li>
         <li><i class="fas fa-check-circle"></i> Kegiatan</li>
-        <li><i class="fas fa-check-circle"></i> Admin Panel</li>
-      </ul>
-    </div>
+    </ul>
   </div>
+</a>
 
 </div>
 </main>
