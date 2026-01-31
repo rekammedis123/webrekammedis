@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <title>Admin Dashboard | Medical Record</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="icon" href="logorekammedis.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root{
@@ -218,6 +217,7 @@ footer{
       <a href="admin_kunjungan.html"><i class="fas fa-chart-simple"></i> Kunjungan Pasien</a>
       <a href="admin_jadwal.html"><i class="fas fa-calendar-check"></i> Jadwal</a>
       <a href="admin_pemusnahan.html"><i class="fas fa-trash"></i> Pemusnahan</a>
+      <a href="admin_imut.html"><i class="fas fa-chart-line"></i> Imut</a>
       <a href="admin_indikatorbor.html"><i class="fas fa-chart-simple"></i> Indikator</a>
     </nav>
   </aside>
@@ -295,6 +295,24 @@ function showDashboard(){
 if(sessionStorage.getItem("adminLogin")==="true"){
   showDashboard();
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const username = document.getElementById("username");
+  const password = document.getElementById("password");
+
+  username.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      password.focus();
+    }
+  });
+
+  password.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      login();
+    }
+  });
+});
 </script>
 
 
