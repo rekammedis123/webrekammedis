@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Admin IMUT | Medical Record</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="icon" href="logorekammedis.ico">
+
+<style>
+:root{
+  --green:#16a34a;
+  --bg:#ffffff;
+  --line:#e5e7eb;
+}
+*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{margin:0;background:var(--bg)}
+.layout{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{
+  width:260px;
+  background:linear-gradient(180deg,#16a34a,#15803d);
+  color:#fff;
+  padding:25px 20px;
+}
+.brand{text-align:center;margin-bottom:40px}
+.brand i{font-size:42px;margin-bottom:10px}
+.brand h2{margin:0;font-size:20px;font-weight:600}
+
+.menu a{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;margin-bottom:14px;
+  color:#ffffff;text-decoration:none;
+  border-radius:14px;
+  transition:.3s;
+}
+.menu a:hover,.menu a.active{
+  background:rgba(255,255,255,.18);
+  transform:translateX(6px);
+}
+
+/* CONTENT */
+.content{
+  flex:1;
+  padding:35px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:.6s;
+}
+.content.show{opacity:1;transform:none}
+
+.header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:30px;
+}
+.header h1{margin:0;color:#166534}
+
+.logout{
+  background:#ef4444;color:#fff;
+  border:none;padding:10px 16px;
+  border-radius:999px;cursor:pointer;
+}
+/* ===== SUB MENU IMUT ===== */
+.menu-toggle{
+  justify-content:space-between;
+}
+
+.arrow{
+  margin-left:auto;
+  transition:.3s;
+}
+
+.submenu{
+  max-height:0;
+  overflow:hidden;
+  margin-left:25px;
+  transition:max-height .35s ease;
+}
+
+.submenu a{
+  font-size:14px;
+  padding:10px 18px;
+  margin-bottom:8px;
+  background:rgba(255,255,255,.12);
+  border-radius:12px;
+}
+
+.submenu.show{
+  max-height:350px;
+}
+
+.submenu.show ~ .menu-toggle .arrow{
+  transform:rotate(180deg);
+}
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  margin-bottom:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  opacity:0;
+  transform:translateY(20px);
+  transition:.5s;
+}
+.card-text{
+color:#252525
+}
+.card.show{opacity:1;transform:none}
+
+label{font-size:13px;color:#166534}
+select,input{
+  padding:8px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  margin:6px 0 14px;
+}
+
+/* TABLE */
+.table-wrapper{overflow-x:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+th,td{
+  border:1px solid var(--line);
+  padding:4px;
+  text-align:center;
+  font-size:12px;
+  white-space:nowrap;
+}
+th{background:var(--green);color:#fff}
+td input{
+  width:42px;
+  padding:4px;
+  font-size:12px;
+  text-align:center;
+}
+
+/* BUTTON */
+button.primary{
+  background:var(--green);
+  color:#fff;border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* SUMMARY */
+.summary{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+.summary .box{
+  background:#f0fdf4;
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+}
+.summary h2{margin:0;color:#065f46}
+
+/* LOADING */
+.loading{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.25);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+}
+.loading.show{opacity:1;pointer-events:auto}
+.spinner{
+  width:30px;height:30px;
+  border:3px solid #bbf7d0;
+  border-top:3px solid var(--green);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{text-align:center;font-size:13px;color:#166534;margin-top:40px}
+
+@media(max-width:900px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loading" id="loading"><div class="spinner"></div></div>
+
+<div class="layout">
+
+<aside class="sidebar">
+    <div class="brand">
+      <i class="fas fa-notes-medical"></i>
+      <h2>ADMIN MR</h2>
+    </div>
+    <nav class="menu">
+      <a href="admin_index.html"><i class="fas fa-gauge-high"></i> Dashboard</a>
+      <a href="admin_regulasi.html"><i class="fas fa-file-medical"></i> Regulasi</a>
+      <a href="admin_kunjungan.html"><i class="fas fa-chart-simple"></i> Kunjungan Pasien</a>
+      <a href="admin_pemusnahan.html"><i class="fas fa-trash"></i> Pemusnahan</a>
+      <a href="javascript:void(0)" class="menu-toggle" onclick="toggleImut()">
+        <i class="fas fa-chart-line"></i>
+        <span>IMUT</span>
+        <i class="fas fa-chevron-down arrow" id="imutArrow"></i>
+      </a>
+
+      <div class="submenu" id="imutSubmenu">
+        <a href="admin_imutrekammedis.html">
+            <i class="fas fa-file-medical"></i>Rekam Medis
+        </a>
+        <a href="admin_imutpendaftaran.html">
+            <i class="fas fa-user-plus"></i>Pendaftaran
+        </a>
+        <a href="admin_i.html">
+            <i class="fas fa-headset"></i>Customer Care
+        </a>
+    </div>
+
+      <a href="admin_indikatorbor.html"><i class="fas fa-chart-simple"></i> Indikator</a>
+    </nav>
+  </aside>
+
+<main class="content" id="content">
+
+<div class="header">
+  <h1>Indikator Mutu (IMUT) - REKAM MEDIS</h1>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<div class="card-text">
+<h3>Filter IMUT</h3>
+
+<label>Jenis Indikator</label>
+<select id="indikator">
+  <option value="resume">IMUT Resume Medis</option>
+  <option value="dobel">IMUT Penomoran Dobel</option>
+  <option value="ic">IMUT Informed Consent</option>
+</select>
+
+<label>Bulan</label>
+<select id="bulan"></select>
+
+<label>Tahun</label>
+<select id="tahun"></select>
+
+<button class="primary" onclick="loadData()">Tampilkan</button>
+</div>
+
+<div class="card-text">
+<h3>Input Harian</h3>
+<div class="table-wrapper">
+<table>
+<thead><tr id="tglHeader"></tr></thead>
+<tbody>
+<tr id="numRow"></tr>
+<tr id="denRow"></tr>
+</tbody>
+</table>
+</div><br>
+<button class="primary" onclick="simpan()">💾 Simpan Data</button>
+</div>
+
+<div class="card-text">
+<h3>Ringkasan</h3>
+<div class="summary">
+  <div class="box"><p>Total Numerator</p><h2 id="totalNum">0</h2></div>
+  <div class="box"><p>Total Denominator</p><h2 id="totalDen">0</h2></div>
+  <div class="box"><p>Persentase</p><h2 id="persen">0%</h2></div>
+</div>
+</div>
+
+<div class="card-text">
+<h3>Grafik Harian</h3>
+<div style="height:420px"><canvas id="chart"></canvas></div>
+</div>
+
+<footer>© 2025 Admin Medical Record RSU An Ni'mah</footer>
+
+</main>
+</div>
+
+<script>
+/* AUTH */
+if(sessionStorage.getItem("adminLogin")!=="true") location.href="admin_index.html";
+
+/* KONFIG */
+const API="https://script.google.com/macros/s/AKfycbw2bWf6egIBJjdiFCnTEaF1TEzOYYpbnV-RZmZuOdrbWw1BfJ8S_QnccarcM0BYlGIALw/exec";
+const bulanArr=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+const indikator=document.getElementById("indikator");
+const bulanSel=document.getElementById("bulan");
+const tahunSel=document.getElementById("tahun");
+const loading=document.getElementById("loading");
+const cards=document.querySelectorAll(".card");
+const content=document.getElementById("content");
+const chartEl = document.getElementById("chart");
+
+let chart;
+
+/* INIT */
+bulanArr.forEach((b,i)=>bulanSel.innerHTML+=`<option value="${i+1}">${b}</option>`);
+const now=new Date().getFullYear();
+for(let y=2020;y<=now+1;y++) tahunSel.innerHTML+=`<option ${y===now?"selected":""}>${y}</option>`;
+
+/* UI */
+const show=v=>loading.classList.toggle("show",v);
+
+/* BUILD TANGGAL */
+function buildTanggal(){
+  const days=new Date(tahunSel.value,bulanSel.value,0).getDate();
+  let th="<th>Jenis</th>", num="<td>Numerator</td>", den="<td>Denominator</td>";
+
+  for(let i=1;i<=days;i++){
+    th+=`<th>${i}</th>`;
+    num+=`<td><input data-t="${i}" data-f="num"></td>`;
+    den+=`<td><input data-t="${i}" data-f="den"></td>`;
+  }
+  tglHeader.innerHTML=th;
+  numRow.innerHTML=num;
+  denRow.innerHTML=den;
+}
+
+/* LOAD DATA */
+function loadData(){
+  show(true);
+  document.querySelectorAll("[data-t]").forEach(i=>i.value="");
+
+  fetch(`${API}?indikator=${indikator.value}&bulan=${bulanSel.value}&tahun=${tahunSel.value}&mode=harian`)
+  .then(r=>r.json())
+  .then(d=>{
+    let labels=[], nums=[], dens=[], tn=0, td=0;
+
+    d.data.forEach(x=>{
+      document.querySelector(`[data-t="${x.key}"][data-f="num"]`).value=x.num;
+      document.querySelector(`[data-t="${x.key}"][data-f="den"]`).value=x.den;
+      labels.push(x.key); nums.push(x.num); dens.push(x.den);
+      tn+=x.num; td+=x.den;
+    });
+
+    totalNum.innerText=tn;
+    totalDen.innerText=td;
+    persen.innerText=td?((tn/td)*100).toFixed(2)+"%":"0%";
+
+    if(chart) chart.destroy();
+    chart=new Chart(chartEl,{
+      type:"bar",
+      data:{labels,datasets:[
+        {label:"Numerator",data:nums},
+        {label:"Denominator",data:dens}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false}
+    });
+  })
+  .finally(()=>{
+    show(false);
+    content.classList.add("show");
+    cards.forEach((c,i)=>setTimeout(()=>c.classList.add("show"),i*120));
+  });
+}
+
+/* SIMPAN */
+async function simpan(){
+  show(true);
+  for(const inp of document.querySelectorAll('[data-f="num"]')){
+    const t=inp.dataset.t;
+    const num=inp.value;
+    const den=document.querySelector(`[data-t="${t}"][data-f="den"]`).value;
+    if(num==="" && den==="") continue;
+    await fetch(API,{method:"POST",body:JSON.stringify({
+      indikator:indikator.value,tahun:tahunSel.value,bulan:bulanSel.value,
+      tgl:Number(t),num:Number(num)||0,den:Number(den)||0
+    })});
+  }
+  await loadData();
+  show(false);
+  alert("✅ Data IMUT berhasil disimpan");
+}
+
+function toggleImut(){
+  const sub = document.getElementById("imutSubmenu");
+  const arrow = document.getElementById("imutArrow");
+
+  sub.classList.toggle("show");
+  arrow.classList.toggle("rotate");
+}
+
+/* EVENT */
+indikator.onchange=loadData;
+bulanSel.onchange=()=>{buildTanggal();loadData();}
+tahunSel.onchange=()=>{buildTanggal();loadData();}
+window.onload=()=>{buildTanggal();loadData();}
+
+/* LOGOUT */
+function logout(){
+  if(confirm("Logout?")){
+    sessionStorage.removeItem("adminLogin");
+    location.href="admin_index.html";
+  }
+}
+</script>
+
+</body>
+</html>
