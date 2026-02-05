@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <title>Admin Pemusnahan | Medical Record</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="logorekammedis.ico">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="logorekammedis.ico">
 <style>
 :root{
   --green:#329951;
@@ -119,6 +119,39 @@ body{
   transform:translateY(-2px);
 }
 
+/* ===== SUB MENU IMUT ===== */
+.menu-toggle{
+  justify-content:space-between;
+}
+
+.arrow{
+  margin-left:auto;
+  transition:.3s;
+}
+
+.submenu{
+  max-height:0;
+  overflow:hidden;
+  margin-left:25px;
+  transition:max-height .35s ease;
+}
+
+.submenu a{
+  font-size:14px;
+  padding:10px 18px;
+  margin-bottom:8px;
+  background:rgba(255,255,255,.12);
+  border-radius:12px;
+}
+
+.submenu.show{
+  max-height:350px;
+}
+
+.submenu.show ~ .menu-toggle .arrow{
+  transform:rotate(180deg);
+}
+
 /* ===== CARD ===== */
 .card{
   background:#fff;
@@ -229,8 +262,24 @@ footer{
     <a href="admin_index.html"><i class="fas fa-gauge-high"></i> Dashboard</a>
     <a href="admin_regulasi.html"><i class="fas fa-file-medical"></i> Regulasi</a>
     <a href="admin_kunjungan.html"><i class="fas fa-chart-simple"></i> Kunjungan Pasien</a>
-    <a href="admin_jadwal.html"><i class="fas fa-calendar-check"></i> Jadwal</a>
-    <a class="active"><i class="fas fa-fire"></i> Pemusnahan</a>
+    <a class="active"><i class="fas fa-trash"></i> Pemusnahan</a>
+    <a href="javascript:void(0)" class="menu-toggle" onclick="toggleImut()">
+        <i class="fas fa-chart-line"></i>
+        <span>IMUT</span>
+        <i class="fas fa-chevron-down arrow" id="imutArrow"></i>
+      </a>
+
+      <div class="submenu" id="imutSubmenu">
+        <a href="admin_imutrekammedis.html">
+            <i class="fas fa-file-medical"></i>Rekam Medis
+        </a>
+        <a href="admin_imutpendaftaran.html">
+            <i class="fas fa-user-plus"></i>Pendaftaran
+        </a>
+        <a href="admin_i.html">
+            <i class="fas fa-headset"></i>Customer Care
+        </a>
+    </div>
     <a href="admin_indikatorbor.html"><i class="fas fa-chart-simple"></i> Indikator</a>
   </nav>
 </aside>
@@ -366,6 +415,15 @@ document.getElementById("btnLogout").addEventListener("click", function(){
     window.location.href = "admin_index.html";
   }
 });
+
+function toggleImut(){
+  const sub = document.getElementById("imutSubmenu");
+  const arrow = document.getElementById("imutArrow");
+
+  sub.classList.toggle("show");
+  arrow.classList.toggle("rotate");
+}
+
 </script>
 </body>
 </html>
