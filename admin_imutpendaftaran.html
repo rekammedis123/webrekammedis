@@ -387,6 +387,14 @@ function loadData(){
   });
 }
 
+function toggleImut(){
+  const sub = document.getElementById("imutSubmenu");
+  const arrow = document.getElementById("imutArrow");
+
+  sub.classList.toggle("show");
+  arrow.classList.toggle("rotate");
+}
+
 /* SIMPAN */
 async function simpan(){
   show(true);
