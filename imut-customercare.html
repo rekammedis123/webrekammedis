@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>IMUT Customer Care – Reminder Pasien</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="icon" href="logorekammedis.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --green:#2fa36b;
+  --dark:#1f7f53;
+}
+body{
+  background:#eef5f2;
+  font-family:'Segoe UI';
+  margin:0;
+}
+main{padding:20px}
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  margin-bottom:22px;
+}
+.form-row{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+select,input,button{
+  padding:8px 16px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  font-weight:600;
+}
+button{
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+.kpi{
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  color:#fff;
+  padding:20px;
+  border-radius:18px;
+  text-align:center;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  padding:8px;
+  text-align:center;
+}
+th{
+  background:linear-gradient(135deg,var(--green),var(--dark));
+  color:#fff;
+}
+tr:nth-child(even){background:#f0fdf4}
+
+/* ===== LOADING ===== */
+.loading{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+.loading.show{opacity:1;pointer-events:auto}
+.spinner{
+  width:36px;height:36px;
+  border:4px solid #ececec;
+  border-top:4px solid var(--green);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+</div>
+
+<main>
+
+<div class="card">
+  <strong>IMUT CUSTOMER CARE – REMINDER PASIEN</strong>
+  <div class="form-row" style="margin-top:12px">
+    <select id="mode">
+      <option value="harian">Harian</option>
+      <option value="bulanan">Bulanan</option>
+    </select>
+    <select id="bulan"></select>
+    <input type="number" id="tahun">
+    <button onclick="loadData()">
+      <i class="fas fa-search"></i> Tampilkan
+    </button>
+  </div>
+</div>
+
+<div class="card kpis">
+  <div class="kpi"><h3>TARGET</h3><div>90%</div></div>
+  <div class="kpi"><h3>CAPAIAN</h3><div id="cap">0%</div></div>
+  <div class="kpi"><h3>KEKURANGAN</h3><div id="kur">0%</div></div>
+</div>
+
+<div class="card">
+<table>
+<tr id="rowT"><th>PERIODE</th></tr>
+<tr id="rowN"><th>Reminder Berhasil</th></tr>
+<tr id="rowD"><th>Total Reminder</th></tr>
+</table>
+</div>
+
+<div class="card" style="height:420px">
+<canvas id="chart"></canvas>
+</div>
+
+</main>
+
+<script>
+const API="https://script.google.com/macros/s/AKfycbzIfIOrKm6J-QXHIXNxfFZRC7WjhAUseh5saEe6lbfoSwjzF4Qrq4b0W5aDJzfvxhid/exec";
+const TARGET=90;
+const bln=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+const loading=document.getElementById("loading");
+const mode=document.getElementById("mode");
+const bulan=document.getElementById("bulan");
+const tahun=document.getElementById("tahun");
+const cap=document.getElementById("cap");
+const kur=document.getElementById("kur");
+const rowT=document.getElementById("rowT");
+const rowN=document.getElementById("rowN");
+const rowD=document.getElementById("rowD");
+const chartEl=document.getElementById("chart");
+let chart;
+
+bln.forEach((b,i)=>bulan.innerHTML+=`<option value="${i+1}">${b}</option>`);
+tahun.value=new Date().getFullYear();
+
+function hari(b,t){return new Date(t,b,0).getDate()}
+function showLoading(v){loading.classList.toggle("show",v)}
+
+function loadData(){
+showLoading(true);
+
+fetch(`${API}?bulan=${bulan.value}&tahun=${tahun.value}&mode=${mode.value}`)
+.then(r=>r.json())
+.then(r=>{
+  rowT.innerHTML="<th>PERIODE</th>";
+  rowN.innerHTML="<th>Reminder Berhasil</th>";
+  rowD.innerHTML="<th>Total Reminder</th>";
+
+  let labels=[], nums=[], dens=[];
+
+  if(mode.value==="harian"){
+    for(let i=1;i<=hari(bulan.value,tahun.value);i++){
+      const x=r.data.find(v=>v.key==i)||{num:0,den:0};
+      rowT.innerHTML+=`<th>${i}</th>`;
+      rowN.innerHTML+=`<td>${x.num}</td>`;
+      rowD.innerHTML+=`<td>${x.den}</td>`;
+      labels.push(i); nums.push(x.num); dens.push(x.den);
+    }
+  }else{
+    bln.forEach((b,i)=>{
+      const x=r.data.find(v=>v.key==i+1)||{num:0,den:0};
+      rowT.innerHTML+=`<th>${b}</th>`;
+      rowN.innerHTML+=`<td>${x.num}</td>`;
+      rowD.innerHTML+=`<td>${x.den}</td>`;
+      labels.push(b); nums.push(x.num); dens.push(x.den);
+    });
+  }
+
+  const c=r.totalDen?(r.totalNum/r.totalDen)*100:0;
+  cap.innerText=c.toFixed(2)+"%";
+  kur.innerText=Math.max(0,TARGET-c).toFixed(2)+"%";
+
+  if(chart) chart.destroy();
+  chart=new Chart(chartEl,{
+    type:"bar",
+    data:{labels,datasets:[
+      {label:"Reminder Berhasil",data:nums},
+      {label:"Total Reminder",data:dens}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false}
+  });
+})
+.finally(()=>showLoading(false));
+}
+
+loadData();
+</script>
+
+</body>
+</html>
