@@ -225,13 +225,13 @@ footer{
 <h2>Daftar ICD</h2>
 
 <div class="filter-bar">
-  <select id="filterJenis" onchange="render()">
-    <option value="">Semua ICD</option>
-    <option value="icd10">ICD 10</option>
-    <option value="icd9">ICD 9</option>
-    <option value="mcu">MCU</option>
-    <option value="kb">KB</option>
-  </select>
+  <select id="filterSheet" onchange="gantiSheet(this.value)">
+  <option value="ICD-10">ICD 10</option>
+  <option value="ICD-9">ICD 9</option>
+  <option value="MCU & VAKSIN">MCU</option>
+  <option value="KB">KB</option>
+</select>
+
   <input placeholder="Cari kode / deskripsi / catatan..."
          onkeyup="cari(this)">
 </div>
@@ -259,18 +259,19 @@ footer{
 </footer>
 
 <script>
-const API = "https://script.google.com/macros/s/AKfycbxcEbM21ukfQtnW2yipXqTmUbhs4ylye6wXogiWTp9eS10HVc_WIzeNVHlD_13Gqzg/exec";
+const API = "https://script.google.com/macros/s/AKfycby6G9EaUq164tlJdEShz_RJ1slGSoW1TVxuKbaQAk8NvmG46zkaSJ22v2Vkq8pM5co3/exec";
 
 const loading = document.getElementById("loading");
 let dataICD = [];
 let keyword = "";
 let editIndex = null;
+let currentSheet = "ICD-10"; // default
 
 window.onload = loadData;
 
 function loadData(){
   loading.style.display="flex";
-  fetch(API+"?action=get")
+  fetch(`${API}?action=get&sheet=${encodeURIComponent(currentSheet)}`)
     .then(r => r.json())
     .then(d => {
       dataICD = d;
@@ -282,13 +283,11 @@ function loadData(){
 
 function render(){
   const tb = document.getElementById("data");
-  const jenisFilter = document.getElementById("filterJenis").value;
   tb.innerHTML="";
 
   dataICD.forEach((r,i)=>{
     const text = ((r[1]||"")+(r[2]||"")+(r[3]||"")).toLowerCase();
     if(keyword && !text.includes(keyword)) return;
-    if(jenisFilter && r[0] !== jenisFilter) return;
 
     // MODE EDIT
     if(editIndex === i){
@@ -321,6 +320,13 @@ function render(){
   });
 }
 
+function gantiSheet(sheet){
+  currentSheet = sheet;
+  keyword = "";
+  editIndex = null;
+  loadData();
+}
+
 function mulaiEdit(i){
   editIndex = i;
   render();
@@ -343,7 +349,7 @@ function simpanEdit(i){
   }
 
   loading.style.display="flex";
-  fetch(`${API}?action=update&oldkode=${r[1]}&jenis=${r[0]}&kode=${kode}&deskripsi=${desk}&catatan=${cat}`)
+  fetch(`${API}?action=update&sheet=${currentSheet}&oldkode=${r[1]}&jenis=${r[0]}&kode=${kode}&diagnosa=${desk}&catatan=${cat}`)
     .then(()=>loadData());
 }
 
@@ -354,7 +360,8 @@ function cari(el){
 
 function tambahICD(){
   loading.style.display="flex";
-  fetch(`${API}?action=add&jenis=${jenis.value}&kode=${kode.value}&deskripsi=${deskripsi.value}&catatan=${catatan.value}`)
+  fetch(`${API}?action=add&sheet=${currentSheet}&jenis=${jenis.value}&kode=${kode.value}&diagnosa=${deskripsi.value}&catatan=${catatan.value}`)
+
     .then(()=>loadData());
 
   kode.value="";
@@ -365,7 +372,7 @@ function tambahICD(){
 function hapusICD(kode){
   if(!confirm("Hapus ICD ini?")) return;
   loading.style.display="flex";
-  fetch(`${API}?action=delete&kode=${kode}`)
+  fetch(`${API}?action=delete&sheet=${currentSheet}&kode=${kode}`)
     .then(()=>loadData());
 }
 </script>
