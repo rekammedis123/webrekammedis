@@ -2,37 +2,30 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>IMUT Customer Care – Reminder Pasien</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="icon" href="logorekammedis.ico">
+<title>IMUT Customer Care - Reminder Pasien</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 :root{
   --green:#2fa36b;
-  --dark:#1f7f53;
+  --green-dark:#1f7f53;
+  --bg:#eef5f2;
+  --shadow:0 12px 30px rgba(0,0,0,.12);
 }
-body{
-  background:#eef5f2;
-  font-family:'Segoe UI';
-  margin:0;
-}
-main{padding:20px}
-.card{
-  background:#fff;
-  padding:22px;
-  border-radius:20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-  margin-bottom:22px;
-}
-.form-row{
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+html,body{
+  min-height:100vh;
+  background:var(--bg);
   display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:center;
+  flex-direction:column;
 }
+main{padding:30px 20px}
+.card{background:#fff;padding:22px;border-radius:20px;margin-bottom:25px;box-shadow:var(--shadow)}
+.form-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 select,input,button{
   padding:8px 16px;
   border-radius:12px;
@@ -40,36 +33,131 @@ select,input,button{
   font-weight:600;
 }
 button{
-  background:linear-gradient(135deg,var(--green),var(--dark));
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
   color:#fff;
   border:none;
   cursor:pointer;
 }
-.kpis{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-}
-.kpi{
-  background:linear-gradient(135deg,var(--green),var(--dark));
-  color:#fff;
-  padding:20px;
-  border-radius:18px;
-  text-align:center;
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-th,td{
-  padding:8px;
-  text-align:center;
-}
-th{
-  background:linear-gradient(135deg,var(--green),var(--dark));
-  color:#fff;
-}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px;text-align:center}
+th{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff}
 tr:nth-child(even){background:#f0fdf4}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+.kpi{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:20px;border-radius:18px;text-align:center}
+
+/* ===== HEADER ===== */
+header{
+  background:linear-gradient(135deg,#ffffff,#e9f7f0);
+  padding:15px 20px;
+  box-shadow:var(--shadow);
+}
+.logo img{width:300px;height:70px}
+
+.tittle{
+  padding:22px;
+  border-radius:20px;
+  margin-bottom:25px;
+  box-shadow:var(--shadow)
+  
+}
+.tittle-font{
+color:#444;
+}
+
+/* ADMIN */
+.admin-btn{
+  margin-left:auto;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:8px 18px;
+  border-radius:30px;
+  font-size:12px;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:var(--shadow);
+  transition:.3s;
+}
+.admin-btn:hover{transform:translateY(-2px)}
+.header-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  padding:10px;
+  margin-top:15px;
+  background:#fff;
+  border-radius:50px;
+  box-shadow:var(--shadow);
+}
+nav ul li a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
+  font-size: 14px;
+  border-radius:50px;
+  padding:6px 16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:.3s;
+}
+nav ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+}
+/* ===== SIDEBAR ===== */
+.sidebar{
+  border-radius:20px;
+  padding:22px;
+  height:fit-content;
+}
+.sidebar h3{
+  color:var(--green);
+  margin-bottom:15px;
+  display:flex;
+  align-items: center;
+  gap:8px;
+}
+.sidebar ul{list-style:none}
+.sidebar ul li a{
+  display: inline-flex;   /* ⬅️ ganti dari flex */
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  background-color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  transition: .3s;
+}
+.sidebar ul li a:hover{
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  transform:translateX(5px);
+}
+.sidebar ul li a.active{
+  background: linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18);
+}
+
+.sidebar ul li a.active i{
+  color:#fff;
+}
 
 /* ===== LOADING ===== */
 .loading{
@@ -92,127 +180,269 @@ tr:nth-child(even){background:#f0fdf4}
   border-radius:50%;
   animation:spin 1s linear infinite;
 }
-@keyframes spin{
-  to{transform:rotate(360deg)}
+
+/* ===== RESPONSIVE SCROLL AREA ===== */
+.scroll-x{
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
 }
+
+.scroll-x::-webkit-scrollbar{
+  height:8px;
+}
+.scroll-x::-webkit-scrollbar-thumb{
+  background:#1277566c;
+  border-radius:20px;
+}
+.scroll-x::-webkit-scrollbar-track{
+  background:#e6f3ee;
+  border-radius:20px;
+}
+
+/* supaya tabel & chart tidak mengecil */
+.table-wide{
+  min-width:900px;
+}
+.chart-wide{
+  min-width:900px;
+  height:420px;
+}
+
+/* STYLE DROPDOWN HUBUNGI KAMI */
+    .dropdown-hubungi {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content-hubungi {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .dropdown-content-hubungi a {
+      color: #333;
+      font-size: 14px;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .dropdown-content-hubungi a:hover {
+      background-color: #e2f8f1;
+      color: #1f8664;
+    }
+    
+    .dropdown-hubungi:hover .dropdown-content-hubungi {
+      display: block;
+    }
+
+  /* ===== FOOTER ===== */
+footer{
+  background:#fff;
+  padding:30px 20px;
+  box-shadow:var(--shadow);
+}
+.small{font-size:14px;color:#666}
+  
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1}
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
 
 <body>
 
-<div class="loading" id="loading">
-  <div class="spinner"></div>
-</div>
+<header>
+  <div class="header-bar">
+    <div class="logo">
+      <img src="logopanjang.png">
+    </div>
+
+    <a href="admin_index.html" class="admin-btn">
+      <i class="fas fa-user-shield"></i> Admin Dashboard
+    </a>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html"><i class="fas fa-home"></i> BERANDA</a></li>
+      <li><a href="profil.html"><i class="fas fa-user-circle"></i> PROFIL</a></li>
+      <li><a href="regulasi.html"><i class="fas fa-swatchbook"></i> REGULASI</a></li>
+      <li><a href="informasi.html"><i class="fas fa-info-circle"></i> INFORMASI</a></li>
+      <li><a href="layanan.html"><i class="fas fa-headset"></i> LAYANAN INTERNAL</a></li>
+      <li><a href="indikator.html"><i class="fas fa-chart-line"></i> INDIKATOR</a></li>
+      <li><a href="laporan.html"><i class="fas fa-database"></i> LAPORAN</a></li>
+      <li><a href="kegiatan.html"><i class="fas fa-calendar-check"></i> KEGIATAN</a></li>
+      <li class="dropdown-hubungi">
+          <a class="dropbtn-hubungi"><i class="fas fa-phone"></i> HUBUNGI KAMI <i class="fas fa-caret-down"></i></a>
+          <div class="dropdown-content-hubungi">
+            <a href="#"><i class="fas fa-envelope"></i> Email</a>
+            <a href="#"><i class="fas fa-phone"></i> Telepon</a>
+            <a href="https://wa.me/6283153300859"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> Alamat</a>
+          </div>
+        </li>
+    </ul>
+  </nav>
+</header>
 
 <main>
 
+<aside class="sidebar">
+  <h3><i class="fas fa-list"></i> Daftar Indikator Mutu</h3>
+  <ul>
+    <li><a href="imut-rekammedis.html"><i class="fas fa-chart-line"></i> IMUT - Rekam Medis</a></li>
+    <li><a href="imut-pendaftaran.html"><i class="fas fa-bed"></i> IMUT - Pendaftaran</a></li>
+    <li><a href="imut-customercare.html" class="active"><i class="fas fa-users"></i> IMUT - Customer Care</a></li>
+  </ul>
+</aside>
+
+<div class="loading" id="loading"><div class="spinner"></div></div>
+
 <div class="card">
-  <strong>IMUT CUSTOMER CARE – REMINDER PASIEN</strong>
-  <div class="form-row" style="margin-top:12px">
+  <div class="tittle">
+  <h2 class="tittle-font">📊 IMUT CUSTOMER CARE – REMINDER PASIEN</h2>
+</div>
+  <div class="form-row">
     <select id="mode">
       <option value="harian">Harian</option>
-      <option value="bulanan">Bulanan</option>
+      <option value="tahunan">Bulanan (Tahunan)</option>
     </select>
     <select id="bulan"></select>
-    <input type="number" id="tahun">
-    <button onclick="loadData()">
-      <i class="fas fa-search"></i> Tampilkan
-    </button>
+    <select id="tahun"></select>
+    <button onclick="loadData()">Tampilkan</button>
   </div>
 </div>
 
 <div class="card kpis">
-  <div class="kpi"><h3>TARGET</h3><div>90%</div></div>
-  <div class="kpi"><h3>CAPAIAN</h3><div id="cap">0%</div></div>
-  <div class="kpi"><h3>KEKURANGAN</h3><div id="kur">0%</div></div>
+  <div class="kpi"><h3>TOTAL PASIEN</h3><div id="totalNum">0</div></div>
+  <div class="kpi"><h3>TARGET</h3><div id="totalDen">0</div></div>
+  <div class="kpi"><h3>CAPAIAN</h3><div id="persen">0%</div></div>
 </div>
 
-<div class="card">
-<table>
-<tr id="rowT"><th>PERIODE</th></tr>
-<tr id="rowN"><th>Reminder Berhasil</th></tr>
-<tr id="rowD"><th>Total Reminder</th></tr>
-</table>
+<div class="card scroll-x">
+  <table class="table-wide">
+    <tr id="rowTgl"><th>INDIKATOR</th></tr>
+    <tr id="rowNum"><th>Numerator</th></tr>
+    <tr id="rowDen"><th>Denominator</th></tr>
+  </table>
 </div>
 
-<div class="card" style="height:420px">
-<canvas id="chart"></canvas>
+<div class="card scroll-x">
+  <div class="chart-wide">
+    <canvas id="chart"></canvas>
+  </div>
 </div>
 
 </main>
 
-<script>
-const API="https://script.google.com/macros/s/AKfycbzIfIOrKm6J-QXHIXNxfFZRC7WjhAUseh5saEe6lbfoSwjzF4Qrq4b0W5aDJzfvxhid/exec";
-const TARGET=90;
-const bln=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+<footer>
+<strong>MEDICAL RECORD</strong>
+<div class="small">© 2025 RSU An'Nimah • Unit Rekam Medis</div>
+</footer>
 
+<script>
+
+const API="https://script.google.com/macros/s/AKfycbzV1YGA3jkKJl7hVpy7j6yAZhoqt1MSkKOK8OJ6OruWa4E9vJkhdTu6A_WDEhouPqHx/exec";
 const loading=document.getElementById("loading");
-const mode=document.getElementById("mode");
 const bulan=document.getElementById("bulan");
 const tahun=document.getElementById("tahun");
-const cap=document.getElementById("cap");
-const kur=document.getElementById("kur");
-const rowT=document.getElementById("rowT");
-const rowN=document.getElementById("rowN");
-const rowD=document.getElementById("rowD");
+const mode=document.getElementById("mode");
+
+const rowTgl=document.getElementById("rowTgl");
+const rowNum=document.getElementById("rowNum");
+const rowDen=document.getElementById("rowDen");
+
+const totalNum=document.getElementById("totalNum");
+const totalDen=document.getElementById("totalDen");
+const persen=document.getElementById("persen");
+
 const chartEl=document.getElementById("chart");
+
+const bln=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 let chart;
 
 bln.forEach((b,i)=>bulan.innerHTML+=`<option value="${i+1}">${b}</option>`);
-tahun.value=new Date().getFullYear();
 
-function hari(b,t){return new Date(t,b,0).getDate()}
-function showLoading(v){loading.classList.toggle("show",v)}
+const now=new Date().getFullYear();
+for(let y=now-5;y<=now+5;y++){
+  tahun.innerHTML+=`<option ${y===now?"selected":""}>${y}</option>`;
+}
+
+function showLoading(v){loading.classList.toggle("show",v);}
+function hari(b,t){return new Date(t,b,0).getDate();}
 
 function loadData(){
-showLoading(true);
+  showLoading(true);
 
-fetch(`${API}?bulan=${bulan.value}&tahun=${tahun.value}&mode=${mode.value}`)
-.then(r=>r.json())
-.then(r=>{
-  rowT.innerHTML="<th>PERIODE</th>";
-  rowN.innerHTML="<th>Reminder Berhasil</th>";
-  rowD.innerHTML="<th>Total Reminder</th>";
+  fetch(`${API}?indikator=customercare&bulan=${bulan.value}&tahun=${tahun.value}&mode=${mode.value}`)
+  .then(r=>r.json())
+  .then(d=>{
 
-  let labels=[], nums=[], dens=[];
+    rowTgl.innerHTML="<th>INDIKATOR</th>";
+    rowNum.innerHTML="<th>Reminder</th>";
+    rowDen.innerHTML="<th>Total Pasien</th>";
 
-  if(mode.value==="harian"){
-    for(let i=1;i<=hari(bulan.value,tahun.value);i++){
-      const x=r.data.find(v=>v.key==i)||{num:0,den:0};
-      rowT.innerHTML+=`<th>${i}</th>`;
-      rowN.innerHTML+=`<td>${x.num}</td>`;
-      rowD.innerHTML+=`<td>${x.den}</td>`;
-      labels.push(i); nums.push(x.num); dens.push(x.den);
+    let labels=[], nums=[], dens=[];
+
+    if(mode.value==="harian"){
+      for(let i=1;i<=hari(bulan.value,tahun.value);i++){
+        const x=d.chart.find(v=>v.key==i)||{num:0,den:0};
+        rowTgl.innerHTML+=`<th>${i}</th>`;
+        rowNum.innerHTML+=`<td>${x.num}</td>`;
+        rowDen.innerHTML+=`<td>${x.den}</td>`;
+        labels.push(i); nums.push(x.num); dens.push(x.den);
+      }
+    }else{
+      bln.forEach((b,i)=>{
+        const x=d.chart.find(v=>v.key==i+1)||{num:0,den:0};
+        rowTgl.innerHTML+=`<th>${b}</th>`;
+        rowNum.innerHTML+=`<td>${x.num}</td>`;
+        rowDen.innerHTML+=`<td>${x.den}</td>`;
+        labels.push(b); nums.push(x.num); dens.push(x.den);
+      });
     }
-  }else{
-    bln.forEach((b,i)=>{
-      const x=r.data.find(v=>v.key==i+1)||{num:0,den:0};
-      rowT.innerHTML+=`<th>${b}</th>`;
-      rowN.innerHTML+=`<td>${x.num}</td>`;
-      rowD.innerHTML+=`<td>${x.den}</td>`;
-      labels.push(b); nums.push(x.num); dens.push(x.den);
+
+    totalNum.innerText = d.totalDen;
+    totalDen.innerText = "85%";
+    let capaian = d.totalDen
+    ? ((d.totalNum / d.totalDen) * 100).toFixed(2)
+    : 0;
+
+    persen.innerText = capaian + "%";
+
+    if(chart) chart.destroy();
+    chart=new Chart(chartEl,{
+      type:"bar",
+      data:{
+        labels,
+        datasets:[
+          {label:"Reminder",data:nums,backgroundColor:"rgba(22,163,74,.6)"},
+          {label:"Total Pasien",data:dens,backgroundColor:"rgba(37,99,235,.6)"}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false}
     });
-  }
 
-  const c=r.totalDen?(r.totalNum/r.totalDen)*100:0;
-  cap.innerText=c.toFixed(2)+"%";
-  kur.innerText=Math.max(0,TARGET-c).toFixed(2)+"%";
-
-  if(chart) chart.destroy();
-  chart=new Chart(chartEl,{
-    type:"bar",
-    data:{labels,datasets:[
-      {label:"Reminder Berhasil",data:nums},
-      {label:"Total Reminder",data:dens}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false}
-  });
-})
-.finally(()=>showLoading(false));
+  })
+  .finally(()=>showLoading(false));
 }
 
 loadData();
-</script>
 
+</script>
 </body>
 </html>
