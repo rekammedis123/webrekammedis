@@ -334,9 +334,9 @@ footer{
 </div>
 
 <div class="card kpis">
-  <div class="kpi"><h3>TARGET</h3><div>25%</div></div>
+  <div class="kpi"><h3>TARGET</h3><div>0%</div></div>
   <div class="kpi"><h3>CAPAIAN</h3><div id="capaian">0%</div></div>
-  <div class="kpi"><h3>KEKURANGAN</h3><div id="kurang">0%</div></div>
+  <div class="kpi"><h3>TOTAL SEP</h3><div id="totalSep">0</div></div>
 </div>
 
 <div class="card scroll-x">
@@ -364,7 +364,7 @@ footer{
 
 const loading=document.getElementById("loading");
 const API="https://script.google.com/macros/s/AKfycbx8KzP1CEmpeAxwtcwuvHyXBkyvjYi64cCIq5Kt9-JtD_hm8v7lIg7uICAc7jLQHgkn1g/exec";
-const TARGET=25;
+const TARGET=0;
 const bln=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 
 const mode=document.getElementById("mode");
@@ -374,7 +374,7 @@ const rowTgl=document.getElementById("rowTgl");
 const rowNum=document.getElementById("rowNum");
 const rowDen=document.getElementById("rowDen");
 const capaian=document.getElementById("capaian");
-const kurang=document.getElementById("kurang");
+const totalSep=document.getElementById("totalSep");
 const chartEl=document.getElementById("chart");
 
 let chart;
@@ -426,9 +426,9 @@ function loadData(){
       });
     }
 
-    const cap=r.totalDen?(r.totalNum/r.totalDen)*100:0;
-    capaian.innerText=cap.toFixed(2)+"%";
-    kurang.innerText=Math.max(0,TARGET-cap).toFixed(2)+"%";
+    const cap = r.totalDen ? (r.totalNum / r.totalDen) * 100 : 0;
+    capaian.innerText = cap.toFixed(2) + "%";
+    totalSep.innerText = r.totalDen || 0;
 
     if(chart) chart.destroy();
     chart=new Chart(chartEl,{
