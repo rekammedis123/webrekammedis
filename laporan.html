@@ -131,12 +131,11 @@ main{
 
 /* ===== LAPORAN CARD ===== */
 .laporan-container{
-  max-width:1000px;
+  max-width:1100px;
   margin:auto;
-  background:var(--card);
-  padding:30px;
-  border-radius:24px;
-  box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
   animation:fadeUp .5s ease;
 }
 
