@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="logorekammedis.ico">
-<title>IMUT Customer Care - Reminder Pasien</title>
+<title>IMUT - Medical Record</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,6 +14,7 @@
   --green:#2fa36b;
   --green-dark:#1f7f53;
   --bg:#eef5f2;
+  --card:#ffffff;
   --shadow:0 12px 30px rgba(0,0,0,.12);
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
@@ -39,12 +40,11 @@ button{
   cursor:pointer;
 }
 table{width:100%;border-collapse:collapse}
-th,td{padding:10px;text-align:center}
+th,td{padding:10px;text-align:center;}
 th{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff}
 tr:nth-child(even){background:#f0fdf4}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
 .kpi{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;padding:20px;border-radius:18px;text-align:center}
-
 /* ===== HEADER ===== */
 header{
   background:linear-gradient(135deg,#ffffff,#e9f7f0);
@@ -158,57 +158,6 @@ nav ul li a:hover{
 .sidebar ul li a.active i{
   color:#fff;
 }
-
-/* ===== LOADING ===== */
-.loading{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.25);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-}
-.loading.show{opacity:1;pointer-events:auto}
-.spinner{
-  width:36px;height:36px;
-  border:4px solid #ececec;
-  border-top:4px solid var(--green);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-
-/* ===== RESPONSIVE SCROLL AREA ===== */
-.scroll-x{
-  overflow-x:auto;
-  overflow-y:hidden;
-  -webkit-overflow-scrolling:touch;
-}
-
-.scroll-x::-webkit-scrollbar{
-  height:8px;
-}
-.scroll-x::-webkit-scrollbar-thumb{
-  background:#1277566c;
-  border-radius:20px;
-}
-.scroll-x::-webkit-scrollbar-track{
-  background:#e6f3ee;
-  border-radius:20px;
-}
-
-/* supaya tabel & chart tidak mengecil */
-.table-wide{
-  min-width:900px;
-}
-.chart-wide{
-  min-width:900px;
-  height:420px;
-}
-
 /* STYLE DROPDOWN HUBUNGI KAMI */
     .dropdown-hubungi {
       position: relative;
@@ -244,27 +193,73 @@ nav ul li a:hover{
       display: block;
     }
 
-  /* ===== FOOTER ===== */
+/* ===== RESPONSIVE SCROLL AREA ===== */
+.scroll-x{
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+
+.scroll-x::-webkit-scrollbar{
+  height:8px;
+}
+.scroll-x::-webkit-scrollbar-thumb{
+  background:#1277566c;
+  border-radius:20px;
+}
+.scroll-x::-webkit-scrollbar-track{
+  background:#e6f3ee;
+  border-radius:20px;
+}
+
+/* supaya tabel & chart tidak mengecil */
+.table-wide{
+  min-width:900px;
+}
+.chart-wide{
+  min-width:900px;
+  height:420px;
+}
+
+/* ===== FOOTER ===== */
 footer{
   background:#fff;
   padding:30px 20px;
   box-shadow:var(--shadow);
 }
 .small{font-size:14px;color:#666}
-  
-  @keyframes fadeUp{
-    from{opacity:0;transform:translateY(20px)}
-    to{opacity:1}
-  }
-  @keyframes spin{to{transform:rotate(360deg)}}
-  @media(max-width:900px){
-    .hero-grid{grid-template-columns:1fr}
-  }
+
+/* ===== LOADING ===== */
+.loading{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+.loading.show{opacity:1;pointer-events:auto}
+.spinner{
+  width:36px;height:36px;
+  border:4px solid #ececec;
+  border-top:4px solid var(--green);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
-
-<body>
-
 <header>
   <div class="header-bar">
     <div class="logo">
@@ -299,28 +294,44 @@ footer{
   </nav>
 </header>
 
+<body>
+<div class="loading" id="loading"><div class="spinner"></div></div>
 <main>
+  </div>
 
+<!-- ===== SIDEBAR ===== -->
 <aside class="sidebar">
   <h3><i class="fas fa-list"></i> Daftar Indikator Mutu</h3>
   <ul>
-    <li><a href="imut-rekammedis.html"><i class="fas fa-chart-line"></i> IMUT - Rekam Medis</a></li>
+    <li>
+  <a href="imut-rekammedis.html" class="active">
+    <i class="fas fa-chart-line"></i> IMUT - Rekam Medis
+  </a>
+</li>
     <li><a href="imut-pendaftaran.html"><i class="fas fa-bed"></i> IMUT - Pendaftaran</a></li>
-    <li><a href="imut-customercare.html" class="active"><i class="fas fa-users"></i> IMUT - Customer Care</a></li>
+    <li><a href="imut-customercare.html"><i class="fas fa-users"></i>IMUT - Customer Care</a></li>
   </ul>
 </aside>
 
-<div class="loading" id="loading"><div class="spinner"></div></div>
+</div>
+<div class="content">
 
 <div class="card">
   <div class="tittle">
-  <h2 class="tittle-font">📊 IMUT CUSTOMER CARE – REMINDER PASIEN</h2>
+  <h2 class="tittle-font">📊 INDIKATOR MUTU - IMUT REKAM MEDIS</h2>
 </div>
   <div class="form-row">
+    <select id="indikator">
+      <option value="resume">IMUT Resume Medis</option>
+      <option value="dobel">IMUT Penomoran Dobel</option>
+      <option value="ic">IMUT Ketidaklengkapan IC</option>
+    </select>
+
     <select id="mode">
       <option value="harian">Harian</option>
-      <option value="tahunan">Bulanan (Tahunan)</option>
+      <option value="bulanan">Bulanan (Tahunan)</option>
     </select>
+
     <select id="bulan"></select>
     <select id="tahun"></select>
     <button onclick="loadData()">Tampilkan</button>
@@ -328,10 +339,9 @@ footer{
 </div>
 
 <div class="card kpis">
- 
-  <div class="kpi"><h3>TARGET</h3><div id="totalDen">0</div></div>
-  <div class="kpi"><h3>CAPAIAN</h3><div id="persen">0%</div></div>
-   <div class="kpi"><h3>TOTAL PASIEN</h3><div id="totalNum">0</div></div>
+  <div class="kpi"><h3>TARGET</h3><div>25%</div></div>
+  <div class="kpi"><h3>CAPAIAN</h3><div id="capaian">0%</div></div>
+   <div class="kpi"><h3>TOTAL DRM</h3><div id="total">0</div></div>
 </div>
 
 <div class="card scroll-x">
@@ -347,7 +357,6 @@ footer{
     <canvas id="chart"></canvas>
   </div>
 </div>
-
 </main>
 
 <footer>
@@ -357,93 +366,111 @@ footer{
 
 <script>
 
-const API="https://script.google.com/macros/s/AKfycbzV1YGA3jkKJl7hVpy7j6yAZhoqt1MSkKOK8OJ6OruWa4E9vJkhdTu6A_WDEhouPqHx/exec";
 const loading=document.getElementById("loading");
+const API="https://script.google.com/macros/s/AKfycbw2bWf6egIBJjdiFCnTEaF1TEzOYYpbnV-RZmZuOdrbWw1BfJ8S_QnccarcM0BYlGIALw/exec";
+const TARGET=25;
+const bln=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+const indikator=document.getElementById("indikator");
+const mode=document.getElementById("mode");
 const bulan=document.getElementById("bulan");
 const tahun=document.getElementById("tahun");
-const mode=document.getElementById("mode");
-
 const rowTgl=document.getElementById("rowTgl");
 const rowNum=document.getElementById("rowNum");
 const rowDen=document.getElementById("rowDen");
-
-const totalNum=document.getElementById("totalNum");
-const totalDen=document.getElementById("totalDen");
-const persen=document.getElementById("persen");
-
+const capaian=document.getElementById("capaian");
+const totaldrm=document.getElementById("total");
 const chartEl=document.getElementById("chart");
 
-const bln=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
 let chart;
 
 bln.forEach((b,i)=>bulan.innerHTML+=`<option value="${i+1}">${b}</option>`);
-
-const now=new Date().getFullYear();
-for(let y=now-5;y<=now+5;y++){
-  tahun.innerHTML+=`<option ${y===now?"selected":""}>${y}</option>`;
+/* ===== ISI TAHUN ===== */
+const tahunSekarang = new Date().getFullYear();
+for(let t = tahunSekarang - 5; t <= tahunSekarang + 5; t++){
+  const opt = document.createElement("option");
+  opt.value = t;
+  opt.textContent = t;
+  if(t === tahunSekarang) opt.selected = true;
+  tahun.appendChild(opt);
 }
-
-function showLoading(v){loading.classList.toggle("show",v);}
-function hari(b,t){return new Date(t,b,0).getDate();}
-
+function hari(b,t){return new Date(t,b,0).getDate()}
+function showLoading(v){
+  loading.classList.toggle("show", v);
+}
 function loadData(){
-  showLoading(true);
+  showLoading(true); // ⬅️ NYALAIN SPINNER
 
-  fetch(`${API}?indikator=customercare&bulan=${bulan.value}&tahun=${tahun.value}&mode=${mode.value}`)
+  fetch(`${API}?indikator=${indikator.value}&bulan=${bulan.value}&tahun=${tahun.value}&mode=${mode.value}`)
   .then(r=>r.json())
-  .then(d=>{
-
+  .then(r=>{
     rowTgl.innerHTML="<th>INDIKATOR</th>";
-    rowNum.innerHTML="<th>Reminder</th>";
-    rowDen.innerHTML="<th>Total Pasien</th>";
+    rowNum.innerHTML="<th>Numerator</th>";
+    rowDen.innerHTML="<th>Denominator</th>";
 
     let labels=[], nums=[], dens=[];
 
     if(mode.value==="harian"){
-      for(let i=1;i<=hari(bulan.value,tahun.value);i++){
-        const x=d.chart.find(v=>v.key==i)||{num:0,den:0};
+      const jml=hari(bulan.value,tahun.value);
+      for(let i=1;i<=jml;i++){
+        const x=r.data.find(v=>v.key==i)||{num:0,den:0};
         rowTgl.innerHTML+=`<th>${i}</th>`;
         rowNum.innerHTML+=`<td>${x.num}</td>`;
         rowDen.innerHTML+=`<td>${x.den}</td>`;
-        labels.push(i); nums.push(x.num); dens.push(x.den);
+        labels.push(i);
+        nums.push(x.num);
+        dens.push(x.den);
       }
-    }else{
+    } else {
       bln.forEach((b,i)=>{
-        const x=d.chart.find(v=>v.key==i+1)||{num:0,den:0};
+        const x=r.data.find(v=>v.key==i+1)||{num:0,den:0};
         rowTgl.innerHTML+=`<th>${b}</th>`;
         rowNum.innerHTML+=`<td>${x.num}</td>`;
         rowDen.innerHTML+=`<td>${x.den}</td>`;
-        labels.push(b); nums.push(x.num); dens.push(x.den);
+        labels.push(b);
+        nums.push(x.num);
+        dens.push(x.den);
       });
     }
 
-    totalNum.innerText = d.totalDen;
-    totalDen.innerText = "85%";
-    let capaian = d.totalDen
-    ? ((d.totalNum / d.totalDen) * 100).toFixed(2)
-    : 0;
-
-    persen.innerText = capaian + "%";
+    const cap=r.totalDen?(r.totalNum/r.totalDen)*100:0;
+    capaian.innerText=cap.toFixed(2)+"%";
+    totaldrm.innerText = r.totalDen || 0;
 
     if(chart) chart.destroy();
     chart=new Chart(chartEl,{
       type:"bar",
-      data:{
-        labels,
-        datasets:[
-          {label:"Reminder",data:nums,backgroundColor:"rgba(22,163,74,.6)"},
-          {label:"Total Pasien",data:dens,backgroundColor:"rgba(37,99,235,.6)"}
-        ]
+      data:{labels,datasets:[
+        {label:"Numerator",data:nums,backgroundColor:"rgba(22,163,74,.6)"},
+        {label:"Denominator",data:dens,backgroundColor:"rgba(37,99,235,.6)"}
+      ]},
+      options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        ticks: {
+          autoSkip: false
+        }
       },
-      options:{responsive:true,maintainAspectRatio:false}
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
     });
-
   })
-  .finally(()=>showLoading(false));
+  .catch(err=>{
+    alert("Gagal load data");
+    console.error(err);
+  })
+  .finally(()=>{
+    showLoading(false); // ⬅️ MATIIN SPINNER
+  });
 }
 
 loadData();
-
 </script>
+
 </body>
 </html>
